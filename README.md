@@ -4,15 +4,14 @@ completed single LED ring sketch. need to add buttons and sort out AND
 gates in the RGB sketch.
 Product Ideas.. data sheets and store locations:
 
-Boards
+Boards options 
 
-26 i/o pins and in the current sketch: https://ww1.microchip.com/downloads/en/devicedoc/atmel-7766-8-bit-avr-atmega16u4-32u4_datasheet.pdf
+27 i/o pins and in the current sketch: https://www.digikey.com/en/products/detail/microchip-technology/ATMEGA4808-MUR/10444956
 
 32 i/o pins: https://www.digikey.com/en/products/detail/microchip-technology/ATMEGA1284P-MU/1914520
 
 
-
-LEDs
+LEDs options
 
 addressable 1mm RGB: 
 https://www.sparkfun.com/smd-led-addressable-rgb-apa-104-1010-pack-of-20.html
