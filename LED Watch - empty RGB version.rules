@@ -1,0 +1,98 @@
+
+(rules PCB LED Watch - empty RGB version.dsn
+  (snap_angle 
+    fortyfive_degree
+  )
+  (autoroute_settings
+    (fanout on)
+    (autoroute on)
+    (postroute on)
+    (vias on)
+    (via_costs 50)
+    (plane_via_costs 5)
+    (start_ripup_costs 100)
+    (start_pass_no 1)
+    (layer_rule F.Cu
+      (active on)
+      (preferred_direction horizontal)
+      (preferred_direction_trace_costs 1.0)
+      (against_preferred_direction_trace_costs 3.6)
+    )
+    (layer_rule B.Cu
+      (active on)
+      (preferred_direction vertical)
+      (preferred_direction_trace_costs 1.0)
+      (against_preferred_direction_trace_costs 3.4)
+    )
+  )
+  (rule
+    (width 200.0)
+    (clearance 200.0)
+    (clearance -0.1 (type smd_to_turn_gap))
+    (clearance 50.0 (type smd))
+    (clearance 200.0 (type "kicad_default"))
+  )
+  (padstack "Via[0-1]_600:300_um"
+    (shape
+      (circle F.Cu 600.0 0.0 0.0)
+    )
+    (shape
+      (circle B.Cu 600.0 0.0 0.0)
+    )
+    (attach off)
+  )
+  (via 
+    "Via[0-1]_600:300_um" "Via[0-1]_600:300_um" default
+  )
+  (via 
+    "Via[0-1]_600:300_um-kicad_default" "Via[0-1]_600:300_um" "kicad_default"
+  )
+  (via_rule
+    default "Via[0-1]_600:300_um"
+  )
+  (via_rule
+    "kicad_default" "Via[0-1]_600:300_um-kicad_default"
+  )
+  (class default
+    (clearance_class default)
+    (via_rule default)
+    (rule
+      (width 200.0)
+    )
+    (circuit 
+      (use_layer F.Cu B.Cu)
+    )
+  )
+  (class "kicad_default"
+    "unconnected-(U1-PE0-Pad2)" /Minute3 /B4 /R1 "unconnected-(U1-PF4-Pad57)" "unconnected-(U1-AREF-Pad62)" "unconnected-(U1-PG5{slash}~{RESET}-Pad20)" "unconnected-(U1-PE1-Pad3)"
+    "unconnected-(U1-PF5-Pad56)" /Minute4 /Minute5 /R4 /B6 /Minute2 "Net-(U1-VCC-Pad21)" /B2
+    /Second4 /G5 /G1 /R6 /B5 "Net-(U1-GND-Pad22)" "unconnected-(U1-PF2-Pad59)" "unconnected-(U1-PF0-Pad61)"
+    /Second7 /Minute6 /Second3 /Second2 /G2 /Minute10 /G6 "unconnected-(U1-PF6-Pad55)"
+    "unconnected-(U1-XTAL2-Pad23)" "unconnected-(U1-PD0-Pad25)" "unconnected-(U1-PF7-Pad54)" /G3 /Hour2 /Second6 /B3 "unconnected-(U1-AVCC-Pad64)"
+    "unconnected-(U1-NC-Pad1)" /R3 /Minute9 /Minute8 /G4 /R2 /Second10 /Minute7
+    "unconnected-(U1-PG4-Pad19)" /Minute1 /Second1 "unconnected-(U1-XTAL1-Pad24)" "unconnected-(U1-PD1-Pad26)" "unconnected-(U1-PF3-Pad58)" /Second8 /B1
+    /Second5 /Hour1 /Second9 /R5 "unconnected-(U1-PF1-Pad60)" "unconnected-(U3-Pad1)" "unconnected-(U4-Pad1)" "unconnected-(U5-Pad1)"
+    "unconnected-(U6-Pad1)" "unconnected-(U7-Pad1)" "unconnected-(U9-Pad1)" "unconnected-(U10-Pad1)" "unconnected-(U11-Pad1)" "unconnected-(U12-Pad1)" "unconnected-(U13-Pad1)" "unconnected-(U15-Pad1)"
+    "unconnected-(U16-Pad1)" "unconnected-(U17-Pad1)" "unconnected-(U18-Pad1)" "unconnected-(U19-Pad1)" "unconnected-(U21-Pad1)" "unconnected-(U22-Pad1)" "unconnected-(U23-Pad1)" "unconnected-(U24-Pad1)"
+    "unconnected-(U25-Pad1)" "unconnected-(U27-Pad1)" "unconnected-(U28-Pad1)" "unconnected-(U29-Pad1)" "unconnected-(U30-Pad1)" "unconnected-(U31-Pad1)" "unconnected-(U33-Pad1)" "unconnected-(U34-Pad1)"
+    "unconnected-(U35-Pad1)" "unconnected-(U36-Pad1)" "unconnected-(U37-Pad1)" "unconnected-(U39-Pad1)" "unconnected-(U40-Pad1)" "unconnected-(U41-Pad1)" "unconnected-(U42-Pad1)" "unconnected-(U43-Pad1)"
+    "unconnected-(U45-Pad1)" "unconnected-(U46-Pad1)" "unconnected-(U47-Pad1)" "unconnected-(U48-Pad1)" "unconnected-(U49-Pad1)" "unconnected-(U51-Pad1)" "unconnected-(U52-Pad1)" "unconnected-(U53-Pad1)"
+    "unconnected-(U54-Pad1)" "unconnected-(U55-Pad1)" "unconnected-(U57-Pad1)" "unconnected-(U58-Pad1)" "unconnected-(U59-Pad1)" "unconnected-(U60-Pad1)" "unconnected-(U61-Pad1)" "unconnected-(U63-Pad1)"
+    "unconnected-(U64-Pad1)" "unconnected-(U65-Pad1)" "unconnected-(U66-Pad1)" "unconnected-(U67-Pad1)" "unconnected-(U69-Pad1)" "unconnected-(U70-Pad1)" "unconnected-(U71-Pad1)" "unconnected-(U72-Pad1)"
+    "unconnected-(U73-Pad1)" "unconnected-(U75-Pad1)" "unconnected-(U76-Pad1)" "unconnected-(U77-Pad1)" "unconnected-(U78-Pad1)" "unconnected-(U79-Pad1)" "unconnected-(U81-Pad1)" "unconnected-(U82-Pad1)"
+    "unconnected-(U83-Pad1)" "unconnected-(U84-Pad1)" "unconnected-(U85-Pad1)" "unconnected-(U87-Pad1)" "unconnected-(U88-Pad1)" "unconnected-(U89-Pad1)" "unconnected-(U90-Pad1)" "unconnected-(U91-Pad1)"
+    "unconnected-(U93-Pad1)" "unconnected-(U94-Pad1)" "unconnected-(U95-Pad1)" "unconnected-(U96-Pad1)" "unconnected-(U97-Pad1)" "unconnected-(U99-Pad1)" "unconnected-(U100-Pad1)" "unconnected-(U101-Pad1)"
+    "unconnected-(U102-Pad1)" "unconnected-(U103-Pad1)" "unconnected-(U105-Pad1)" "unconnected-(U106-Pad1)" "unconnected-(U107-Pad1)" "unconnected-(U108-Pad1)" "unconnected-(U109-Pad1)" "unconnected-(U111-Pad1)"
+    "unconnected-(U112-Pad1)" "unconnected-(U113-Pad1)" "unconnected-(U114-Pad1)" "unconnected-(U115-Pad1)" "unconnected-(U117-Pad1)" "unconnected-(U118-Pad1)" "unconnected-(U119-Pad1)" "unconnected-(U120-Pad1)"
+    "unconnected-(U121-Pad1)" "unconnected-(U123-Pad1)" "unconnected-(U124-Pad1)" "unconnected-(U125-Pad1)" "unconnected-(U126-Pad1)" "unconnected-(U127-Pad1)" "unconnected-(U129-Pad1)" "unconnected-(U130-Pad1)"
+    "unconnected-(U131-Pad1)" "unconnected-(U132-Pad1)" "unconnected-(U133-Pad1)"
+    (clearance_class "kicad_default")
+    (via_rule "kicad_default")
+    (rule
+      (width 200.0)
+    )
+    (circuit 
+      (use_layer F.Cu B.Cu)
+    )
+  )
+)

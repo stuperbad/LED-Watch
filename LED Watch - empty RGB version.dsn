@@ -1,0 +1,927 @@
+(pcb "C:\Users\evanf\Desktop\LED-Watch\LED Watch - empty RGB version.dsn"
+  (parser
+    (string_quote ")
+    (space_in_quoted_tokens on)
+    (host_cad "KiCad's Pcbnew")
+    (host_version "9.0.2")
+  )
+  (resolution um 10)
+  (unit um)
+  (structure
+    (layer F.Cu
+      (type signal)
+      (property
+        (index 0)
+      )
+    )
+    (layer B.Cu
+      (type signal)
+      (property
+        (index 1)
+      )
+    )
+    (boundary
+      (path pcb 0  145458 -142100  54541.7 -142100  54541.7 -57900  145458 -57900
+            145458 -142100)
+    )
+    (via "Via[0-1]_600:300_um")
+    (rule
+      (width 200)
+      (clearance 200)
+      (clearance 50 (type smd_smd))
+    )
+  )
+  (placement
+    (component "B39D3RGB_F6C0001HOU1930:B39D3RGB-F6C0001HOU1930_HVK"
+      (place U70 87797.900000 -72593.636000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U97 122750.440000 -125266.924000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U53 75729.490000 -117633.557000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U27 129344.428000 -93762.649000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U68 82366.442000 -75729.490000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U131 89493.422000 -67664.078000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U118 66186.255000 -103553.967000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U49 85000.000000 -125980.762000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U48 87797.900000 -127406.363000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U92 132335.921000 -110506.577000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U64 74019.237000 -85000.000000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U25 127406.363000 -87797.900000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U19 115000.000000 -74019.237000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U101 110506.577000 -132335.921000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U22 122294.344000 -79926.081000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U2 100000.000000 -74000.000000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U104 100000.000000 -134000.000000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U96 125266.924000 -122750.440000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U42 106237.350000 -129344.428000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U59 70000.000000 -100000.000000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U46 93762.649000 -129344.428000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U81 122750.440000 -74733.075000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U87 133257.018000 -92931.002000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U55 72593.636000 -112202.099000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U72 93762.649000 -70655.571000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U58 70164.343000 -103135.853000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U3 113000.000000 -77483.339000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U41 109270.509000 -128531.695000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U120 66186.255000 -96446.032000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U108 86170.954000 -131060.545000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U90 133813.744000 -103553.967000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U77 110506.577000 -67664.078000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U73 96864.146000 -70164.343000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U130 86170.954000 -68939.454000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U83 127506.577000 -80015.301000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U89 134000.000000 -99999.999000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U37 120073.918000 -122294.344000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U35 124270.509000 -117633.557000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U117 66742.981000 -107068.997000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U9 87000.000000 -122516.660000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U127 77249.559000 -74733.075000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U15 103135.853000 -70164.343000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U18 112202.099000 -72593.636000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U24 125980.762000 -84999.999000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U21 120073.918000 -77705.655000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U133 96446.032000 -66186.255000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U44 100000.000000 -130000.000000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U125 72493.422000 -80015.301000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U39 114999.999000 -125980.762000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U4 122516.660000 -86999.999000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U34 125980.762000 -115000.000000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U80 119984.698000 -72493.422000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U114 70555.136000 -117000.000000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U61 70655.571000 -93762.649000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U109 83000.000000 -129444.863000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U107 89493.422000 -132335.921000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U121 66742.981000 -92931.002000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U43 103135.853000 -129835.656000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U65 75729.490000 -82366.442000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U7 113000.000000 -122516.660000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U69 85000.000000 -74019.237000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U105 96446.032000 -133813.744000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U129 83000.000000 -70555.136000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U95 127506.577000 -119984.698000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U32 128531.695000 -109270.509000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U54 74019.237000 -115000.000000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U128 80015.301000 -72493.422000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U30 129835.656000 -103135.853000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U126 74733.075000 -77249.559000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U31 129344.428000 -106237.350000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U50 82366.442000 -124270.509000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U62 71468.304000 -90729.490000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U106 92931.002000 -133257.018000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U20 117633.557000 -75729.490000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U124 70555.136000 -83000.000000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U93 131060.545000 -113829.045000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U103 103553.967000 -133813.744000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U86 132335.921000 -89493.422000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U112 74733.075000 -122750.440000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U63 72593.636000 -87797.900000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U84 129444.863000 -82999.999000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U85 131060.545000 -86170.954000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U82 125266.924000 -77249.559000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U66 77705.655000 -79926.081000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U60 70164.343000 -96864.146000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U14 100000.000000 -70000.000000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U38 117633.557000 -124270.509000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U76 107068.997000 -66742.981000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U132 92931.002000 -66742.981000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U119 66000.000000 -100000.000000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U98 119984.698000 -127506.577000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U23 124270.509000 -82366.442000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U75 103553.967000 -66186.255000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U10 77483.339000 -113000.000000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U11 74000.000000 -100000.000000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U94 129444.863000 -117000.000000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U115 68939.454000 -113829.045000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U111 77249.559000 -125266.924000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U51 79926.081000 -122294.344000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U74 100000.000000 -66000.000000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U13 87000.000000 -77483.339000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U36 122294.344000 -120073.918000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U8 100000.000000 -126000.000000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U16 106237.350000 -70655.571000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U5 126000.000000 -100000.000000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U79 117000.000000 -70555.136000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U29 130000.000000 -99999.999000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U102 107068.997000 -133257.018000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U56 71468.304000 -109270.509000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U12 77483.339000 -87000.000000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U33 127406.363000 -112202.099000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U57 70655.571000 -106237.350000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U17 109270.509000 -71468.304000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U67 79926.081000 -77705.655000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U71 90729.490000 -71468.304000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U78 113829.045000 -68939.454000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U88 133813.744000 -96446.032000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U40 112202.099000 -127406.363000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U113 72493.422000 -119984.698000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U26 128531.695000 -90729.490000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U47 90729.490000 -128531.695000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U91 133257.018000 -107068.997000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U52 77705.655000 -120073.918000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U116 67664.078000 -110506.577000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U122 67664.078000 -89493.422000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U110 80015.301000 -127506.577000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U6 122516.660000 -113000.000000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U99 116999.999000 -129444.863000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U100 113829.045000 -131060.545000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U123 68939.454000 -86170.954000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U28 129835.656000 -96864.146000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+      (place U45 96864.146000 -129835.656000 front 0.000000 (PN "B39D3RGB-F6C0001HOU1930"))
+    )
+    (component "Package_QFP:TQFP-64_14x14mm_P0.8mm"
+      (place U1 100000.000000 -100000.000000 front 0.000000 (PN "ATmega165PA-A"))
+    )
+  )
+  (library
+    (image "B39D3RGB_F6C0001HOU1930:B39D3RGB-F6C0001HOU1930_HVK"
+      (outline (path signal 150  -700 700  700 700))
+      (outline (path signal 150  -700 -700  -700 700))
+      (outline (path signal 150  700 700  700 -700))
+      (outline (path signal 150  700 -700  -700 -700))
+      (outline (path signal 25.4  -419.1 419.1  419.1 419.1))
+      (outline (path signal 25.4  -419.1 114.3  -419.1 419.1))
+      (outline (path signal 25.4  -419.1 0  -419.1 -114.3))
+      (outline (path signal 25.4  -419.1 -114.3  -419.1 -419.1))
+      (outline (path signal 25.4  -419.1 -419.1  419.1 -419.1))
+      (outline (path signal 25.4  -165.1 419.1  -419.1 165.1))
+      (outline (path signal 25.4  419.1 114.3  419.1 419.1))
+      (outline (path signal 25.4  419.1 0  419.1 -114.3))
+      (outline (path signal 25.4  419.1 -114.3  419.1 -419.1))
+      (outline (path signal 0  -415.552 11.733  -414.24 11.733  -412.449 9.942  -409.37 8.164
+            -408.626 6.119  -407.367 4.86  -407.367 2.66  -406.399 0  -407.367 -2.659
+            -407.367 -4.86  -408.626 -6.118  -409.37 -8.164  -412.449 -9.941
+            -414.24 -11.733  -415.552 -11.733  -416.894 -12.508  -421.288 -11.733
+            -423.96 -11.733  -424.533 -11.16  -425.45 -10.999  -429.397 -6.296
+            -430.833 -4.86  -430.833 -4.584  -431.035 -4.344  -431.035 4.344
+            -430.833 4.585  -430.833 4.86  -429.397 6.297  -425.45 10.999
+            -424.533 11.161  -423.96 11.733  -421.288 11.733  -416.894 12.508))
+      (outline (path signal 0  422.648 11.733  423.96 11.733  425.751 9.942  428.83 8.164
+            429.574 6.119  430.833 4.86  430.833 2.66  431.801 0  430.833 -2.659
+            430.833 -4.86  429.574 -6.118  428.83 -8.164  425.751 -9.941
+            423.96 -11.733  422.648 -11.733  421.306 -12.508  416.912 -11.733
+            414.24 -11.733  413.667 -11.16  412.75 -10.999  408.803 -6.296
+            407.367 -4.86  407.367 -4.584  407.165 -4.344  407.165 4.344
+            407.367 4.585  407.367 4.86  408.803 6.297  412.75 10.999  413.667 11.161
+            414.24 11.733  416.912 11.733  421.306 12.508))
+      (pin Rect[T]Pad_300.000000x300.000000_um 1 -250 250)
+      (pin Rect[T]Pad_300.000000x300.000000_um 2 -250 -250)
+      (pin Rect[T]Pad_300.000000x300.000000_um 3 250 -250)
+      (pin Rect[T]Pad_300.000000x300.000000_um 4 250 250)
+    )
+    (image "Package_QFP:TQFP-64_14x14mm_P0.8mm"
+      (outline (path signal 120  -7110 7110  -7110 6535))
+      (outline (path signal 120  -7110 -7110  -7110 -6535))
+      (outline (path signal 120  -6535 7110  -7110 7110))
+      (outline (path signal 120  -6535 -7110  -7110 -7110))
+      (outline (path signal 120  6535 7110  7110 7110))
+      (outline (path signal 120  6535 -7110  7110 -7110))
+      (outline (path signal 120  7110 7110  7110 6535))
+      (outline (path signal 120  7110 -7110  7110 -6535))
+      (outline (path signal 50  -8650 6530  -7250 6530))
+      (outline (path signal 50  -8650 -6530  -8650 6530))
+      (outline (path signal 50  -7250 7250  -6530 7250))
+      (outline (path signal 50  -7250 6530  -7250 7250))
+      (outline (path signal 50  -7250 -6530  -8650 -6530))
+      (outline (path signal 50  -7250 -7250  -7250 -6530))
+      (outline (path signal 50  -6530 8650  6530 8650))
+      (outline (path signal 50  -6530 7250  -6530 8650))
+      (outline (path signal 50  -6530 -7250  -7250 -7250))
+      (outline (path signal 50  -6530 -8650  -6530 -7250))
+      (outline (path signal 50  6530 8650  6530 7250))
+      (outline (path signal 50  6530 7250  7250 7250))
+      (outline (path signal 50  6530 -7250  6530 -8650))
+      (outline (path signal 50  6530 -8650  -6530 -8650))
+      (outline (path signal 50  7250 7250  7250 6530))
+      (outline (path signal 50  7250 6530  8650 6530))
+      (outline (path signal 50  7250 -6530  7250 -7250))
+      (outline (path signal 50  7250 -7250  6530 -7250))
+      (outline (path signal 50  8650 6530  8650 -6530))
+      (outline (path signal 50  8650 -6530  7250 -6530))
+      (outline (path signal 100  -7000 6000  -6000 7000))
+      (outline (path signal 100  -7000 -7000  -7000 6000))
+      (outline (path signal 100  -6000 7000  7000 7000))
+      (outline (path signal 100  7000 7000  7000 -7000))
+      (outline (path signal 100  7000 -7000  -7000 -7000))
+      (pin RoundRect[T]Pad_1475.000000x550.000000_138.023000_um_0.000000_0 1 -7662.5 6000)
+      (pin RoundRect[T]Pad_1475.000000x550.000000_138.023000_um_0.000000_0 2 -7662.5 5200)
+      (pin RoundRect[T]Pad_1475.000000x550.000000_138.023000_um_0.000000_0 3 -7662.5 4400)
+      (pin RoundRect[T]Pad_1475.000000x550.000000_138.023000_um_0.000000_0 4 -7662.5 3600)
+      (pin RoundRect[T]Pad_1475.000000x550.000000_138.023000_um_0.000000_0 5 -7662.5 2800)
+      (pin RoundRect[T]Pad_1475.000000x550.000000_138.023000_um_0.000000_0 6 -7662.5 2000)
+      (pin RoundRect[T]Pad_1475.000000x550.000000_138.023000_um_0.000000_0 7 -7662.5 1200)
+      (pin RoundRect[T]Pad_1475.000000x550.000000_138.023000_um_0.000000_0 8 -7662.5 400)
+      (pin RoundRect[T]Pad_1475.000000x550.000000_138.023000_um_0.000000_0 9 -7662.5 -400)
+      (pin RoundRect[T]Pad_1475.000000x550.000000_138.023000_um_0.000000_0 10 -7662.5 -1200)
+      (pin RoundRect[T]Pad_1475.000000x550.000000_138.023000_um_0.000000_0 11 -7662.5 -2000)
+      (pin RoundRect[T]Pad_1475.000000x550.000000_138.023000_um_0.000000_0 12 -7662.5 -2800)
+      (pin RoundRect[T]Pad_1475.000000x550.000000_138.023000_um_0.000000_0 13 -7662.5 -3600)
+      (pin RoundRect[T]Pad_1475.000000x550.000000_138.023000_um_0.000000_0 14 -7662.5 -4400)
+      (pin RoundRect[T]Pad_1475.000000x550.000000_138.023000_um_0.000000_0 15 -7662.5 -5200)
+      (pin RoundRect[T]Pad_1475.000000x550.000000_138.023000_um_0.000000_0 16 -7662.5 -6000)
+      (pin RoundRect[T]Pad_550.000000x1475.000000_138.023000_um_0.000000_0 17 -6000 -7662.5)
+      (pin RoundRect[T]Pad_550.000000x1475.000000_138.023000_um_0.000000_0 18 -5200 -7662.5)
+      (pin RoundRect[T]Pad_550.000000x1475.000000_138.023000_um_0.000000_0 19 -4400 -7662.5)
+      (pin RoundRect[T]Pad_550.000000x1475.000000_138.023000_um_0.000000_0 20 -3600 -7662.5)
+      (pin RoundRect[T]Pad_550.000000x1475.000000_138.023000_um_0.000000_0 21 -2800 -7662.5)
+      (pin RoundRect[T]Pad_550.000000x1475.000000_138.023000_um_0.000000_0 22 -2000 -7662.5)
+      (pin RoundRect[T]Pad_550.000000x1475.000000_138.023000_um_0.000000_0 23 -1200 -7662.5)
+      (pin RoundRect[T]Pad_550.000000x1475.000000_138.023000_um_0.000000_0 24 -400 -7662.5)
+      (pin RoundRect[T]Pad_550.000000x1475.000000_138.023000_um_0.000000_0 25 400 -7662.5)
+      (pin RoundRect[T]Pad_550.000000x1475.000000_138.023000_um_0.000000_0 26 1200 -7662.5)
+      (pin RoundRect[T]Pad_550.000000x1475.000000_138.023000_um_0.000000_0 27 2000 -7662.5)
+      (pin RoundRect[T]Pad_550.000000x1475.000000_138.023000_um_0.000000_0 28 2800 -7662.5)
+      (pin RoundRect[T]Pad_550.000000x1475.000000_138.023000_um_0.000000_0 29 3600 -7662.5)
+      (pin RoundRect[T]Pad_550.000000x1475.000000_138.023000_um_0.000000_0 30 4400 -7662.5)
+      (pin RoundRect[T]Pad_550.000000x1475.000000_138.023000_um_0.000000_0 31 5200 -7662.5)
+      (pin RoundRect[T]Pad_550.000000x1475.000000_138.023000_um_0.000000_0 32 6000 -7662.5)
+      (pin RoundRect[T]Pad_1475.000000x550.000000_138.023000_um_0.000000_0 33 7662.5 -6000)
+      (pin RoundRect[T]Pad_1475.000000x550.000000_138.023000_um_0.000000_0 34 7662.5 -5200)
+      (pin RoundRect[T]Pad_1475.000000x550.000000_138.023000_um_0.000000_0 35 7662.5 -4400)
+      (pin RoundRect[T]Pad_1475.000000x550.000000_138.023000_um_0.000000_0 36 7662.5 -3600)
+      (pin RoundRect[T]Pad_1475.000000x550.000000_138.023000_um_0.000000_0 37 7662.5 -2800)
+      (pin RoundRect[T]Pad_1475.000000x550.000000_138.023000_um_0.000000_0 38 7662.5 -2000)
+      (pin RoundRect[T]Pad_1475.000000x550.000000_138.023000_um_0.000000_0 39 7662.5 -1200)
+      (pin RoundRect[T]Pad_1475.000000x550.000000_138.023000_um_0.000000_0 40 7662.5 -400)
+      (pin RoundRect[T]Pad_1475.000000x550.000000_138.023000_um_0.000000_0 41 7662.5 400)
+      (pin RoundRect[T]Pad_1475.000000x550.000000_138.023000_um_0.000000_0 42 7662.5 1200)
+      (pin RoundRect[T]Pad_1475.000000x550.000000_138.023000_um_0.000000_0 43 7662.5 2000)
+      (pin RoundRect[T]Pad_1475.000000x550.000000_138.023000_um_0.000000_0 44 7662.5 2800)
+      (pin RoundRect[T]Pad_1475.000000x550.000000_138.023000_um_0.000000_0 45 7662.5 3600)
+      (pin RoundRect[T]Pad_1475.000000x550.000000_138.023000_um_0.000000_0 46 7662.5 4400)
+      (pin RoundRect[T]Pad_1475.000000x550.000000_138.023000_um_0.000000_0 47 7662.5 5200)
+      (pin RoundRect[T]Pad_1475.000000x550.000000_138.023000_um_0.000000_0 48 7662.5 6000)
+      (pin RoundRect[T]Pad_550.000000x1475.000000_138.023000_um_0.000000_0 49 6000 7662.5)
+      (pin RoundRect[T]Pad_550.000000x1475.000000_138.023000_um_0.000000_0 50 5200 7662.5)
+      (pin RoundRect[T]Pad_550.000000x1475.000000_138.023000_um_0.000000_0 51 4400 7662.5)
+      (pin RoundRect[T]Pad_550.000000x1475.000000_138.023000_um_0.000000_0 52 3600 7662.5)
+      (pin RoundRect[T]Pad_550.000000x1475.000000_138.023000_um_0.000000_0 53 2800 7662.5)
+      (pin RoundRect[T]Pad_550.000000x1475.000000_138.023000_um_0.000000_0 54 2000 7662.5)
+      (pin RoundRect[T]Pad_550.000000x1475.000000_138.023000_um_0.000000_0 55 1200 7662.5)
+      (pin RoundRect[T]Pad_550.000000x1475.000000_138.023000_um_0.000000_0 56 400 7662.5)
+      (pin RoundRect[T]Pad_550.000000x1475.000000_138.023000_um_0.000000_0 57 -400 7662.5)
+      (pin RoundRect[T]Pad_550.000000x1475.000000_138.023000_um_0.000000_0 58 -1200 7662.5)
+      (pin RoundRect[T]Pad_550.000000x1475.000000_138.023000_um_0.000000_0 59 -2000 7662.5)
+      (pin RoundRect[T]Pad_550.000000x1475.000000_138.023000_um_0.000000_0 60 -2800 7662.5)
+      (pin RoundRect[T]Pad_550.000000x1475.000000_138.023000_um_0.000000_0 61 -3600 7662.5)
+      (pin RoundRect[T]Pad_550.000000x1475.000000_138.023000_um_0.000000_0 62 -4400 7662.5)
+      (pin RoundRect[T]Pad_550.000000x1475.000000_138.023000_um_0.000000_0 63 -5200 7662.5)
+      (pin RoundRect[T]Pad_550.000000x1475.000000_138.023000_um_0.000000_0 64 -6000 7662.5)
+    )
+    (padstack RoundRect[T]Pad_550.000000x1475.000000_138.023000_um_0.000000_0
+      (shape (polygon F.Cu 0  -275.523 600  -265.017 652.819  -235.097 697.597  -190.319 727.517
+            -137.499 738.022  137.5 738.023  190.319 727.517  235.097 697.597
+            265.017 652.819  275.522 599.999  275.523 -600  265.017 -652.819
+            235.097 -697.597  190.319 -727.517  137.499 -738.022  -137.5 -738.023
+            -190.319 -727.517  -235.097 -697.597  -265.017 -652.819  -275.522 -599.999
+            -275.523 600))
+      (attach off)
+    )
+    (padstack RoundRect[T]Pad_1475.000000x550.000000_138.023000_um_0.000000_0
+      (shape (polygon F.Cu 0  -738.023 137.5  -727.517 190.319  -697.597 235.097  -652.819 265.017
+            -599.999 275.522  600 275.523  652.819 265.017  697.597 235.097
+            727.517 190.319  738.022 137.499  738.023 -137.5  727.517 -190.319
+            697.597 -235.097  652.819 -265.017  599.999 -275.522  -600 -275.523
+            -652.819 -265.017  -697.597 -235.097  -727.517 -190.319  -738.022 -137.499
+            -738.023 137.5))
+      (attach off)
+    )
+    (padstack Rect[T]Pad_300.000000x300.000000_um
+      (shape (rect F.Cu -150 -150 150 150))
+      (attach off)
+    )
+    (padstack "Via[0-1]_600:300_um"
+      (shape (circle F.Cu 600))
+      (shape (circle B.Cu 600))
+      (attach off)
+    )
+  )
+  (network
+    (net "unconnected-(U1-PE0-Pad2)"
+      (pins U1-2)
+    )
+    (net /Minute3
+      (pins U1-41 U26-1)
+    )
+    (net /B4
+      (pins U53-2 U131-2 U101-2 U59-2 U41-2 U77-2 U83-2 U89-2 U35-2 U125-2 U107-2
+        U65-2 U95-2 U119-2 U23-2 U11-2 U5-2 U29-2 U1-13 U17-2 U71-2 U113-2 U47-2)
+    )
+    (net /R1
+      (pins U68-4 U92-4 U2-4 U104-4 U44-4 U80-4 U32-4 U128-4 U50-4 U62-4 U20-4 U86-4
+        U14-4 U38-4 U98-4 U74-4 U8-4 U56-4 U1-51 U26-4 U116-4 U122-4 U110-4)
+    )
+    (net "unconnected-(U1-PF4-Pad57)"
+      (pins U1-57)
+    )
+    (net "unconnected-(U1-AREF-Pad62)"
+      (pins U1-62)
+    )
+    (net "unconnected-(U1-PG5{slash}~{RESET}-Pad20)"
+      (pins U1-20)
+    )
+    (net "unconnected-(U1-PE1-Pad3)"
+      (pins U1-3)
+    )
+    (net "unconnected-(U1-PF5-Pad56)"
+      (pins U1-56)
+    )
+    (net /Minute4
+      (pins U32-1 U1-42)
+    )
+    (net /Minute5
+      (pins U38-1 U1-27)
+    )
+    (net /R4
+      (pins U53-4 U131-4 U101-4 U59-4 U41-4 U77-4 U83-4 U89-4 U35-4 U125-4 U107-4
+        U65-4 U95-4 U119-4 U23-4 U11-4 U5-4 U29-4 U1-11 U17-4 U71-4 U113-4 U47-4)
+    )
+    (net /B6
+      (pins U97-2 U49-2 U25-2 U19-2 U55-2 U73-2 U37-2 U127-2 U133-2 U61-2 U109-2 U121-2
+        U43-2 U7-2 U31-2 U103-2 U85-2 U115-2 U13-2 U79-2 U1-36 U67-2 U91-2)
+    )
+    (net /Minute2
+      (pins U20-1 U1-40)
+    )
+    (net "Net-(U1-VCC-Pad21)"
+      (pins U1-21 U1-52)
+    )
+    (net /B2
+      (pins U27-2 U81-2 U87-2 U3-2 U117-2 U9-2 U15-2 U21-2 U39-2 U69-2 U105-2 U129-2
+        U93-2 U63-2 U75-2 U111-2 U51-2 U33-2 U1-46 U57-2 U99-2 U123-2 U45-2)
+    )
+    (net /Second4
+      (pins U92-1 U1-7)
+    )
+    (net /G5
+      (pins U48-3 U96-3 U42-3 U72-3 U120-3 U108-3 U90-3 U18-3 U24-3 U114-3 U54-3 U30-3
+        U126-3 U84-3 U66-3 U60-3 U132-3 U36-3 U102-3 U12-3 U1-15 U78-3 U6-3)
+    )
+    (net /G1
+      (pins U68-3 U92-3 U2-3 U104-3 U44-3 U80-3 U32-3 U128-3 U50-3 U62-3 U20-3 U86-3
+        U14-3 U38-3 U98-3 U74-3 U8-3 U56-3 U1-50 U26-3 U116-3 U122-3 U110-3)
+    )
+    (net /R6
+      (pins U97-4 U49-4 U25-4 U19-4 U55-4 U73-4 U37-4 U127-4 U133-4 U61-4 U109-4 U121-4
+        U43-4 U7-4 U31-4 U103-4 U85-4 U115-4 U13-4 U79-4 U1-17 U67-4 U91-4)
+    )
+    (net /B5
+      (pins U48-2 U96-2 U42-2 U72-2 U120-2 U108-2 U90-2 U18-2 U24-2 U114-2 U54-2 U30-2
+        U126-2 U84-2 U66-2 U60-2 U132-2 U36-2 U102-2 U12-2 U1-16 U78-2 U6-2)
+    )
+    (net "Net-(U1-GND-Pad22)"
+      (pins U1-22 U1-53 U1-63)
+    )
+    (net "unconnected-(U1-PF2-Pad59)"
+      (pins U1-59)
+    )
+    (net "unconnected-(U1-PF0-Pad61)"
+      (pins U1-61)
+    )
+    (net /Second7
+      (pins U1-33 U110-1)
+    )
+    (net /Minute6
+      (pins U44-1 U1-28)
+    )
+    (net /Second3
+      (pins U86-1 U1-6)
+    )
+    (net /Second2
+      (pins U80-1 U1-5)
+    )
+    (net /G2
+      (pins U27-3 U81-3 U87-3 U3-3 U117-3 U9-3 U15-3 U21-3 U39-3 U69-3 U105-3 U129-3
+        U93-3 U63-3 U75-3 U111-3 U51-3 U33-3 U1-47 U57-3 U99-3 U123-3 U45-3)
+    )
+    (net /Minute10
+      (pins U68-1 U1-32)
+    )
+    (net /G6
+      (pins U97-3 U49-3 U25-3 U19-3 U55-3 U73-3 U37-3 U127-3 U133-3 U61-3 U109-3 U121-3
+        U43-3 U7-3 U31-3 U103-3 U85-3 U115-3 U13-3 U79-3 U1-35 U67-3 U91-3)
+    )
+    (net "unconnected-(U1-PF6-Pad55)"
+      (pins U1-55)
+    )
+    (net "unconnected-(U1-XTAL2-Pad23)"
+      (pins U1-23)
+    )
+    (net "unconnected-(U1-PD0-Pad25)"
+      (pins U1-25)
+    )
+    (net "unconnected-(U1-PF7-Pad54)"
+      (pins U1-54)
+    )
+    (net /G3
+      (pins U70-3 U118-3 U64-3 U22-3 U46-3 U58-3 U130-3 U4-3 U34-3 U106-3 U124-3 U112-3
+        U82-3 U76-3 U10-3 U94-3 U16-3 U1-44 U88-3 U40-3 U52-3 U100-3 U28-3)
+    )
+    (net /Hour2
+      (pins U8-1 U1-38)
+    )
+    (net /Second6
+      (pins U104-1 U1-9)
+    )
+    (net /B3
+      (pins U70-2 U118-2 U64-2 U22-2 U46-2 U58-2 U130-2 U4-2 U34-2 U106-2 U124-2 U112-2
+        U82-2 U76-2 U10-2 U94-2 U16-2 U1-10 U88-2 U40-2 U52-2 U100-2 U28-2)
+    )
+    (net "unconnected-(U1-AVCC-Pad64)"
+      (pins U1-64)
+    )
+    (net "unconnected-(U1-NC-Pad1)"
+      (pins U1-1)
+    )
+    (net /R3
+      (pins U70-4 U118-4 U64-4 U22-4 U46-4 U58-4 U130-4 U4-4 U34-4 U106-4 U124-4 U112-4
+        U82-4 U76-4 U10-4 U94-4 U16-4 U1-45 U88-4 U40-4 U52-4 U100-4 U28-4)
+    )
+    (net /Minute9
+      (pins U62-1 U1-31)
+    )
+    (net /Minute8
+      (pins U56-1 U1-30)
+    )
+    (net /G4
+      (pins U53-3 U131-3 U101-3 U59-3 U41-3 U77-3 U83-3 U89-3 U35-3 U125-3 U107-3
+        U65-3 U95-3 U119-3 U23-3 U11-3 U5-3 U29-3 U1-12 U17-3 U71-3 U113-3 U47-3)
+    )
+    (net /R2
+      (pins U27-4 U81-4 U87-4 U3-4 U117-4 U9-4 U15-4 U21-4 U39-4 U69-4 U105-4 U129-4
+        U93-4 U63-4 U75-4 U111-4 U51-4 U33-4 U1-48 U57-4 U99-4 U123-4 U45-4)
+    )
+    (net /Second10
+      (pins U128-1 U1-18)
+    )
+    (net /Minute7
+      (pins U50-1 U1-29)
+    )
+    (net "unconnected-(U1-PG4-Pad19)"
+      (pins U1-19)
+    )
+    (net /Minute1
+      (pins U14-1 U1-39)
+    )
+    (net /Second1
+      (pins U74-1 U1-4)
+    )
+    (net "unconnected-(U1-XTAL1-Pad24)"
+      (pins U1-24)
+    )
+    (net "unconnected-(U1-PD1-Pad26)"
+      (pins U1-26)
+    )
+    (net "unconnected-(U1-PF3-Pad58)"
+      (pins U1-58)
+    )
+    (net /Second8
+      (pins U1-34 U116-1)
+    )
+    (net /B1
+      (pins U68-2 U92-2 U2-2 U104-2 U44-2 U80-2 U32-2 U128-2 U50-2 U62-2 U20-2 U86-2
+        U14-2 U38-2 U98-2 U74-2 U8-2 U56-2 U1-49 U26-2 U116-2 U122-2 U110-2)
+    )
+    (net /Second5
+      (pins U98-1 U1-8)
+    )
+    (net /Hour1
+      (pins U2-1 U1-37)
+    )
+    (net /Second9
+      (pins U1-43 U122-1)
+    )
+    (net /R5
+      (pins U48-4 U96-4 U42-4 U72-4 U120-4 U108-4 U90-4 U18-4 U24-4 U114-4 U54-4 U30-4
+        U126-4 U84-4 U66-4 U60-4 U132-4 U36-4 U102-4 U12-4 U1-14 U78-4 U6-4)
+    )
+    (net "unconnected-(U1-PF1-Pad60)"
+      (pins U1-60)
+    )
+    (net "unconnected-(U3-Pad1)"
+      (pins U3-1)
+    )
+    (net "unconnected-(U4-Pad1)"
+      (pins U4-1)
+    )
+    (net "unconnected-(U5-Pad1)"
+      (pins U5-1)
+    )
+    (net "unconnected-(U6-Pad1)"
+      (pins U6-1)
+    )
+    (net "unconnected-(U7-Pad1)"
+      (pins U7-1)
+    )
+    (net "unconnected-(U9-Pad1)"
+      (pins U9-1)
+    )
+    (net "unconnected-(U10-Pad1)"
+      (pins U10-1)
+    )
+    (net "unconnected-(U11-Pad1)"
+      (pins U11-1)
+    )
+    (net "unconnected-(U12-Pad1)"
+      (pins U12-1)
+    )
+    (net "unconnected-(U13-Pad1)"
+      (pins U13-1)
+    )
+    (net "unconnected-(U15-Pad1)"
+      (pins U15-1)
+    )
+    (net "unconnected-(U16-Pad1)"
+      (pins U16-1)
+    )
+    (net "unconnected-(U17-Pad1)"
+      (pins U17-1)
+    )
+    (net "unconnected-(U18-Pad1)"
+      (pins U18-1)
+    )
+    (net "unconnected-(U19-Pad1)"
+      (pins U19-1)
+    )
+    (net "unconnected-(U21-Pad1)"
+      (pins U21-1)
+    )
+    (net "unconnected-(U22-Pad1)"
+      (pins U22-1)
+    )
+    (net "unconnected-(U23-Pad1)"
+      (pins U23-1)
+    )
+    (net "unconnected-(U24-Pad1)"
+      (pins U24-1)
+    )
+    (net "unconnected-(U25-Pad1)"
+      (pins U25-1)
+    )
+    (net "unconnected-(U27-Pad1)"
+      (pins U27-1)
+    )
+    (net "unconnected-(U28-Pad1)"
+      (pins U28-1)
+    )
+    (net "unconnected-(U29-Pad1)"
+      (pins U29-1)
+    )
+    (net "unconnected-(U30-Pad1)"
+      (pins U30-1)
+    )
+    (net "unconnected-(U31-Pad1)"
+      (pins U31-1)
+    )
+    (net "unconnected-(U33-Pad1)"
+      (pins U33-1)
+    )
+    (net "unconnected-(U34-Pad1)"
+      (pins U34-1)
+    )
+    (net "unconnected-(U35-Pad1)"
+      (pins U35-1)
+    )
+    (net "unconnected-(U36-Pad1)"
+      (pins U36-1)
+    )
+    (net "unconnected-(U37-Pad1)"
+      (pins U37-1)
+    )
+    (net "unconnected-(U39-Pad1)"
+      (pins U39-1)
+    )
+    (net "unconnected-(U40-Pad1)"
+      (pins U40-1)
+    )
+    (net "unconnected-(U41-Pad1)"
+      (pins U41-1)
+    )
+    (net "unconnected-(U42-Pad1)"
+      (pins U42-1)
+    )
+    (net "unconnected-(U43-Pad1)"
+      (pins U43-1)
+    )
+    (net "unconnected-(U45-Pad1)"
+      (pins U45-1)
+    )
+    (net "unconnected-(U46-Pad1)"
+      (pins U46-1)
+    )
+    (net "unconnected-(U47-Pad1)"
+      (pins U47-1)
+    )
+    (net "unconnected-(U48-Pad1)"
+      (pins U48-1)
+    )
+    (net "unconnected-(U49-Pad1)"
+      (pins U49-1)
+    )
+    (net "unconnected-(U51-Pad1)"
+      (pins U51-1)
+    )
+    (net "unconnected-(U52-Pad1)"
+      (pins U52-1)
+    )
+    (net "unconnected-(U53-Pad1)"
+      (pins U53-1)
+    )
+    (net "unconnected-(U54-Pad1)"
+      (pins U54-1)
+    )
+    (net "unconnected-(U55-Pad1)"
+      (pins U55-1)
+    )
+    (net "unconnected-(U57-Pad1)"
+      (pins U57-1)
+    )
+    (net "unconnected-(U58-Pad1)"
+      (pins U58-1)
+    )
+    (net "unconnected-(U59-Pad1)"
+      (pins U59-1)
+    )
+    (net "unconnected-(U60-Pad1)"
+      (pins U60-1)
+    )
+    (net "unconnected-(U61-Pad1)"
+      (pins U61-1)
+    )
+    (net "unconnected-(U63-Pad1)"
+      (pins U63-1)
+    )
+    (net "unconnected-(U64-Pad1)"
+      (pins U64-1)
+    )
+    (net "unconnected-(U65-Pad1)"
+      (pins U65-1)
+    )
+    (net "unconnected-(U66-Pad1)"
+      (pins U66-1)
+    )
+    (net "unconnected-(U67-Pad1)"
+      (pins U67-1)
+    )
+    (net "unconnected-(U69-Pad1)"
+      (pins U69-1)
+    )
+    (net "unconnected-(U70-Pad1)"
+      (pins U70-1)
+    )
+    (net "unconnected-(U71-Pad1)"
+      (pins U71-1)
+    )
+    (net "unconnected-(U72-Pad1)"
+      (pins U72-1)
+    )
+    (net "unconnected-(U73-Pad1)"
+      (pins U73-1)
+    )
+    (net "unconnected-(U75-Pad1)"
+      (pins U75-1)
+    )
+    (net "unconnected-(U76-Pad1)"
+      (pins U76-1)
+    )
+    (net "unconnected-(U77-Pad1)"
+      (pins U77-1)
+    )
+    (net "unconnected-(U78-Pad1)"
+      (pins U78-1)
+    )
+    (net "unconnected-(U79-Pad1)"
+      (pins U79-1)
+    )
+    (net "unconnected-(U81-Pad1)"
+      (pins U81-1)
+    )
+    (net "unconnected-(U82-Pad1)"
+      (pins U82-1)
+    )
+    (net "unconnected-(U83-Pad1)"
+      (pins U83-1)
+    )
+    (net "unconnected-(U84-Pad1)"
+      (pins U84-1)
+    )
+    (net "unconnected-(U85-Pad1)"
+      (pins U85-1)
+    )
+    (net "unconnected-(U87-Pad1)"
+      (pins U87-1)
+    )
+    (net "unconnected-(U88-Pad1)"
+      (pins U88-1)
+    )
+    (net "unconnected-(U89-Pad1)"
+      (pins U89-1)
+    )
+    (net "unconnected-(U90-Pad1)"
+      (pins U90-1)
+    )
+    (net "unconnected-(U91-Pad1)"
+      (pins U91-1)
+    )
+    (net "unconnected-(U93-Pad1)"
+      (pins U93-1)
+    )
+    (net "unconnected-(U94-Pad1)"
+      (pins U94-1)
+    )
+    (net "unconnected-(U95-Pad1)"
+      (pins U95-1)
+    )
+    (net "unconnected-(U96-Pad1)"
+      (pins U96-1)
+    )
+    (net "unconnected-(U97-Pad1)"
+      (pins U97-1)
+    )
+    (net "unconnected-(U99-Pad1)"
+      (pins U99-1)
+    )
+    (net "unconnected-(U100-Pad1)"
+      (pins U100-1)
+    )
+    (net "unconnected-(U101-Pad1)"
+      (pins U101-1)
+    )
+    (net "unconnected-(U102-Pad1)"
+      (pins U102-1)
+    )
+    (net "unconnected-(U103-Pad1)"
+      (pins U103-1)
+    )
+    (net "unconnected-(U105-Pad1)"
+      (pins U105-1)
+    )
+    (net "unconnected-(U106-Pad1)"
+      (pins U106-1)
+    )
+    (net "unconnected-(U107-Pad1)"
+      (pins U107-1)
+    )
+    (net "unconnected-(U108-Pad1)"
+      (pins U108-1)
+    )
+    (net "unconnected-(U109-Pad1)"
+      (pins U109-1)
+    )
+    (net "unconnected-(U111-Pad1)"
+      (pins U111-1)
+    )
+    (net "unconnected-(U112-Pad1)"
+      (pins U112-1)
+    )
+    (net "unconnected-(U113-Pad1)"
+      (pins U113-1)
+    )
+    (net "unconnected-(U114-Pad1)"
+      (pins U114-1)
+    )
+    (net "unconnected-(U115-Pad1)"
+      (pins U115-1)
+    )
+    (net "unconnected-(U117-Pad1)"
+      (pins U117-1)
+    )
+    (net "unconnected-(U118-Pad1)"
+      (pins U118-1)
+    )
+    (net "unconnected-(U119-Pad1)"
+      (pins U119-1)
+    )
+    (net "unconnected-(U120-Pad1)"
+      (pins U120-1)
+    )
+    (net "unconnected-(U121-Pad1)"
+      (pins U121-1)
+    )
+    (net "unconnected-(U123-Pad1)"
+      (pins U123-1)
+    )
+    (net "unconnected-(U124-Pad1)"
+      (pins U124-1)
+    )
+    (net "unconnected-(U125-Pad1)"
+      (pins U125-1)
+    )
+    (net "unconnected-(U126-Pad1)"
+      (pins U126-1)
+    )
+    (net "unconnected-(U127-Pad1)"
+      (pins U127-1)
+    )
+    (net "unconnected-(U129-Pad1)"
+      (pins U129-1)
+    )
+    (net "unconnected-(U130-Pad1)"
+      (pins U130-1)
+    )
+    (net "unconnected-(U131-Pad1)"
+      (pins U131-1)
+    )
+    (net "unconnected-(U132-Pad1)"
+      (pins U132-1)
+    )
+    (net "unconnected-(U133-Pad1)"
+      (pins U133-1)
+    )
+    (class kicad_default /B1 /B2 /B3 /B4 /B5 /B6 /G1 /G2 /G3 /G4 /G5 /G6 /Hour1
+      /Hour2 /Minute1 /Minute10 /Minute2 /Minute3 /Minute4 /Minute5 /Minute6
+      /Minute7 /Minute8 /Minute9 /R1 /R2 /R3 /R4 /R5 /R6 /Second1 /Second10
+      /Second2 /Second3 /Second4 /Second5 /Second6 /Second7 /Second8 /Second9
+      "Net-(U1-GND-Pad22)" "Net-(U1-VCC-Pad21)" "unconnected-(U1-AREF-Pad62)"
+      "unconnected-(U1-AVCC-Pad64)" "unconnected-(U1-NC-Pad1)" "unconnected-(U1-PD0-Pad25)"
+      "unconnected-(U1-PD1-Pad26)" "unconnected-(U1-PE0-Pad2)" "unconnected-(U1-PE1-Pad3)"
+      "unconnected-(U1-PF0-Pad61)" "unconnected-(U1-PF1-Pad60)" "unconnected-(U1-PF2-Pad59)"
+      "unconnected-(U1-PF3-Pad58)" "unconnected-(U1-PF4-Pad57)" "unconnected-(U1-PF5-Pad56)"
+      "unconnected-(U1-PF6-Pad55)" "unconnected-(U1-PF7-Pad54)" "unconnected-(U1-PG4-Pad19)"
+      "unconnected-(U1-PG5{slash}~{RESET}-Pad20)" "unconnected-(U1-XTAL1-Pad24)"
+      "unconnected-(U1-XTAL2-Pad23)" "unconnected-(U10-Pad1)" "unconnected-(U100-Pad1)"
+      "unconnected-(U101-Pad1)" "unconnected-(U102-Pad1)" "unconnected-(U103-Pad1)"
+      "unconnected-(U105-Pad1)" "unconnected-(U106-Pad1)" "unconnected-(U107-Pad1)"
+      "unconnected-(U108-Pad1)" "unconnected-(U109-Pad1)" "unconnected-(U11-Pad1)"
+      "unconnected-(U111-Pad1)" "unconnected-(U112-Pad1)" "unconnected-(U113-Pad1)"
+      "unconnected-(U114-Pad1)" "unconnected-(U115-Pad1)" "unconnected-(U117-Pad1)"
+      "unconnected-(U118-Pad1)" "unconnected-(U119-Pad1)" "unconnected-(U12-Pad1)"
+      "unconnected-(U120-Pad1)" "unconnected-(U121-Pad1)" "unconnected-(U123-Pad1)"
+      "unconnected-(U124-Pad1)" "unconnected-(U125-Pad1)" "unconnected-(U126-Pad1)"
+      "unconnected-(U127-Pad1)" "unconnected-(U129-Pad1)" "unconnected-(U13-Pad1)"
+      "unconnected-(U130-Pad1)" "unconnected-(U131-Pad1)" "unconnected-(U132-Pad1)"
+      "unconnected-(U133-Pad1)" "unconnected-(U15-Pad1)" "unconnected-(U16-Pad1)"
+      "unconnected-(U17-Pad1)" "unconnected-(U18-Pad1)" "unconnected-(U19-Pad1)"
+      "unconnected-(U21-Pad1)" "unconnected-(U22-Pad1)" "unconnected-(U23-Pad1)"
+      "unconnected-(U24-Pad1)" "unconnected-(U25-Pad1)" "unconnected-(U27-Pad1)"
+      "unconnected-(U28-Pad1)" "unconnected-(U29-Pad1)" "unconnected-(U3-Pad1)"
+      "unconnected-(U30-Pad1)" "unconnected-(U31-Pad1)" "unconnected-(U33-Pad1)"
+      "unconnected-(U34-Pad1)" "unconnected-(U35-Pad1)" "unconnected-(U36-Pad1)"
+      "unconnected-(U37-Pad1)" "unconnected-(U39-Pad1)" "unconnected-(U4-Pad1)"
+      "unconnected-(U40-Pad1)" "unconnected-(U41-Pad1)" "unconnected-(U42-Pad1)"
+      "unconnected-(U43-Pad1)" "unconnected-(U45-Pad1)" "unconnected-(U46-Pad1)"
+      "unconnected-(U47-Pad1)" "unconnected-(U48-Pad1)" "unconnected-(U49-Pad1)"
+      "unconnected-(U5-Pad1)" "unconnected-(U51-Pad1)" "unconnected-(U52-Pad1)"
+      "unconnected-(U53-Pad1)" "unconnected-(U54-Pad1)" "unconnected-(U55-Pad1)"
+      "unconnected-(U57-Pad1)" "unconnected-(U58-Pad1)" "unconnected-(U59-Pad1)"
+      "unconnected-(U6-Pad1)" "unconnected-(U60-Pad1)" "unconnected-(U61-Pad1)"
+      "unconnected-(U63-Pad1)" "unconnected-(U64-Pad1)" "unconnected-(U65-Pad1)"
+      "unconnected-(U66-Pad1)" "unconnected-(U67-Pad1)" "unconnected-(U69-Pad1)"
+      "unconnected-(U7-Pad1)" "unconnected-(U70-Pad1)" "unconnected-(U71-Pad1)"
+      "unconnected-(U72-Pad1)" "unconnected-(U73-Pad1)" "unconnected-(U75-Pad1)"
+      "unconnected-(U76-Pad1)" "unconnected-(U77-Pad1)" "unconnected-(U78-Pad1)"
+      "unconnected-(U79-Pad1)" "unconnected-(U81-Pad1)" "unconnected-(U82-Pad1)"
+      "unconnected-(U83-Pad1)" "unconnected-(U84-Pad1)" "unconnected-(U85-Pad1)"
+      "unconnected-(U87-Pad1)" "unconnected-(U88-Pad1)" "unconnected-(U89-Pad1)"
+      "unconnected-(U9-Pad1)" "unconnected-(U90-Pad1)" "unconnected-(U91-Pad1)"
+      "unconnected-(U93-Pad1)" "unconnected-(U94-Pad1)" "unconnected-(U95-Pad1)"
+      "unconnected-(U96-Pad1)" "unconnected-(U97-Pad1)" "unconnected-(U99-Pad1)"
+      (circuit
+        (use_via "Via[0-1]_600:300_um")
+      )
+      (rule
+        (width 200)
+        (clearance 200)
+      )
+    )
+  )
+  (wiring
+  )
+)
