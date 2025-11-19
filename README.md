@@ -1,45 +1,58 @@
-# LED-Watch
-first schematic progress commit. adding RGB sketch schematic as well as
-completed single LED ring sketch. need to add buttons and sort out AND
-gates in the RGB sketch.
-Product Ideas.. data sheets and store locations:
+# LED-Watch — Software and Hardware Overview
 
-Boards options 
+This repository contains the hardware and firmware for the LED Watch project. The software work will live on the software-start branch while we scaffold the firmware and development tooling.
 
-27 i/o pins and in the current sketch: https://www.digikey.com/en/products/detail/microchip-technology/ATMEGA4808-MUR/10444956
+## Summary
 
-32 i/o pins: https://www.digikey.com/en/products/detail/microchip-technology/ATMEGA1284P-MU/1914520
+A small wrist-worn LED watch using an ATmega128DB28 microcontroller and an RGB LED array. The KiCad hardware files are included in the repository (see the KiCad project folder listed below).
 
+## Target hardware
 
-LEDs options
+- MCU / Board: ATmega128DB28 (AVR, 28-pin package)
+- Display: RGB LEDs (project contains the "LED Watch - empty RGB version" KiCad project)
+- RTC: (not populated in hardware docs — add here if present)
+- Power: (battery, charging, regulator details to be added)
+- Buttons: (pin mapping to be documented)
 
-addressable 1mm RGB: 
-https://www.sparkfun.com/smd-led-addressable-rgb-apa-104-1010-pack-of-20.html
-datasheet: https://cdn.sparkfun.com/assets/3/c/c/0/9/SparkFun_APA-104-1010__5mA__LED_Datasheet.pdf
+The most recent KiCad project is in the repository under the folder named "LED Watch - empty RGB version" and contains the schematic (.sch), PCB (.kicad_pcb), and other KiCad project files. If you want, I can list the exact files found there.
 
-nonaddressable 1mm RGB: 
-https://www.digikey.com/en/products/detail/harvatek-corporation/B36J3RGB-F6C0001H4U1930/13588748
+## Build and development
 
+Two recommended workflows are supported by the scaffold we will add:
 
-discrete white 0603:
-https://www.digikey.com/en/products/detail/everlight-electronics-co-ltd/CSP0603AN101-WP30300563001-3T/15286660?s=N4IgjCBcoMwOxVAYygMwIYBsDOBTANCAPZQDaIALAExgAMAHLSALqEAOALlCAMocBOASwB2AcxABfQhQBsiECkgYcBYmRAy4tWgFYYLdl0i8BI8RKkgq6gASZcAExYSgA
+- PlatformIO (recommended for reproducible builds and CI)
+  - We'll add a `platformio.ini` with a custom board definition if needed for ATmega128DB28, or instructions for adding a cores/board package.
+- Arduino IDE (quick testing)
+  - Open the `src`/`.ino` file in Arduino IDE and install any necessary core/board package for ATmega128DB28.
 
+Note: The ATmega128DB28 is not a common Arduino default board; you may need a custom board definition or use raw AVR toolchains. I can add a sample PlatformIO configuration and a starter `main.ino` if you want.
 
+## Software goals
 
+- Drive the RGB LED display with efficient refresh
+- Read time from an RTC (or maintain time on MCU)
+- Handle button input and UI modes
+- Support low-power sleep when idle
 
-Button Options
+## Repo layout (planned)
 
-19 cent 3.4mm square: https://www.digikey.com/en/products/detail/same-sky-formerly-cui-devices/TS21-34-035-BK-260-SMT-TR/21186457
+- hardware/
+  - LED Watch - empty RGB version/  (KiCad project files already present)
+- software/
+  - src/main.ino or src/main.cpp
+  - drivers/
+  - platformio.ini (optional)
+  - README.md (this file)
 
-8 cent 5.2mm square: https://www.digikey.com/en/products/detail/c-k/G01008829/16500348
+## Branching and contribution
 
-Battery Parts:
+- This file was updated on branch `software-start` to reflect the actual MCU and presence of KiCad hardware files.
+- Create feature branches off `software-start` for firmware work and open PRs to merge into `main` when ready.
 
-Lipo Connector 
-Thru-hole - 2mm.. they make 1mm mb? 
-https://www.digikey.com/en/products/detail/jst-sales-america-inc/B2B-PH-K-S/926611
+## Next steps I can take now
 
-Coin Cell Harness
-20mm dia. 3.
-Do i need a negative connector? is SMD okay?
-https://www.digikey.com/en/products/detail/keystone-electronics/3034TR/4499408
+- Add a PlatformIO `platformio.ini` and a starter `src/main.ino` for ATmega128DB28 (I can add a note about custom board config).
+- Create driver stubs for display, buttons, and RTC.
+- List the exact KiCad files in the "LED Watch - empty RGB version" folder.
+
+Choose which one you'd like me to do next.
