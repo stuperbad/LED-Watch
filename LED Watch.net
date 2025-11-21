@@ -1,7 +1,7 @@
 (export (version "E")
   (design
     (source "C:\\Users\\evanf\\Desktop\\LED-Watch\\LED Watch.kicad_sch")
-    (date "2025-11-19T17:25:30-0800")
+    (date "2025-11-19T17:32:47-0800")
     (tool "Eeschema 9.0.2")
     (sheet (number "1") (name "/") (tstamps "/")
       (title_block
