@@ -4,11 +4,14 @@ completed single LED ring sketch. need to add buttons and sort out AND
 gates in the RGB sketch.
 Product Ideas.. data sheets and store locations:
 
+Digikey working parts list: https://www.digikey.com/en/mylists/list/WPRJ7CQ35H
+
 Boards options 
 
 27 i/o pins and in the current sketch: https://www.digikey.com/en/products/detail/microchip-technology/ATMEGA4808-MUR/10444956
 
 32 i/o pins: https://www.digikey.com/en/products/detail/microchip-technology/ATMEGA1284P-MU/1914520
+
 
 
 LEDs options
