@@ -1359,6 +1359,7 @@
 		(property "Reference" "D3"
 			(at 0 -1.05 90)
 			(layer "F.SilkS")
+			(hide yes)
 			(uuid "204fdec6-8a67-4966-bdc6-a61ec6b49133")
 			(effects
 				(font
@@ -4065,7 +4066,7 @@
 		(descr "LED SMD 0201 (0603 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: https://www.vishay.com/docs/20052/crcw0201e3.pdf), generated with kicad-footprint-generator")
 		(tags "LED")
 		(property "Reference" "D4"
-			(at 0 -1.05 90)
+			(at 0 0.96 90)
 			(layer "F.SilkS")
 			(uuid "a6d497bf-d4bb-4ab8-96bc-64efc77f8edb")
 			(effects
@@ -6572,7 +6573,7 @@
 		(descr "LED SMD 0201 (0603 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: https://www.vishay.com/docs/20052/crcw0201e3.pdf), generated with kicad-footprint-generator")
 		(tags "LED")
 		(property "Reference" "D1"
-			(at 0 -1.05 90)
+			(at -0.08 -1 90)
 			(layer "F.SilkS")
 			(uuid "0cafb818-f6b2-4c5d-8406-1eb7037b0be4")
 			(effects
@@ -18243,6 +18244,7 @@
 		(property "Reference" "D2"
 			(at 0 -1.05 90)
 			(layer "F.SilkS")
+			(hide yes)
 			(uuid "0e3b4144-9add-49aa-a188-1c610d653320")
 			(effects
 				(font
