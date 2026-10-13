@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LED Watch Simulator</title>
+<style>
+:root{--bg:#0e1220;--panel:#161c2e;--line:#2a3350;--ink:#dfe5f7;--dim:#8892b0;--acc:#ffd54a;--ok:#6fe3a0;--bad:#ff7a7a}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:13px/1.35 system-ui,Segoe UI,sans-serif}
+header{padding:10px 16px;border-bottom:1px solid var(--line);display:flex;gap:16px;align-items:baseline}
+header h1{font-size:16px;margin:0}header span{color:var(--dim)}
+main{display:flex;flex-wrap:wrap;gap:14px;padding:14px;align-items:flex-start}
+#watchcol{flex:0 0 auto}
+#watchcol{--w:min(660px,94vw,calc(100vh - 170px));width:var(--w)}
+canvas#face{width:var(--w);height:var(--w);background:#0a0e1b;border:1px solid var(--line);border-radius:10px;display:block;touch-action:none}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin-bottom:12px}
+.panel h2{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);margin:0 0 8px}
+#side{flex:1 1 360px;min-width:320px;max-width:520px}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:5px 0}
+button{background:#232c47;color:var(--ink);border:1px solid var(--line);border-radius:7px;padding:6px 10px;font:inherit;cursor:pointer}
+button:hover{background:#2c3760}button.on,button:active{background:var(--acc);color:#222;border-color:var(--acc)}
+.big{flex:1;padding:14px 8px;font-size:14px;font-weight:600;user-select:none;touch-action:none}
+label{color:var(--dim);display:flex;gap:6px;align-items:center}
+input[type=range]{flex:1;min-width:90px}
+select{background:#232c47;color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:4px}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:2px 10px;font-variant-numeric:tabular-nums}
+.kv b{color:var(--dim);font-weight:400}
+.warn{color:var(--bad)}.good{color:var(--ok)}
+#tilt{background:#0a0e1b;border:1px solid var(--line);border-radius:50%;touch-action:none;cursor:crosshair}
+#ctl td{padding:3px 6px;border-top:1px solid #20283f;vertical-align:top}#ctl td:first-child{color:var(--dim);white-space:nowrap;width:1%}
+.cyc{padding:2px 7px;border-radius:5px;border:1px solid var(--line);color:var(--dim);font-size:11px}.cyc.cur{background:var(--acc);color:#222;border-color:var(--acc)}
+#log{height:150px;overflow:auto;font:12px ui-monospace,Consolas,monospace;color:#b9c2e0;background:#0a0e1b;border-radius:6px;padding:6px}
+#log div:first-child{color:var(--acc)}
+#matrix{border-collapse:collapse;font:10px ui-monospace,Consolas,monospace}
+#matrix td{width:20px;height:16px;text-align:center;border:1px solid #20283f;color:#7480a6}
+#matrix td.h{color:var(--dim);border:none}
+kbd{background:#232c47;border:1px solid var(--line);border-radius:4px;padding:0 4px}
+.hint{color:var(--dim);font-size:12px}
+</style></head><body>
+<header><h1>LED Watch Simulator</h1><span id="board"></span><span>runs <code>watch_core.js</code> (the firmware logic) on the real LED/pin map</span></header>
+<main>
+ <div id="watchcol">
+  <canvas id="face" width="660" height="660"></canvas>
+  <div class="row">
+   <button class="big" id="bL">LEFT <small>(Z or ←)</small></button>
+   <button class="big" id="bR">RIGHT <small>(X or →)</small></button>
+  </div>
+  <div class="row hint">LEFT LONG = mode selection from anywhere (then Left/Right move the highlight; wait to enter). Inside a mode both buttons belong to the mode. Both held 2 s = lock/unlock. On a dark watch the first press only wakes it. See "Controls right now" for the current mode.</div>
+  <div class="row"><button id="bLongL">Long left</button><button id="bLongR">Long right</button><button id="bChord">Both held 2.2 s (lock)</button><button id="bHold">Hold right 3 s</button></div>
+ </div>
+ <div id="side">
+  <div class="panel"><h2>Accelerometer (LIS2DW12)</h2>
+   <div class="row" style="align-items:flex-start">
+    <div><canvas id="tilt" width="170" height="170"></canvas><div class="hint" style="width:170px;text-align:center">drag toward the edge you lift<br>(<kbd>W A S D</kbd>, <kbd>Q</kbd> level)</div></div>
+    <div style="flex:1;min-width:150px">
+     <div class="kv"><b>x (→3 o'clk)</b><span id="ax">0</span><b>y (→12 o'clk)</b><span id="ay">0</span><b>z (out)</b><span id="az">1</span><b>|a|</b><span id="am">1</span></div>
+     <div class="row"><button id="bShake">Shake <kbd>Space</kbd></button><button id="bFF">Free-fall</button></div>
+     <div class="row"><button id="bRaise">Raise wrist <kbd>R</kbd></button><button id="bTap">Double tap <kbd>T</kbd></button></div>
+     <label>raise strength <input id="vig" type="range" min="0.1" max="1" step="0.05" value="0.6"><span id="vigv">0.6</span></label>
+     <label><input id="devori" type="checkbox"> use device tilt (phone, experimental)</label>
+    </div></div></div>
+  <div class="panel"><h2>Environment</h2>
+   <div class="row"><label>time speed <select id="speed"><option value="1">1×</option><option value="10">10×</option><option value="60">60×</option><option value="600">600×</option></select></label>
+    <button id="bNow">Set watch to PC time</button><span id="clock" style="margin-left:auto;font-weight:600"></span></div>
+   <label>battery <input id="soc" type="range" min="0" max="100" value="80"><span id="socv"></span></label>
+   <label>solar <input id="sol" type="range" min="0" max="30" step="0.5" value="0"><span id="solv"></span></label>
+   <label>ambient light <input id="amb" type="range" min="0" max="1" step="0.05" value="0.5"><span id="ambv"></span></label>
+   <label><input id="drain" type="checkbox"> drain / charge battery from simulated current (140 mAh)</label>
+  </div>
+  <div class="panel"><h2>Controls right now</h2>
+   <div id="cyc" class="row" style="gap:4px"></div>
+   <table id="ctl" style="width:100%;border-collapse:collapse"></table>
+   <div id="ctlnote" class="hint" style="margin-top:6px"></div></div>
+  <div class="panel"><h2>Watch status</h2>
+   <div class="kv" id="status"></div></div>
+  <div class="panel"><h2>Display options</h2>
+   <label><input id="slow" type="checkbox"> slow-motion scan (show one matrix slot at a time)</label>
+   <label>slot time <input id="slowms" type="range" min="20" max="400" value="120"><span id="slowv">120 ms</span></label>
+   <label><input id="lbl" type="checkbox" checked> mode labels</label>
+   <label><input id="blur" type="checkbox"> raw (linear) brightness instead of eye-curve</label>
+  </div>
+  <div class="panel"><h2>Matrix (row = sink, column = source) and scan plan</h2>
+   <div class="hint" id="scanline"></div><table id="matrix"></table></div>
+  <div class="panel"><h2>Manual <a href="MANUAL.md" target="_blank" style="color:var(--acc);font-size:11px;text-transform:none">(open as plain text)</a></h2>
+   <pre id="manual" style="white-space:pre-wrap;max-height:300px;overflow:auto;margin:0;font:12px ui-monospace,Consolas,monospace;color:#b9c2e0">loading...</pre></div>
+  <div class="panel"><h2>Event log</h2><div id="log"></div></div>
+ </div>
+</main>
+<script src="face_data.js"></script>
+<script src="watch_core.js"></script>
+<script>
+'use strict';
+const F = window.FACE, W = createWatch(F);
+document.getElementById('board').textContent = 'board ' + F.board + ', Ø' + F.D + ' mm, ' + F.leds.length + ' ring LEDs';
+const $ = id => document.getElementById(id);
+
+/* ---------- inputs ---------- */
+const btn = [false, false]; const press = [0, 0];                          // press: bitmask of sources (mouse/key/macro)
+function setBtn(i, src, on) { press[i] = on ? press[i] | src : press[i] & ~src; btn[i] = press[i] !== 0; }
+function bindHold(el, i) {
+  el.addEventListener('pointerdown', e => { el.setPointerCapture(e.pointerId); setBtn(i, 1, true); });
+  el.addEventListener('pointerup', () => setBtn(i, 1, false)); el.addEventListener('pointercancel', () => setBtn(i, 1, false));
+}
+bindHold($('bL'), 0); bindHold($('bR'), 1);
+function macro(buttons, ms) { buttons.forEach(i => setBtn(i, 4, true)); setTimeout(() => buttons.forEach(i => setBtn(i, 4, false)), ms); }
+$('bLongL').onclick = () => macro([0], 1150); $('bLongR').onclick = () => macro([1], 1150);
+$('bChord').onclick = () => macro([0, 1], 2250); $('bHold').onclick = () => macro([1], 3200);
+const keys = {};
+addEventListener('keydown', e => {
+  if (e.repeat || /INPUT|SELECT/.test(e.target.tagName)) return;
+  const k = e.key.toLowerCase();
+  if (k === 'z' || k === 'arrowleft') setBtn(0, 2, true); else if (k === 'x' || k === 'arrowright') setBtn(1, 2, true);
+  else if (k === ' ') { e.preventDefault(); shake(); } else if (k === 'r') raise(); else if (k === 't') tap = true; else if (k === 'q') { tilt.u = tilt.v = 0; }
+  else if ('wasd'.includes(k)) keys[k] = true;
+});
+addEventListener('keyup', e => {
+  const k = e.key.toLowerCase();
+  if (k === 'z' || k === 'arrowleft') setBtn(0, 2, false); else if (k === 'x' || k === 'arrowright') setBtn(1, 2, false); else keys[k] = false;
+});
+
+/* tilt pad: puck position (u right, v up) = direction of the edge you lift */
+const tilt = { u: 0, v: 0 }, tp = $('tilt'), tc = tp.getContext('2d');
+let dragging = false;
+function tiltFrom(e) {
+  const r = tp.getBoundingClientRect(), x = (e.clientX - r.left) / r.width * 2 - 1, y = -((e.clientY - r.top) / r.height * 2 - 1);
+  const m = Math.hypot(x, y), k = m > 1 ? 1 / m : 1; tilt.u = x * k; tilt.v = y * k;
+}
+tp.addEventListener('pointerdown', e => { dragging = true; tp.setPointerCapture(e.pointerId); tiltFrom(e); });
+tp.addEventListener('pointermove', e => { if (dragging) tiltFrom(e); });
+tp.addEventListener('pointerup', () => dragging = false);
+tp.addEventListener('dblclick', () => { tilt.u = tilt.v = 0; });
+let shakeT = 0, ffT = 0, ffEv = false, tap = false, raiseAnim = null, wakeStrength = 0, devOri = null;
+function shake() { shakeT = 700; }
+function raise() { raiseAnim = { t: 0, from: { u: 0, v: -0.92 } }; }
+$('bShake').onclick = shake; $('bFF').onclick = () => { ffT = 600; ffEv = true; }; $('bRaise').onclick = raise; $('bTap').onclick = () => tap = true;
+$('vig').oninput = () => $('vigv').textContent = $('vig').value;
+$('devori').onchange = e => {
+  if (e.target.checked) {
+    const on = () => addEventListener('deviceorientation', ev => { devOri = ev; });
+    if (window.DeviceOrientationEvent && DeviceOrientationEvent.requestPermission) DeviceOrientationEvent.requestPermission().then(r => r === 'granted' && on()); else on();
+  } else devOri = null;
+};
+
+/* ---------- environment ---------- */
+let simSpeed = 1, socV = 0.8, drain = false;
+$('speed').onchange = e => simSpeed = +e.target.value;
+$('bNow').onclick = () => { const d = new Date(); W.setHms(d.getHours(), d.getMinutes(), d.getSeconds()); W.setDate(d.getFullYear(), d.getMonth() + 1, d.getDate()); };
+const sync = () => { $('socv').textContent = $('soc').value + ' %'; $('solv').textContent = $('sol').value + ' mW'; $('ambv').textContent = $('amb').value; $('slowv').textContent = $('slowms').value + ' ms'; };
+['soc', 'sol', 'amb', 'slowms'].forEach(id => $(id).addEventListener('input', () => { if (id === 'soc') socV = $('soc').value / 100; sync(); }));
+sync();
+function vddOf(soc) {                                                        // rough single-cell LiPo curve (V)
+  const t = [[0, 3.0], [0.05, 3.3], [0.2, 3.65], [0.5, 3.8], [0.8, 4.0], [1, 4.2]];
+  for (let i = 1; i < t.length; i++) if (soc <= t[i][0]) return t[i - 1][1] + (t[i][1] - t[i - 1][1]) * (soc - t[i - 1][0]) / (t[i][0] - t[i - 1][0]);
+  return 4.2;
+}
+
+/* ---------- drawing ---------- */
+const cv = $('face'), cx = cv.getContext('2d');
+const SC = cv.width / (F.D + 8), OX = cv.width / 2, OY = cv.height / 2;
+const X = x => OX + x * SC, Y = y => OY + y * SC;
+const IND_X = F.inds.map(d => d.x);
+function swHit(ev) {
+  const r = cv.getBoundingClientRect(), mx = (ev.clientX - r.left) / r.width * cv.width, my = (ev.clientY - r.top) / r.height * cv.height;
+  for (const s of F.sw) if (Math.hypot(mx - X(s.x), my - Y(s.y)) < 2.6 * SC) return s.x < 0 ? 0 : 1;
+  return -1;
+}
+let faceHold = -1;
+cv.addEventListener('pointerdown', e => { const i = swHit(e); if (i >= 0) { faceHold = i; cv.setPointerCapture(e.pointerId); setBtn(i, 8, true); } });
+cv.addEventListener('pointerup', () => { if (faceHold >= 0) setBtn(faceHold, 8, false); faceHold = -1; });
+const lastVis = new Float32Array(144);
+
+function drawFace(out, slowSlot, rawVis) {
+  cx.clearRect(0, 0, cv.width, cv.height);
+  cx.fillStyle = '#1b2235'; cx.strokeStyle = '#8892b0'; cx.lineWidth = 2;
+  cx.beginPath(); cx.arc(OX, OY, F.D / 2 * SC, 0, 7); cx.fill(); cx.stroke();
+  // solar cell + parts
+  const c = F.cell;
+  cx.fillStyle = '#2b2437'; cx.strokeStyle = '#5a4b7a'; cx.lineWidth = 1;
+  for (const k of F.cells) { cx.fillRect(X(k.x - c.w / 2), Y(k.y - c.h / 2), c.w * SC, c.h * SC); cx.strokeRect(X(k.x - c.w / 2), Y(k.y - c.h / 2), c.w * SC, c.h * SC); }
+  cx.fillStyle = '#6b5f88'; cx.font = (SC * 1.2) + 'px system-ui'; cx.textAlign = 'center'; cx.fillText('solar', X(0), Y(0.4));
+  // buttons
+  F.sw.forEach((s, i) => {
+    cx.beginPath(); cx.arc(X(s.x), Y(s.y), 2.0 * SC, 0, 7);
+    cx.fillStyle = btn[i] ? '#ffd54a' : '#2c3760'; cx.fill(); cx.strokeStyle = '#8892b0'; cx.stroke();
+    cx.fillStyle = btn[i] ? '#222' : '#9aa6d0'; cx.fillText(i ? 'R' : 'L', X(s.x), Y(s.y) + 0.45 * SC);
+  });
+  const lit = (row, col) => out.fb[row * 12 + col];
+  const on = (idx, row, col) => {
+    if (!out.awake) return 0;
+    if (slowSlot) { if (slowSlot.row !== row || !slowSlot.cols.includes(col)) return 0; return lit(row, col) ? 1 : 0; }
+    const v = lit(row, col) / 255 * out.scan.relBright * (out.duty / 0.5);
+    return rawVis ? Math.min(1, v) : Math.min(1, Math.pow(Math.min(1, v * 1.0) , 0.5));
+  };
+  cx.globalCompositeOperation = 'lighter';
+  const rs = { '0603': 0.55, '0402': 0.42, '0201': 0.3 };
+  for (const L of F.leds) {
+    const v = on(0, L.row, L.col), r = (rs[L.size] || 0.4) * SC;
+    cx.globalCompositeOperation = 'source-over';
+    cx.beginPath(); cx.arc(X(L.x), Y(L.y), r, 0, 7); cx.fillStyle = '#39445f'; cx.fill();
+    if (v > 0.02) {
+      cx.globalCompositeOperation = 'lighter';
+      const g = cx.createRadialGradient(X(L.x), Y(L.y), 0, X(L.x), Y(L.y), r * 3.2);
+      g.addColorStop(0, `rgba(255,244,190,${v})`); g.addColorStop(0.35, `rgba(255,214,110,${v * 0.45})`); g.addColorStop(1, 'rgba(255,200,80,0)');
+      cx.fillStyle = g; cx.beginPath(); cx.arc(X(L.x), Y(L.y), r * 3.2, 0, 7); cx.fill();
+    }
+  }
+  cx.globalCompositeOperation = 'source-over';
+  const names = W.IND_NAME;
+  F.inds.forEach((d, i) => {
+    const v = on(1, d.row, d.col);
+    cx.beginPath(); cx.arc(X(d.x), Y(d.y), 0.42 * SC, 0, 7); cx.fillStyle = v > 0.02 ? '#ffd54a' : '#3a4560'; cx.fill();
+    if (v > 0.02) { cx.globalCompositeOperation = 'lighter'; const g = cx.createRadialGradient(X(d.x), Y(d.y), 0, X(d.x), Y(d.y), 2.2 * SC); g.addColorStop(0, `rgba(255,214,90,${v})`); g.addColorStop(1, 'rgba(255,200,60,0)'); cx.fillStyle = g; cx.beginPath(); cx.arc(X(d.x), Y(d.y), 2.2 * SC, 0, 7); cx.fill(); cx.globalCompositeOperation = 'source-over'; }
+    if ($('lbl').checked) { cx.fillStyle = '#7885ad'; cx.font = (SC * 0.95) + 'px system-ui'; cx.fillText(names[i], X(d.x), Y(d.y) + 1.9 * SC); }
+  });
+  // hour numerals for orientation
+  cx.fillStyle = '#3d4868'; cx.font = (SC * 1.1) + 'px system-ui';
+  [[12, 0], [3, 90], [6, 180], [9, 270]].forEach(([n, a]) => { const r = (F.radii.S + 3.1), t = a * Math.PI / 180; cx.fillText(n, X(r * Math.sin(t)), Y(-r * Math.cos(t)) + SC * 0.4); });
+  // sand particles preview (physics positions), faint
+  if (out.awake && W.S.mode === 4 && W.S.fun.playing && W.S.fun.g === 0 && W.game().sand && W.game().sand.mode < 4 && $('slow').checked === false) {
+    cx.fillStyle = 'rgba(120,170,255,.18)';
+    for (const q of W.sandParticles()) { cx.beginPath(); cx.arc(X(q.x), Y(q.y), 0.8 * SC, 0, 7); cx.fill(); }
+  }
+  if (!out.awake) { cx.fillStyle = '#566'; cx.font = '14px system-ui'; cx.fillText('display off - MCU asleep (raise wrist, tap, or press a button)', OX, OY + F.D / 2 * SC - 26); }
+}
+
+/* tilt pad render */
+function drawTilt(f) {
+  tc.clearRect(0, 0, 170, 170); tc.strokeStyle = '#2a3350'; tc.beginPath(); tc.arc(85, 85, 80, 0, 7); tc.moveTo(5, 85); tc.lineTo(165, 85); tc.moveTo(85, 5); tc.lineTo(85, 165); tc.stroke();
+  tc.fillStyle = '#566'; tc.font = '10px system-ui'; tc.textAlign = 'center'; tc.fillText('12', 85, 14); tc.fillText('6', 85, 164); tc.fillText('9', 12, 88); tc.fillText('3', 158, 88);
+  tc.fillStyle = '#ffd54a'; tc.beginPath(); tc.arc(85 + tilt.u * 80, 85 - tilt.v * 80, 7, 0, 7); tc.fill();
+  tc.strokeStyle = '#6fe3a0'; tc.beginPath(); tc.moveTo(85, 85); tc.lineTo(85 + f.x * 80, 85 - f.y * 80); tc.stroke();   // measured accel
+}
+
+/* ---------- main loop ---------- */
+let last = performance.now(), acc = { x: 0, y: 0, z: 1 }, slowIdx = 0, slowT = 0, energy = { mWh: 0 }, lastLogTxt = '';
+const logEl = $('log');
+fetch('MANUAL.md').then(r => r.text()).then(t => $('manual').textContent = t).catch(() => $('manual').textContent = '(serve this folder over http to see the manual here, or open MANUAL.md)');
+const MODES = ['TIME', 'SET', 'TMR', 'BAT', 'FUN', 'CFG']; let lastCtl = '';
+function drawControls() {
+  const c = W.controls(), key = JSON.stringify([c, W.S.mode]);
+  if (key === lastCtl) return; lastCtl = key;
+  const hi = c.menu >= 0 ? c.menu : W.S.mode;
+  $('cyc').innerHTML = MODES.map((m, i) => `<span class="cyc${i === hi ? ' cur' : ''}">${m}</span>`).join('<span class="hint">›</span>') + (c.menu >= 0 ? '<span class="hint">&nbsp;MODE SELECTION</span>' : '');
+  $('ctl').innerHTML = `<tr><td>LEFT short</td><td>${c.ls}</td></tr><tr><td>LEFT long</td><td>${c.ll}</td></tr><tr><td>RIGHT short</td><td>${c.rs}</td></tr><tr><td>RIGHT long</td><td>${c.rl}</td></tr><tr><td>BOTH held</td><td>${c.both}</td></tr>`;
+  $('ctlnote').textContent = c.note;
+}
+function addLog(msg) {
+  const d = document.createElement('div'); const t = W.getHms();
+  d.textContent = `${String(t.h).padStart(2, '0')}:${String(t.m).padStart(2, '0')}:${String(t.s).padStart(2, '0')}  ${msg}`;
+  logEl.prepend(d); while (logEl.children.length > 120) logEl.lastChild.remove();
+}
+// matrix table
+const mt = $('matrix'); {
+  let h = '<tr><td class="h"></td>'; for (let c = 0; c < 12; c++) h += `<td class="h">C${c}<br>${F.pins['COL' + c]}</td>`; h += '</tr>';
+  for (let r = 0; r < 12; r++) { h += `<tr><td class="h">R${r} ${F.pins['ROW' + r]}</td>`; for (let c = 0; c < 12; c++) h += `<td id="m${r}_${c}"></td>`; h += '</tr>'; }
+  mt.innerHTML = h;
+}
+function frame(now) {
+  const dt = Math.min(50, now - last); last = now;
+  // keyboard tilt
+  if (keys.a) tilt.u = Math.max(-1, tilt.u - dt * 0.002); if (keys.d) tilt.u = Math.min(1, tilt.u + dt * 0.002);
+  if (keys.w) tilt.v = Math.min(1, tilt.v + dt * 0.002); if (keys.s) tilt.v = Math.max(-1, tilt.v - dt * 0.002);
+  // raise-wrist animation: from hanging-down to looking at it, strength reported to the wake logic at the end
+  wakeStrength = 0;
+  if (raiseAnim) {
+    raiseAnim.t += dt; const k = Math.min(1, raiseAnim.t / 450), e = k * k * (3 - 2 * k);
+    tilt.u = raiseAnim.from.u * (1 - e); tilt.v = raiseAnim.from.v * (1 - e) + 0.05 * e;
+    if (k >= 1) { wakeStrength = +$('vig').value; raiseAnim = null; }
+  }
+  let fx = tilt.u, fy = tilt.v, fz = Math.sqrt(Math.max(0, 1 - fx * fx - fy * fy));
+  if (devOri && devOri.beta != null) { fy = Math.sin(devOri.beta * Math.PI / 180); fx = Math.sin(devOri.gamma * Math.PI / 180); fz = Math.sqrt(Math.max(0, 1 - fx * fx - fy * fy)); }
+  if (shakeT > 0) { shakeT -= dt; const a = 2.2 * Math.min(1, shakeT / 300); fx += (Math.random() - .5) * 2 * a; fy += (Math.random() - .5) * 2 * a; fz += (Math.random() - .5) * a; }
+  if (ffT > 0) { ffT -= dt; fx = fy = fz = 0.02; }
+  acc = { x: fx, y: fy, z: fz };
+  const solar = +$('sol').value, soc = socV, charging = solar > 0.8 && soc < 0.995;
+  const io = { btn: btn.slice(), accel: acc, wakeStrength, tap, ff: ffEv, vdd: vddOf(soc), soc, batOk: soc > 0.12, solarMw: solar, charging, ambient: +$('amb').value };
+  tap = false; ffEv = false;
+  const out = W.step(dt, dt * simSpeed, io);
+  for (const e of out.events) addLog(e);
+  // battery model: LED current + MCU current; solar charges
+  const mcuMa = out.awake ? 1.2 : 0.004;                                     // assumption: ~1.2 mA running at 4 MHz, ~4 uA asleep (RTC+IMU)
+  const loadMa = out.scan.avgMa + mcuMa, solMa = solar / Math.max(3.0, io.vdd) * 0.8;
+  energy.mWh += loadMa * io.vdd * dt / 3.6e6;
+  if ($('drain').checked) { socV = Math.max(0, Math.min(1, socV + (solMa - loadMa) * dt * simSpeed / 3.6e6 / 140)); $('soc').value = Math.round(socV * 100); sync(); }
+  // draw
+  let slot = null;
+  if ($('slow').checked && out.scan.slots.length) {
+    slowT += dt; const ms = +$('slowms').value; if (slowT >= ms) { slowT = 0; slowIdx++; }
+    slot = out.scan.slots[slowIdx % out.scan.slots.length];
+  }
+  drawFace(out, slot, $('blur').checked);
+  drawControls();
+  drawTilt(acc);
+  // panels
+  $('ax').textContent = acc.x.toFixed(2); $('ay').textContent = acc.y.toFixed(2); $('az').textContent = acc.z.toFixed(2); $('am').textContent = Math.hypot(acc.x, acc.y, acc.z).toFixed(2);
+  const t = out.time; const dd = out.date; $('clock').textContent = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'][dd.wd - 1] + ' ' + dd.y + '-' + String(dd.m).padStart(2, '0') + '-' + String(dd.d).padStart(2, '0') + '  ' + `${String(t.h).padStart(2, '0')}:${String(t.m).padStart(2, '0')}:${String(t.s).padStart(2, '0')}`;
+  const sc = out.scan;
+  $('status').innerHTML =
+    `<b>mode</b><span>${out.modeName}${out.sub ? ' - ' + out.sub : ''}${out.locked ? ' <span class="warn">[LOCKED]</span>' : ''}</span>` +
+    `<b>display</b><span>${out.awake ? 'on (idle ' + (W.S.idle / 1000).toFixed(1) + ' s)' : 'off, MCU in standby'}</span>` +
+    `<b>VDD</b><span>${io.vdd.toFixed(2)} V  (BAT_OK ${io.batOk ? 'high' : '<span class="warn">low</span>'}${W.S.dead ? ', <span class="warn">dead</span>' : ''})</span>` +
+    `<b>LED current</b><span>${sc.I.toFixed(2)} mA each, ${sc.m} per row-slot (row sink ≤ 10 mA)</span>` +
+    `<b>scan</b><span>${sc.N} slots/frame; duty ${(sc.achievable * 100).toFixed(1)} % vs ${(sc.needed * 100).toFixed(1)} % wanted ${sc.limited ? '<span class="warn">- brightness limited to ' + Math.round(sc.relBright * 100) + ' %</span>' : '<span class="good">ok</span>'}</span>` +
+    `<b>avg LED current</b><span>${sc.avgMa.toFixed(3)} mA (${(sc.avgMa * io.vdd).toFixed(2)} mW)</span>` +
+    `<b>total load</b><span>${loadMa.toFixed(3)} mA, solar in ≈ ${solMa.toFixed(2)} mA${charging ? ' <span class="good">charging</span>' : ''}</span>` +
+    `<b>energy used</b><span>${energy.mWh.toFixed(3)} mWh since load</span>`;
+  $('scanline').textContent = slot ? `slot: ROW${slot.row} (${F.pins['ROW' + slot.row]}) low, columns ${slot.cols.map(c => 'COL' + c + ' (' + F.pins['COL' + c] + ')').join(', ')} high` : (sc.N ? 'full-speed scan: ' + sc.N + ' slots (' + sc.slots.map(s => 'R' + s.row).join(' ') + ')' : 'no LEDs lit');
+  for (let r = 0; r < 12; r++) for (let c = 0; c < 12; c++) {
+    const el = $('m' + r + '_' + c), v = out.fb[r * 12 + c];
+    el.style.background = v ? `rgba(255,213,74,${0.25 + v / 340})` : ''; el.style.color = v ? '#221' : ''; el.textContent = v ? (slot && slot.row === r && slot.cols.includes(c) ? '●' : '·') : '';
+    el.style.outline = slot && slot.row === r ? '1px solid #6fe3a0' : '';
+  }
+}
+setInterval(() => frame(performance.now()), 16);   // timer, not rAF, so it also runs in a background/embedded pane
+addLog('simulator started - the watch is asleep; press a button or raise wrist');
+</script>
+</body></html>

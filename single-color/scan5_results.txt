@@ -1,0 +1,13 @@
+[--cell KXOB25 --cell-count 2] tc70 x2 | min D = 43
+[--cell KXOB25 --cell-count 2] 50 x2 | min D = 44
+[--cell KXOB25 --cell-count 2] 401030 x2 | none up to 50 (no solution: battery plug does not fit beside the cell)
+[--cell KXOB25 --cell-count 2] 301030 x2 | none up to 50 (no solution: battery plug does not fit beside the cell)
+[--cell AM1606] tc70 x2 | min D = 43
+[--cell AM1606] 50 x2 | min D = 44
+[--cell AM1606] 401030 x2 | none up to 50 (no solution: battery plug does not fit beside the cell)
+[--cell AM1606] 301030 x2 | none up to 50 (no solution: battery plug does not fit beside the cell)
+[--cell KXOB25] tc70 x2 | min D = 40
+[--cell KXOB25] 50 x2 | min D = 44
+[--cell KXOB25] 401030 x2 | none up to 50 (no solution: battery plug does not fit beside the cell)
+[--cell KXOB25] 301030 x2 | none up to 50 (no solution: battery plug does not fit beside the cell)
+finished

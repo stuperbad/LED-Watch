@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="720" viewBox="0 0 1500 720" font-family="Arial">
+<rect width="1500" height="720" fill="white"/>
+<text x="30" y="40" font-size="26" font-weight="bold">Solar cells to scale (1 mm = 14 px) against the watch's free centre</text>
+<text x="30" y="68" font-size="16" fill="#444">Dashed circles = free centre of the 36.9 mm board (18 mm) and of the 30 mm board (13.7 mm). Solid = cell outline.</text>
+<circle cx="230" cy="330" r="126.0" fill="none" stroke="#2a7" stroke-width="2" stroke-dasharray="8 6"/>
+<circle cx="230" cy="330" r="95.89999999999999" fill="none" stroke="#c60" stroke-width="2" stroke-dasharray="3 5"/>
+<rect x="125.0" y="225.0" width="210" height="210" fill="#8a4b2a" stroke="black" stroke-width="2"/>
+<text x="230" y="160" font-size="20" font-weight="bold" text-anchor="middle">Panasonic AM-1606C</text>
+<text x="230" y="182" font-size="16" text-anchor="middle">15 x 15 x 0.7 mm   (area 2.25 cm2, diagonal 21.2 mm)</text>
+<text x="230" y="465" font-size="15" text-anchor="middle" fill="#064">does NOT fit the 18 mm circle (needs 21.2 mm)</text>
+<text x="230" y="485" font-size="15" text-anchor="middle" fill="#a40">does NOT fit the 13.7 mm circle</text>
+<text x="230" y="515" font-size="15" text-anchor="middle" fill="#222">3.7 V, 8.8 uW @ 200 lux</text>
+<text x="230" y="535" font-size="15" text-anchor="middle" fill="#222">~10 mW @ 1 sun (estimate)</text>
+<text x="230" y="555" font-size="15" text-anchor="middle" fill="#222">glass, bare electrodes, no reflow</text>
+<circle cx="640" cy="330" r="126.0" fill="none" stroke="#2a7" stroke-width="2" stroke-dasharray="8 6"/>
+<circle cx="640" cy="330" r="95.89999999999999" fill="none" stroke="#c60" stroke-width="2" stroke-dasharray="3 5"/>
+<rect x="560.55" y="274.0" width="158.9" height="112" fill="#16233f" stroke="black" stroke-width="2"/>
+<text x="640" y="160" font-size="20" font-weight="bold" text-anchor="middle">Anysolar KXOB25-07X1TF</text>
+<text x="640" y="182" font-size="16" text-anchor="middle">11.35 x 8 x 1.2 mm   (area 0.91 cm2, diagonal 13.9 mm)</text>
+<text x="640" y="465" font-size="15" text-anchor="middle" fill="#064">fits the 18 mm circle</text>
+<text x="640" y="485" font-size="15" text-anchor="middle" fill="#a40">does NOT fit the 13.7 mm circle</text>
+<text x="640" y="515" font-size="15" text-anchor="middle" fill="#222">0.69 V, 14.3 mW @ 1 sun (datasheet)</text>
+<text x="640" y="535" font-size="15" text-anchor="middle" fill="#222">~2 uW @ 200 lux (estimate)</text>
+<text x="640" y="555" font-size="15" text-anchor="middle" fill="#222">reflow only with low-temp paste</text>
+<circle cx="1100" cy="330" r="126.0" fill="none" stroke="#2a7" stroke-width="2" stroke-dasharray="8 6"/>
+<circle cx="1100" cy="330" r="95.89999999999999" fill="none" stroke="#c60" stroke-width="2" stroke-dasharray="3 5"/>
+<rect x="939.0" y="155.0" width="322" height="350" fill="#16233f" stroke="black" stroke-width="2"/>
+<text x="1100" y="115" font-size="20" font-weight="bold" text-anchor="middle">Anysolar KXOB081K06TF (yours)</text>
+<text x="1100" y="137" font-size="16" text-anchor="middle">23 x 25 x 1.2 mm   (area 5.75 cm2, diagonal 34.0 mm)</text>
+<text x="1100" y="545" font-size="15" text-anchor="middle" fill="#064">does NOT fit the 18 mm circle (needs 34.0 mm)</text>
+<text x="1100" y="565" font-size="15" text-anchor="middle" fill="#a40">does NOT fit the 13.7 mm circle</text>
+<text x="1100" y="595" font-size="15" text-anchor="middle" fill="#222">4.15 V, 105.9 mW @ 1 sun (datasheet)</text>
+<text x="1100" y="615" font-size="15" text-anchor="middle" fill="#222">~17 uW @ 200 lux (estimate)</text>
+<text x="1100" y="635" font-size="15" text-anchor="middle" fill="#222">reflow only with low-temp paste</text>
+<line x1="30" y1="690" x2="170" y2="690" stroke="black" stroke-width="3"/><text x="100" y="684" font-size="14" text-anchor="middle">10 mm</text>
+</svg>

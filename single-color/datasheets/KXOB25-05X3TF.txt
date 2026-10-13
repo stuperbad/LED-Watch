@@ -1,0 +1,234 @@
+                                                     Preliminary                                  KXOB25-05X3TF
+
+IXOLARTM High Efficiency SolarBIT
+
+Description
+
+IXOLARTM SolarBIT is an ANYSOLAR product line of SolarBIT made of monocrystalline, high efficiency solar
+cells. The IXOLARTM SolarBIT is an ideal for charging various battery powered and handheld consumer products
+such as mobile phones, cameras, RF-ID Tag, PDAs, MP3-Players and toys. They are also suitable for industrial
+applications such as wireless sensors, portable instrumentation and for charging emergency backup batteries.
+
+With a cell efficiency of typically 25% measured at a wafer level, SolarBIT gives the ability to extend run time
+even in "low light" conditions and increase battery life and run time in a small footprint, which can be easily
+accommodated in the design of portable products. The design allows connecting SolaBIT flexibly in series
+and/or parallel to perfectly meet the custom-specific application's power requirements.
+
+IXOLARTM products have a very good photonic response over a wide range of wavelength and therefore can
+be used in both indoor and outdoor applications.
+
+Product and Ordering Information
+
+  Part Number       Open Circuit Short Circuit       Typ. Voltage                   Typ. Current
+                    Voltage [V] Current [mA]          @ Pmpp [V]                    @ Pmpp [mA]
+
+KXOB25-05X3TF       2.07                    19.5          1.67                           18.4
+
+(Parameters given are typical values)                                                             Features
+Dimensions (W x L x H): 23 x 8 x 1.2 ± 0.3 [mm]
+                                                                                                  · Monocrystalline silicon technology
+SolarBIT Weight: 0.4 grams                                                                        · High efficiency outdoor and indoor
+Storage Temperature: -40°C ~ +90°C                                                                · Long life and stable output
+Operation Temperature: -40°C ~ +90°C                                                              · Sealed Package
+SolarBIT is compliant to the RoHS Norm.                                                           · High mechanical robustness
+                                                                                                  · Surface Mount Package
+Electrical Characteristics                                                                        · Reflow Solderable
+
+Symbol Cell Parameter                                Typical Ratings *) Units                     Applications
+
+VOC    open circuit voltage                                                   2.07      V         · Battery chargers for portables such as cell
+                                                                                                   phones, PDAs, GPS-Systems, ...
+ISC    short circuit current                                                  19.5 mA
+                                                                                                  · "Green" electricity generation
+Vmpp   voltage at max. power point                                            1.67      V         · Power backup for UPS, Sensors, Wearables
+
+Impp   current at max. power point                                            18.4 mA             Advantages
+
+Pmpp   maximum peak power                                                     30.7 mW             · Automatic Pick & Place Mounting
+                                                                                                  · One Product for Multiple Applications
+FF     fill factor                                                            > 70      %         · Flexible Integration into the Application
+
+       solar cell efficiency                                                  25        %
+
+VOC/T  open circuit voltage temp. coefficient           -5.22 mV/K
+ISC/T  short circuit current temp. coefficient          8.84 uA/K
+
+*) All values measured at Standard Condition: 1 sun (= 100 mW/cm²), Air Mass 1.5, 25°C
+
+ANYSOLAR reserves the right to change limits, test conditions and dimensions                      © 2010 ANYSOLAR All rights reserved
+
+ANYSOLAR LTD.                                        1                                                         http://www.anysolar.biz
+
+IX-Tower #C-B218, 27, Dongtancheomdansaneop 1-ro,
+
+Hwaseong-si, Gyeonggi-Do, Republic of Korea [18469]
+
+Phone +82-31-784-8810, Fax +82-31-784-8811           Rev. Jun. 2026
+                                                     Preliminary              KXOB25-05X3TF
+
+               Typical SolarBIT Performance Data
+
+ANYSOLAR reserves the right to change limits, test conditions and dimensions  © 2010 ANYSOLAR All rights reserved
+
+ANYSOLAR LTD.                                        2                                     http://www.anysolar.biz
+
+IX-Tower #C-B218, 27, Dongtancheomdansaneop 1-ro,
+
+Hwaseong-si, Gyeonggi-Do, Republic of Korea [18469]
+
+Phone +82-31-784-8810, Fax +82-31-784-8811           Rev. Jun. 2026
+                                                     Preliminary              KXOB25-05X3TF
+
+Package front-side and back-side view. (dimensions in millimeters)
+
+               Front-side View details                                        Back-side View details
+
+Moisture Sensitivity, Reflow Soldering and Washing Information
+
+ANYSOLAR has characterized the moisture reflow sensitivity of the SolarBIT. Moisture uptake from atmospheric
+humidity occurs by diffusion. During the solder reflow process of SolarBIT being soldered to the PCB, the whole
+body of the SolarBIT is exposed to high process temperatures. The combination of moisture uptake and high
+reflow soldering temperatures may lead to moisture induced delamination or blistering of the SolarBIT.
+
+For a reflow solder, we recommend to use low temperature solder alloy like lead-free Sn-42 / Bi-58 compound.
+For instance, we recommend the lead-free solder paste TLF-401-11 manufactured by TAMURA
+CORPORATION, where it recommends 220°C peak temperatures at the reflow zone above 175°C for
+about 50 seconds.
+
+Otherwise, manual soldering is recommended for 5 sec below 400°C. If cleaning is required, it is recommended
+to use lukewarm water. All chemical detergents, including IPA, may damage the film, so please apply them to
+a small area in advance to check for stability before use.
+
+ IF YOU HAVE ANY DIFFICULTIES WITH SOLDERING, PLEASE CONTACT US AT THE EMAIL;
+   techdevelop@anysolar.biz
+
+Packaging & Moisture caution
+
+SolarBITs are shipped in 460 mm long clear PVC carrier tubes with antistatic coating or in tape and reel
+package. A tube contains 20 devices and a tape and reel contains 2500 devices. SolarBITs are characterized
+as the moisture sensitivity level 3. To prevent from moisture induced blistering or delamination during the high
+temperature solder reflow process, the carrier tubes and tape and reel packages containing SolarBITs are
+vacuum sealed in a plastic package to keep them dry from atmospheric humidity. When vacuum package
+sealing is found broken, prebaking is recommended in a dry oven according to IPC/JEDEC J-STD-033C (Table
+4-1 in Section 4 Drying, 1.4mm<thickness<2.0mm).
+
+ANYSOLAR reserves the right to change limits, test conditions and dimensions  © 2010 ANYSOLAR All rights reserved
+
+ANYSOLAR LTD.                                        3                                     http://www.anysolar.biz
+
+IX-Tower #C-B218, 27, Dongtancheomdansaneop 1-ro,
+
+Hwaseong-si, Gyeonggi-Do, Republic of Korea [18469]
+
+Phone +82-31-784-8810, Fax +82-31-784-8811           Rev. Jun. 2026
+                                                     Preliminary              KXOB25-05X3TF
+
+Tape & Reel Information for TR Packages. (Dimensions in millimeters)
+
+KXOB25-05X3TF packaging contains 2,500 pieces on a 13" reel.
+
+ANYSOLAR reserves the right to change limits, test conditions and dimensions  © 2010 ANYSOLAR All rights reserved
+
+ANYSOLAR LTD.                                        4                                     http://www.anysolar.biz
+
+IX-Tower #C-B218, 27, Dongtancheomdansaneop 1-ro,
+
+Hwaseong-si, Gyeonggi-Do, Republic of Korea [18469]
+
+Phone +82-31-784-8810, Fax +82-31-784-8811           Rev. Jun. 2026
+                                                     Preliminary              KXOB25-05X3TF
+
+Background
+
+Some basic information needs to be covered to better understand what to expect in terms of the SolarBIT's
+performance with regards to solar cell type, lighting conditions in terms of power density, and general industry
+standards as they relate to battery charging.
+
+Solar Cell Types
+
+Keep in mind these cost and performance tradeoffs when comparing various solar cell materials:
+
+Polycrystalline cells are commonly found in outdoor applications and have a spectral sensitivity range of 500nm
+to 1100nm. They're in the medium price range and typically offer a 13% power conversion efficiency.
+
+Monocrystalline cells, such as the ANYSOLAR SolarBIT, have a spectral sensitivity range from 300 nm (near-
+ultraviolet) to 1100 nm (near-infrared), which includes visible light (400 to 700 nm). Due to this wide spectral
+range, they can be used in both indoor and outdoor applications. Monocrystalline or single-crystalline material
+is the most expensive but it does not contain impurities, and as such the power conversion efficiency does not
+degrade over operating time. The power conversion efficiency of commercially available monocrystalline cells
+ranges from 15 to 25%. The surface of these cells is a homogenous dark blue or dark grey.
+
+Finally, amorphous cells, which work in the spectral range of 300nm to 600nm, are used predominantly indoors
+in products such as solar powered calculators since they are not sensitive to the upper light spectrum and cannot
+take advantage of natural sunlight. They offer about 5% power conversion efficiency and are mostly used with
+ultra low power devices like clocks and electronic calculators. Amorphous cells, like polycrystalline cells, suffer
+from efficiency degradation.
+
+ANYSOLAR reserves the right to change limits, test conditions and dimensions  © 2010 ANYSOLAR All rights reserved
+
+ANYSOLAR LTD.                                        5                                     http://www.anysolar.biz
+
+IX-Tower #C-B218, 27, Dongtancheomdansaneop 1-ro,
+
+Hwaseong-si, Gyeonggi-Do, Republic of Korea [18469]
+
+Phone +82-31-784-8810, Fax +82-31-784-8811           Rev. Jun. 2026
+                                                     Preliminary              KXOB25-05X3TF
+
+SolarBIT Description
+
+SolarBIT is made of monocrystalline, high-efficiency solar cells in a surface mountable package. They're robust
+and can be used in harsh environments. Solar cells used in SolarBIT have a very high (25%) power conversion
+efficiency, which means that 25% of the light energy is converted into electrical energy. They're extremely useful
+in applications requiring solar power generation in a limited space.
+
+Monocrystalline cells can be used in indoor and outdoor applications because they have a wide spectral
+sensitivity, 300 to 1100 nm. However, the output power of a solar cell is proportional (over a wide range) to the
+incoming light energy, and irradiance is generally much higher outdoors. The values in the datasheet are
+measured at "standard condition" of 1 sun, which is equal to 1000W per square meter sunlight irradiance at a
+defined light spectrum (air mass of 1.5) and 25°C cell temperature.
+
+ANYSOLAR reserves the right to change limits, test conditions and dimensions  © 2010 ANYSOLAR All rights reserved
+
+ANYSOLAR LTD.                                        6                                     http://www.anysolar.biz
+
+IX-Tower #C-B218, 27, Dongtancheomdansaneop 1-ro,
+
+Hwaseong-si, Gyeonggi-Do, Republic of Korea [18469]
+
+Phone +82-31-784-8810, Fax +82-31-784-8811           Rev. Jun. 2026
+                                                     Preliminary              KXOB25-05X3TF
+
+Relative Lighting Power Density
+
+The figure above compares relative power density for various lighting conditions in units of Watts per square
+meter (W/m2). The reference standard condition is 1 Sun and is equal to 1000 Watts per square meter of sunlight
+irradiance at a constant 25°C cell temperature and at 1.5 Air Mass (Air Mass stands for a well defined light
+spectrum which appears if the sunlight goes through the earth's atmosphere at a defined angle).
+
+As the chart clearly shows, the power density of typical indoor lighting is dramatically lower than that of sunlight.
+Not only is irradiance from indirect and artificial light lower; the spectrum is also narrower. In typical Office Space
+lighting with a spectrum produced from incandescent or halogen light bulbs, the power output may be roughly
+100 times less than bright sunlight. It may be 200 to 500 times less with fluorescent lighting due to the further
+limited spectrum.
+
+ANYSOLAR makes no representations or warranties with respect to the accuracy or completeness of the contents of this publication and reserves
+the right to make changes to specifications and product descriptions at any time without notice. Neither circuit patent licenses or indemnity are
+expressed or implied. Except as set forth in ANYSOLAR Standard Terms and Conditions of Sale, ANYSOLAR assumes no liability whatsoever, and
+disclaims any express or implied warranty relating to its products, including, but not limited to, the implied warranty of merchantability, fitness for a
+particular purpose, or infringement of any intellectual property right.
+The products described in this document are not designed, intended, authorized, or warranted for use as components in systems intended for
+surgical implant into the body, or in other applications intended to support or sustain life, or where malfunction of ANYSOLAR product may result in
+direct physical harm, injury, or death to a person or severe property or environmental damage. ANYSOLAR reserves the right to discontinue or make
+changes to its products at any time without notice.
+
+ANYSOLAR reserves the right to change limits, test conditions and dimensions  © 2010 ANYSOLAR All rights reserved
+
+ANYSOLAR LTD.                                        7                                     http://www.anysolar.biz
+
+IX-Tower #C-B218, 27, Dongtancheomdansaneop 1-ro,
+
+Hwaseong-si, Gyeonggi-Do, Republic of Korea [18469]
+
+Phone +82-31-784-8810, Fax +82-31-784-8811           Rev. Jun. 2026
+

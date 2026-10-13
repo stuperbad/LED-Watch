@@ -1,0 +1,19 @@
+profile,cell_cm2,case,harvest_mWh_day,cover_3.3,cover_5.7,cover_14.4,life_days_3.3_40mAh,life_days_3.3_150mAh,life_days_5.7_40mAh,life_days_5.7_150mAh,life_days_14.4_40mAh,life_days_14.4_150mAh,nosolar_days_3.3_40mAh,nosolar_days_14.4_40mAh
+Office worker,1.5,base,0.61,19,11,4,55.0,206.0,29.0,109.0,11.0,40.0,45.0,10.0
+Office worker,1.5,ceiling,2.46,75,43,17,,,,,,,45.0,10.0
+Office worker,3.0,base,1.23,37,22,9,71.0,268.0,33.0,124.0,11.0,42.0,45.0,10.0
+Office worker,3.0,ceiling,4.92,149,86,34,,,,,,,45.0,10.0
+Office worker,5.75,base,2.35,71,41,16,156.0,584.0,44.0,166.0,12.0,46.0,45.0,10.0
+Office worker,5.75,ceiling,9.43,286,165,65,,,,,,,45.0,10.0
+Commuter,1.5,base,1.49,45,26,10,82.0,307.0,35.0,132.0,11.0,43.0,45.0,10.0
+Commuter,1.5,ceiling,6.97,211,122,48,,,,,,,45.0,10.0
+Commuter,3.0,base,2.98,90,52,21,463.0,1734.0,54.0,204.0,13.0,49.0,45.0,10.0
+Commuter,3.0,ceiling,13.94,422,245,97,,,,,,,45.0,10.0
+Commuter,5.75,base,5.71,173,100,40,inf,inf,inf,inf,17.0,64.0,45.0,10.0
+Commuter,5.75,ceiling,26.71,809,469,186,,,,,,,45.0,10.0
+Outdoor enthusiast,1.5,base,9.23,280,162,64,inf,inf,inf,inf,29.0,107.0,45.0,10.0
+Outdoor enthusiast,1.5,ceiling,32.38,981,568,225,,,,,,,45.0,10.0
+Outdoor enthusiast,3.0,base,18.46,559,324,128,inf,inf,inf,inf,inf,inf,45.0,10.0
+Outdoor enthusiast,3.0,ceiling,64.76,1962,1136,450,,,,,,,45.0,10.0
+Outdoor enthusiast,5.75,base,35.37,1072,621,246,inf,inf,inf,inf,inf,inf,45.0,10.0
+Outdoor enthusiast,5.75,ceiling,124.12,3761,2178,862,,,,,,,45.0,10.0

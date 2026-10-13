@@ -1,0 +1,76 @@
+{
+    "$schema": "https://schemas.kicad.org/erc.v1.json",
+    "coordinate_units": "mm",
+    "date": "2026-10-11T09:15:02",
+    "ignored_checks": [
+        {
+            "description": "Global label only appears once in the schematic",
+            "key": "single_global_label"
+        },
+        {
+            "description": "Four connection points are joined together",
+            "key": "four_way_junction"
+        },
+        {
+            "description": "SPICE model issue",
+            "key": "simulation_model_issue"
+        },
+        {
+            "description": "Assigned footprint doesn't match footprint filters",
+            "key": "footprint_filter"
+        }
+    ],
+    "included_severities": [
+        "error",
+        "warning",
+        "exclusion"
+    ],
+    "kicad_version": "10.0.6",
+    "sheets": [
+        {
+            "path": "/",
+            "uuid_path": "/73c52f82-7fbd-4d06-b274-ee49c0cc6b26",
+            "violations": [
+                {
+                    "description": "Pins of type Bidirectional and Power output are connected",
+                    "items": [
+                        {
+                            "description": "Symbol U2 Pin 3 [SDO/SA0, Bidirectional, Line]",
+                            "pos": {
+                                "x": 3.8862,
+                                "y": 0.889
+                            },
+                            "uuid": "54f43ebf-6b65-4cea-835a-ebc36966eb46"
+                        },
+                        {
+                            "description": "Symbol #PWR040 Pin 1 [Power output, Line]",
+                            "pos": {
+                                "x": 3.7592,
+                                "y": 1.9812
+                            },
+                            "uuid": "314a306b-3016-4fa9-854a-d455cf329452"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "pin_to_pin"
+                },
+                {
+                    "description": "The symbol library 'Local' was not found at 'C:\\Users\\evanf\\Desktop\\LED Watch Single Color\\schematic/Local.kicad_sym'",
+                    "items": [
+                        {
+                            "description": "Symbol U2 [LIS2DW12]",
+                            "pos": {
+                                "x": 3.9878,
+                                "y": 0.889
+                            },
+                            "uuid": "99300b33-16d3-4887-981f-dfaae4f89d9e"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_issues"
+                }
+            ]
+        }
+    ],
+    "source": "watch_usb.kicad_sch"
+}
