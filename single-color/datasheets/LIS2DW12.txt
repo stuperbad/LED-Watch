@@ -1,0 +1,2783 @@
+                                                                                     LIS2DW12
+
+                                                                                                                 Datasheet
+
+                   MEMS digital output motion sensor: high-performance ultralow-power
+                                                                         3-axis "femto" accelerometer
+
+Product status link               Features
+      LIS2DW12
+                                  · Ultralow power consumption: 50 nA in power-down mode, below 1 µA in active
+Product summary                           low-power mode
+
+Order code         LIS2DW12TR     · Very low noise: down to 1.3 mg RMS in low-power mode
+                                  · Multiple operating modes with multiple bandwidths
+Temperature range  -40 to +85     · Android stationary detection, motion detection
+          [°C]                    · Supply voltage, 1.62 V to 3.6 V
+                                  · Independent I/O supply
+Package            LGA-12         · ±2g/±4g/±8g/±16g full scale
+                                  · High-speed I²C/SPI digital output interface
+Packing            Tape and reel  · Single data conversion on demand
+                                  · 16-bit data output
+        Product resources         · Embedded temperature sensor
+AN5038 (device application note)  · Self-test
+                                  · 32-level FIFO
+ TN0018 (design and soldering)    · 10000 g high shock survivability
+                                  · ECOPACK and RoHS compliant
+Product label
+                                  Applications
+
+                                  · Motion detection for wearables
+                                  · Gesture recognition and gaming
+                                  · Motion-activated functions and user interfaces
+                                  · Display orientation
+                                  · Tap/double-tap recognition
+                                  · Free-fall detection
+                                  · Smart power saving for handheld devices
+                                  · Hearing aids
+                                  · Portable healthcare devices
+                                  · Wireless sensor nodes
+                                  · Motion-enabled metering devices
+
+                                  Description
+
+                                  The LIS2DW12 is an ultralow-power high-performance 3-axis linear accelerometer
+                                  belonging to the "femto" family, which leverages on the robust and mature
+                                  manufacturing processes already used for the production of micromachined
+                                  accelerometers.
+
+                                  The device has user-selectable full scales of ±2g/±4g/±8g/±16g and can measure
+                                  accelerations with output data rates from 1.6 Hz to 1600 Hz.
+
+                                  The LIS2DW12 has an integrated 32-level first-in, first-out (FIFO) buffer allowing the
+                                  user to store data in order to limit intervention by the host processor.
+
+                                  The embedded self-test capability allows the user to check the functioning of the
+                                  sensor in the final application.
+
+DS11811 - Rev 9 - September 2024                                             www.st.com
+For further information contact your local STMicroelectronics sales office.
+                                                                                                                    LIS2DW12
+
+                 The device has a dedicated internal engine to process motion and acceleration detection including free-fall, wake-
+                 up, highly configurable single/double-tap recognition, activity/inactivity, stationary/motion detection, portrait/
+                 landscape detection, and 6D/4D orientation.
+                 The LIS2DW12 is available in a small thin plastic, land grid array (LGA) package and it is guaranteed to operate
+                 over an extended temperature range from -40°C to +85°C.
+
+DS11811 - Rev 9  page 2/65
+                                                                                                         LIS2DW12
+
+                                                                                       Block diagram and pin description
+
+1                Block diagram and pin description
+
+1.1              Block diagram
+
+                                                    Figure 1. Block diagram
+
+                                X+
+
+                                Y+                  CHARG E
+
+                                Z+                  AMPLIFIE R                               CS
+
+                 a                                                     A/D  CONTROL    I 2C  SCL/SPC
+                                                                CONVERTER      LOGIC
+                                           MUX                                                     SDA/SDO/SDI
+                                                                                       SPI
+                                Z-
+                                                                                                   SDO/SA0
+                                Y-
+
+                                X-
+
+                                TEMPERATURE SENSOR
+
+                 SELF TEST      REFERENCE           TRIMMING    CLOCK        32 Level  CONTROL LOGIC            INT1
+                                                    CIRCUITS                   FIFO                 &           INT2
+
+                                                                                       INTERRUPT GEN.
+
+DS11811 - Rev 9                                                                                                       page 3/65
+1.2              Pin description                                                                                 LIS2DW12
+
+                                                   Z                                                             Block diagram and pin description
+
+                                                         Figure 2. Pin connections
+
+                                                                                   INT2
+                                                                                              INT1
+
+                                1                        VDDIO 10                  11  12           1 SCL/SPC
+
+                                                         VDD 9                                      2 CS
+
+                                                         GND 8                                      3 SDO/SA0
+
+                        X                             Y
+
+                                                         RES 7                     6   5            4 SDA/SDI/SDO
+
+                               (TOP VIEW)                                          GND
+                                                                                              NC
+                           DIRECTION OF THE
+                           DETECTABLE                    (BOTTOM VIEW)
+                           ACCELERATIONS
+
+                                                         Table 1. Pin description
+
+                 Pin#    Name                                                                  Function
+                   1      SCL   I²C serial clock (SCL)
+                          SPC   SPI serial port clock (SPC)
+                  2(1)          Enable SPI
+                           CS   I²C/SPI mode selection
+                  3(1)          (1: SPI idle mode / I²C communication enabled;
+                          SDO   0: SPI communication mode / I²C disabled)
+                   4      SA0   SPI serial data output (SDO)
+                          SDA   I²C less significant bit of the device address (SA0)
+                   5       SDI  I²C serial data (SDA)
+                   6      SDO   SPI serial data input (SDI)
+                   7       NC   3-wire interface serial data output (SDO)
+                   8      GND   Internally not connected. Can be tied to VDD, VDDIO, or GND.
+                   9      RES   0 V supply
+                  10      GND   Connect to GND
+                  11      VDD   0 V supply
+                  12    VDD_IO  Power supply
+                          INT2  Power supply for I/O pins
+                          INT1  Interrupt pin 2. Clock input when selected in single data conversion on demand.
+                                Interrupt pin 1
+
+                 1. SDO/SA0 and CS pins are internally pulled up. Refer to Table 2. Internal pull-up values (typ.) for SDO/SA0 and CS pins for
+                      the internal pull-up values (typ).
+
+DS11811 - Rev 9                                                                                                    page 4/65
+                 Vdd_IO                                                                              LIS2DW12
+
+                  1.7 V                                                                                        Block diagram and pin description
+                  1.8 V
+                  2.5 V  Table 2. Internal pull-up values (typ.) for SDO/SA0 and CS pins
+                  3.6 V                                      Resistor value for SDO/SA0 and CS pins
+                                                                                    Typ. (k)
+                                                                                       54.4
+                                                                                       49.2
+                                                                                       30.4
+                                                                                       20.4
+
+DS11811 - Rev 9          page 5/65
+                                                                                                               LIS2DW12
+
+                                                                                        Mechanical and electrical specifications
+
+2                Mechanical and electrical specifications
+
+2.1              Mechanical characteristics
+
+                 @Vdd = 1.8 V, T = 25°C unless otherwise noted. The product is factory calibrated at 1.8 V. The operational power
+                 supply range is from 1.62 V to 3.6 V.
+
+                                             Table 3. Mechanical characteristics
+
+Symbol             Parameter                                           Test conditions             Min. Typ.(1) Max. Unit
+
+                                                                                                       ±2
+
+   FS Measurement range                                                                                ±4
+                                                                                                                              g
+
+                                                                                                       ±8
+
+                                                                                                       ±16
+
+                                             @ FS ±2 g in high-performance mode and all low-power      0.244
+                                             modes except low-power mode 1
+
+                                             @ FS ±4 g in high-performance mode and all low-power      0.488
+                                             modes except low-power mode 1
+
+   So Sensitivity                            @ FS ±8 g in high-performance mode and all low-power      0.976  mg/digit
+                                             modes except low-power mode 1                             1.952
+
+                                             @ FS ±16 g in high-performance mode and all low-
+                                             power modes except low-power mode 1
+
+                                             @ FS ±2 g in low-power mode 1                             0.976
+
+                                             @ FS ±4 g in low-power mode 1                             1.952
+
+                                             @ FS ±8 g in low-power mode 1                             3.904
+
+                                             @ FS ±16 g in low-power mode 1                            7.808
+
+   An   Noise density - high-performance     @ FS ±2 g                                                 90     µg/Hz
+        mode(2)
+
+                                             Low-power mode 4                                          1.3
+
+   RMS  RMS noise - low-power modes(3)       Low-power mode 3                                          1.8
+        @ FS ±2 g                            Low-power mode 2                                                           mg(RMS)
+
+                                                                                                       2.4
+
+                                             Low-power mode 1                                          4.5
+
+   TyOff Zero-g level offset accuracy(4)                                                               ±20    mg
+
+   TCO Zero-g offset change vs. temperature                                                            ±0.2   mg/°C
+
+   TCS Sensitivity change vs. temperature                                                              0.01   %/°C
+
+   ST Self-test positive difference                                                                70         1500 mg
+
+1. Typical specifications are not guaranteed.
+2. Noise density is the same for all ODRs. Low-noise setting enabled.
+3. RMS noise is the same for all ODRs. Low-noise setting enabled.
+4. Values after factory calibration test and trimming.
+
+DS11811 - Rev 9                                                                                               page 6/65
+                                                                                                       LIS2DW12
+
+                                                                                Mechanical and electrical specifications
+
+2.2              Electrical characteristics
+
+                 @Vdd = 1.8 V, T = 25°C unless otherwise noted. The product is factory calibrated at 1.8 V. The operational power
+                 supply range is from 1.62 V to 3.6 V.
+
+                                           Table 4. Electrical characteristics
+
+Symbol              Parameter                     Test conditions               Min.          Typ. (1)  Max.     Unit
+
+Vdd Supply voltage                                                              1.62          1.8       3.6      V
+
+Vdd_IO I/O pins supply voltage(2)                                               1.62                    Vdd+0.1  V
+
+IddHR Supply current in high-performance mode(3)  @ ODR range                                 90                 µA
+                                                  12.5 Hz - 1600 Hz, 14-bit
+
+                                                  ODR 100 Hz                                  5
+
+IddLP Supply current in low-power mode(4)         ODR 50 Hz                                   3
+                                                  ODR 12.5 Hz                                                                µA
+
+                                                                                              1
+
+                                                  ODR 1.6 Hz                                  0.38
+
+Idd_PD Supply current in power-down                                                           50                 nA
+
+VIH Digital high-level input voltage                                            0.7*Vdd_IO                       V
+
+VIL Digital low-level input voltage                                                                     0.3*Vdd_IO V
+
+VOH Digital high-level output voltage             IOH = 4 mA(5)                 Vdd_IO - 0.2                     V
+
+VOL Digital low-level output voltage              IOL = 4 mA(5)                                         0.2      V
+
+1. Typical specifications are not guaranteed.
+
+2. It is possible to remove Vdd maintaining Vdd_IO without blocking the communication busses. In this condition the measurement chain is
+     powered off.
+
+3. Low-noise setting disabled.
+
+4. Low-power mode 1. Low-noise setting disabled.
+
+5. 4 mA is the maximum driving capability, that is, the maximum DC current that can be sourced/sunk by the digital pad in order to guarantee
+     the correct digital output voltage levels VOH and VOL.
+
+DS11811 - Rev 9                                                                                                  page 7/65
+                                                                                                     LIS2DW12
+
+                                                                              Mechanical and electrical specifications
+
+2.3              Temperature sensor characteristics
+
+                 @Vdd = 1.8 V, T = 25°C unless otherwise noted
+
+                                 Table 5. Temperature sensor characteristics
+
+Symbol Parameter                                                              Min.  Typ. (1)  Max.    Unit
+                                                                              -40             +85      °C
+Top Operating temperature range                                               -15     1(3)    +15      °C
+                                                                                     16(4)
+Toff  Temperature offset(2)                                                                         LSB/°C
+
+TSDr Temperature sensor output change vs. temperature
+
+      Temperature refresh rate in high-performance mode for all ODRs                50
+      or in low-power modes for ODRs equal to 200/100/50 Hz
+
+TODR  Temperature refresh rate in low-power modes for ODR equal to 25 Hz            25              Hz
+      Temperature refresh rate in low-power modes for ODR equal to 12.5 Hz
+                                                                                    12.5
+
+      Temperature refresh rate in low-power modes for ODR equal to 1.6 Hz           1.6
+
+1. Typical specifications are not guaranteed.
+2. The output of the temperature sensor is 0 LSB (typ.) at 25°C.
+3. 8-bit resolution.
+4. 12-bit resolution.
+
+DS11811 - Rev 9                                                                                     page 8/65
+                                                                                                                       LIS2DW12
+
+                                                                                                Mechanical and electrical specifications
+
+2.4              Communication interface characteristics
+
+2.4.1            SPI - serial peripheral interface
+                 Subject to general operating conditions for Vdd and Top.
+Note:
+                                                       Table 6. SPI slave timing values
+
+                 Symbol                                        Parameter                             Value (1)                 Unit
+
+                                                                                                Min             Max
+
+                 tc(SPC)       SPI clock cycle                                                  100                                       ns
+
+                 fc(SPC)       SPI clock frequency                                                              10             MHz
+
+                 tsu(CS)       CS setup time                                                    6
+
+                 th(CS)        CS hold time                                                     8
+                 tsu(SI)       SDI input setup time
+                 th(SI)        SDI input hold time                                              12
+
+                                                                                                15                                        ns
+
+                 tv(SO)        SDO valid output time                                                            50
+
+                 th(SO)        SDO output hold time                                             9
+
+                 tdis(SO)      SDO output disable time                                                          50
+
+                 1. 10 MHz clock frequency for SPI with both 4 and 3 wires, based on characterization results, not tested in production.
+
+                                                       Figure 3. SPI slave timing diagram
+
+                           CS  tsu(CS)                                         tc(SPC)                  th(CS)
+                          SPC
+                          SDI                 tsu(SI)          th(SI)                                  LSB IN
+                          SDO                                                                                        tdis(SO)
+                                                       MSB IN
+                                                                                                     LSB OUT
+                                                                       tv(SO)           th(SO)
+
+                                                       MSB OUT
+
+                 Measurement points are done at 0.3·Vdd_IO and 0.7·Vdd_IO for both input and output ports.
+
+DS11811 - Rev 9                                                                                                                page 9/65
+                                                                                                                          LIS2DW12
+
+                                                                                                   Mechanical and electrical specifications
+
+2.4.2            I²C - inter-IC control interface
+Note:            Subject to general operating conditions for Vdd and Top.
+
+                                                              Table 7. I²C slave timing values
+
+                 Symbol                             Parameter                     I²C standard mode(1)                 I²C fast mode(1)  Unit
+
+                                                                                  Min              Max                 Min       Max
+
+                 f(SCL) SCL clock frequency                                                     0  100                 0         400 kHz
+
+                 tw(SCLL) SCL clock low time                                      4.7                                  1.3               µs
+
+                 tw(SCLH) SCL clock high time                                     4.0                                  0.6
+
+                 tsu(SDA) SDA setup time                                          250                                  100               ns
+
+                 th(SDA) SDA data hold time                                       0.01             3.45                0.01      0.9     µs
+
+                 th(ST) START condition hold time                                               4                      0.6
+
+                 tsu(SR) Repeated START condition setup time                      4.7                                  0.6
+                                                                                                                                                 µs
+                 tsu(SP) STOP condition setup time                                              4
+                                                                                                                       0.6
+
+                 tw(SP:SR) Bus free time between STOP and START condition         4.7                                  1.3
+
+                 1. Data based on standard I²C protocol requirement, not tested in production.
+
+                                                              Figure 4. I²C slave timing diagram
+
+                                                                                                                       REPEATED
+                                                                                                                          START
+
+                                          START
+
+                                                                                                   tsu(SR)                START
+
+                         SDA                                                                                tw(SP:SR)
+
+                                                               tsu(SDA)  th(SDA)
+
+                                                                                                   tsu(SP)             STOP
+
+                         SCL
+
+                              th(ST)      tw(SCLL)  tw(SCLH)
+
+                 Measurement points are done at 0.3·Vdd_IO and 0.7·Vdd_IO for both ports.
+
+DS11811 - Rev 9                                                                                                                       page 10/65
+                                                                                                                  LIS2DW12
+
+                                                                                           Mechanical and electrical specifications
+
+                            Table 8. I²C high-speed mode specifications at 1 MHz and 3.4 MHz
+
+Mode                Symbol                                    Parameter                             Min Max Unit
+
+                     fSCL SCL clock frequency                                                       0       1 MHz
+                    tHD;STA Hold time (repeated) START condition
+                                                                                                    260     -
+
+                    tLOW Low period of the SCL clock                                                500     -
+
+                    tHIGH High period of the SCL clock                                              260     -
+
+                    tSU;STA Setup time for a repeated START condition                               260     -
+
+                    tHD;DAT Data hold time                                                          0       -
+                    tSU;DAT Data setup time
+                                                                                                    50      - ns
+
+                    trDA Rise time of SDA signal                                                    -       120
+
+Fast mode plus(1)   tfDA Fall time of SDA signal                                                    -       120
+                    trCL Rise time of SCL signal
+                                                                                                    20*Vdd/5.5 120
+
+                      tfCL Fall time of SCL signal                                                  20*Vdd/5.5 120
+                    tSU;STO Setup time for STOP condition
+                                                                                                    260     -
+                       Cb Capacitive load for each bus line
+                                                                                                    -       550 pF
+
+                    tVD;DAT Data valid time                                                         -       450 ns
+
+                    tVD;ACK Data valid acknowledge time                                             -       450
+
+                    VnL Noise margin at low level                                                   0.1Vdd  -V
+
+                    VnH Noise margin at high level                                                  0.2Vdd  -
+                    tSP Pulse width of spikes that must be suppressed by the input filter
+                                                                                                    0       50 ns
+
+                    fSCLH SCLH clock frequency                                                      0       3.4 MHz
+
+                    tSU;STA Setup time for a repeated START condition                               160     -
+
+                    tHD;STA Hold time (repeated) START condition                                    160     -
+
+                     tLOW Low period of the SCLH clock                                              160     -
+                     tHIGH High period of the SCLH clock
+                    tSU;DAT Data setup time                                                         60      -
+
+                                                                                                    10      -
+
+                    tHD;DAT Data hold time                                                          0       70
+
+                    trCL    Rise time of SCLH signal                                                10      40 ns
+                    trCL1
+High-speed mode(1)          Rise time of SCLH signal after a repeated START condition and after an  10      80
+                            acknowledge bit
+
+                    tfCL Fall time of SCLH signal                                                      10   40
+                                                                                                       10   80
+                      trDA Rise time of SDAH signal                                                    10   80
+                      tfDA Fall time of SDAH signal                                                   160     -
+                    tSU;STO Setup time for STOP condition                                               -   100 pF
+                                                                                                    0.2Vdd    -V
+                    Cb Capacitive load for each bus line                                               0    10 ns
+
+                    VnH Noise margin at high level
+
+                    tSP Pulse width of spikes that must be suppressed by the input filter
+
+1. Data based on characterization, not tested in production.
+
+DS11811 - Rev 9                                                                                             page 11/65
+                                                                                               LIS2DW12
+
+                                                                        Mechanical and electrical specifications
+
+2.5              Absolute maximum ratings
+
+Note:            Stresses above those listed as "absolute maximum ratings" may cause permanent damage to the device. This is
+                 a stress rating only and functional operation of the device under these conditions is not implied. Exposure to
+                 maximum rating conditions for extended periods may affect device reliability.
+
+                         Table 9. Absolute maximum ratings
+
+                 Symbol  Ratings                                        Maximum value        Unit
+                   Vdd
+                         Supply voltage                                 -0.3 to 4.8                                              V
+                 Vdd_IO
+                         I/O pins supply voltage                        -0.3 to 4.8                                              V
+                    Vin
+                         Input voltage on any control pin               -0.3 to Vdd_IO +0.3                                      V
+                         (CS, SCL/SPC, SDA/SDI/SDO, SDO/SA0)
+
+                 APOW    Acceleration (any axis, powered, Vdd = 1.8 V)  3000 g for 0.5 ms                                        g
+
+                                                                        10000 g for 0.2 ms                                       g
+
+                 AUNP    Acceleration (any axis, unpowered)             3000 g for 0.5 ms                                        g
+
+                 TOP     Operating temperature range                    10000 g for 0.2 ms                                       g
+                 TSTG    Storage temperature range
+                 ESD     Electrostatic discharge protection             -40 to +85                                               °C
+
+                                                                        -40 to +125                                              °C
+
+                                                                        2 (HBM)                                                  kV
+
+                 Supply voltage on any pin should never exceed 4.8 V.
+
+                 This device is sensitive to mechanical shock, improper handling can cause permanent damage to the part.
+
+                 This device is sensitive to electrostatic discharge (ESD), improper handling can cause permanent damage to the
+                 part.
+
+DS11811 - Rev 9                                                                              page 12/65
+                                                             LIS2DW12
+
+                                                Terminology and functionality
+
+3                Terminology and functionality
+
+3.1              Terminology
+
+3.1.1            Sensitivity
+                 Sensitivity describes the gain of the sensor and can be determined by applying 1 g acceleration to it. As the
+3.1.2            sensor can measure DC accelerations this can be done easily by pointing the axis of interest towards the center
+                 of the Earth, noting the output value, rotating the sensor by 180 degrees (pointing to the sky) and noting the
+                 output value again. By doing so, ±1 g acceleration is applied to the sensor. Subtracting the larger output value
+                 from the smaller one, and dividing the result by 2, leads to the actual sensitivity of the sensor. This value changes
+                 very little over temperature and time. The sensitivity tolerance describes the range of sensitivities of a large
+                 population of sensors.
+
+                 Zero-g level offset
+                 Zero-g level offset describes the deviation of an actual output signal from the ideal output signal if no acceleration
+                 is present. A sensor in a steady state on a horizontal surface measures 0 g on the X-axis and 0 g on the Y-axis
+                 whereas the Z-axis measures 1 g. The output is ideally in the middle of the dynamic range of the sensor (content
+                 of OUT registers 00h, data expressed as two's complement number). A deviation from the ideal value in this case
+                 is called zero-g level offset. Offset is to some extent a result of stress to the MEMS sensor and therefore the offset
+                 can slightly change after mounting the sensor onto a printed circuit board or exposing it to extensive mechanical
+                 stress. Offset changes little over temperature, see "Zero-g level offset change vs. temperature".
+
+DS11811 - Rev 9                                 page 13/65
+                                                                                                                  LIS2DW12
+
+                                                                                                     Terminology and functionality
+
+3.2              Functionality
+
+3.2.1            Operating modes
+
+                 Two sets of operating modes have been designed to offer the customer a broad choice of noise/power
+                 consumption combinations:
+
+                 ·  Low-noise disabled (see Table 10. Operating modes - low-noise setting disabled)
+
+                 ·  Low-noise enabled (see Table 11. Operating modes - low-noise setting enabled)
+
+                 Writing the LOW_NOISE bit in CTRL6 (25h) selects the operating mode (low-noise).
+
+                 From each of these two sets, five operating modes have been designed:
+
+                 ·  One high-performance mode: focus on low noise
+
+                 ·  Four low-power modes: trade-off between noise and power consumption
+
+                 These operating modes are selected by writing the MODE[1:0] and LP_MODE[1:0] bits in CTRL1 (20h).
+
+                                               Table 10. Operating modes - low-noise setting disabled
+
+                                    Parameter    High-performance  Low-power            Low-power      Low-power    Low-power
+                                                          mode       mode 4               mode 3         mode 2       mode 1
+                 Resolution [bit]                                                                                       12-bit
+                 ODR [Hz]                                 14-bit       14-bit               14-bit         14-bit     1.6 - 200
+                                                                                                                        3200
+                 BW [Hz]                              12.5 - 1600    1.6 - 200            1.6 - 200      1.6 - 200    ODR/4,
+                                                                                                                      ODR/10,
+                                                   ODR/2 (N/A for       180                  360            720       ODR/20
+                                                       1600 Hz),
+                                                                     ODR/4,               ODR/4,         ODR/4,          550
+                                                  ODR/4, ODR/10,     ODR/10,              ODR/10,        ODR/10,
+                                                        ODR/20       ODR/20               ODR/20         ODR/20          0.38
+                                                                                                                           1
+                 Noise density [µg/Hz]           110               160                  210            300               1.5
+                 @FS = ±2 g, ODR = 200 Hz                                                                                  3
+                                                                                                                           5
+                                ODR = 1.6 Hz     -                 0.65                 0.55           0.45               10
+
+                                ODR = 12.5 Hz    90                4                    2.5            1.6                 -
+
+                                ODR = 25 Hz      90                8.5                  4.5            3
+
+                 Supply current [µA] = 50 Hz     90                16                   9              5.5
+
+                 @Vdd=1.8 V     ODR = 100 Hz     90                32                   17.5           10.5
+
+                                ODR = 200 Hz     90                63                   34.5           20.5
+
+                                ODR = 400, 800,  90                -                    -              -
+                                1600 Hz
+
+DS11811 - Rev 9                                                                                                      page 14/65
+                                                                                                              LIS2DW12
+
+                                                                                                 Terminology and functionality
+
+                                               Table 11. Operating modes - low-noise setting enabled
+
+                                    Parameter      High-performance    Low-power    Low-power         Low-power    Low-power
+                                                            mode         mode 4       mode 3            mode 2       mode 1
+                 Resolution [bit]
+                 ODR [Hz]                                   14-bit         14-bit       14-bit            14-bit       12-bit
+
+                 BW [Hz]                                12.5 - 1600      1.6 - 200    1.6 - 200         1.6 - 200    1.6 - 200
+
+                                                  ODR/2 (N/A for 1600       180          360               720         3200
+                                                             Hz),
+                                                                         ODR/4,       ODR/4,            ODR/4,       ODR/4,
+                                                    ODR/4, ODR/10,       ODR/10,      ODR/10,           ODR/10,      ODR/10,
+                                                          ODR/20         ODR/20       ODR/20            ODR/20       ODR/20
+
+                 Noise density [µg/Hz]            90                   130          180               240          450
+                 @FS = ±2 g, ODR = 200 Hz
+
+                             ODR = 1.6 Hz         -                    0.7          0.6               0.5          0.4
+
+                             ODR = 12.5 Hz        120                  5            3                 2            1.1
+
+                             ODR = 25 Hz          120                  10           6                 3.5          2
+
+                 Supply current [µA] ODR = 50 Hz  120                  20           11                7            3.5
+
+                 @Vdd=1.8 V  ODR = 100 Hz         120                  39           21.5              13           6
+
+                             ODR = 200 Hz         120                  77           42                25           12
+
+                             ODR = 400, 800,      120                  -            -                 -            -
+                             1600 Hz
+
+DS11811 - Rev 9                                                                                                    page 15/65
+                                                                                                   LIS2DW12
+
+                                                                                      Terminology and functionality
+
+3.2.2            Single data conversion on-demand mode
+
+                 The device features a single data conversion on-demand mode that is valid for both sets of operating modes (low-
+                 noise disabled or enabled) in the four low-power modes. This mode is enabled by writing the MODE[1:0] bits to 10
+                 in CTRL1 (20h). Low power modes are selected by writing the LP_MODE[1:0] bits in CTRL1 (20h).
+
+                 The trigger for output data generation can be managed through the I²C/SPI or by applying a clock signal on the
+                 INT2 pin acting here as an input by writing the SLP_MODE_ SEL bit in CTRL3 (22h):
+
+                 ·  When SLP_MODE_SEL = 0, output data generation is triggered by the clock signal on the INT2 pin (see
+
+                    Figure 5. Single data conversion on-demand functionality).
+
+                 ·  When SLP_MODE_SEL = 1, output data generation starts when the SLP_MODE_1 bit is set to 1 logic
+
+                    through the I²C/SPI. When XL data are available in the registers, this bit is automatically set to 0 and the
+
+                    device is ready for another triggered session.
+
+                 Output data are generated according to the selected low-power mode.
+
+                 When output data is saved in an output register or FIFO, the device goes to power-down mode and waits for a
+                 new trigger.
+
+                 All ODRs in the range from 0 to up to 200 Hz are supported due to the INT2 clock input.
+
+                 A DRDY signal or FIFO flags are available on the INT1 pin.
+
+                 Power consumption is the same as that of standard low-power modes for the same ODR.
+
+                                Figure 5. Single data conversion on-demand functionality
+
+                    Trigger Signal (INT2 pin)
+
+                                     T_on                                    PD                           T_on
+
+                    DRDY (INT1 pin)
+
+                 At the end of turn-on time T_on, the DRDY interrupt is activated, output data are available to be read and the
+                 device goes into power-down. T_on values depend on the low-power mode as follows:
+
+                 T_on (typ.) =
+
+                 ·  1.20 ms for low-power mode 1
+
+                 ·  1.70 ms for low-power mode 2
+
+                 ·  2.30 ms for low-power mode 3
+
+                 ·  3.55 ms for low-power mode 4
+
+3.2.3            Self-test
+
+                 The self-test allows checking the sensor functionality without moving it. The self-test function is off when the self-
+                 test bits (ST) are programmed to 00. When the self-test bits are changed, an actuation force is applied to the
+                 sensor, simulating a definite input acceleration. In this case, the sensor outputs exhibit a change in their DC
+                 levels, which are related to the selected full scale through the device sensitivity. When the self-test is activated,
+                 the device output level is given by the algebraic sum of the signals produced by the acceleration acting on the
+                 sensor and by the electrostatic test-force. If the output signals change within the amplitude specified in
+                 Table 3. Mechanical characteristics, then the sensor is working properly and the parameters of the interface chip
+                 are within the defined specifications.
+
+DS11811 - Rev 9                                                                                                 page 16/65
+                                                                                                     LIS2DW12
+
+                                                                                        Terminology and functionality
+
+3.2.4            Activity/Inactivity, Android stationary/motion-detection functions
+
+3.2.5            The activity/inactivity function recognizes the device's sleep state and allows reducing system power
+3.2.6            consumption.
+
+                 When the activity/inactivity function is activated by setting the INTERRUPTS_ENABLE bit in CTRL7 (3Fh) and the
+                 SLEEP_ON bit in WAKE_UP_THS (34h), the LIS2DW12 automatically goes to 12.5 Hz ODR in the low-power
+                 mode previously selected by the LP_MODE[1:0] bits in CTRL1 (20h) if the sleep state condition is detected and
+                 wakes up as soon as the interrupt event has been detected, increasing the output data rate and bandwidth.
+
+                 With this feature the system may be efficiently switched from low-power mode to full performance depending on
+                 user-selectable positioning and acceleration events, thus ensuring power saving and flexibility.
+
+                 The Android stationary/motion detection function only recognizes the device's sleep state.
+
+                 When the Android stationary/motion-detection function is activated by setting the STATIONARY bit in
+                 WAKE_UP_DUR (35h), the LIS2DW12 detects acceleration below a fixed threshold but does not change either
+                 ODR or operating mode (high-performance mode or low-power mode) after sleep state detection.
+
+                 The activity/inactivity recognition function can use the high-pass filter or the offset outputs, this choice can be
+                 made through the USR_OFF_ON_OUT bit in CTRL7 (3Fh).
+
+                 If the device is in sleep (inactivity/stationary) mode, when at least one of the axes exceeds the threshold in
+                 WAKE_UP_THS (34h), the device goes into a sleep-to-wake state (as wake-up).
+
+                 For the activity/inactivity function, the device, in a wake-up state, returns to the operating mode (HP or LP) and
+                 ODR before sleep state detection.
+
+                 Activity/inactivity, Android stationary/motion-detection threshold and duration can be configured in the following
+                 control registers:
+
+                 WAKE_UP_THS (34h)
+
+                 WAKE_UP_DUR (35h)
+
+                 High tap/double-tap user configurability
+
+                 The device embeds the possibility to select the following parameters:
+
+                 ·  single axis or multiple axes in TAP_THS_Z (32h)
+
+                 ·  axis priority in TAP_THS_Y (31h)
+
+                 ·  threshold value of each axis in TAP_THS_X (30h), TAP_THS_Y (31h), and TAP_THS_Z (32h)
+
+                 ·  max time threshold between two consecutive taps for double-tap recognition, min time threshold between
+
+                    two consecutive taps to detect a new tap event in INT_DUR (33h)
+
+                 Offset management
+
+                 The user can manage the offset in the output or for wake-up detection using dedicated embedded hardware (see
+                 Section 5.1: Block diagram of filters).
+
+DS11811 - Rev 9                                                                                            page 17/65
+                                                                                                                    LIS2DW12
+
+                                                                                                       Terminology and functionality
+
+3.3              Sensing element
+
+                 A proprietary process is used to create a surface micromachined accelerometer. The technology allows
+                 processing suspended silicon structures, which are attached to the substrate in a few points called anchors and
+                 are free to move in the direction of the sensed acceleration. In order to be compatible with the traditional
+                 packaging techniques, a cap is placed on top of the sensing element to avoid blocking the moving parts during
+                 the molding phase of the plastic encapsulation. When an acceleration is applied to the sensor, the proof mass
+                 displaces from its nominal position, causing an imbalance in the capacitive half-bridge. This imbalance is
+                 measured using charge integration in response to a voltage pulse applied to the capacitor.
+
+                 At steady-state the nominal value of the capacitors are a few pF and when an acceleration is applied, the
+                 maximum variation of the capacitive load is in the fF range.
+
+3.4              IC interface
+
+                 The complete measurement chain is composed of a low-noise capacitive amplifier, which converts the capacitive
+                 unbalancing of the MEMS sensor into an analog voltage using an analog-to-digital converter.
+
+                 The acceleration data may be accessed through an I²C/SPI interface thus making the device particularly suitable
+                 for direct interfacing with a microcontroller.
+
+                 The LIS2DW12 features a data-ready signal, which indicates when a new set of measured acceleration data is
+                 available, thus simplifying data synchronization in the digital system that uses the device.
+
+3.5              Factory calibration
+
+                 The IC interface is factory-calibrated for sensitivity (So) and zero-g level offset.
+
+                 The trim values are stored inside the device in nonvolatile memory. Anytime the device is turned on, the trimming
+                 parameters are downloaded into the registers to be used during active operation. This allows using the device
+                 without further calibration. If an accidental write occurs in the registers where trimming parameters are stored, the
+                 BOOT bit in CTRL2 (21h) can help to retrieve the correct trimming parameters from nonvolatile memory without
+                 the need to switch on/off the device. This bit is automatically reset at the end of the download operation. Setting
+                 this bit has no impact on the control registers.
+
+3.6              Temperature sensor
+
+                 The temperature is available in OUT_T_L (0Dh), OUT_T_H (0Eh) stored as two's complement data, left-justified
+                 in 12-bit mode and in OUT_T (26h) stored as two's complement data, left-justified in 8-bit mode.
+
+                 Refer to Table 5. Temperature sensor characteristics for the conversion factor.
+
+DS11811 - Rev 9                                                                                                             page 18/65
+                                                                                                                                LIS2DW12
+
+                                                                                                                               Application hints
+
+4                Application hints
+
+                                               Figure 6. LIS2DW12 electrical connections (top view)
+
+                                                                            Vdd_IO                                   HOST
+                                                                      100nF
+                                                                                                            I2C / SPI (3/4-w)
+                                               INT1                GND
+                                                         INT2                                                      LIS2DW12
+                                                                                    Vdd
+                                                                                            10µF
+
+                 SCL/SPC  1                    12  11          10  Vdd_IO
+
+                 CS       2                                    9 VDD                100nF
+
+                 SDO/SA0                                       8 GND                              GND       I2C configuration
+                                        3                                                                            Vdd_IO
+
+                 SDA/SDI/SDO                   5   6           7 RES                                        Rpu                Rpu
+                                            4
+
+                                               NC                                                      SCL
+                                                       GND                                             SDA
+
+                                                                                                       Pull-up to be added
+                                                                                                       Rpu=10kOhm
+
+                 The device core is supplied through the Vdd line while the I/O pads are supplied through the Vdd_IO line. Power
+                 supply decoupling capacitors (100 nF ceramic, 10 µF aluminum) should be placed as near as possible to pin 9 of
+                 the device (common design practice).
+
+                 All the voltage and ground supplies must be present at the same time to have proper behavior of the IC (refer to
+                 Figure 6. LIS2DW12 electrical connections (top view)). It is possible to remove Vdd while maintaining Vdd_IO
+                 without blocking the communication bus, in this condition the measurement chain is powered off.
+
+                 The functionality of the device and the measured acceleration data are selectable and accessible through the I²C
+                 or SPI interfaces. When using the I²C, CS must be tied high (i.e. connected to Vdd_IO).
+
+                 The functions, the threshold and the timing of the two interrupt pins (INT1 and INT2) can be completely
+                 programmed by the user through the I²C/SPI interface.
+
+DS11811 - Rev 9                                                                                                                     page 19/65
+                                                                                                           LIS2DW12
+
+                                                                                                          Application hints
+
+                                          Table 12. Internal pin status
+
+Pin # Name                                Function                                                          Pin status
+                                                                                         Default: open drain
+         SCL I²C serial clock (SCL)                                                      Default: input with internal pull-up(1)
+1                                                                                        Default: input with internal pull-up
+                                                                                         Default: (SDA) input open drain
+         SPC SPI serial port clock (SPC)
+                                                                                         Default: push-pull output forced to Gnd
+                 Enable SPI                                                              Default: push-pull output forced to Gnd
+
+2  CS            I²C/SPI mode selection
+
+                 1: SPI idle mode / I²C communication enabled
+
+                 0: SPI communication mode / I²C disabled
+
+         SDO Serial data output (SDO)
+3
+
+          SA0 I²C less significant bit of the device address (SA0)
+
+   SDA I²C serial data (SDA)
+
+4  SDI SPI serial data input (SDI)
+
+   SDO 3-wire interface serial data output (SDO)
+
+5  NC Internally not connected. Can be tied to VDD, VDDIO, or GND.
+
+6  GND 0 V supply
+
+7  RES Connect to GND
+
+8  GND 0 V supply
+
+9  VDD Power supply
+
+10 VDD_IO Power supply for I/O pins
+
+11 INT2 Interrupt pin 2. Clock input when selected in single data conversion on-demand.
+
+12 INT1 Interrupt pin 1
+
+1. In order to disable the internal pull-up on the CS pin, write 1 to the CS_PU_DISC bit in CTRL2 (21h).
+
+DS11811 - Rev 9                                                                                           page 20/65
+                                                                             LIS2DW12
+
+                                                                          Digital main blocks
+
+5                Digital main blocks
+
+5.1              Block diagram of filters
+
+                                           Figure 7. Accelerometer chain
+
+                 Referring to Figure 7. Accelerometer chain, the first block is the low-pass filter 1 (LPF1) whose behavior is a
+                 function of the actual ODR and mode selected in CTRL1 (20h). The signal is then downsampled and can be
+                 either directly sent to the output registers or to the low-pass filter 2 (LPF2) or high-pass filter (HP) using the
+                 BW_FILT[1:0] bits and FDS bit in CTRL6 (25h).
+
+                 In the low-pass path, it is possible to apply a user offset determined by the X_OFS_USR (3Ch), Y_OFS_USR
+                 (3Dh), Z_OFS_USR (3Eh) register values and the USR_OFF_W bit in CTRL7 (3Fh) and send the result to the
+                 output using the USR_OFF_ON_OUT bit in CTRL7 (3Fh).
+
+                 In the high-pass path, it is possible to use the high-pass filter reference mode (HP) using the HP_REF_MODE bit
+                 in CTRL7 (3Fh).
+
+DS11811 - Rev 9                                                           page 21/65
+                                                                               LIS2DW12
+
+                                                                            Digital main blocks
+
+5.2              Data stabilization time vs. ODR/device setting
+
+                 Some data samples need to be discarded when changing the ODR in HP mode with ODR/2 bandwidth selection.
+
+                 The table below provides the number of samples to be discarded in order to obtain valid usable data.
+
+                               Table 13. Number of samples to be discarded
+
+                 MODE[1:0] in  ODR [Hz]  BW_FILT[1:0] in         Samples to be discarded
+                 CTRL1 (20h)               CTRL6 (25h)
+                                     -                                            0
+                        00        12.5            00                              0
+                                   25                                             0
+                        01         50                                             0
+                                   100                                            1
+                                   200                                            1
+                                   400                                            1
+                                   800                                            1
+                                  1600                                            2
+
+DS11811 - Rev 9                                                                                                        page 22/65
+                                                                                                      LIS2DW12
+
+                                                                                                   Digital main blocks
+
+5.3              FIFO
+
+                 The LIS2DW12 embeds 32 slots of 14-bit data FIFO for each of the three output channels, X, Y, and Z of the
+                 acceleration data. This allows consistent power saving for the system, since the host processor does not need to
+                 continuously poll data from the sensor, but it can wake up only when needed and burst the significant data out
+                 from the FIFO.
+
+                 The internal FIFO allows collecting 32 samples (14-bit size data) for each axis.
+
+                 When the FIFO mode is other than bypass, reading the output registers (28h to 2Dh) returns the oldest FIFO
+                 sample set. In order to minimize communication between the master and slave, the address read may be
+                 automatically incremented by the device by setting the IF_ADD_INC bit of CTRL2 (21h) to 1. The device rolls
+                 back to 0x28 when register 0x2D is reached.
+
+                 This buffer can work according to the following five different modes:
+
+                 ·  Bypass mode
+
+                 ·  FIFO mode
+
+                 ·  Continuous-to-FIFO
+
+                 ·  Bypass-to-continuous
+
+                 ·  Continuous
+
+                 Each mode is selected by the FMode[2:0] bits in the FIFO_CTRL (2Eh) register.
+
+                 Programmable FIFO threshold is selected in FIFO_CTRL (2Eh). Status and FIFO overrun events are available in
+                 the FIFO_SAMPLES (2Fh) register and can be used to generate dedicated interrupts on the INT1 and INT2 pins
+                 using the CTRL4_INT1_PAD_CTRL (23h) and CTRL5_INT2_PAD_CTRL (24h) registers.
+
+                 FIFO_SAMPLES (2Fh) (FIFO_FTH) goes to 1 when the number of unread samples FIFO_SAMPLES (2Fh)
+                 (Diff[5:0]) is greater than or equal to FTH[4:0] in FIFO_CTRL (2Eh).
+
+                 If FTH[4:0] is equal to 0, FIFO_SAMPLES (2Fh) (FIFO_FTH) goes to 0.
+
+                 FIFO_SAMPLES (2Fh) (FIFO_OVR) is equal to 1 if a FIFO slot is overwritten.
+
+                 FIFO_SAMPLES (2Fh) (Diff[5:0]) contains stored data levels of unread samples. When Diff[5:0] is equal to
+                 000000, FIFO is empty. When Diff[5:0] is equal to 100000, FIFO is full and the unread samples are 32.
+
+                 To guarantee the correct acquisition of data during the switching into and out of FIFO, the first sample acquired
+                 must be discarded.
+
+                 When the FIFO threshold status flag is 0 logic, FIFO filling is lower than the threshold level and when 1 logic,
+                 FIFO filling is equal to or higher than the threshold level.
+
+DS11811 - Rev 9                                                                                    page 23/65
+5.3.1                                                                                                               LIS2DW12
+5.3.2
+5.3.3                                                                                                                                                            Digital main blocks
+
+                 Bypass mode
+                 In bypass mode (FIFO_CTRL (2Eh) (FMode [2:0])= 000), the FIFO is not operational, no data is collected in FIFO
+                 memory, and it remains empty with the only actual sample available in the output registers.
+                 Bypass mode is also used to reset the FIFO when in FIFO mode.
+                 For each channel, only the first address is used. When new data is available, the old data is overwritten.
+
+                 FIFO mode
+                 In FIFO mode (FIFO_CTRL (2Eh)(FMode [2:0])= 001) data from the X, Y, and Z channels are stored in the FIFO
+                 until it is full, when 32 unread samples are stored in memory, data collecting is stopped.
+                 To reset the FIFO content, bypass mode should be written in the FIFO_CTRL (2Eh) register, setting the FMODE
+                 [2:0] bits to 000. After this reset command, it is possible to restart FIFO mode, writing the value 001 in
+                 FIFO_CTRL (2Eh)(FMODE [2:0]).
+                 The FIFO buffer can memorize 32 slots of X, Y, and Z data.
+
+                 Continuous mode
+                 Continuous mode (FIFO_CTRL (2Eh) (FMode[2:0] = 110) provides a continuous FIFO update: when 32 unread
+                 samples are stored in memory, as new data arrives the oldest data is discarded and overwritten by the newer.
+                 A FIFO threshold flag FIFO_SAMPLES (2Fh) (FIFO_FTH) is asserted when the number of unread samples in
+                 FIFO is greater than or equal to (FIFO_CTRL (2Eh)FTH[4:0]).
+                 It is possible to route FIFO_SAMPLES (2Fh)(FTH) to the INT1 pin by writing the INT1_FTH bit to 1 in register
+                 CTRL4_INT1_PAD_CTRL (23h) or to the INT2 pin by writing the INT2_FTH bit to 1 in register
+                 CTRL5_INT2_PAD_CTRL (24h).
+                 If an overrun occurs, the oldest sample in FIFO is overwritten and the FIFO_OVR flag in FIFO_SAMPLES (2Fh) is
+                 asserted.
+                 In order to empty the FIFO before it is full, it is also possible to pull from FIFO the number of unread samples
+                 available in FIFO_SAMPLES (2Fh) (Diff[5:0]).
+
+DS11811 - Rev 9  page 24/65
+                                                                                           LIS2DW12
+
+                                                                                        Digital main blocks
+
+5.3.4            Continuous-to-FIFO mode
+                 In continuous-to-FIFO mode FIFO_CTRL (2Eh)(FMode[2:0] = 011), FIFO operates in continuous mode and FIFO
+                 mode starts upon an internal trigger event. When the FIFO is full, data collecting is stopped. The trigger could be
+                 a single or double tap, wake-up, free-fall, 6D interrupt, or any combination of these events, but every interrupt has
+                 to be routed to the corresponding pad to be used as a trigger.
+
+                                                                   Figure 8. Continuous-to-FIFO mode
+
+                 xi,yi,zi  x0   y0   z0   xi,yi,zi                     x0         z0
+
+                                                                            y0
+
+                           x1   y1   z1                                x1   y1    z1
+
+                           x2   y2   z2
+
+                                                                       x2   y2    z2
+
+                           x30  y30  z30
+
+                           x31  y31  z31                               x31  y31   z31
+
+                                Continuous Mode                        FIFO Mode
+                                                        Trigger event
+
+                           Figure 9. Trigger event to FIFO for continuous-to-FIFO mode
+
+DS11811 - Rev 9                                                                         page 25/65
+                                                                                                       LIS2DW12
+
+                                                                                                    Digital main blocks
+
+5.3.5            Bypass-to-continuous mode
+                 In bypass-to-continuous mode (FIFO_CTRL (2Eh)(FMode[2:0] = 100), data measurement storage inside FIFO
+                 starts in continuous mode upon an internal trigger event, then the sample that follows the trigger is available in
+                 FIFO. The trigger could be a single or double tap, wake-up, free-fall, 6D interrupt, or any combination of these
+                 events, but every interrupt has to be routed to the corresponding pad to be used as a trigger.
+
+                                                                 Figure 10. Bypass-to-continuous mode
+
+                          xi,yi,zi  x0   y0   z0   xi,yi,zi                  x0   y0   z0
+                 empty
+                                    x1   y1   z1                             x1   y1   z1
+
+                                    x2        z2                             x2   y2   z2
+
+                                         y2
+
+                                                                             x30  y30  z30
+
+                                                                             x31  y31  z31
+
+                                    x31  y31  z31
+
+                                         Bypass Mode                         Continuous Mode
+                                                              Trigger event
+
+                                    Figure 11. Trigger event to FIFO for bypass-to-continuous mode
+
+DS11811 - Rev 9                                                                                     page 26/65
+                                                                                                                         LIS2DW12
+
+                                                                                                                        Digital interfaces
+
+6                Digital interfaces
+
+                 The registers embedded inside the LIS2DW12 may be accessed through both the I²C and SPI serial interfaces.
+                 The latter may be software configured to operate either in 3-wire or 4-wire interface mode.
+
+                 The serial interfaces are mapped to the same pins. To select/exploit the I²C interface, the CS line must be tied
+                 high (that is, connected to Vdd_IO).
+
+                 Pin name                     Table 14. Serial interface pin description
+
+                     CS                                                                Pin description
+                              Enable SPI
+                    SCL       I²C/SPI mode selection
+                    SPC       (1: SPI idle mode / I²C communication enabled;
+                    SDA       0: SPI communication mode / I²C disabled)
+                     SDI      I²C serial clock (SCL)
+                    SDO       SPI serial port clock (SPC)
+                    SA0       I²C serial data (SDA)
+                    SDO       SPI serial data input (SDI)
+                              3-wire interface serial data output (SDO)
+                              I²C address selection (SA0)
+                              SPI serial data output (SDO)
+
+6.1              I²C serial interface
+
+                 The LIS2DW12 I²C is a bus slave. The I²C is employed to write data into registers whose content can also be
+                 read back.
+
+                 The relevant I²C terminology is given in the table below.
+
+                                       Table 15. I²C terminology
+
+                     Term                                                                      Description
+                 Transmitter  The device that sends data to the bus
+                              The device that receives data from the bus
+                  Receiver    The device that initiates a transfer, generates clock signals, and terminates a transfer
+                   Master     The device addressed by the master
+                    Slave
+
+                 There are two signals associated with the I²C bus: the serial clock line (SCL) and the serial data line (SDA). The
+                 latter is a bidirectional line used for sending and receiving the data to/from the interface. Both the lines must be
+                 connected to Vdd_IO through an external pull-up resistor. When the bus is free, both the lines are high.
+
+                 The I²C interface supports fast mode (400 kHz) I²C standards as well as normal mode.
+
+                 In order to disable the I²C block, CTRL2 (21h) (I2C_DISABLE) = 1 must be set.
+
+DS11811 - Rev 9                                                                                                         page 27/65
+                                                                                                               LIS2DW12
+
+                                                                                                              Digital interfaces
+
+6.1.1            I²C operation
+
+                 The transaction on the bus is started through a start (ST) signal. A start condition is defined as a high to low
+                 transition on the data line while the SCL line is held high. After this has been transmitted by the master, the bus is
+                 considered busy. The next byte of data transmitted after the start condition contains the address of the slave in
+                 the first 7 bits and the eighth bit tells whether the master is receiving data from the slave or transmitting data to
+                 the slave. When an address is sent, each device in the system compares the first seven bits after a start condition
+                 with its address. If they match, the device considers itself addressed by the master.
+
+                 The slave address (SAD) associated to the LIS2DW12 is 001100xb where the x bit is modified by the SA0/SDO
+                 pin in order to modify the device address. If the SA0/SDO pin is connected to the supply voltage, the address is
+                 0011001b, otherwise if the SA0/SDO pin is connected to ground, the address is 0011000b. This solution permits
+                 to connect and address two different accelerometers to the same I²C lines.
+
+                 Data transfer with acknowledge is mandatory. The transmitter must release the SDA line during the acknowledge
+                 pulse. The receiver must then pull the data line low so that it remains stable low during the high period of the
+                 acknowledge clock pulse. A receiver that has been addressed is obliged to generate an acknowledge after each
+                 byte of data received.
+
+                 The I²C embedded inside the LIS2DW12 behaves like a slave device and the following protocol must be adhered
+                 to. After the start condition (ST), a slave address is sent. Once a slave acknowledge (SAK) has been returned, an
+                 8-bit subaddress (SUB) is transmitted: the 7 LSb represents the actual register address while the CTRL2 (21h)
+                 (IF_ADD_INC) bit defines the address increment.
+
+                 The slave address is completed with a read/write bit. If the bit is 1 (read), a repeated start (SR) condition must be
+                 issued after the two subaddress bytes. If the bit is 0 (write) the master transmits to the slave with direction
+                 unchanged. Table 16 explains how the SAD+read/write bit pattern is composed, listing all the possible
+                 configurations.
+
+                                                  Table 16. SAD+read/write patterns
+
+                     Command            SAD[6:1]            SAD[0] = SA0             R/W             SAD+R/W
+                        Read             001100                                                   00110001 (31h)
+                        Write            001100                 0                    1            00110000 (30h)
+                        Read             001100                                                   00110011 (33h)
+                        Write            001100                 0                    0            00110010 (32h)
+
+                                                                1                    1
+
+                                                                1                    0
+
+                               Table 17. Transfer when master is writing one byte to slave
+
+Master               ST        SAD + W                 SUB                           DATA                         SP
+
+Slave                                        SAK                   SAK                            SAK
+
+                         Table 18. Transfer when master is writing multiple bytes to slave
+
+Master           ST      SAD + W             SUB                   DATA                     DATA                  SP
+
+Slave                             SAK                  SAK                  SAK                         SAK
+
+                     Table 19. Transfer when master is receiving (reading) one byte of data from slave
+
+Master           ST  SAD + W            SUB                 SR     SAD + R                              NMAK      SP
+Slave
+                                  SAK             SAK                          SAK          DATA
+
+                     Table 20. Transfer when master is receiving (reading) multiple bytes of data from slave
+
+Master ST SAD+W                   SUB             SR SAD+R                MAK               MAK               NMAK SP
+
+Slave                    SAK            SAK                 SAK DATA                 DATA         DATA
+
+DS11811 - Rev 9                                                                                               page 28/65
+                                                                                                                LIS2DW12
+
+                                                                                                               Digital interfaces
+
+                 Data are transmitted in byte format (DATA). Each data transfer contains 8 bits. The number of bytes transferred
+                 per transfer is unlimited. Data is transferred with the most significant bit (MSb) first. If a receiver cannot receive
+                 another complete byte of data until it has performed some other function, it can hold the clock line, SCL low to
+                 force the transmitter into a wait state. Data transfer only continues when the receiver is ready for another byte and
+                 releases the data line. If a slave receiver does not acknowledge the slave address (that is, it is not able to receive
+                 because it is performing some real-time function) the data line must be left high by the slave. The master can then
+                 abort the transfer. A low to high transition on the SDA line while the SCL line is high is defined as a stop condition.
+                 Each data transfer must be terminated by the generation of a stop (SP) condition.
+
+                 In the presented communication format MAK is master acknowledge and NMAK is no master acknowledge.
+
+6.2              SPI bus interface
+
+                 The LIS2DW12 SPI is a bus slave. The SPI allows writing to and reading from the registers of the device.
+
+                 The serial interface interacts with the application using four wires: CS, SPC, SDI, and SDO.
+
+                                        Figure 12. Read and write protocol
+
+                   CS               RW                               DI7 DI6 DI5 DI4 DI3 DI2 DI1 DI0
+                 SPC
+                  SDI                   AD6 AD5 AD4 AD3 AD2 AD1 AD0
+
+                 SDO
+
+                                                                     DO7 DO6 DO5 DO4 DO3 DO2 DO1 DO0
+
+                 CS enables the serial port and it is controlled by the SPI master. It goes low at the start of the transmission and
+                 goes back high at the end. SPC is the serial port clock and it is controlled by the SPI master. It is stopped high
+                 when CS is high (no transmission). SDI and SDO are respectively the serial port data input and output. Those
+                 lines are driven at the falling edge of SPC and should be captured at the rising edge of SPC.
+
+                 Both the read register and write register commands are completed in 16 clock pulses or in multiples of 8 in case
+                 of multiple read/write bytes. Bit duration is the time between two falling edges of SPC. The first bit (bit 0) starts at
+                 the first falling edge of SPC after the falling edge of CS while the last bit (bit 15, bit 23, ...) starts at the last falling
+                 edge of SPC just before the rising edge of CS.
+
+                 bit 0: RW bit. When 0, the data DI(7:0) is written into the device. When 1, the data DO(7:0) from the device is
+                 read. In the latter case, the chip drives SDO at the start of bit 8.
+
+                 bit 1-7: address AD(6:0). This is the address field of the indexed register.
+
+                 bit 8-15: data DI(7:0) (write mode). This is the data that is written into the device (MSb first).
+
+                 bit 8-15: data DO(7:0) (read mode). This is the data that is read from the device (MSb first).
+
+                 In multiple read/write commands, additional blocks of 8 clock periods are added. When the CTRL2 (21h)
+                 (IF_ADD_INC) bit is 0, the address used to read/write data remains the same for every block. When the CTRL2
+                 (21h) (IF_ADD_INC) bit is 1, the address used to read/write data is increased at every block.
+
+                 The function and the behavior of SDI and SDO remain unchanged.
+
+DS11811 - Rev 9                                                                                                            page 29/65
+                                                                                                                              LIS2DW12
+
+                                                                                                                             Digital interfaces
+
+6.2.1            SPI read
+
+                                 CS  Figure 13. SPI read protocol
+                               SPC
+                                SDI  RW
+                              SDO           AD6 AD5 AD4 AD3 AD2 AD1 AD0
+
+                                                                                            DO7 DO6 DO5 DO4 DO3 DO2 DO1 DO0
+
+                 The SPI read command is performed with 16 clock pulses. A multiple byte read command is performed by adding
+                 blocks of 8 clock pulses to the previous one.
+                 bit 0: READ bit. The value is 1.
+                 bit 1-7: address AD(6:0). This is the address field of the indexed register.
+                 bit 8-15: data DO(7:0) (read mode). This is the data that is read from the device (MSb first).
+                 bit 16-... : data DO(...-8). Additional data in multiple byte reads.
+
+                                                   Figure 14. Multiple byte SPI read protocol (2-byte example)
+
+                   CS                RW
+                 SPC                       AD6 AD5 AD4 AD3 AD2 AD1 AD0
+                  SDI
+                                                                                               DO7 DO6 DO5 DO4 DO3 DO2 DO1 DO0 DO15 DO14DO13DO12 DO11DO10 DO9 DO8
+                 SDO
+
+DS11811 - Rev 9                                                                                                                                                    page 30/65
+                                                                                                   LIS2DW12
+
+                                                                                                  Digital interfaces
+
+6.2.2            SPI write
+
+                                    Figure 15. SPI write protocol
+
+                   CS
+                 SPC
+                  SDI
+
+                                RW                               DI7 DI6 DI5 DI4 DI3 DI2 DI1 DI0
+
+                                    AD6 AD5 AD4 AD3 AD2 AD1 AD0
+
+                 The SPI write command is performed with 16 clock pulses. A multiple byte write command is performed by adding
+                 blocks of 8 clock pulses to the previous one.
+                 bit 0: WRITE bit. The value is 0.
+                 bit 1 -7: address AD(6:0). This is the address field of the indexed register.
+                 bit 8-15: data DI(7:0) (write mode). This is the data that is written inside the device (MSb first).
+                 bit 16-... : data DI(...-8). Additional data in multiple byte writes.
+
+                                                  Figure 16. Multiple byte SPI write protocol (2-byte example)
+
+                   CS
+                 SPC
+                  SDI
+
+                            RW                               DI7 DI6 DI5 DI4 DI3 DI2 DI1 DI0 DI15 DI14 DI13 DI12 DI11 DI10 DI9 DI8
+
+                                AD6 AD5 AD4 AD3 AD2 AD1 AD0
+
+DS11811 - Rev 9                                                                                                                     page 31/65
+6.2.3                                                                                                               LIS2DW12
+
+                                                                                                                                                                    Digital interfaces
+
+                 SPI read in 3-wire mode
+                 3-wire mode is entered by setting the CTRL2 (21h) (SIM) bit equal to 1 (SPI serial interface mode selection).
+
+                                                              Figure 17. SPI read protocol in 3-wire mode
+
+                     CS
+                   SPC
+                 SDI/O
+
+                         RW                               DO7 DO6 DO5 DO4 DO3 DO2 DO1 DO0
+
+                             AD6 AD5 AD4 AD3 AD2 AD1 AD0
+
+                 The SPI read command is performed with 16 clock pulses:
+                 bit 0: READ bit. The value is 1.
+                 bit 1-7: address AD(6:0). This is the address field of the indexed register.
+                 bit 8-15: data DO(7:0) (read mode). This is the data that is read from the device (MSb first).
+                 A multiple read command is also available in 3-wire mode.
+
+DS11811 - Rev 9                                                                                                  page 32/65
+                                                                                LIS2DW12
+
+                                                                              Register mapping
+
+7                Register mapping
+
+                 The table given below provides a list of the 8-bit registers embedded in the device and the corresponding
+                 addresses.
+
+                                                  Table 21. Register map
+
+                                   Name  Type(1)  Register address  Default   Comment
+
+                 OUT_T_L                    R     Hex    Binary
+                 OUT_T_H                    R
+                 WHO_AM_I                   R     0D     00001101   00000000  Temp sensor output
+                 RESERVED                    -                      00000000  Who am I ID
+                 CTRL1                    R/W     0E     00001110   01000100  RESERVED
+                 CTRL2                    R/W
+                 CTRL3                    R/W     0F     00001111         -   Control registers
+                 CTRL4_INT1_PAD_CTRL      R/W                       00000000
+                 CTRL5_INT2_PAD_CTRL      R/W     10-1F             00000100  Temp sensor output
+                 CTRL6                    R/W                       00000000  Status data register
+                 OUT_T                      R     20     00100000   00000000
+                 STATUS                     R                       00000000  Output registers
+                 OUT_X_L                    R     21     00100001   00000000
+                 OUT_X_H                    R                       00000000  FIFO control register
+                 OUT_Y_L                    R     22     00100010   00000000  Unread samples stored in FIFO
+                 OUT_Y_H                    R                       00000000
+                 OUT_Z_L                    R     23     00100011   00000000  Tap thresholds
+                 OUT_Z_H                    R                       00000000
+                 FIFO_CTRL                R/W     24     00100100   00000000  Interrupt duration
+                 FIFO_SAMPLES               R                       00000000  Tap/double-tap selection,
+                 TAP_THS_X                R/W     25     00100101   00000000  inactivity enable,
+                 TAP_THS_Y                R/W                       00000000  wake-up threshold
+                 TAP_THS_Z                R/W     26     00100110   00000000  Wake-up duration
+                 INT_DUR                  R/W                       00000000  Free-fall configuration
+                                                  27     00100111   00000000  Status register
+                 WAKE_UP_THS              R/W                       00000000  Wake-up source
+                                                  28     00101000   00000000  Tap source
+                 WAKE_UP_DUR              R/W                                 6D source
+                 FREE_FALL                R/W     29     00101001   00000000
+                 STATUS_DUP
+                 WAKE_UP_SRC                R     2A     00101010   00000000
+                 TAP_SRC                    R                       00000000
+                 SIXD_SRC                   R     2B     00101011   00000000
+                 ALL_INT_SRC                R                       00000000
+                 X_OFS_USR                  R     2C     00101100   00000000
+                                          R/W                       00000000
+                                                  2D     00101101   00000000
+                                                                    00000000
+                                                  2E     00101110
+
+                                                  2F     00101111
+
+                                                  30     00110000
+
+                                                  31     00110001
+
+                                                  32     00110010
+
+                                                  33     00110011
+
+                                                  34     00110100
+
+                                                  35     00110101
+
+                                                  36     00110110
+
+                                                  37     00110111
+
+                                                  38     00111000
+
+                                                  39     00111001
+
+                                                  3A     00111010
+
+                                                  3B     00111011
+
+                                                  3C     00111100
+
+DS11811 - Rev 9                                                                                                             page 33/65
+                                                                                                  LIS2DW12
+
+                                                                                                Register mapping
+
+                            Name  Type(1)  Register address                            Default  Comment
+
+                                           Hex                                Binary  00000000
+                                                                                      00000000
+                 Y_OFS_USR        R/W      3D   00111110                              00000000
+
+                 Z_OFS_USR        R/W      3E   00000100
+
+                 CTRL7            R/W      3F   00000100
+
+                 1. R = read-only register, R/W = readable/writable register
+
+                 Registers marked as Reserved must not be changed. Writing to those registers may cause permanent damage to
+                 the device.
+
+                 The content of the registers that are loaded at boot should not be changed. They contain the factory calibration
+                 values. Their content is automatically restored when the device is powered up.
+
+DS11811 - Rev 9                                                                                          page 34/65
+                                                                                                                  LIS2DW12
+
+                                                                                                              Register description
+
+8                Register description
+
+8.1              OUT_T_L (0Dh)
+
+                 Temperature output register in 12-bit resolution (R)
+
+                                              Table 22. OUT_T_L register
+
+                 TEMP3   TEMP2   TEMP1        TEMP0                    0      0                            0      0
+
+                                                                Table 23. OUT_T_L register description
+                                  The 8 least significant bits of the temperature sensor output. 0 LSB = 25°C. Sensitivity = 16 LSB/°C.
+                 TEMP[3:0]
+                                  Together with OUT_T_H (0Eh), it forms the output value expressed as a 16-bit word in two's complement.
+
+8.2              OUT_T_H (0Eh)
+
+                 Temperature output register in 12-bit resolution (R)
+
+                                              Table 24. OUT_T_H register
+
+                 TEMP11  TEMP10        TEMP9  TEMP8                    TEMP7  TEMP6                        TEMP5  TEMP4
+
+                                                                Table 25. OUT_T_H register description
+                                    The 8 most significant bits of the temperature sensor output. 0 LSB = 25°C. Sensitivity = 16 LSB/°C.
+                 TEMP[11:4]
+                                    Together with OUT_T_L (0Dh), it forms the output value expressed as a 16-bit word in two's complement
+
+8.3              WHO_AM_I (0Fh)
+
+                 Who_AM_I register (R). This register is a read-only register. Its value is fixed at 44h.
+
+                                 Table 26. WHO_AM_I register default values
+
+                 0       1             0      0                        0      1                            0      0
+
+DS11811 - Rev 9                                                                                                   page 35/65
+                                                                                                                           LIS2DW12
+
+                                                                                                                       Register description
+
+8.4              CTRL1 (20h)
+
+                 Control register 1 (R/W)
+
+                                                 Table 27. Control register 1
+
+                 ODR3          ODR2        ODR1  ODR0  MODE1                   MODE0                                   LP_MODE1  LP_MODE0
+
+                 ODR[3:0]                         Table 28. Control register 1 description
+                 MODE[1:0]
+                 LP_MODE[1:0]  Output data rate and mode selection (see Table 29. Data rate configuration)
+                               Mode selection (see Table 30. Mode selection)
+                               Low-power mode selection (see Table 31. Low-power mode selection)
+
+                 ODR[3:0] is used to set the power mode and ODR selection. The following table lists the bit settings for power-
+                 down mode and each available frequency.
+
+                 ODR[3:0]                              Table 29. Data rate configuration
+                    0000
+                    0001                                                         Power mode / data rate configuration
+                    0010       Power-down
+                    0011       High-performance / low-power mode 12.5 / 1.6 Hz
+                    0100       High-performance / low-power mode 12.5 Hz
+                    0101       High-performance / low-power mode 25 Hz
+                    0110       High-performance / low-power mode 50 Hz
+                    0111       High-performance / low-power mode 100 Hz
+                    1000       High-performance / low-power mode 200 Hz
+                    1001       High-performance / low-power mode 400 / 200 Hz
+                               High-performance / low-power mode 800 / 200 Hz
+                               High-performance / low-power mode 1600 / 200 Hz
+
+                 MODE[1:0]                                    Table 30. Mode selection
+                       00
+                       01                                                                    Mode and resolution
+                       10      Low-power mode (12/14-bit resolution)
+                       11      High-performance mode (14-bit resolution)
+                               Single data conversion on-demand mode (12/14-bit resolution)
+                               -
+
+                       LP_MODE[1:0]         Table 31. Low-power mode selection
+                               00
+                               01                                                      Power mode and resolution
+                               10          Low-power mode 1 (12-bit resolution)
+                               11          Low-power mode 2 (14-bit resolution)
+                                           Low-power mode 3 (14-bit resolution)
+                                           Low-power mode 4 (14-bit resolution)
+
+DS11811 - Rev 9                                                                                                                  page 36/65
+                                                                                                                             LIS2DW12
+
+                                                                                                                         Register description
+
+8.5              CTRL2 (21h)
+
+                 Control register 2 (R/W)
+
+                                                 Table 32. Control register 2
+
+                 BOOT        SOFT_         0(1)  CS_PU_                                       BDU           IF_ADD_ INC     I2C_  SIM
+                             RESET                 DISC                                                                  DISABLE
+
+                 1. This bit must be set to 0 for the correct operation of the device.
+
+                 BOOT        Boot enables retrieving the correct trimming parameters from nonvolatile memory into registers where
+                             trimming parameters are stored.
+
+                             Once the operation is over, this bit automatically returns to 0.
+
+                             Default value: 0 (0: disabled; 1: enabled)
+
+                                       Soft reset acts as reset for all control registers, then goes to 0.
+                 SOFT_RESET
+
+                                       Default value: 0 (0: disabled; 1: enabled)
+
+                                       Disconnect CS pull-up. Default value: 0
+                 CS_PU_DISC (0: pull-up connected to CS pin;
+
+                                       1: pull-up disconnected to CS pin)
+
+                 BDU         Block data update. Default value: 0
+                             (0: continuous update; 1: output registers not updated until MSB and LSB read)
+
+                 IF_ADD_INC  Register address automatically incremented during multiple byte access with a serial interface (I²C or SPI).
+                             Default value: 1
+
+                             (0: disabled; 1: enabled)
+
+                                       Disable I²C communication protocol. Default value: 0
+                 I2C_DISABLE
+
+                                       (0: SPI and I²C interfaces enabled; 1: I²C mode disabled)
+
+                                       SPI serial interface mode selection. Default value: 0
+                 SIM
+
+                                       (0: 4-wire interface; 1: 3-wire interface)
+
+                 The BDU bit is used to inhibit the update of the output registers until both upper and lower register parts are read.
+                 In default mode (BDU = 0) the output register values are updated continuously. When the BDU is activated
+                 (BDU = 1), the content of the output registers is not updated until both MSB and LSB are read which avoids
+                 reading values related to different sample times.
+
+DS11811 - Rev 9                                                                                                                   page 37/65
+                                                                                                                 LIS2DW12
+
+                                                                                                             Register description
+
+8.6              CTRL3 (22h)
+
+                 Control register 3 (R/W)
+
+                                                       Table 33. Control register 3
+
+                      ST2      ST1              PP_OD  LIR                   H_LACTIVE            0              SLP_    SLP_
+                                                                                                             MODE_SEL  MODE_1
+
+                                                Table 34. Control register 3 description
+
+                 ST[2:1]       Enables self-test. Default value: 00
+                               (00: self-test disabled; other: see Table 35. Self-test mode selection)
+
+                 PP_OD         Push-pull/open-drain selection on interrupt pad. Default value: 0
+                               (0: push-pull; 1: open-drain)
+
+                               Latched interrupt. Switches between latched (1 logic) and pulsed (0 logic) mode for function source signals
+
+                 LIR           and interrupts routed to pins (wake-up, single/double-tap). Default value: 0
+
+                               (0: interrupt request not latched; 1: interrupt request latched)
+
+                 H_LACTIVE     Interrupt active high, low. Default value: 0
+                               (0: active high; 1: active low)
+
+                               Single data conversion on demand mode selection:
+
+                 SLP_MODE_SEL (0: enabled with external trigger on INT2;
+
+                               1: enabled by I²C/SPI writing SLP_MODE_1 to 1)
+
+                 SLP_MODE_1    Single data conversion on-demand mode enable. When SLP_MODE_SEL = 1 and this bit is set to 1 logic,
+                               single data conversion on-demand mode starts. When accelerometer data are available in the registers,
+                               this bit is set to 0 automatically and the device is ready for another triggered session.
+
+                                                Table 35. Self-test mode selection
+
+                          ST2              ST1                                   Self-test mode
+
+                          0                0    Normal mode
+
+                          0                1    Positive sign self-test
+
+                          1                0    Negative sign self-test
+
+                          1                1    -
+
+DS11811 - Rev 9                                                                                                        page 38/65
+                                                                                                            LIS2DW12
+
+                                                                                                        Register description
+
+8.7              CTRL4_INT1_PAD_CTRL (23h)
+
+                 Control register 4 (R/W)
+
+                                               Table 36. Control register 4
+
+                 INT1_6D       INT1_  INT1_WU  INT1_FF  INT1_TAP             INT1_                      INT1_  INT1_
+                          SINGLE_TAP                                         DIFF5                       FTH   DRDY
+
+                 INT1_6D                      Table 37. Control register 4 description
+                 INT1_SINGLE_TAP
+                 INT1_WU              6D recognition is routed to INT1 pad. Default: 0
+                 INT1_FF              (0: disabled; 1: enabled)
+                 INT1_TAP             Single-tap recognition is routed to INT1 pad. Default value: 0
+                 INT1_DIFF5           (0: disabled; 1: enabled)
+                 INT1_FTH             Wake-up recognition is routed to INT1 pad. Default value: 0
+                 INT1_DRDY            (0: disabled; 1: enabled)
+                                      Free-fall recognition is routed to INT1 pad. Default value: 0
+                                      (0: disabled; 1: enabled)
+                                      Double-tap recognition is routed to INT1 pad. Default value: 0
+                                      (0: disabled; 1: enabled)
+                                      FIFO full recognition is routed to INT1 pad. Default value: 0
+                                      (0: disabled; 1: enabled)
+                                      FIFO threshold interrupt is routed to INT1 pad. Default value: 0
+                                      (0: disabled; 1: enabled)
+                                      Data-ready is routed to INT1 pad. Default value: 0
+                                      (0: disabled; 1: enabled)
+
+DS11811 - Rev 9                                                                                                page 39/65
+                                                                                                              LIS2DW12
+
+                                                                                                          Register description
+
+8.8              CTRL5_INT2_PAD_CTRL (24h)
+
+                 Control register 5 (R/W)
+
+                                               Table 38. Control register 5
+
+                 INT2_  INT2_           INT2_   INT2_  INT2_                 INT2_                        INT2_  INT2_
+                                        BOOT   DRDY_T  OVR                   DIFF5                         FTH   DRDY
+                 SLEEP_STATE SLEEP_CHG
+
+                 INT2_SLEEP_STATE             Table 39. Control register 5 description
+                 INT2_SLEEP_CHG
+                 INT2 _BOOT             Enables routing SLEEP_STATE to INT2 pad. Default value: 0
+                 INT2_DRDY_T            (0: disabled; 1: enabled)
+                 INT2 _OVR              Sleep change status routed to INT2 pad. Default value: 0
+                 INT2_DIFF5             (0: disabled; 1: enabled)
+                 INT2 _FTH              Boot state routed to INT2 pad. Default value: 0
+                 INT2 _DRDY             (0: disabled; 1: enabled)
+                                        Temperature data-ready is routed to INT2. Default value: 0
+                                        (0: disabled; 1: enabled)
+                                        FIFO overrun interrupt is routed to INT2 pad. Default value: 0
+                                        (0: disabled; 1: enabled)
+                                        FIFO full recognition is routed to INT2 pad. Default value: 0
+                                        (0: disabled; 1: enabled)
+                                        FIFO threshold interrupt is routed to INT2 pad. Default value: 0
+                                        (0: disabled; 1: enabled)
+                                        Data-ready is routed to INT2 pad. Default value: 0
+                                        (0: disabled; 1: enabled)
+
+DS11811 - Rev 9                                                                                                  page 40/65
+                                                                                                                        LIS2DW12
+
+                                                                                                                    Register description
+
+8.9              CTRL6 (25h)
+
+                 Control register 6 (R/W)         Table 40. Control register 6
+
+                    BW_FILT1 BW_FILT0      FS1    FS0  FDS                        LOW_                           0  0
+                                                                                  NOISE
+
+                 BW_FILT[1:0]           Bandwidth selection (see Table 41. Digital filtering cutoff selection)
+                 FS[1:0]                Full-scale selection (see Table 42. Full-scale selection)
+                 FDS                    Filtered data type selection. Default value: 0
+                                        (0: low-pass filter path selected;
+                 LOW_NOISE              1: high-pass filter path selected)
+                                        Low-noise configuration.
+                                        (0: disabled; 1: enabled)
+
+                 BW_FILT[1:0]                         Table 41. Digital filtering cutoff selection
+                        00
+                        01                                                                  Bandwidth selection
+                        10              ODR/2 (up to ODR = 800 Hz, 400 Hz when ODR = 1600 Hz)
+                         11             ODR/4 (HP/LP)
+                                        ODR/10 (HP/LP)
+                                        ODR/20 (HP/LP)
+
+                                                  Table 42. Full-scale selection
+
+                               FS[1:0]                 Full-scale selection
+                                  00
+                                  01       ±2 g
+                                  10       ±4 g
+                                  11       ±8 g
+                                           ±16 g
+
+DS11811 - Rev 9                                                                                                     page 41/65
+                                                                                                                      LIS2DW12
+
+                                                                                                                  Register description
+
+8.10             OUT_T (26h)
+8.11
+                 Temperature output register in 8-bit resolution (R)
+
+                                              Table 43. OUT_T register
+
+                 TEMP7       TEMP6    TEMP5   TEMP4                   TEMP3                                TEMP2  TEMP1  TEMP0
+
+                 TEMP[7:0]                              Table 44. OUT_T register description
+
+                             Temperature sensor output data.
+                             The value is expressed as two's complement sign. Sensitivity = 1°C/LSB
+                             0 LSB represents T = 25°C ambient.
+
+                 STATUS (27h)
+
+                 Status register (R)
+
+                                              Table 45. STATUS register
+
+                 FIFO_THS    WU_IA    SLEEP_  DOUBLE_                 SINGLE_                              6D_IA  FF_IA  DRDY
+                                       STATE      TAP                    TAP
+
+                                      Table 46. STATUS register description
+
+                 FIFO_THS    FIFO threshold status flag
+                             (0: FIFO filling is lower than threshold level; 1: FIFO filling is equal to or higher than the threshold level.)
+
+                 WU_IA       Wake-up event detection status
+                             (0: wake-up event not detected; 1: wake-up event detected)
+
+                                         Sleep event status.
+                 SLEEP_STATE
+
+                                         (0: sleep event not detected; 1: sleep event detected)
+
+                                         Double-tap event status
+                 DOUBLE_TAP
+
+                                         (0: double-tap event not detected; 1: double-tap event detected)
+
+                 SINGLE_TAP  Single-tap event status
+                             (0: single-tap event not detected; 1: single-tap event detected)
+
+                 6D_IA       Source of change in position portrait/landscape/face-up/face-down
+                             (0: no event detected; 1: a change in position detected)
+
+                 FF_IA       Free-fall event detection status
+                             (0: free-fall event not detected; 1: free-fall event detected)
+
+                 DRDY        Data-ready status
+                             (0: not ready; 1: X-, Y- and Z-axis new data available)
+
+DS11811 - Rev 9                                                                                                          page 42/65
+                                                                                                                      LIS2DW12
+
+                                                                                                                  Register description
+
+8.12             OUT_X_L (28h)
+8.13
+8.14             X-axis LSB output register (R)
+8.15
+                                                       Table 47. OUT_X_L register
+
+                 X_L7  X_L6  X_L5                      X_L4                X_L3(1)        X_L2(1)           0        0
+
+                 1. If low-power mode 1 is enabled, this bit is set to 0.
+
+                 The 8 least significant bits of linear acceleration sensor X-axis output. Together with the OUT_X_H (29h) register,
+                 it forms the output value expressed as a 16-bit word in two's complement.
+
+                 OUT_X_H (29h)
+
+                 X-axis MSB output register (R)
+
+                                                       Table 48. OUT_X_H register
+
+                 X_H7  X_H6                      X_H5        X_H4                   X_H3           X_H2        X_H1  X_H0
+
+                 The 8 most significant bits of linear acceleration sensor X-axis output. Together with the OUT_X_L (28h) register,
+                 it forms the output value expressed as a 16-bit word in two's complement.
+
+                 OUT_Y_L (2Ah)
+
+                 Y-axis LSB output register (R)
+
+                                                       Table 49. OUT_Y_L register
+
+                 Y_L7  Y_L6                      Y_L5        Y_L4          Y_L3(1)                 Y_L2(1)     0        0
+
+                 1. If low-power mode 1 is enabled, this bit is set to 0.
+
+                 The 8 least significant bits of linear acceleration sensor Y-axis output. Together with the OUT_Y_H (2Bh) register,
+                 it forms the output value expressed as a 16-bit word in two's complement.
+
+                 OUT_Y_H (2Bh)
+
+                 Y-axis MSB output register (R)
+
+                                                       Table 50. OUT_Y_H register
+
+                 Y_H7  Y_H6                      Y_H5        Y_H4                   Y_H3           Y_H2        Y_H1  Y_H0
+
+                 The 8 most significant bits of linear acceleration sensor Y-axis output. Together with the OUT_Y_L (2Ah) register,
+                 it forms the output value expressed as a 16-bit word in two's complement.
+
+DS11811 - Rev 9                                                                                                      page 43/65
+                                                                                                                       LIS2DW12
+
+                                                                                                                   Register description
+
+8.16             OUT_Z_L (2Ch)
+8.17
+8.18             Z-axis LSB output register (R)
+
+                                                         Table 51. OUT_Z_L register
+
+                 Z_L7        Z_L6                Z_L5    Z_L4              Z_L3(1)     Z_L2(1)                  0                  0
+
+                 1. If low-power mode 1 is enabled, this bit is set to 0.
+
+                 The 8 least significant bits of linear acceleration sensor Z-axis output. Together with the OUT_Z_H (2Dh) register,
+                 it forms the output value expressed as a 16-bit word in two's complement.
+
+                 OUT_Z_H (2Dh)
+
+                 Z-axis MSB output register (R)
+
+                                                         Table 52. OUT_Z_H register
+
+                 Z_H7        Z_H6                Z_H5    Z_H4              Z_H3        Z_H2                     Z_H1               Z_H0
+
+                 The 8 most significant bits of linear acceleration sensor Z-axis output. Together with the OUT_Z_L (2Ch) register,
+                 it forms the output value expressed as a 16-bit word in two's complement.
+
+                 FIFO_CTRL (2Eh)
+
+                 FIFO control register (R/W)
+
+                                                         Table 53. FIFO_CTRL register
+
+                 FMode2      FMode1              FMode0  FTH4              FTH3        FTH2                     FTH1               FTH0
+
+                                                 Table 54. FIFO_CTRL register description
+
+                 FMode[2:0]  FIFO mode selection bits. Default: 000. For further details, refer to Table 55. FIFO mode selection.
+                 FTH[4:0]    FIFO threshold level setting
+
+                 FMode[2:0]                                 Table 55. FIFO mode selection
+                      000
+                      001                                                               Mode description
+                      010    Bypass mode: FIFO turned off
+                      011    FIFO mode: stops collecting data when FIFO is full
+                      100    Reserved
+                      101    Continuous-to-FIFO: stream mode until trigger is deasserted, then FIFO mode
+                      110    Bypass-to-continuous: bypass mode until trigger is deasserted, then FIFO mode
+                      111    Reserved
+                             Continuous mode: If the FIFO is full, the new sample overwrites the older sample.
+                             Reserved
+
+DS11811 - Rev 9                                                                                                                    page 44/65
+                                                                                                                    LIS2DW12
+
+                                                                                                                Register description
+
+8.19             FIFO_SAMPLES (2Fh)
+8.20
+                 FIFO_SAMPLES control register (R)
+
+                                                    Table 56. FIFO_SAMPLES register
+
+                 FIFO_FTH FIFO_OVR        Diff5     Diff4                     Diff3  Diff2                      Diff1  Diff0
+
+                 FIFO_FTH                           Table 57. FIFO_SAMPLES register description
+                 FIFO_OVR
+                 Diff[5:0]       FIFO threshold status flag
+                                 (0: FIFO filling is lower than threshold level;
+                                 1: FIFO filling is equal to or higher than the threshold level.)
+                                 FIFO overrun status
+                                 (0: FIFO is not completely filled;
+                                 1: FIFO is completely filled and at least one sample has been overwritten)
+                                 Represents the number of unread samples stored in FIFO.
+                                 (000000 = FIFO empty; 100000 = FIFO full, 32 unread samples).
+
+                 TAP_THS_X (30h)
+
+                 Enables 4D configuration and configures TAP threshold (R/W)
+
+                                                    Table 58. TAP_THS_X register
+
+                 4D_EN           6D_THS1  6D_THS0     TAP_    TAP_                     TAP_                    TAP_      TAP_
+                                                    THSX_4  THSX_3                   THSX_2                  THSX_1    THSX_0
+
+                                          Table 59. TAP_THS_X register description
+
+                 4D_EN           Enables 4D detection portrait/landscape position
+                                 (0: no position detected;
+                 6D_THS[1:0]     1: portrait/landscape detection and face-up/face-down position enabled).
+                 TAP_THSX_[4:0]  Thresholds for 4D/6D function @ FS = ±2 g (refer to Table 60. 4D/6D threshold setting FS @ ±2 g)
+                                 Threshold for TAP recognition @ FS = ±2 g on X direction
+
+                            6D_THS[1:0]   Table 60. 4D/6D threshold setting FS @ ±2 g
+                                   00
+                                   01                                             Threshold decoding (degrees)
+                                   10                                                         6 (80 degrees)
+                                   11                                                        11 (70 degrees)
+                                                                                             16 (60 degrees)
+                                                                                             21 (50 degrees)
+
+DS11811 - Rev 9                                                                                                        page 45/65
+                                                                                                        LIS2DW12
+
+                                                                                                    Register description
+
+8.21             TAP_THS_Y (31h)
+8.22
+                                                  Table 61. TAP_THS_Y register
+
+                   TAP_            TAP_     TAP_     TAP_          TAP_           TAP_                TAP_    TAP_
+                 PRIOR_2         PRIOR_1  PRIOR_0  THSY_4        THSY_3         THSY_2              THSY_1  THSY_0
+
+                                                              Table 62. TAP_THS_Y register description
+                 TAP_PRIOR_[2:0] Selection of priority axis for tap detection (see Table 63. Selection of axis priority for tap detection)
+                 TAP_THSY_[4:0] Threshold for tap recognition @ FS = ±2 g on Y direction
+
+                                          Table 63. Selection of axis priority for tap detection
+
+                 TAP_PRIOR_[2:0]                   Max priority          Mid priority               Min priority
+                           000                            X                     Y                          Z
+                           001                            Y                     X                          Z
+                           010                            X                     Z                          Y
+                           011                            Z                     Y                          X
+                           100                            X                     Y                          Z
+                           101                            Y                     Z                          X
+                           110                            Z                     X                          Y
+                           111                            Z                     Y                          X
+
+                 TAP_THS_Z (32h)
+
+                                                  Table 64. TAP_THS_Z register
+
+                 TAP_X_          TAP_Y_   TAP_Z_    TAP_          TAP_           TAP_                TAP_    TAP_
+                    EN              EN       EN    THSZ_4        THSZ_3         THSZ_2              THSZ_1  THSZ_0
+
+                 TAP_X_EN                         Table 65. TAP_THS_Z register description
+                 TAP_Y_EN
+                 TAP_Z_EN                 Enables X direction in tap recognition
+                 TAP_THSZ_[4:0]           (0: disabled; 1: enabled)
+                                          Enables Y direction in tap recognition
+                                          (0: disabled; 1: enabled)
+                                          Enables Z direction in tap recognition
+                                          (0: disabled; 1: enabled)
+                                          Threshold for tap recognition @ FS = ±2 g on Z direction
+
+DS11811 - Rev 9                                                                                             page 46/65
+                                                                                                LIS2DW12
+
+                                                                                            Register description
+
+8.23             INT_DUR (33h)
+8.24
+                 Interrupt duration register (R/W)
+
+                                                    Table 66. INT_DUR register
+
+                 LATENCY3    LATENCY2   LATENCY1 LATENCY0  QUIET1               QUIET0      SHOCK1                          SHOCK0
+
+                                                    Table 67. INT_DUR register description
+
+                                       Duration of maximum time gap for double-tap recognition. When double-tap recognition is enabled, this
+                                       register expresses the maximum time between two successive detected taps to determine a double-tap event.
+                 LATENCY[3:0] Default value is LATENCY[3:0] = 0000 (which is 16 * 1/ODR)
+
+                             1 LSB = 32 * 1/ODR
+
+                 QUIET[1:0]  Expected quiet time after a tap detection: this register represents the time after the first detected tap in which
+                             there must not be any overthreshold event.
+
+                             Default value is QUIET[1:0] = 00 (which is 2 * 1/ODR)
+
+                             1 LSB = 4 * 1/ODR
+
+                 SHOCK[1:0]  Maximum duration of overthreshold event: this register represents the maximum time of an overthreshold
+                             signal detection to be recognized as a tap event.
+
+                             Default value is SHOCK[1:0] = 00 (which is 4 * 1/ODR)
+
+                             1 LSB = 8 *1/ODR
+
+                 WAKE_UP_THS (34h)
+
+                 Wake-up threshold register (R/W)
+
+                 SINGLE_     SLEEP_ ON            Table 68. WAKE_UP_THS register            WK_THS 1                        WK_THS 0
+                 DOUBLE_                WK_THS5 WK_THS4 WK_THS3 WK_THS 2
+
+                     TAP
+
+                 SINGLE_DOUBLE_ TAP          Table 69. WAKE_UP_THS register description
+                 SLEEP_ON
+                 WK_THS[5:0]            Enables single/double-tap event. Default value: 0
+                                        (0: only single-tap event is enabled; 1: single and double-tap events are enabled)
+                                        Enables sleep (inactivity). Default value: 0
+                                        (0: sleep disabled; 1: sleep enabled)
+                                        Wake-up threshold, 6-bit unsigned 1 LSB = 1/64 of FS. Default value: 000000
+
+DS11811 - Rev 9                                                                                                             page 47/65
+                                                                                                                                      LIS2DW12
+
+                                                                                                                                  Register description
+
+8.25             WAKE_UP_DUR (35h)
+8.26
+                 Wake--up and sleep duration configuration register (R/W)
+
+                                                   Table 70. WAKE_UP_DUR register
+
+                 FF_DUR5          WAKE_     WAKE_    STATIONARY SLEEP_ DUR3 SLEEP_ DUR2 SLEEP_ DUR1 SLEEP_ DUR0
+                                   DUR1      DUR0
+
+                                            Table 71. WAKE_UP_DUR register description
+
+                 FF_DUR5          Free-fall duration. In conjunction with FF_DUR [4:0] bit in the FREE_FALL (36h) register.
+                 WAKE_DUR[1:0]    1 LSB = 1 * 1/ODR
+                 STATIONARY       Wake-up duration. 1 LSB = 1 *1/ODR
+                                  Enables stationary detection / motion detection with no automatic ODR change when detecting stationary state
+                 SLEEP_ DUR[3:0]  Default value: 0
+                                  (0: disabled; 1: enabled)
+                                  Duration to go in sleep mode
+                                  Default value is SLEEP_ DUR[3:0] = 0000 (which is 16 * 1/ODR).
+                                  1 LSB = 512 * 1/ODR
+
+                 FREE_FALL (36h)
+
+                 Free-fall duration and threshold configuration register (R/W)
+
+                                                     Table 72. FREE_FALL register
+
+                 FF_DUR4          FF_DUR3   FF_DUR2  FF_DUR1                    FF_DUR0  FF_THS2                                  FF_THS1  FF_THS0
+
+                 FF_DUR [4:0]                            Table 73. FREE_FALL register description
+                 FF_THS [2:0]
+                                  Free-fall duration. In conjunction with FF_DUR5 bit in the WAKE_UP_DUR (35h) register.
+                                  1 LSB = 1 * 1/ODR
+                                  Free-fall threshold @ FS = ±2 g (refer to Table 74. FREE_FALL threshold decoding @ ± 2 g FS)
+
+                               FF_THS[2:0]  Table 74. FREE_FALL threshold decoding @ ± 2 g FS
+                                     000
+                                     001                                                                Threshold decoding (LSB)
+                                     010                                                                                  5
+                                     011                                                                                  7
+                                     100                                                                                  8
+                                     101                                                                                 10
+                                     110                                                                                  11
+                                     111                                                                                 13
+                                                                                                                         15
+                                                                                                                         16
+
+DS11811 - Rev 9                                                                                                                            page 48/65
+                                                                                                                  LIS2DW12
+
+                                                                                                              Register description
+
+8.27             STATUS_DUP (37h)
+
+                 Event detection status register (R)
+
+                                                      Table 75. STATUS_DUP register
+
+                 OVR  DRDY_T       SLEEP_             DOUBLE_  SINGLE_               6D_IA  FF_IA             DRDY
+                                  STATE_IA                TAP     TAP
+
+                 OVR                        Table 76. STATUS_DUP register description
+
+                 DRDY_T           FIFO overrun status flag
+                 SLEEP_ STATE_IA  (0: FIFO is not completely filled;
+                 DOUBLE_ TAP      1: FIFO is completely filled and at least one sample has been overwritten)
+                 SINGLE_ TAP      Temperature status
+                 6D_IA            (0: data not available; 1: a new set of data is available)
+                 FF_IA            Sleep event status
+                 DRDY             (0: Sleep event not detected; 1: Sleep event detected)
+                                  Double-tap event status
+                                  (0: Double-tap event not detected; 1: Double-tap event detected)
+                                  Single-tap event status
+                                  (0: Single-tap event not detected; 1: Single-tap event detected)
+                                  Source of change in position portrait/landscape/face-up/face-down
+                                  (0: no event detected; 1: a change in position is detected)
+                                  Free-fall event detection status
+                                  (0: free-fall event not detected; 1: free-fall event detected)
+                                  Data-ready status
+                                  (0: not ready; 1: X-, Y-, and Z-axis new data available)
+
+DS11811 - Rev 9                                                                                               page 49/65
+                                                                                                                       LIS2DW12
+
+                                                                                                                   Register description
+
+8.28             WAKE_UP_SRC (38h)
+
+                 Wake-up source register (R)
+
+                                                     Table 77. WAKE_UP_SRC register
+
+                 0                0           FF_IA  SLEEP_    WU_IA                 X_WU  Y_WU                    Z_WU
+                                                     STATE IA
+
+                 FF_IA                         Table 78. WAKE_UP_SRC register description
+                 SLEEP_ STATE IA
+                 WU_IA               Free-fall event detection status
+                 X_WU                (0: FF event not detected; 1: FF event detected)
+                 Y_WU                Sleep event status
+                 Z_WU                (0: sleep event not detected; 1: sleep event detected)
+                                     Wake-up event detection status
+                                     (0: wake-up event not detected; 1: wake-up event is detected)
+                                     Wake-up event detection status on X-axis
+                                     (0: wake-up event on X not detected; 1: wake-up event on X-axis is detected)
+                                     Wake-up event detection status on Y-axis
+                                     (0: wake-up event on Y not detected; 1: wake-up event on Y-axis is detected)
+                                     Wake-up event detection status on Z-axis
+                                     (0: wake-up event on Z not detected; 1: wake-up event on Z-axis is detected)
+
+DS11811 - Rev 9                                                                                                    page 50/65
+                                                                                                                         LIS2DW12
+
+                                                                                                                     Register description
+
+8.29             TAP_SRC (39h)
+
+                 Tap source register (R)
+
+                                                   Table 79. TAP_SRC register
+
+                 0           TAP_IA       SINGLE_  DOUBLE_  TAP_SIGN           X_TAP  Y_TAP                          Z_TAP
+                                             TAP       TAP
+
+                 TAP_IA                           Table 80. TAP_SRC register description
+                 SINGLE_TAP
+                 DOUBLE_TAP  Tap event status
+                 TAP_SIGN    (0: tap event not detected; 1: tap event detected)
+                 X_TAP       Single-tap event status
+                 Y_TAP       (0: single-tap event not detected; 1: single-tap event detected)
+                 Z_TAP       Double-tap event status
+                             (0: double-tap event not detected; 1: double-tap event detected)
+                             Sign of acceleration detected by tap event
+                             (0: positive sign of acceleration detected; 1: negative sign of acceleration detected)
+                             Tap event detection status on X-axis
+                             (0: tap event on X not detected; 1: tap event on X-axis is detected)
+                             Tap event detection status on Y-axis
+                             (0: tap event on Y not detected; 1: tap event on Y-axis is detected)
+                             Tap event detection status on Z-axis
+                             (0: tap event on Z not detected; 1: tap event on Z-axis is detected)
+
+DS11811 - Rev 9                                                                                                      page 51/65
+                                                                                                          LIS2DW12
+
+                                                                                                      Register description
+
+8.30             SIXD_SRC (3Ah)
+
+                 6D source register (R)
+
+                                             Table 81. SIXD_SRC register
+
+                        0  6D_IA         ZH  ZL  YH                       YL                      XH  XL
+
+                 6D_IA                                   Table 82. SIXD_SRC register description
+                 ZH
+                 ZL        Source of change in position portrait/landscape/face-up/face-down
+                 YH        (0: no event detected; 1: a change in position is detected)
+                 YL        ZH over threshold
+                 XH        (0: ZH does not exceed the threshold; 1: ZH is over the threshold)
+                 XL        ZL over threshold
+                           (0: ZL does not exceed the threshold; 1: ZL is over the threshold)
+                           YH over threshold
+                           (0: YH does not exceed the threshold; 1: YH is over the threshold)
+                           YL over threshold
+                           (0: YL does not exceed the threshold; 1: YL is over the threshold)
+                           XH over threshold
+                           (0: XH does not exceed the threshold; 1: XH is over the threshold)
+                           XL over threshold
+                           (0: XL does not exceed the threshold; 1: XL is over the threshold)
+
+DS11811 - Rev 9                                                                                       page 52/65
+                                                                                                            LIS2DW12
+
+                                                                                                        Register description
+
+8.31             ALL_INT_SRC (3Bh)
+
+                 Reading this register, all related interrupt function flags routed to the INT pads are reset simultaneously.
+
+                                     Table 83. ALL_INT_SRC register
+
+                 0                0     SLEEP_  6D_IA  DOUBLE_  SINGLE_                                 WU_IA                  FF_IA
+                                     CHANGE_IA             TAP     TAP
+
+                 SLEEP_CHANGE_IA         Table 84. ALL_INT_SRC register description
+                 6D_IA
+                 DOUBLE_TAP          Sleep change status
+                 SINGLE_TAP          (0: sleep change not detected; 1: sleep change detected)
+                 WU_IA               Source of change in position portrait/landscape/face-up/face-down
+                 FF_IA               (0: no event detected; 1: a change in position detected)
+                                     Double-tap event status
+                                     (0: double-tap event not detected; 1: double-tap event detected)
+                                     Single-tap event status
+                                     (0: single-tap event not detected; 1: single-tap event detected)
+                                     Wake-up event detection status
+                                     (0: wake-up event not detected; 1: wake-up event detected)
+                                     Free-fall event detection status.
+                                     (0: free-fall event not detected; 1: free-fall event detected)
+
+DS11811 - Rev 9                                                                                                                page 53/65
+                                                                                                                    LIS2DW12
+
+                                                                                                                Register description
+
+8.32             X_OFS_USR (3Ch)
+8.33
+8.34                                      Table 85. X_OFS_USR register
+
+                 X_OFS_  X_OFS_   X_OFS_  X_OFS_  X_OFS_                X_OFS_  X_OFS_                          X_OFS_
+                 USR_7   USR_6    USR_5   USR_4   USR_3                 USR_2   USR_1                           USR_0
+
+                 X_OFS_USR_[7:0]               Table 86. X_OFS_USR register description
+                                  Two's complement user offset value on X-axis data, used for wake-up function
+
+                 Y_OFS_USR (3Dh)
+
+                                          Table 87. Y_OFS_USR register
+
+                 Y_OFS_  Y_OFS_   Y_OFS_  Y_OFS_  Y_OFS_                Y_OFS_  Y_OFS_                          Y_OFS_
+                 USR_7   USR_6    USR_5   USR_4   USR_3                 USR_2   USR_1                           USR_0
+
+                 Y_OFS_USR_[7:0]               Table 88. Y_OFS_USR register description
+                                  Two's complement user offset value on Y-axis data, used for wake-up function
+
+                 Z_OFS_USR (3Eh)
+
+                                          Table 89. Z_OFS_USR register
+
+                 Z_OFS_  Z_OFS_   Z_OFS_  Z_OFS_  Z_OFS_                Z_OFS_  Z_OFS_                          Z_OFS_
+                 USR_7   USR_6    USR_5   USR_4   USR_3                 USR_2   USR_1                           USR_0
+
+                 Z_OFS_USR_[7:0]               Table 90. Z_OFS_USR register description
+                                  Two's complement user offset value on Z-axis data, used for wake-up function
+
+DS11811 - Rev 9                                                                                                 page 54/65
+                                                                                                                      LIS2DW12
+
+                                                                                                                  Register description
+
+8.35             CTRL7 (3Fh)
+
+                                                       Table 91. CTRL7 register
+
+                 DRDY_         INT2_ON_  INTERRUPTS USR_OFF               USR_OFF             USR_          HP_REF         LPASS_
+                 PULSED           INT1                                    _ON_WU             OFF _W         _MODE           ON6D
+                                         _ENABLE       _ON_OUT
+
+                                         Table 92. CTRL7 register description
+
+                 DRDY_PULSED     Switches between latched and pulsed mode for data ready interrupt
+                                 (0: latched mode is used; 1: pulsed mode enabled for data-ready)
+
+                 INT2_ON_INT1    Signal routing
+                                 (1: all signals available only on INT2 are routed to INT1)
+
+                 INTERRUPTS_ENABLE Enables interrupts
+
+                 USR_OFF_ON_OUT  Enables application of user offset value in accelerometer output data registers
+                                 FDS bit in CTRL6 (25h) must be set to 0 logic (low-pass path selected).
+
+                 USR_OFF_ON_WU   Enables application of user offset value on accelerometer data for wake-up function only
+
+                 USR_OFF_W       Selects the weight of the user offset words specified by X_OFS_USR_[7:0], Y_OFS_USR_[7:0],
+                                 and Z_OFS_USR_[7:0] bits
+
+                                 (0: 977 µg/LSB; 1: 15.6 mg/LSB)
+
+                                 Enables high-pass filter reference mode
+
+                 HP_REF_MODE     (0: high-pass filter reference mode disabled (default);
+
+                                 1: high-pass filter reference mode enabled)
+
+                 LPASS_ON6D      (0: ODR/2 low-pass filtered data sent to 6D interrupt function (default);
+                                 1: LPF2 output data sent to 6D interrupt function)
+
+DS11811 - Rev 9                                                                                                            page 55/65
+                                                                                                         LIS2DW12
+
+                                                                                                    Package information
+
+9                Package information
+
+                 To meet environmental requirements, ST offers these devices in different grades of ECOPACK packages,
+                 depending on their level of environmental compliance. ECOPACK specifications, grade definitions, and product
+                 status are available at: www.st.com. ECOPACK is an ST trademark.
+
+9.1              Soldering information
+
+                 The LGA package is compliant with the ECOPACK and RoHS standard.
+
+                 It is qualified for soldering heat resistance according to JEDEC J-STD-020.
+
+                 For land pattern and soldering recommendations, consult technical note TN0018 available on www.st.com.
+
+9.2              LGA-12L package information
+
+                 Figure 18. LGA-12L 2.0 x 2.0 x 0.7 mm package outline and mechanical data
+
+                                          Dimensions are in millimeter unless otherwise specified.
+                                        General Tolerance is +/-0.15mm unless otherwise specified.
+
+                    ITEM                                   OUTER DIMENSIONS                   TOLERANCE [mm]
+                 Length [L]                                                                             ± 0.1
+                 Width [W]                                    DIMENSION [mm]                            ± 0.1
+                 Height [H]                                               2                                /
+                                                                          2
+
+                                                                     0.7 MAX
+
+                                                                                                               DM00170568_7
+
+Note:            Package tolerances guaranteed by process
+
+DS11811 - Rev 9                                                                                                page 56/65
+                                                                               LIS2DW12
+
+                                                                          Package information
+
+9.3              LGA-12L packing information
+
+                 Figure 19. Carrier tape information for LGA-12L package
+
+                 Figure 20. LGA-12L package orientation in carrier tape
+
+DS11811 - Rev 9                                                           page 57/65
+                                                                                                                      LIS2DW12
+
+Revision history
+
+                                                  Table 93. Document revision history
+
+Date             Revision                                                 Changes
+
+10-Feb-2017      1         Initial release
+
+                           Updated Applications and Figure 7: Accelerometer chain
+
+13-Apr-2017      2         Added Section 3.2.4: Activity/Inactivity, Android stationary/motion-detection functions
+
+                           Renamed registers 3Ch, 3Dh, 3Eh, 3Fh
+
+15-Jun-2017      3         Added bullet concerning Android to Features
+
+                           Document status promoted to "production data"
+
+                           Updated Description
+
+12-Sep-2017      4         Updated Section 3.2.4: Activity/Inactivity, Android stationary/motion-detection functions
+
+                           Added bit 7 to CTRL5_INT2_PAD_CTRL (24h)
+
+                           Added bit 4 to WAKE_UP_DUR (35h)
+
+01-Oct-2018      5         Added product label indicating participation in ST's sustainable technology program
+
+                           Updated Section 3.2.4 Activity/Inactivity, Android stationary/motion-detection functions
+
+06-Nov-2018      6         Updated Figure 6. LIS2DW12 electrical connections (top view)
+
+                           Added Section 9.3 LGA-12 packing information
+
+03-May-2019      7         Updated Figure 19. Carrier tape information for LGA-12 package
+
+02-Jul-2019      8         Updated OUT_T_L (0Dh) and OUT_T_H (0Eh)
+
+                           Updated product summary
+
+                           Added quick links to product resources
+
+17-Sep-2024      9         Updated VIH and VIL in Table 4. Electrical characteristics as well as Notes below Figure 3. SPI slave timing diagram
+
+                           and Figure 4. I²C slave timing diagram
+
+                           Minor textual updates
+
+DS11811 - Rev 9                                                                                                       page 58/65
+                                                                                                                  LIS2DW12
+
+                                                                                                                                                                                    Contents
+
+Contents
+
+1 Block diagram and pin description . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+       1.1 Block diagram . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+       1.2 Pin description . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+
+2 Mechanical and electrical specifications . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+       2.1 Mechanical characteristics . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+       2.2 Electrical characteristics. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+       2.3 Temperature sensor characteristics . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+       2.4 Communication interface characteristics . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 9
+
+                  2.4.1 SPI - serial peripheral interface . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 9
+                  2.4.2 I²C - inter-IC control interface . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+       2.5 Absolute maximum ratings. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12
+
+3 Terminology and functionality . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .13
+       3.1 Terminology . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 13
+
+                  3.1.1 Sensitivity . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 13
+                  3.1.2 Zero-g level offset . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 13
+       3.2 Functionality. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 14
+                  3.2.1 Operating modes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 14
+                  3.2.2 Single data conversion on-demand mode . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16
+                  3.2.3 Self-test. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16
+                  3.2.4 Activity/Inactivity, Android stationary/motion-detection functions . . . . . . . . . . . . . . . . . . . . 17
+                  3.2.5 High tap/double-tap user configurability . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
+                  3.2.6 Offset management. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
+       3.3 Sensing element . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
+       3.4 IC interface. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
+       3.5 Factory calibration. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
+       3.6 Temperature sensor . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
+
+4 Application hints . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .19
+5 Digital main blocks . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .21
+
+       5.1 Block diagram of filters . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 21
+       5.2 Data stabilization time vs. ODR/device setting . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 22
+       5.3 FIFO . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 23
+
+                  5.3.1 Bypass mode . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 24
+                  5.3.2 FIFO mode . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 24
+                  5.3.3 Continuous mode . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 24
+                  5.3.4 Continuous-to-FIFO mode. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 25
+
+DS11811 - Rev 9  page 59/65
+                                                                                                                  LIS2DW12
+
+                                                                                                                                                                                    Contents
+
+                  5.3.5 Bypass-to-continuous mode . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 26
+
+6 Digital interfaces . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .27
+       6.1 I²C serial interface . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27
+
+                  6.1.1 I²C operation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28
+       6.2 SPI bus interface . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29
+
+                  6.2.1 SPI read . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30
+                  6.2.2 SPI write . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
+                  6.2.3 SPI read in 3-wire mode . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32
+
+7 Register mapping. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .33
+8 Register description . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .35
+
+       8.1 OUT_T_L (0Dh). . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
+       8.2 OUT_T_H (0Eh) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
+       8.3 WHO_AM_I (0Fh) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
+       8.4 CTRL1 (20h) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 36
+       8.5 CTRL2 (21h) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 37
+       8.6 CTRL3 (22h) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 38
+       8.7 CTRL4_INT1_PAD_CTRL (23h) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 39
+       8.8 CTRL5_INT2_PAD_CTRL (24h) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 40
+       8.9 CTRL6 (25h) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 41
+       8.10 OUT_T (26h) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 42
+       8.11 STATUS (27h) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 42
+       8.12 OUT_X_L (28h) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 43
+       8.13 OUT_X_H (29h) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 43
+       8.14 OUT_Y_L (2Ah). . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 43
+       8.15 OUT_Y_H (2Bh) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 43
+       8.16 OUT_Z_L (2Ch). . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 44
+       8.17 OUT_Z_H (2Dh) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 44
+       8.18 FIFO_CTRL (2Eh). . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 44
+       8.19 FIFO_SAMPLES (2Fh). . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 45
+       8.20 TAP_THS_X (30h) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 45
+       8.21 TAP_THS_Y (31h) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 46
+       8.22 TAP_THS_Z (32h). . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 46
+       8.23 INT_DUR (33h) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 47
+       8.24 WAKE_UP_THS (34h) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 47
+       8.25 WAKE_UP_DUR (35h) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 48
+       8.26 FREE_FALL (36h). . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 48
+
+DS11811 - Rev 9  page 60/65
+                                                                                                                  LIS2DW12
+
+                                                                                                                                                                                    Contents
+
+       8.27 STATUS_DUP (37h) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 49
+       8.28 WAKE_UP_SRC (38h) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 50
+       8.29 TAP_SRC (39h). . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 51
+       8.30 SIXD_SRC (3Ah). . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 52
+       8.31 ALL_INT_SRC (3Bh) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 53
+       8.32 X_OFS_USR (3Ch). . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 54
+       8.33 Y_OFS_USR (3Dh). . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 54
+       8.34 Z_OFS_USR (3Eh) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 54
+       8.35 CTRL7 (3Fh) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 55
+9 Package information. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .56
+       9.1 Soldering information . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 56
+       9.2 LGA-12L package information . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 56
+       9.3 LGA-12L packing information . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 57
+Revision history . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .58
+
+DS11811 - Rev 9  page 61/65
+                 LIS2DW12
+
+                    List of tables
+
+List of tables
+
+Table 1.   Pin description. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+Table 2.   Internal pull-up values (typ.) for SDO/SA0 and CS pins . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+Table 3.   Mechanical characteristics . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+Table 4.   Electrical characteristics . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+Table 5.   Temperature sensor characteristics . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+Table 6.   SPI slave timing values. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 9
+Table 7.   I²C slave timing values . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+Table 8.   I²C high-speed mode specifications at 1 MHz and 3.4 MHz . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
+Table 9.   Absolute maximum ratings . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12
+Table 10.  Operating modes - low-noise setting disabled . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 14
+Table 11.  Operating modes - low-noise setting enabled . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 15
+Table 12.  Internal pin status . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 20
+Table 13.  Number of samples to be discarded . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 22
+Table 14.  Serial interface pin description . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27
+Table 15.  I²C terminology . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27
+Table 16.  SAD+read/write patterns . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28
+Table 17.  Transfer when master is writing one byte to slave. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28
+Table 18.  Transfer when master is writing multiple bytes to slave . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28
+Table 19.  Transfer when master is receiving (reading) one byte of data from slave . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28
+Table 20.  Transfer when master is receiving (reading) multiple bytes of data from slave . . . . . . . . . . . . . . . . . . . . . . . . . 28
+Table 21.  Register map. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 33
+Table 22.  OUT_T_L register . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
+Table 23.  OUT_T_L register description . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
+Table 24.  OUT_T_H register . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
+Table 25.  OUT_T_H register description . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
+Table 26.  WHO_AM_I register default values. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
+Table 27.  Control register 1 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 36
+Table 28.  Control register 1 description . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 36
+Table 29.  Data rate configuration . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 36
+Table 30.  Mode selection . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 36
+Table 31.  Low-power mode selection . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 36
+Table 32.  Control register 2 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 37
+Table 33.  Control register 3 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 38
+Table 34.  Control register 3 description . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 38
+Table 35.  Self-test mode selection . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 38
+Table 36.  Control register 4 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 39
+Table 37.  Control register 4 description . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 39
+Table 38.  Control register 5 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 40
+Table 39.  Control register 5 description . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 40
+Table 40.  Control register 6 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 41
+Table 41.  Digital filtering cutoff selection . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 41
+Table 42.  Full-scale selection. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 41
+Table 43.  OUT_T register . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 42
+Table 44.  OUT_T register description . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 42
+Table 45.  STATUS register . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 42
+Table 46.  STATUS register description . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 42
+Table 47.  OUT_X_L register . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 43
+Table 48.  OUT_X_H register . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 43
+Table 49.  OUT_Y_L register . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 43
+Table 50.  OUT_Y_H register . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 43
+Table 51.  OUT_Z_L register . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 44
+Table 52.  OUT_Z_H register . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 44
+Table 53.  FIFO_CTRL register. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 44
+
+DS11811 - Rev 9  page 62/65
+                 LIS2DW12
+
+                    List of tables
+
+Table 54.  FIFO_CTRL register description. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 44
+Table 55.  FIFO mode selection . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 44
+Table 56.  FIFO_SAMPLES register . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 45
+Table 57.  FIFO_SAMPLES register description . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 45
+Table 58.  TAP_THS_X register . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 45
+Table 59.  TAP_THS_X register description . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 45
+Table 60.  4D/6D threshold setting FS @ ±2 g . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 45
+Table 61.  TAP_THS_Y register . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 46
+Table 62.  TAP_THS_Y register description . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 46
+Table 63.  Selection of axis priority for tap detection . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 46
+Table 64.  TAP_THS_Z register . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 46
+Table 65.  TAP_THS_Z register description . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 46
+Table 66.  INT_DUR register . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 47
+Table 67.  INT_DUR register description . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 47
+Table 68.  WAKE_UP_THS register. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 47
+Table 69.  WAKE_UP_THS register description . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 47
+Table 70.  WAKE_UP_DUR register . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 48
+Table 71.  WAKE_UP_DUR register description . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 48
+Table 72.  FREE_FALL register . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 48
+Table 73.  FREE_FALL register description . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 48
+Table 74.  FREE_FALL threshold decoding @ ± 2 g FS . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 48
+Table 75.  STATUS_DUP register . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 49
+Table 76.  STATUS_DUP register description . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 49
+Table 77.  WAKE_UP_SRC register . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 50
+Table 78.  WAKE_UP_SRC register description . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 50
+Table 79.  TAP_SRC register . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 51
+Table 80.  TAP_SRC register description . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 51
+Table 81.  SIXD_SRC register . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 52
+Table 82.  SIXD_SRC register description . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 52
+Table 83.  ALL_INT_SRC register . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 53
+Table 84.  ALL_INT_SRC register description. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 53
+Table 85.  X_OFS_USR register . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 54
+Table 86.  X_OFS_USR register description . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 54
+Table 87.  Y_OFS_USR register . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 54
+Table 88.  Y_OFS_USR register description . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 54
+Table 89.  Z_OFS_USR register . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 54
+Table 90.  Z_OFS_USR register description . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 54
+Table 91.  CTRL7 register . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 55
+Table 92.  CTRL7 register description . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 55
+Table 93.  Document revision history . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 58
+
+DS11811 - Rev 9  page 63/65
+                 LIS2DW12
+
+                   List of figures
+
+List of figures
+
+Figure 1.        Block diagram . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+Figure 2.        Pin connections . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+Figure 3.        SPI slave timing diagram . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 9
+Figure 4.        I²C slave timing diagram . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+Figure 5.        Single data conversion on-demand functionality . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16
+Figure 6.        LIS2DW12 electrical connections (top view) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 19
+Figure 7.        Accelerometer chain . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 21
+Figure 8.        Continuous-to-FIFO mode . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 25
+Figure 9.        Trigger event to FIFO for continuous-to-FIFO mode. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 25
+Figure 10.       Bypass-to-continuous mode . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 26
+Figure 11.       Trigger event to FIFO for bypass-to-continuous mode . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 26
+Figure 12.       Read and write protocol . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29
+Figure 13.       SPI read protocol . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30
+Figure 14.       Multiple byte SPI read protocol (2-byte example). . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30
+Figure 15.       SPI write protocol . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
+Figure 16.       Multiple byte SPI write protocol (2-byte example) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
+Figure 17.       SPI read protocol in 3-wire mode . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32
+Figure 18.       LGA-12L 2.0 x 2.0 x 0.7 mm package outline and mechanical data . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 56
+Figure 19.       Carrier tape information for LGA-12L package . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 57
+Figure 20.       LGA-12L package orientation in carrier tape . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 57
+
+DS11811 - Rev 9  page 64/65
+                                                                                                                 LIS2DW12
+
+                                                                                                                                                                            List of figures
+
+                                                                           IMPORTANT NOTICE ­ READ CAREFULLY
+STMicroelectronics NV and its subsidiaries ("ST") reserve the right to make changes, corrections, enhancements, modifications, and improvements to ST
+products and/or to this document at any time without notice. Purchasers should obtain the latest relevant information on ST products before placing orders. ST
+products are sold pursuant to ST's terms and conditions of sale in place at the time of order acknowledgment.
+Purchasers are solely responsible for the choice, selection, and use of ST products and ST assumes no liability for application assistance or the design of
+purchasers' products.
+No license, express or implied, to any intellectual property right is granted by ST herein.
+Resale of ST products with provisions different from the information set forth herein shall void any warranty granted by ST for such product.
+ST and the ST logo are trademarks of ST. For additional information about ST trademarks, refer to www.st.com/trademarks. All other product or service names
+are the property of their respective owners.
+Information in this document supersedes and replaces information previously supplied in any prior versions of this document.
+
+                                                                          © 2024 STMicroelectronics ­ All rights reserved
+
+DS11811 - Rev 9  page 65/65
+

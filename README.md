@@ -1,48 +1,18 @@
 # LED-Watch
-first schematic progress commit. adding RGB sketch schematic as well as
-completed single LED ring sketch. need to add buttons and sort out AND
-gates in the RGB sketch.
-Product Ideas.. data sheets and store locations:
 
-Digikey working parts list: https://www.digikey.com/en/mylists/list/WPRJ7CQ35H
+A round LED wristwatch: 132 small LEDs (12 hours, 60 minutes, 60 seconds as three rings) driven straight from an AVR microcontroller, with an accelerometer to wake it. Two variants share the idea and some code but have different hardware, so each lives in its own folder.
 
-Boards options 
+| Folder | Variant | Status |
+|---|---|---|
+| [`single-color/`](single-color/) | White LEDs, solar-charged (BQ25570 + one Anysolar cell + two small LiPo cells), AVR128DB48 | Board `Y43` is fully routed (DRC clean) and quoted at JLCPCB; **not ordered yet**. Gerbers, BOM, placement files, schematic, docs, datasheets, firmware pin map and simulator are all in the folder. Start with [`single-color/README.md`](single-color/README.md) and [`single-color/REVIEW-GUIDE.md`](single-color/REVIEW-GUIDE.md). |
+| [`rgb/`](rgb/) | RGB LEDs, the original KiCad work (schematic, several PCB iterations, Gerbers used to get an instant quote) | Work in progress. There is no RGB firmware in this repository yet. The old README is [`rgb/README.md`](rgb/README.md). |
 
-27 i/o pins and in the current sketch: https://www.digikey.com/en/products/detail/microchip-technology/ATMEGA4808-MUR/10444956
+## How the repository is organised (and why folders, not branches)
+Both variants live side by side on `main`. Branches are used for work in progress (for example `firmware-matrix-scan`) and are merged back, rather than keeping each variant on a long-lived branch of its own: two long-lived branches drift apart, and anything they share (firmware drivers, the LED ring generator, the scripts) would have to be merged by hand forever.
 
-32 i/o pins: https://www.digikey.com/en/products/detail/microchip-technology/ATMEGA1284P-MU/1914520
+- Each variant keeps its own BOM, schematic, board files and documentation inside its folder.
+- Code that both variants use (for example the LED matrix scan, the RTC and mode state machine, the accelerometer driver) moves to a top-level `shared/` folder when the RGB firmware starts; the single-colour firmware in [`single-color/firmware/`](single-color/firmware/) is the starting point.
+- Datasheets live in `single-color/datasheets/` for now. Anything RGB-specific can go in `rgb/datasheets/`.
 
-
-
-LEDs options
-
-addressable 1mm RGB: 
-https://www.sparkfun.com/smd-led-addressable-rgb-apa-104-1010-pack-of-20.html
-datasheet: https://cdn.sparkfun.com/assets/3/c/c/0/9/SparkFun_APA-104-1010__5mA__LED_Datasheet.pdf
-
-nonaddressable 1mm RGB: 
-https://www.digikey.com/en/products/detail/harvatek-corporation/B36J3RGB-F6C0001H4U1930/13588748
-
-
-discrete white 0603:
-https://www.digikey.com/en/products/detail/everlight-electronics-co-ltd/CSP0603AN101-WP30300563001-3T/15286660?s=N4IgjCBcoMwOxVAYygMwIYBsDOBTANCAPZQDaIALAExgAMAHLSALqEAOALlCAMocBOASwB2AcxABfQhQBsiECkgYcBYmRAy4tWgFYYLdl0i8BI8RKkgq6gASZcAExYSgA
-
-
-
-
-Button Options
-
-19 cent 3.4mm square: https://www.digikey.com/en/products/detail/same-sky-formerly-cui-devices/TS21-34-035-BK-260-SMT-TR/21186457
-
-8 cent 5.2mm square: https://www.digikey.com/en/products/detail/c-k/G01008829/16500348
-
-Battery Parts:
-
-Lipo Connector 
-Thru-hole - 2mm.. they make 1mm mb? 
-https://www.digikey.com/en/products/detail/jst-sales-america-inc/B2B-PH-K-S/926611
-
-Coin Cell Harness
-20mm dia. 3.
-Do i need a negative connector? is SMD okay?
-https://www.digikey.com/en/products/detail/keystone-electronics/3034TR/4499408
+## Reviewing
+Teammates: open `single-color/REVIEW-GUIDE.md`. It lists what to check first and where each file is.

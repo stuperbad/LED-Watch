@@ -1,0 +1,28 @@
+KXOB25 | 50 x2 | MCU front | min D = 37 | MCU on front
+KXOB25 | 50 x2 | MCU auto | min D = 37 | MCU on front
+KXOB25 | 401230 x2 | MCU front | min D = 42 | MCU on front
+KXOB25 | 401230 x2 | MCU auto | min D = 42 | MCU on front
+KXOB25 | 402025 x1 | MCU front | min D = 37 | MCU on front
+KXOB25 | 402025 x1 | MCU auto | min D = 37 | MCU on front
+KXOB25 | 402025 x2 | MCU front | none up to 48
+KXOB25 | 402025 x2 | MCU auto | none up to 48
+AM1606 | 50 x2 | MCU front | min D = 43 | MCU on front
+AM1606 | 50 x2 | MCU auto | min D = 42 | MCU on back
+AM1606 | 401230 x2 | MCU front | min D = 46 | MCU on front
+AM1606 | 401230 x2 | MCU auto | min D = 46 | MCU on front
+AM1606 | 402025 x1 | MCU front | min D = 43 | MCU on front
+AM1606 | 402025 x1 | MCU auto | min D = 42 | MCU on back
+AM1606 | 402025 x2 | MCU front | none up to 48
+AM1606 | 402025 x2 | MCU auto | none up to 48
+KXOB25 | 401230 x2 | MCU front | min D = 42 | MCU on front (vertical)
+KXOB25 | 401230 x2 | MCU auto | min D = 42 | MCU on front (vertical)
+KXOB25 | 402025 x2 | MCU front | none up to 48 (vertical)
+KXOB25 | 402025 x2 | MCU auto | none up to 48 (vertical)
+AM1606 | 401230 x2 | MCU front | min D = 46 | MCU on front (vertical)
+AM1606 | 401230 x2 | MCU auto | min D = 46 | MCU on front (vertical)
+AM1606 | 402025 x2 | MCU front | none up to 48 (vertical)
+AM1606 | 402025 x2 | MCU auto | none up to 48 (vertical)
+KXOB25 | 401230 x1 | MCU front | min D = 37 | MCU on front
+KXOB25 | 401230 x1 | MCU auto | min D = 36 | MCU on back
+AM1606 | 401230 x1 | MCU front | min D = 43 | MCU on front
+AM1606 | 401230 x1 | MCU auto | min D = 42 | MCU on back
