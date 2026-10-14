@@ -20,7 +20,7 @@ from shapely.ops import unary_union
 from shapely.strtree import STRtree
 
 args = sys.argv[1:]
-opt = {"--res": 0.05, "--clr": 0.10, "--w": 0.10, "--via-cost": 60.0, "--layers": "F,In1,B", "--in2-cost": 2.5, "--edge": 0.3, "--margin": 0.03}
+opt = {"--res": 0.05, "--clr": 0.10, "--w": 0.10, "--via-cost": 60.0, "--layers": "F,In1,B", "--in2-cost": 2.5, "--via-pad-area": 1.0, "--exclude": "", "--edge": 0.3, "--margin": 0.03}
 pos = []
 i = 0
 while i < len(args):
@@ -127,6 +127,16 @@ for net, ln, g, kind, gid in items:
     if kind == "via":      # hole to hole >= 0.2 mm for every pair of vias, same net or not
         paint(vstack, Point(g.centroid.x, g.centroid.y).buffer(VIA_DRILL + 0.2 + MARGIN, 8), -1, ln)
 print("rasterised", len(items), "items in %.0f s" % (time.time() - t0), flush=True)
+# no via inside (or touching) an SMD pad smaller than --via-pad-area mm2 (thermal pads and big pads may keep theirs): solder wicks into the hole
+n_vp = 0
+for p in d["pads"]:
+    g = Polygon(p["pts"]).buffer(0)
+    if g.area < opt["--via-pad-area"]:
+        for ln in range(4):
+            paint(vstack, g.buffer(VIA_D / 2, 4), -1, ln)
+        n_vp += 1
+print("vias kept out of", n_vp, "small pads", flush=True)
+
 
 # drilled holes (PTH / NPTH): hole edge to a track 0.28 mm (JLCPCB), to a via hole at least as much
 for c in d["circles"]:

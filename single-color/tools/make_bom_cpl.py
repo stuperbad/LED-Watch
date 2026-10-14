@@ -12,9 +12,9 @@ LCSC = {
  ("SW_Push", "SW_Push_1P1T_NO_CK_KMR2"): "C72443", ("LiPo", "JST_SH_SM02B-SRSS-TB_1x02-1MP_P1.00mm_Horizontal"): "C160402",
  ("32.768kHz", "Crystal_SMD_3215-2Pin_3.2x1.5mm"): "C97606", ("AVR128DB48-I/6LX", "QFN-48-1EP_6x6mm_P0.4mm_EP4.2x4.2mm"): "C1019768",
  ("LIS2DW12TR", "LGA-12_2x2mm_P0.5mm"): "C189624", ("BQ25570RGRR", "BQ25570RGR_VQFN-20_3.5x3.5mm_P0.5mm_EP2.05mm"): "C506250",
- ("10uH", "L_1210_3225Metric"): "C74563", ("22uH", "L_1210_3225Metric"): "C90320",
+ ("PKMCS0909E4000-R1", "Piezo_Murata_PKMCS0909E4000-R1_9x9mm"): "C910763", ("10uH", "L_1210_3225Metric"): "C74563", ("22uH", "L_1210_3225Metric"): "C90320",
 }
-IND = {"SET", "TMR", "BAT", "FUN", "CFG", "LCK"}
+IND = {"SET", "TMR", "ALM", "BAT", "FUN", "CFG", "LCK"}
 rows = list(csv.DictReader(open(pos, encoding="utf8")))
 bom = collections.OrderedDict()
 cpl = []

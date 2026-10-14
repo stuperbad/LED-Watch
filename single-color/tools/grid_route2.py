@@ -20,7 +20,7 @@ from shapely.ops import unary_union
 from shapely.strtree import STRtree
 
 args = sys.argv[1:]
-opt = {"--res": 0.05, "--clr": 0.10, "--w": 0.10, "--via-cost": 60.0, "--layers": "F,In1,B", "--in2-cost": 2.5, "--rip-cost": 25.0, "--max-attempts": 400, "--max-nodes": 1500000, "--edge": 0.3, "--margin": 0.03}
+opt = {"--res": 0.05, "--clr": 0.10, "--w": 0.10, "--via-cost": 60.0, "--layers": "F,In1,B", "--in2-cost": 2.5, "--rip-cost": 25.0, "--max-attempts": 400, "--max-nodes": 1500000, "--via-pad-area": 1.0, "--exclude": "", "--edge": 0.3, "--margin": 0.03}
 pos = []
 i = 0
 while i < len(args):
@@ -129,6 +129,16 @@ for net, ln, g, kind, gid in items:
     if kind == "via":      # hole to hole >= 0.2 mm for every pair of vias, same net or not
         paint(vstack, Point(g.centroid.x, g.centroid.y).buffer(VIA_DRILL + 0.2 + MARGIN, 8), -1, ln)
 print("rasterised", len(items), "items in %.0f s" % (time.time() - t0), flush=True)
+# no via inside (or touching) an SMD pad smaller than --via-pad-area mm2 (thermal pads and big pads may keep theirs): solder wicks into the hole
+n_vp = 0
+for p in d["pads"]:
+    g = Polygon(p["pts"]).buffer(0)
+    if g.area < opt["--via-pad-area"]:
+        for ln in range(4):
+            paint(vstack, g.buffer(VIA_D / 2, 4), -1, ln)
+        n_vp += 1
+print("vias kept out of", n_vp, "small pads", flush=True)
+
 
 # drilled holes (PTH / NPTH): hole edge to a track 0.28 mm (JLCPCB), to a via hole at least as much
 for c in d["circles"]:
@@ -372,6 +382,17 @@ for ko in d.get("keepouts", []):
             paint(vstack, kg.buffer(VIA_D / 2 + MARGIN, 4), -1, ln)
         if ko["tracks"]:
             paint(tstack, kg.buffer(W / 2 + MARGIN, 4), -1, ln)
+
+# exclusion rectangles (--exclude x0,y0,x1,y1;x0,y0,x1,y1): no track and no via of any routed net on ANY layer, e.g. the crystal circuit
+# (AVR datasheet 4.5.1: nothing but the ground plane under or around the 32 kHz crystal and its load caps).  Copper zones such as the F.Cu
+# guard around the crystal are NOT obstacles for the rasteriser, so they have to be listed here.
+for rect in [r for r in opt["--exclude"].split(";") if r.strip()]:
+    ex0, ey0, ex1, ey1 = [float(v) for v in rect.split(",")]
+    eg = Polygon([(ex0, ey0), (ex1, ey0), (ex1, ey1), (ex0, ey1)])
+    for ln in range(4):
+        paint(tstack, eg.buffer(W / 2 + MARGIN, 4), -1, ln)
+        paint(vstack, eg.buffer(VIA_D / 2 + MARGIN, 4), -1, ln)
+    print("exclusion zone on all layers:", rect, flush=True)
 
 routes = {}                       # net -> list of ops ('seg', layer, p1, p2) / ('via', p)
 added = {}                        # net -> copper pieces added by the router (for connectivity)

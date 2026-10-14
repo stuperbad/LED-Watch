@@ -7,6 +7,17 @@ for ko in d.get("keepouts", []):
         if ko["tracks"]:
             paint(tstack, kg.buffer(W / 2 + MARGIN, 4), -1, ln)
 
+# exclusion rectangles (--exclude x0,y0,x1,y1;x0,y0,x1,y1): no track and no via of any routed net on ANY layer, e.g. the crystal circuit
+# (AVR datasheet 4.5.1: nothing but the ground plane under or around the 32 kHz crystal and its load caps).  Copper zones such as the F.Cu
+# guard around the crystal are NOT obstacles for the rasteriser, so they have to be listed here.
+for rect in [r for r in opt["--exclude"].split(";") if r.strip()]:
+    ex0, ey0, ex1, ey1 = [float(v) for v in rect.split(",")]
+    eg = Polygon([(ex0, ey0), (ex1, ey0), (ex1, ey1), (ex0, ey1)])
+    for ln in range(4):
+        paint(tstack, eg.buffer(W / 2 + MARGIN, 4), -1, ln)
+        paint(vstack, eg.buffer(VIA_D / 2 + MARGIN, 4), -1, ln)
+    print("exclusion zone on all layers:", rect, flush=True)
+
 routes = {}                       # net -> list of ops ('seg', layer, p1, p2) / ('via', p)
 added = {}                        # net -> copper pieces added by the router (for connectivity)
 base_items = {n: list(v) for n, v in by_net.items()}
