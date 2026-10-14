@@ -29,3 +29,18 @@ boards/Y43/*
 !boards/Y43/fab/
 !boards/Y43/asm/
 boards/Y43/asm/pos_raw.csv
+
+# Board Y42 (42.0 mm, 2026-10-13): working placement, routed board, fab + assembly files
+!boards/X42/
+!boards/Y43/Y43_mockD_pogo8.kicad_pcb
+!boards/Y43/Y43_mockD_pogo8.kicad_pro
+!boards/Y43/Y42_routed_v2.kicad_pcb
+!boards/Y43/Y42_routed_v2.kicad_pro
+!boards/Y43/Y42_routed_v2_gerbers.zip
+!boards/Y43/fab42/
+!boards/Y43/asm42/
+!boards/Y43/nets42.txt
+!boards/Y43/crystal_exclude.txt
+!boards/Y43/render_Y42_top.png
+!boards/Y43/render_Y42_v2_bottom.png
+!boards/Y43/render_pogo8_top.png
