@@ -29,3 +29,9 @@ Steps 1 and 4 (toolchain, mode state machine) are done in a different way than f
 4. Mode state machine (SET, TMR, BAT, FUN, CFG, LCK) per DESIGN-UX.md.
 5. IMU driver (wake on raise), brightness vs VDD, sleep current budget (target a few uA asleep).
 6. Fuse and clock settings (single supply; internal oscillator; 32 kHz crystal) documented for programming day.
+
+## Board changes 2026-10-13 that the firmware must follow (hardware session, board Y42)
+- **Buzzer:** Murata PKMCS0909E4000-R1 piezo on **PB4 = BUZ_A** and **PB5 = BUZ_B** (see `mcu-pinmaps.md`). Both pins are TCA1 outputs on the default PORTB route (TCA1 exists on the 48-pin part): TCA1 in **split mode**, high-byte timer, HCMP1 -> WO4 (PB4), HCMP2 -> WO5 (PB5), enable HCMP1EN/HCMP2EN only (PB0-PB3 are LED columns, leave their compare outputs off); equal compare values, and `PORTB.PIN5CTRL |= PORT_INVEN_bm` so the two pins swing in opposite phase (about 6.6 V across the piezo). Split mode is 8-bit single-slope down-count: pick the prescaler per note (about 1.5-10 kHz is usable; Murata's curve is loudest near 8 kHz, about 72 dB at 4 kHz with a 3 V pk-pk drive).
+- **Seven mode LEDs:** SET TMR **ALM** BAT FUN CFG LCK (new IND7 = ROW11 / COL6, silkscreen order left to right as listed).
+- **Weekday display:** the mode LEDs double as weekday lights (S M T W T F S, Sunday first): SET-S TMR-M ALM-T BAT-W FUN-T CFG-F LCK-S are printed on the board. The day is shown by lighting that one LED (replaces the old 1-7 LED bar on the outer ring).
+- **Programming:** pogo pads RESET, VDD(VBAT), GND, UPDI (1.27 mm), RESET on PF6 for high-voltage recovery only.

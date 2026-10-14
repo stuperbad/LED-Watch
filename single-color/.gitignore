@@ -34,9 +34,9 @@ boards/Y43/asm/pos_raw.csv
 !boards/X42/
 !boards/Y43/Y43_mockD_pogo8.kicad_pcb
 !boards/Y43/Y43_mockD_pogo8.kicad_pro
-!boards/Y43/Y42_routed_v2.kicad_pcb
-!boards/Y43/Y42_routed_v2.kicad_pro
-!boards/Y43/Y42_routed_v2_gerbers.zip
+!boards/Y43/Y42_routed_v4.kicad_pcb
+!boards/Y43/Y42_routed_v4.kicad_pro
+!boards/Y43/Y42_routed_v4_gerbers.zip
 !boards/Y43/fab42/
 !boards/Y43/asm42/
 !boards/Y43/nets42.txt
@@ -44,3 +44,8 @@ boards/Y43/asm/pos_raw.csv
 !boards/Y43/render_Y42_top.png
 !boards/Y43/render_Y42_v2_bottom.png
 !boards/Y43/render_pogo8_top.png
+!boards/Y43/Y42_routed_v4.kicad_pcb
+!boards/Y43/Y42_routed_v4.kicad_pro
+!boards/Y43/Y42_routed_v4_gerbers.zip
+!boards/Y43/render_Y42_v4_top.png
+!boards/Y43/render_Y42_v4_bottom.png

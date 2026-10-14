@@ -37,8 +37,8 @@ Usable I/O after the dedicated pins: PA0-7, PB0-5, PC0-7, PD0-7, PE0-3, PF2-5 = 
 | 5 | PB1 | COLUMN (anode side, SOURCE, series resistor) |
 | 6 | PB2 | COLUMN (anode side, SOURCE, series resistor) |
 | 7 | PB3 | COLUMN (anode side, SOURCE, series resistor) |
-| 8 | PB4 | spare GPIO |
-| 9 | PB5 | spare GPIO |
+| 8 | PB4 | BUZ_A: piezo drive, TCA1 WO4 (split mode, high byte HCMP1), default PORTB route |
+| 9 | PB5 | BUZ_B: piezo drive, TCA1 WO5 (split mode, HCMP2); set PORTB.PIN5CTRL.INVEN for opposite phase |
 | 10 | PC0 | COLUMN (anode side, SOURCE, series resistor) |
 | 11 | PC1 | COLUMN (anode side, SOURCE, series resistor) |
 | 12 | PC2 | ROW (cathode side, SINK) |

@@ -14,6 +14,9 @@ LCSC = {
  ("LIS2DW12TR", "LGA-12_2x2mm_P0.5mm"): "C189624", ("BQ25570RGRR", "BQ25570RGR_VQFN-20_3.5x3.5mm_P0.5mm_EP2.05mm"): "C506250",
  ("PKMCS0909E4000-R1", "Piezo_Murata_PKMCS0909E4000-R1_9x9mm"): "C910763", ("10uH", "L_1210_3225Metric"): "C74563", ("22uH", "L_1210_3225Metric"): "C90320",
 }
+# JLCPCB rotation corrections per footprint (their part model vs KiCad footprint zero), checked in the
+# JLCPCB PCBA placement preview 2026-10-14: pin-1 dot of the model must land on the silkscreen pin-1 mark.
+ROT_FIX = {"LGA-12_2x2mm_P0.5mm": -90, "BQ25570RGR_VQFN-20_3.5x3.5mm_P0.5mm_EP2.05mm": -90}
 IND = {"SET", "TMR", "ALM", "BAT", "FUN", "CFG", "LCK"}
 rows = list(csv.DictReader(open(pos, encoding="utf8")))
 bom = collections.OrderedDict()
@@ -28,7 +31,8 @@ for r in rows:
         missing.append((ref, val, pkg))
         continue
     bom.setdefault(key, []).append(ref)
-    cpl.append((ref, r["PosX"], r["PosY"], "Top" if r["Side"] == "top" else "Bottom", r["Rot"]))
+    rot = (float(r["Rot"]) + ROT_FIX.get(pkg, 0)) % 360
+    cpl.append((ref, r["PosX"], r["PosY"], "Top" if r["Side"] == "top" else "Bottom", "%.6f" % rot))
 with open(out + "/BOM.csv", "w", newline="", encoding="utf8") as f:
     w = csv.writer(f); w.writerow(["Comment", "Designator", "Footprint", "LCSC Part #"])
     for (val, pkg), refs in bom.items():
