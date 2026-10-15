@@ -5,7 +5,7 @@ Gerber job file; every released revision gets a git tag (`rev-A`, `rev-B`, ...),
 
 | Rev | Date | Status | What it is |
 |---|---|---|---|
-| **A** | 2026-10-14 | order candidate (quote $308.63 for 5 assembled boards; not ordered yet) | 42.0 mm round board, layout "D", 132 ring LEDs + 7 mode LEDs, Murata piezo, 4-pad pogo programming row. DRC 0 errors / 0 unconnected (7 deliberate silk-height warnings). Was called `Y42_routed_v4` during the layout work. |
+| **A** | 2026-10-14 | order candidate (quote $308.63 for 5 assembled boards; not ordered yet) | 42.0 mm round board, layout "D", 132 ring LEDs + 7 mode LEDs, Murata piezo, 4-pad pogo programming row. DRC 0 errors / 0 unconnected (7 deliberate silk-height warnings). Was called `Y42_routed_v4` during the layout work. Updated 2026-10-15 (before any order): nine nets re-routed out from under the MCU and the BQ25570, see `docs/DECISION-LOG.md`; Gerbers re-exported. |
 
 How to make the next revision: change `REVISION` in `gen_schematic.py`, set the revision in the board's title block (File > Board Setup > Title block, or `pcbnew` python),
 regenerate `production/` (commands in `../README.md`), commit, tag.
