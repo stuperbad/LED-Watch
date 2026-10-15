@@ -54,6 +54,7 @@ Missing SET: crystal problem (the watch then keeps time from the inaccurate inte
 ## Flat or tripped battery
 - Below about 1.98 V the BQ25570 keeps the battery off the system rail. It then needs light on the solar cell: at least 0.6 V from the cell starts the cold-start charger (the cell's open-circuit voltage is about 2.07 V in full sun, so use a bright lamp close to it).
 - A protected pouch that tripped has to be woken by charge first; try a bench supply (4.0 V, 20 mA current limit) on the plug for a minute, then connect it normally.
+- The TinyCircuits ASR00011 pouch has its own protection board (datasheet: overdischarge cuts off at 2.5 V +-0.05 V and releases at 2.9 V +-0.1 V, overcharge cuts at 4.28 V; it says a 0 V cell can be recharged). That cutoff is far above the BQ25570's own 1.95 V disconnect, so the cell's board is what really stops the discharge; a tripped cell looks like 0 V until it is charged (solar cold start or a bench supply). Whether the BQ25570's cold-start charger can revive a tripped cell through the protection board is not tested.
 - Running from the solar cell with **no** battery at all is not supported: the BQ25570 wants a storage element of at least 100 uF on its battery pin.
 
 ## What to measure and write down

@@ -6,6 +6,7 @@ Status key: [ ] open, [~] partly done, [x] done. Owner: E = Evan, C = Claude (ca
 
 ## A. Decisions to lock first
 - [ ] A1 (E+C) Solar: two KXOB25-07X1TF in series, or one AM-1606C (15 mm)? Check Anysolar stock/price and lead time (no live stock was found); get a quote or ask for samples.
+- [x] A2a (2026-10-15) TinyCircuits ASR00011 (70 mAh, 15 x 15 x 5.0 +-0.5 mm, 1.9 g, 26 +-5 mm wires, plug JST SHR-02V-S-B = mates our J1/J1B SM02B-SRSS-TB) datasheet saved as `docs/datasheets/TinyCircuits-ASR00011-70mAh-datasheet.pdf`: protection board DW01 + 8205A cuts off at 2.5 V (releases 2.9 V) and at 4.28 V; max charge 70 mA per cell (1C), charge only 10-45 C. NOT stated: which wire is + (measure it), which side the wires leave.
 - [ ] A2 (E+C) Batteries: TinyCircuits 70 mAh pair (JST-SH plug) vs generic 401030/301030 pair vs Renata 50 mAh pair. Confirm real dimensions and wire exit side; buy ONE of each to test-fit before the board is final.
 - [ ] A3 (E) Board diameter limit (43 mm now; 1 mm bumper -> 45 mm outside) and whether one-sided SMT (47 mm) is worth the cheaper assembly (see ASSEMBLY-AND-COST.md).
 - [ ] A4 (E) LED brightness target and colour temperature; confirm LED parts (below, section E).

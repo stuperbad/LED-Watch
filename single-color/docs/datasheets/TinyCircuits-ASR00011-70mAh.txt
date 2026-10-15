@@ -1,0 +1,467 @@
+Li-ion Polymer 70mAh Battery Datasheet
+
+Distributed by TinyCircuits:
+
+TinyCircuits Part Number: ASR00011
+Website: https://tinycircuits.com/
+Company Address: 540 S. Main St Ste 457 Akron,
+OH 44311 USA
+Battery Connector Part: JST SHR-02V-S-B
+Battery Mating Connector Part: JST SM02B-SRSS-
+TB(LF)(SN)
+
+Manufacturing Information:                                Figure 1: 70mAh Battery Drawing & Dimensions
+
+Company: Shenzhen Hondark Electronics Co., Ltd.
+Product Type: Lithium-ion Polymer Battery
+Model Name: 501515-70mAh
+USHTS: 8507600020
+ECCN: EAR99
+Country of Origin: China
+
+1. Dimensions and Appearance
+
+1.1 Outline Dimensions: See attached drawing, Figure
+1, for dimensions.
+Note: The thickness of the battery will swell when
+stored or used at high temperatures.
+1.2 Appearance: The outer surface of the battery is
+clean, no electrolyte leakage, no obvious scratches
+and mechanical damage, no deformation, no other
+appearance defects that affect the value of the battery.
+
+Revision 1  July 2022                                     Page 1 of 12
+TinyCircuits                          Li-ion Polymer 70mAh Battery Datasheet           July 2022
+
+2. Battery Specifications
+
+Table 1: Ratings
+
+No.               Item                    Specification Unit Notes
+
+                     Normal Capacity      70         mAh  1.0C Discharge
+2.1
+                                          65         mAh
+                   Minimum Capacity
+
+                  Energy Capacity         0.26       Wh
+
+2.2               Nominal voltage         3.70       V
+
+2.3           AC Impedance Resistance     560        m (with PCB)
+
+2.4           Discharge Cut-off Voltage   3.0        V
+
+2.5               Charge Voltage          4.20       V
+
+2.6           Maximum Charging Voltage    4.20       V
+
+2.7           Standard Charge Current     35         mA 0.5C
+
+2.8           Maximum Charge Current      70         mA 1.0C
+
+2.9           Maximum Discharge Current   70         mA 1.0C
+
+2.10              Weight                  1.9        g
+
+2.11        Operating Temperature Charge  10 - +45   C
+
+      Operating Temperature Discharge     -10 - +45  C
+
+          Storage Temperature ( 1 month)  -10 - +45  C storage temperature: 20 - 25 C
+2.12                                      -10 - +35  C
+
+         Storage Temperature ( 6 months)
+
+2.13          Standard Testing Condition                  Temperature: 25±2 C, Humidity: 45%-
+                                                          75%RH
+
+Revision 1                                July 2022                           Page 2 of 12
+TinyCircuits                Li-ion Polymer 70mAh Battery Datasheet                                  July 2022
+
+3. General Performance
+
+3.1 Initial Performance Test
+
+              Item        Measuring Procedure                                              Requirements
+
+(1) Open-Circuit Voltage  The open-circuit voltage should be measured                      4.15V
+                          within 24 hours after standard charge.
+
+(2) Internal Resistance   The Impedance shall be measured in an alter-                     560m
+                          nating current method (1kHz LCR meter) after
+                          standard charge at 25±2°C
+
+(3) Minimum Capacity      After standard charging, put it aside for 30 min-                C570mAh
+                          utes, discharge 0.5C to 2.75V, and test the cell
+                          capacity (The capacity is defined as C5)
+
+(4) 0.5C Discharge Capacity After standard charging, test 0.5C discharge Discharge Capacity 95%C5
+                                         capacity
+
+3.2 Electrical Performance
+
+Item                      Measuring Procedure                                              Requirements
+
+Cycle Life (25°C)         First charge with a constant current of 0.5C to 4.2V and a       Cycle life  300 cy-
+                          constant voltage of 4.2V until the charge current is less than   cles
+                          or equal to 0.01C. Leave it aside for 10 minutes. Then dis-
+                          charge to 2.75V with a current of 0.5C - leave it aside for an-
+                          other 10 minutes. Repeat the above steps 300 times. The
+                          capacity of the cells should be higher than 80% of the mini-
+                          mum capacity.
+
+Long Term Storage Per-    The battery for this experiment should be a battery less than    Capacity Recovery
+formance                  3 months from the date of production to the date of the ex-      85% C5
+                          periment. Charge the battery with 50% of its capacity before
+                          storage, then leave it open for 365 days, and cycle at 0.2C at
+                          25±2°C. Second, test the recovery capacity (the maximum
+                          discharge capacity in a 3-week cycle).
+
+Self-discharge at room    Charge the battery at a constant current and constant volt-      Battery will lose up to
+temperature               age of 0.2C for 360 minutes, with a cut-off voltage of 4.0V.     10 millivolts of volt-
+                          Then place the battery in a normal temperature environ-          age
+                          ment, leave it open for 24 hours.
+
+Revision 1                                     July 2022                                   Page 3 of 12
+TinyCircuits                 Li-ion Polymer 70mAh Battery Datasheet  July 2022
+
+3.3 Shelf Life (Charge Retention Capability)
+
+Item                         Measuring Procedure                     Requirements
+Storage Characteristics 1.1
+Storage Characteristics 1.2  After standard charging, the battery is stored in an envi- Remaining Capacity
+Storage Characteristics 2.1  ronment of 25±2°C for 30 days, and the 0.5C discharge  85% C5
+Storage Characteristics 2.2  capacity (holding capacity) is tested.
+
+                             After the above remaining capacity test, test the dis- Recovery Capacity
+                             charge capacity after standard charging (the maximum  90% C5
+                             discharge capacity in a 3-week cycle)
+
+                             After standard charging, the battery is stored in an envi- Remaining Capacity
+                             ronment of 60±2°C for 7 days, and the 0.5C discharge  60% C5
+                             capacity (holding capacity) is tested.
+
+                             After the above remaining capacity test, test the dis- Recovery Capacity
+                             charge capacity after standard charging (the maximum  80% C5
+                             discharge capacity in a 3-week cycle).
+
+3.4. Charging and Discharging Curve
+
+   · Temperature: 25°C
+   · Charging: CC-CV: 37.5mA-4.2V
+
+Figure 2: 70mAh Battery Charge and Discharge curve
+
+Revision 1                           July 2022                       Page 4 of 12
+TinyCircuits     Li-ion Polymer 70mAh Battery Datasheet                                          July 2022
+
+4. Environmental Performance
+
+Mechanical Properties
+
+Item             Measuring Procedure                                               Requirements
+Vibration Test
+                 After standard charging, the battery is to be tested under the    The battery has no leak-
+Drop Test        following conditions:                                             age, smoke, or explo-
+                 Displacement Amplitude: 0.19mm                                    sion. The battery volt-
+Thermal-shock    Frequency: 10-55Hz (sweep:1Hz/min)                                age is 4.0V
+Test             Direction for vibration: X/Y/Z axis for 30min. The battery is to
+Constant Heat    be tested in three mutually perpendicular axes.
+and Humidity
+Characteristics  After standard charging, the drop test shall be carried out ac-   The battery has no leak-
+                 cording to the following conditions:                              age, smoke or explo-
+                 Drop height: 1.0m                                                 sion.
+                 Surface: 18-20mm or more thick hardwood or concrete
+                 Falling direction: fall once along the front and back sides of
+                 the horizontal direction
+
+                 A battery is to be heated in a gravity convection or circulating  No explosion, no fire
+                 air oven. The temperature of the oven is to be raised at a rate
+                 of 5±2°C/min to a temperature of 130±2C where the battery is
+                 to remain for 30 minutes.
+
+                 Under the temperature of 20±5°C, after charging the battery       Discharge capacity 
+                 with 0.2C, put it in a constant temperature and humidity box at   60% C5
+                 40±2C and a humidity of 90-95% for 48h.The battery should
+                 have no obvious deformation, leakage, rust, smoking, or explo-
+                 sion. After testing, take the battery out and put it aside for 2
+                 hours, and discharge it to 2.75V at 1.0C under the temperature
+                 of 20±5C
+
+Revision 1                            July 2022                                    Page 5 of 12
+TinyCircuits             Li-ion Polymer 70mAh Battery Datasheet                           July 2022
+
+5. Safety Performance
+
+Item                     Measuring Procedure                                              Requirements
+5.1 Over-Charge Test                                                                      No explosion, no fire
+                         After standard charging, the battery and the sliding rheostat
+5.2 Over-Discharge Test  are connected in series with a constant current and constant     No explosion, no fire
+5.3 Short-Circuit Test   voltage source, the voltage is adjusted to 4.6V, the current is
+                         adjusted to 3.0C through the sliding rheostat, and then the      No explosion, no fire.
+                         battery is charged at 3.0C. The test time is 2.5H.               The external tem-
+                                                                                          perature of the bat-
+                         The fully discharged cell is continually discharged for 24h      tery shall not exceed
+                         with the (30×n) load at 23±2°C                                   160C
+
+                         After standard charge, short-circuit the battery by connect-
+                         ing the positive and negative terminals of the battery with
+                         copper wire having a maximum resistance load of 0.1
+
+Revision 1               July 2022                                                        Page 6 of 12
+TinyCircuits                   Li-ion Polymer 70mAh Battery Datasheet                    July 2022
+
+6. Protection Circuit Characteristics
+
+Table 2: PCM Standard (Protection Board Standard)
+
+Item                      Symbol   Details                             Standard
+
+                          VDET 1   Overcharge detection voltage        4.28±0.025V
+                          tVDET 1
+Overcharge Protection     VREL1    Overcharge detection delay time     0.15s - 4.6s
+Overdischarge Protection  VDET 2
+                          VDET 2   Overcharge release voltage          4.15±0.025V
+                          tVDET 2
+                                   Overdischarge detection voltage     2.5±0.05V
+
+                                   Overdischarge release voltage       2.9±0.1V
+
+                                   Overdischarge detection delay time  36ms - 210ms
+
+                          IDP      Charging overcurrent protection current 2.0A - 3.6A
+                          IDP
+Overcurrent Protection    tVDET 3  Discharge overcurrent protection current 2.0A - 3.6A
+
+                                   Overcurrent detection delay time    4.5ms - 18ms
+
+                                   Protection release condition        Disconnect load
+
+                                   Protection condition                External short circuit
+
+Short Circuit Protection TSHORT    Detection delay time                3200µs - 600µs
+
+                                   Protection release conditions       Break the short circuit
+
+Internal resistance       RDS      Main circuit on-state internal resistance RDS560m
+                                   Current consumption in normal operation 7.0µA Max
+Current consumption       IDD
+
+Current consumption       IDD      Current consumption during sleep    0.1µA Max
+
+Recommended working                Operating temperature               -30°C - 65°C
+temperature
+
+0V Recharge                        Is it possible to charge the 0V battery? Yes
+
+Short circuit recovery             Is there a short circuit automatic recovery Yes
+                                   function?
+
+Revision 1                                  July 2022                                    Page 7 of 12
+TinyCircuits  Li-ion Polymer 70mAh Battery Datasheet                July 2022
+
+5. Schematic Diagram & Table
+
+Figure 3: 70mAh Battery Schematic  Label Specification Package Unit Qty.
+
+Table 3: PCM BOM List              U2            8205A         SOT-23-6 pcs 1
+ No. Component
+   1 Silicon MOSFET                U1            DW01          SOT-23-6 pcs 1
+   2 Battery Protection IC
+   3 Resistance                    R1 100 5% 1/16W 0603 pcs 1
+   4 Resistance
+   5 Resistance                    R2 1K 5% 1/16W 0603 pcs 1
+   6 Capacitance
+   7 Printed Circuit Board         R3            5% 1/16W      0603 pcs -
+   8 Nickel Sheets
+                                   C1 0.1µF 5% 1/16W 0402 pcs 1
+
+                                              -  9.0*3.8*0.6M  FR4  pcs 1
+
+                                              -  3*2.5*0.3MM        PCS 2
+
+Revision 1                         July 2022                        Page 8 of 12
+TinyCircuits           Li-ion Polymer 70mAh Battery Datasheet    July 2022
+
+Reference Battery Charging Schematic Diagram & Table
+
+The following schematic and list of parts is implemented in a lithium ion polymer battery charging diagram that is a
+simplified version of the TinyCircuits Battery Charger, product ASL2112*.
+
+*The ASL2112 is a standalone Lithium battery charger that can be used with a Micro USB B cable. Use the JST SH
+connector on the ASL2112 board to easily plug-in a battery (compatible batteries sold at https://tinycircuits.com/).
+Alternatively, a battery can be connected without the JST SH connector by using the two through holes, J3 and J4,
+to connect to a battery pack. To charge a battery with ASL2112, plug the USB B side of the charger into a power
+source using a compatible cable, and plug a lithium polymer or lithium ion rechargeable (3.7V / 4.2V) battery into
+the other side. A status LED on the board will indicate when a battery is charging, and the LED will turn off when
+the battery is fully charged.
+
+Figure 4: Sample Battery Charger Schematic
+
+Table 4: PCM BOM List
+
+Component Label        Specification        Notes
+
+IC            U1       MCP73831
+
+R             R1       1K
+
+R             R2       2K 2
+
+C             C1,C3    10µF
+
+C             C2       0.1µF
+
+LED Diode D1           AMBER                Charging Status LED
+
+Connector     J2 JST SM02B-SRSS-TB(LF)(SN) Compatible Battery Connector: JST SHR-02V-S-B
+
+Revision 1                                  July 2022            Page 9 of 12
+TinyCircuits  Li-ion Polymer 70mAh Battery Datasheet  July 2022
+
+Handling Instruction and Warnings
+
+Read and observe the following precautions carefully to ensure the correct use of lithium-ion batteries. Our com-
+pany is not responsible for any problems arising from violation of the following precautions.
+
+Failure to observe the following precautions may result in battery leakage, overheating, explosion and/ or fire.
+
+Battery Environment
+
+   · Do not immerse the pack in water, seawater, or other liquids.
+
+   · Do not use, or leave the battery near heat sources such as a fire or heater.
+
+   · Do not use or store the battery where it is exposed to an extremely hot environment, such as in a car under
+      direct sunlight or on a hot day. Otherwise, the battery will overheat and may catch fire (ignite). This can also
+      reduce battery performance and/or shorten service life.
+
+   · Do not place the battery in a microwave oven or pressurized container.
+
+   · Do not use the battery in a location where static electricity or magnetic fields are great, otherwise, the safety
+      devices in the pack may be damaged, which may cause unsafe risks.
+
+   · Keep the batteries out of the reach of young children. If a child somehow swallows a battery, seek medical
+      attention immediately. In cases where children use the battery, instruct them on the contents of this document
+      and supervise them to ensure that the battery is being used correctly.
+
+   · Use the battery only under the environmental conditions mentioned in this document. Failure to do so can
+      result in reduced performance or a shorten service life. Using the battery outside this temperature range can
+      cause the battery to overheat, explode or catch fire.
+
+Aluminum Foil Flexible Packaging
+
+   · The aluminum foil flexible packaging encasing the battery cells is vulnerable to sharp objects that could punc-
+      ture or damage the integrity of the aluminum.
+
+   · Do not transport or store the battery together with metal objects such as keys, necklaces etc.
+   · Do not strike at pack with any sharp objects. The soft aluminum packing foil may be easily damaged by sharp
+
+      edge parts such as Ni-tabs, pins and needles.
+   · Do not strike the battery with any sharp-edged parts.
+   · Trim nails or wear gloves before handling batteries.
+   · Clean worktable where battery is used to avoid any sharp objects.
+   · Polymer batteries have lower mechanical durability than metal shell prismatic batteries. Drops, collisions,
+
+      bending, etc. may reduce the performance of polymer batteries.
+
+Battery Electrolyte
+
+   · If the pack leaks and the electrolyte get into the eyes, do not rub eyes. Instead, rinse the eyes with clean
+      running water, and immediately seek medical attention. Otherwise, eye injury may result.
+
+   · If the battery leaks and electrolyte gets on your skin or clothing, immediately rinse the affected area with clean
+      running water. If left as is, skin inflammation can occur.
+
+Revision 1    July 2022                               Page 10 of 12
+TinyCircuits  Li-ion Polymer 70mAh Battery Datasheet  July 2022
+
+   · Pay attention to the use of insulation structures between the battery core (the exposed aluminum layer on the
+      side and the top edge of the package sealing film) and the PCB, as well as between the battery core and
+      electrical appliances. Pay special attention to the insulation between the aluminum layer and positive and
+      negative terminals of the battery. Contact of the poles and aluminum layer or electrical equipment may cause
+      battery leakage or swelling.
+
+   · If the battery leaks or emits an odor, immediately remove it from the proximity of any exposed flame. The
+      leaking electrolyte can ignite and cause a fire or explosion.
+
+Prohibit Short Circuit
+
+   · A short circuit will generate high current and may cause the battery to generate heat, leak electrolyte, smoke,
+      and/or explode.
+
+   · Do not short-circuit the pack by connecting the positive and negative terminals directly, or by using conductive
+      materials such as metal wire.
+
+   · Short circuiting is very dangerous. The battery tabs may be short-circuited by putting them on a conductive
+      surface. An external short circuit such as this may lead to heat generation and damage to the battery.
+
+Electrical Application
+
+   · Do not use the battery in combination with batteries of different capacity, type, or brand.
+
+   · Do not attempt to disassemble or modify the battery in any way.
+
+   · Do not use any chargers other than those recommended for Lithium-ion Polymer batteries. Consider using
+      TinyCircuits' Battery Charger product ASL2112.
+
+   · Do not reverse the positive (+) and negative (-) terminals.
+
+   · Do not connect the pack to an electrical outlet, such as wall outlets or car cigarette-lighter sockets.
+
+   · Do not directly solder the pack or battery terminals.
+
+   · If the pack emits an odor, generates heat, becomes discolored or deformed, or any abnormal phenomenon
+      occurs during charging, recharging or storage, immediately remove the battery from the charger or device,
+      and stop use.
+
+   · If the case pack terminals are dirty, clean the terminals with a dry cloth before use. Otherwise power failure or
+      charge failure may occur due to the poor connection with the instrument.
+
+   · Be aware that discharged battery may cause fire or smoke; tape the terminals with insulating paper to insulate
+      them.
+
+   · For directions on battery installation and removal, read the instruction manual that accompanies the equipment
+      in which the battery will be used.
+
+   · The load circuit may generate voltage and current, which will be reversed to the battery pack (including PCM).
+      The voltage and current cannot exceed the reverse withstand voltage (RWV) and current (RWI) value of the
+      protection board itself. High voltage or current can damage the protection board in the battery pack.
+
+Storage
+
+If a device is not used for an extended period, the battery should be removed and stored in a cool, dry place.
+Otherwise, resting, or reduced performance may occur.
+
+The pack should be stored at room temperature, charged to about 40% to 60% of capacity. In case of over-
+discharge, a pack should be charged once every 3 months while storing and batteries should be discharged and
+charged after being stored more than a year in order to activate and restore energy.
+
+Revision 1    July 2022                               Page 11 of 12
+TinyCircuits  Li-ion Polymer 70mAh Battery Datasheet  July 2022
+
+Vendor Notes
+
+The customer is requested to contact TinyCircuits in advance, if and when the customer needs other applications
+or operating conditions than those described in this document. Additional experimentation may be required to
+verify performance and safety under such conditions.
+TinyCircuits will take no responsibility for any accident when the battery is used under other conditions than those
+described in this Document.
+TinyCircuits will inform, in a written form, the customer of improvement(s) regarding proper use and handing of the
+battery, if it is deemed necessary.
+Any matters that this specification does not cover should be conferred between the customer and TinyCircuits.
+
+Period of Warranty
+
+The period of warranty is 90 days from the date of shipment. If you find that the product does not perform to
+specifications at any time within ninety (90) calendar days of purchase, TinyCircuits will gladly replace the defective
+product. If the problem is caused by the user's misuse, it will not be replaced.
+
+Amendment of this Specification
+
+The company, TinyCircuits, has the right to revise this product specification. After revising the product specification,
+our company will notify the customer.
+
+Revision 1    July 2022                               Page 12 of 12
+
