@@ -49,42 +49,71 @@ def seg_dist(p, a, c):
 
 
 # ---------------------------------------------------------------- T junction pre-pass: a free end on the body of another piece of its net becomes a real joint
-def split_tjunctions():
-    n_split = 0
-    for _ in range(4):
+def near_centre(net, layer, p):
+    for v in vias:
+        if v.GetNetname() == net and abs(v.GetPosition().x - p[0]) < 3000 and abs(v.GetPosition().y - p[1]) < 3000:
+            return True
+    for pd in pads:
+        if pd.GetNetname() == net and pd.IsOnLayer(layer) and abs(pd.GetPosition().x - p[0]) < 3000 and abs(pd.GetPosition().y - p[1]) < 3000:
+            return True
+    return False
+
+
+def weld():
+    """a track end that reaches another piece of its net only by overlapping it (side or offset vertex) is moved onto a SHARED point:
+    onto the other piece's vertex when it is at one, otherwise the other piece is split at the touching point"""
+    n_weld = 0
+    for _ in range(40):
         nodes = collections.defaultdict(list)
         for r in recs:
             for which in ("a", "b"):
                 nodes[(r["net"], r["layer"], K(r[which]))].append((r, which))
+        for r in recs:                           # ends in the same 1 um bucket become one exact point
+            for which in ("a", "b"):
+                k = (r["net"], r["layer"], K(r[which]))
+                first = nodes[k][0]
+                r[which] = first[0][first[1]]
         by_nl = collections.defaultdict(list)
         for r in recs:
             by_nl[(r["net"], r["layer"])].append(r)
         add = []
         changed = False
         for (net, layer, key), inc in list(nodes.items()):
-            p = inc[0][0][inc[0][1]]
-            incident = {id(x[0]) for x in inc}
+            if len(inc) != 1 or (net, layer, key) in arc_keys:
+                continue
+            r, which = inc[0]
+            p = r[which]
+            if near_centre(net, layer, p):
+                continue
             best = None
             for h in by_nl[(net, layer)]:
-                if id(h) in incident or h.get("dead"):
+                if h is r or h.get("dead"):
                     continue
                 d, tt = seg_dist(p, h["a"], h["b"])
-                if 0.02 < tt < 0.98 and d < mm(0.06) and (best is None or d < best[0]):
+                if d < (h["w"] + r["w"]) / 2 + mm(0.005) and (best is None or d < best[0]):
                     best = (d, h, tt)
-            if best:
-                d, h, tt = best
+            if not best:
+                continue
+            d, h, tt = best
+            L = math.hypot(h["b"][0] - h["a"][0], h["b"][1] - h["a"][1])
+            if tt * L < mm(0.03):
+                q = h["a"]
+            elif (1 - tt) * L < mm(0.03):
+                q = h["b"]
+            else:
                 q = (round(h["a"][0] + tt * (h["b"][0] - h["a"][0])), round(h["a"][1] + tt * (h["b"][1] - h["a"][1])))
                 add.append(dict(net=h["net"], nobj=h["nobj"], layer=h["layer"], w=h["w"], a=q, b=h["b"], obj=None))
                 h["b"] = q
-                for rr, which in inc:
-                    rr[which] = q
-                n_split += 1
+            if q != p:
+                r[which] = q
+                n_weld += 1
                 changed = True
+            if add:
                 break                              # the lists are stale after a split: rebuild
         recs.extend(add)
         if not changed:
             break
-    return n_split
+    return n_weld
 
 
 seen_dup = set()
@@ -94,12 +123,7 @@ for r in list(recs):                              # identical duplicate pieces (
         r["dead"] = True
     seen_dup.add(k)
 recs[:] = [r for r in recs if not r.get("dead")]
-nsplit = 0
-while True:
-    n_ = split_tjunctions()
-    nsplit += n_
-    if n_ == 0 or nsplit > 5000:
-        break
+nsplit = weld()
 
 # ---------------------------------------------------------------- obstacle index
 items = {}
@@ -314,7 +338,7 @@ for pieces in chains:
     pts = [pieces[0][1]] + [p[2] for p in pieces]
     cid = "%s|%s|%d,%d" % (net, b.GetLayerName(layer), pts[0][0], pts[0][1])
     xs, ys = [p[0] for p in pts], [p[1] for p in pts]
-    info.append(dict(id=cid, bbox=[tomm(min(xs)), tomm(min(ys)), tomm(max(xs)), tomm(max(ys))]))
+    info.append(dict(id=cid, bbox=[tomm(min(xs)), tomm(min(ys)), tomm(max(xs)), tomm(max(ys))], pts=[[tomm(x_), tomm(y_)] for x_, y_ in pts]))
     len_before += length(pts)
     angles_before += sum(1 for a, c in zip(pts[:-1], pts[1:]) if not is_octo(a, c))
     if cid in skip:
@@ -388,5 +412,5 @@ for r in recs:
     n_out += 1
 pcbnew.SaveBoard(dst, b)
 json.dump(info, open(dst + ".chains.json", "w"))
-print("T junctions made %d, chains %d changed %d, pieces now %d, length %.1f -> %.1f mm, non-45 pieces %d -> %d" % (
+print("loose joints welded %d, chains %d changed %d, pieces now %d, length %.1f -> %.1f mm, non-45 pieces %d -> %d" % (
     nsplit, len(chains), changed, n_out, len_before / 1e6, len_after / 1e6, angles_before, angles_after))

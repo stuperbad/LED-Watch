@@ -39,13 +39,26 @@ for rnd in range(12):
     if len(v) <= len(v0) and len(u) <= len(u0):
         shutil.copy(os.path.join(w, "b.kicad_pcb"), dst)
         print("wrote", dst)
+        print("skipped chains:", skip)
         break
     chains = json.load(open(os.path.join(w, "a.kicad_pcb.chains.json")))
     pts = [i["pos"] for x in v for i in x["items"]] + [i["pos"] for x in u for i in x["items"]]
     added = 0
+    import math
+
+    def near(c, q, tol=0.25):
+        P = c["pts"]
+        if len(P) == 1:
+            return math.hypot(P[0][0] - q["x"], P[0][1] - q["y"]) < tol
+        for (ax, ay), (bx, by) in zip(P[:-1], P[1:]):
+            ux, uy, wx, wy = bx - ax, by - ay, q["x"] - ax, q["y"] - ay
+            L2 = ux * ux + uy * uy
+            s = max(0.0, min(1.0, (wx * ux + wy * uy) / L2)) if L2 else 0.0
+            if math.hypot(wx - s * ux, wy - s * uy) < tol:
+                return True
+        return False
     for c in chains:
-        x0, y0, x1, y1 = c["bbox"]
-        if c["id"] not in skip and any(x0 - 0.4 <= p["x"] <= x1 + 0.4 and y0 - 0.4 <= p["y"] <= y1 + 0.4 for p in pts):
+        if c["id"] not in skip and any(near(c, p) for p in pts):
             skip.append(c["id"])
             added += 1
     if not added:
