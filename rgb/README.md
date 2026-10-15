@@ -4,11 +4,12 @@ The RGB version of the watch (132 RGB LEDs, ATmega-class MCU, never built). Open
 
 | File / folder | What it is |
 |---|---|
-| `LED Watch - RGB.kicad_pro` / `.kicad_sch` / `.kicad_pcb` / `.net` | the current RGB project: schematic and board as of December 2025 (this was called just `LED Watch` before) |
-| `mechanical/` | watch outline drawings (SVG) and the 3D print (`LED Watch - RGB.stl`) |
-| `production/gerbers 2025-12-08/` | Gerbers of that board (used for an instant quote) |
+| `LED Watch - RGB.kicad_pro` / `.kicad_sch` / `.kicad_pcb` / `.net` | the current RGB project: schematic and board as of 2026-10-14 (your live working files; this was called just `LED Watch`) |
+| `mechanical/` | watch outline drawings (SVG), the 3D print (`LED Watch - RGB.stl`) and the Rhino layout (`watch layout 1.3dm`) |
+| `production/gerbers 2025-12-08/` | Gerbers of the December 2025 version of the board (used for an instant quote) |
+| `production/fab-rfq 2026-10-05/` | the October 2026 fabrication quote work for this board: BOM, placement files, Gerbers, DRC, quote screenshots, `OPEN-ISSUES.md`, `rfq-emails.md`, `jlc-alternatives.md` |
 | `scripts/` | KiCad scripting-console script that places the LEDs on the three rings |
-| `archive/pre-claude/` | everything older, named by date: the first RGB schematic (2025-10-28), the empty/unrouted version and its Freerouting export (2025-11), the 4-layer routing attempts of 2025-11-19 ... 2025-11-25 (`...50PERCENT`, `...95PERCENT` = how far the routing got), KiCad backups, autosaves, a link to a Discord-hosted board file |
+| `archive/pre-claude/` | everything older, named by date: the December 2025 version of this board (`2025-12-08 RGB board - last version committed ...`), snapshots taken before the October 2026 edits, the first RGB schematic (2025-10-28), the empty/unrouted version and its Freerouting export (2025-11), the 4-layer routing attempts of 2025-11-19 ... 2025-11-25 (`...50PERCENT`, `...95PERCENT` = how far the routing got), KiCad backups, autosaves, a link to a Discord-hosted board file |
 
 Below: Evan's original notes (part links and ideas).
 

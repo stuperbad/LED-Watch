@@ -45345,7 +45345,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "BMI160"
+		(property "Value" "BMI270"
 			(at 52.9433 278.13 0)
 			(effects
 				(font
@@ -45363,7 +45363,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://www.bosch-sensortec.com/media/boschsensortec/downloads/datasheets/bst-bmi160-ds000.pdf"
+		(property "Datasheet" "https://www.bosch-sensortec.com/media/boschsensortec/downloads/datasheets/bst-bmi270-ds000.pdf"
 			(at 33.02 266.7 0)
 			(effects
 				(font
@@ -45372,7 +45372,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Small, low power inertial measurement unit, LGA-14"
+		(property "Description" "Bosch BMI270 6-axis IMU (accel+gyro), LGA-14 2.5x3.0mm; pin-compatible successor to BMI160 (symbol drawn from BMI160, identical pin-out)"
 			(at 50.8 288.29 0)
 			(effects
 				(font
