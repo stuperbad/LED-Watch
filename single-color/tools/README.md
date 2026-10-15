@@ -14,3 +14,4 @@ These scripts made and checked the revision A board. Most take the board file(s)
 
 The story of the order the stages were run in, with the reasons, is in `../docs/DECISION-LOG.md`.
 | centre landing | `snap_centers.py` (move track ends on vias/pads to their centres) |
+| wobble | `simplify_chains.py`, `simplify_loop.py` (straighten the 0.05 mm staircase on routed diagonals, DRC-guarded) |
