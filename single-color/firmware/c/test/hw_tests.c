@@ -175,8 +175,21 @@ static void test_imu_driver(void) {
     whoami = 0x00; CHECK(imu_init() == 0, "init reports a missing / wrong sensor");
 }
 
+static void test_buzzer_plan(void) {
+    buzzer_plan_t p;
+    CHECK(buzzer_plan(4000, F_CPU_HZ, &p) && p.div_idx == 2 && p.per == 249, "4 kHz: DIV4, period 250 clocks = exactly 4000 Hz");
+    CHECK(!buzzer_plan(0, F_CPU_HZ, &p), "0 Hz is silence, no plan");
+    static const uint16_t tones[] = { 1300, 1500, 1800, 2000, 2200, 2400, 2600, 3000, 3200, 3300, 3500, 3600, 4000, 4200, 4800, 5000, 8000 };
+    static const uint16_t DIV[8] = { 1, 2, 4, 8, 16, 64, 256, 1024 };
+    for (unsigned i = 0; i < sizeof tones / sizeof tones[0]; i++) {
+        int ok = buzzer_plan(tones[i], F_CPU_HZ, &p);
+        CHECK(ok && p.per >= 3, "every tone the firmware plays fits the 8-bit timer");
+        if (ok) { long f = (long)(F_CPU_HZ / DIV[p.div_idx] / (p.per + 1u)); long err = f > tones[i] ? f - tones[i] : tones[i] - f; CHECK(err * 100 <= tones[i], "frequency within 1 % of the wanted tone"); }
+    }
+}
+
 int main(void) {
-    test_pin_map(); test_slot_timing(); test_frame_brightness(); test_inputs_and_math(); test_raise(); test_imu_driver();
+    test_pin_map(); test_slot_timing(); test_buzzer_plan(); test_frame_brightness(); test_inputs_and_math(); test_raise(); test_imu_driver();
     printf("%d checks, %d failed\n", checks, fails);
     return fails ? 1 : 0;
 }

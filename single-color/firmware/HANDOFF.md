@@ -35,3 +35,13 @@ Steps 1 and 4 (toolchain, mode state machine) are done in a different way than f
 - **Seven mode LEDs:** SET TMR **ALM** BAT FUN CFG LCK (new IND7 = ROW11 / COL6, silkscreen order left to right as listed).
 - **Weekday display:** the mode LEDs double as weekday lights (S M T W T F S, Sunday first): SET-S TMR-M ALM-T BAT-W FUN-T CFG-F LCK-S are printed on the board. The day is shown by lighting that one LED (replaces the old 1-7 LED bar on the outer ring).
 - **Programming:** pogo pads RESET, VDD(VBAT), GND, UPDI (1.27 mm), RESET on PF6 for high-voltage recovery only.
+
+## Update 2026-10-14: ALM mode, weekday lights, buzzer (firmware session)
+Done in BOTH cores (`c/watch.c` and `sim/watch_core.js`, 20 scenarios match frame-for-frame including the buzzer frequency; 71 unit checks, 197 hardware-layer checks; AVR build 31.7 KB flash / 2.2 KB RAM):
+- **Seven indicators, face order** SET TMR ALM BAT FUN CFG LCK: `MODE_LED[7]` in `ledmap.h` is now generated in physical (left to right) order from the board file (`gen_pins.py` reads `boards/Y43/Y42_routed_v4.kicad_pcb`; IND7 = ALM = COL6 sits third). Mode ids follow the same order (TIME SET TMR ALM BAT FUN CFG), so mode selection walks the row.
+- **ALM mode** (alarm clock: hour, minute, on/off; rings up to 1 min, any button stops it, wakes even a locked watch) and a dim ALM LED in Time while an alarm is set.
+- **Weekday on the indicator LEDs** (SET = Sunday ... LCK = Saturday) instead of the outer-ring bar.
+- **Sound engine**: the core reports `watch_tone_hz()`; patterns for key click, game events (Runner, Target, Quick Draw, Simon tones, Pong, Pacer ticks), award and the alarm. **CFG 11 key beeps (off by default), CFG 12 game sounds (on by default)**, 12 settings now (`set[12]`). Low battery mutes all but the alarm.
+- **`c/hw/buzzer.c`**: TCA1 split mode, PB4 = WO4 (HCMP1), PB5 = WO5 (HCMP2) with PORTB.PIN5CTRL.INVEN (only while sounding), 50 % duty, prescaler chosen by `buzzer_plan()` (tested). `main.c` calls `buzzer_set(watch_awake() ? watch_tone_hz() : 0)`, beeps 150 ms at boot (confirms the piezo), boot diagnostics use the new LED order.
+- **Simulator**: `export_face_board.py` (KiCad python) rebuilds `face_data.js` from the real Y42 board (ring radii now 14.635 / 17.44 / 19.57 mm; the C particle constants follow); Sound panel with WebAudio and an "Alarm test" button.
+Not done: EEPROM for settings and the alarm (all RAM, lost at reset), snooze, bring-up on the real board (see `c/BRINGUP.md` step for the buzzer).

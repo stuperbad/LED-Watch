@@ -8,11 +8,13 @@
 #include <string.h>
 #include <stddef.h>
 #include "watch.h"
-#include "ledmap.h"            /* generated: HOUR_LED[12], MINUTE_LED[60], SECOND_LED[60], MODE_LED[6] = {row, col} per LED */
+#include "ledmap.h"            /* generated: HOUR_LED[12], MINUTE_LED[60], SECOND_LED[60], MODE_LED[7] = {row, col} per LED */
 
 /* ------------------------------------------------------------------ constants ---- */
-enum { M_TIME, M_SET, M_TMR, M_BAT, M_FUN, M_CFG, M_COUNT };
-enum { C_BRI, C_WAKE, C_DUR, C_AUTO, C_SEC, C_RAISE, C_SHAKE, C_TAP, C_BTNW, C_LOCKD, C_COUNT };
+enum { M_TIME, M_SET, M_TMR, M_ALM, M_BAT, M_FUN, M_CFG, M_COUNT };          /* the order of the indicator row on the face (mode selection moves along it) */
+enum { I_SET, I_TMR, I_ALM, I_BAT, I_FUN, I_CFG, I_LCK, I_COUNT };           /* indicator LEDs left to right = MODE_LED[] = the weekday lights Sun..Sat */
+enum { C_BRI, C_WAKE, C_DUR, C_AUTO, C_SEC, C_RAISE, C_SHAKE, C_TAP, C_BTNW, C_LOCKD, C_KEYB, C_GAMEB, C_COUNT };
+enum { SND_NONE, SND_KEY, SND_TICK, SND_OK, SND_BAD, SND_WIN, SND_LOSE, SND_AWARD, SND_GO, SND_BEAT, SND_ACCENT, SND_SIM_L, SND_SIM_R, SND_ALARM, SND_COUNT };
 enum { G_PART, G_RUN, G_TARGET, G_QD, G_ORBIT, G_RNG, G_PACER, G_SIMON, G_PONG, G_COUNT };
 enum { QD_IDLE, QD_WAIT, QD_GO, QD_RESULT };
 enum { SM_READY, SM_NEXT, SM_SHOW, SM_INPUT };
@@ -33,11 +35,11 @@ enum { PG_READY, PG_PLAY, PG_POINT, PG_OVER };
 #define PONG_Z_Q16 10486         /* 0.16 */
 #define PONG_WIN 5
 
-static const int8_t  MODE_IND[M_COUNT]  = { -1, 0, 1, 2, 3, 4 };       /* indicator index per mode; indicator 5 is LCK */
+static const int8_t  MODE_IND[M_COUNT]  = { -1, I_SET, I_TMR, I_ALM, I_BAT, I_FUN, I_CFG };       /* indicator per mode; I_LCK is a state, not a mode */
 static const uint16_t BRI_Q16[5] = { 3277, 6554, 13107, 19661, 32768 };
 static const uint8_t  WAKE_SENS[3] = { 70, 50, 30 };
 static const uint16_t DUR_MS[4] = { 2000, 3000, 5000, 10000 };
-static const uint8_t  CFG_COUNT[C_COUNT] = { 5, 3, 4, 2, 2, 2, 2, 2, 4, 3 };
+static const uint8_t  CFG_COUNT[C_COUNT] = { 5, 3, 4, 2, 2, 2, 2, 2, 4, 3, 2, 2 };
 static const uint8_t  TENTHS_LED[10] = { 1, 2, 3, 4, 5, 7, 8, 9, 10, 11 };
 static const uint8_t  DAYS_IN[12] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 
@@ -48,8 +50,8 @@ static const uint8_t SOLAR_BAR[31] = { 0, 12, 19, 24, 28, 31, 34, 36, 38, 40, 42
 static const uint8_t RADAR_LVL[7] = { 255, 134, 91, 69, 55, 46, 40 };
 static const uint8_t COMET_LVL[8] = { 255, 150, 106, 82, 67, 57, 49, 43 };
 static const uint8_t AWARD_LVL[4] = { 255, 128, 85, 64 };
-static const int16_t BEAD_K[3] = { 475, 401, 359 };                    /* BAM/s^2 per milli-g on the hour / minute / second ring */
-static const uint16_t RING_R_Q8[3] = { 3939, 4657, 5202 };             /* ring radii 15.385 / 18.19 / 20.32 mm in 1/256 mm */
+static const int16_t BEAD_K[3] = { 499, 419, 373 };                    /* BAM/s^2 per milli-g on the hour / minute / second ring = 7301 / radius (mm) */
+static const uint16_t RING_R_Q8[3] = { 3747, 4465, 5010 };             /* ring radii 14.635 / 17.44 / 19.57 mm (board Y42) in 1/256 mm */
 
 #define BAM_PER_RAD 10430.378
 #define RAD(x) ((int32_t)((x) * BAM_PER_RAD + 0.5))                    /* compile-time constant, positive x only */
@@ -61,8 +63,8 @@ static const pmode_t PM[4] = {
     { 230, 51, 5, 26, 0, 31 },        /* gravel */
     { 1280, 13, 0, 0, 1, 0 },         /* oil    */
     { 102, 90, 0, 0, 1, 0 } };        /* water  */
-#define R_IN_Q8   3555                /* 13.885 mm */
-#define R_OUT_Q8  5509                /* 21.52 mm  */
+#define R_IN_Q8   3363                /* 13.135 mm = hour ring radius - 1.5 */
+#define R_OUT_Q8  5317                /* 20.77 mm  = second ring radius + 1.2 */
 #define PR_Q8     205                 /* 0.8 mm    */
 
 /* ------------------------------------------------------------------ state ---- */
@@ -121,6 +123,43 @@ static void ind(uint8_t i, uint8_t lvl) { put(MODE_LED[i], lvl); }
 static void putr(uint8_t r, uint8_t k, uint8_t lvl) { put(ring_led(r, k), lvl); }
 static void bar_n(uint8_t r, uint8_t n, uint8_t lvl) { uint8_t len = ring_len(r); if (n > len) n = len; for (uint8_t i = 0; i < n; i++) putr(r, i, lvl); }   /* n LEDs clockwise from 12 */
 
+/* ------------------------------------------------------------------ sound (piezo patterns) ---- */
+/* The core only says WHICH frequency should sound now (watch_tone_hz); the hardware layer drives the buzzer, the simulator plays it.
+ * Piezo: loudest near 4 kHz, so beeps live between about 2 and 5 kHz; no note is shorter than 20 ms because the hardware loop steps every 16 ms. Kinds: 0 = key beep (CFG 11), 1 = game sound (CFG 12), 2 = alarm (always). */
+typedef struct { uint16_t hz, ms; } note_t;
+static const note_t P_KEY[]    = { { 3500, 20 }, { 0, 0 } };
+static const note_t P_TICK[]   = { { 3000, 20 }, { 0, 0 } };
+static const note_t P_OK[]     = { { 2600, 60 }, { 3300, 90 }, { 0, 0 } };
+static const note_t P_BAD[]    = { { 2000, 120 }, { 1500, 220 }, { 0, 0 } };
+static const note_t P_WIN[]    = { { 2400, 80 }, { 3000, 80 }, { 3600, 80 }, { 4200, 220 }, { 0, 0 } };
+static const note_t P_LOSE[]   = { { 3000, 100 }, { 2400, 100 }, { 1800, 100 }, { 1300, 280 }, { 0, 0 } };
+static const note_t P_AWARD[]  = { { 2400, 100 }, { 3000, 100 }, { 3600, 100 }, { 4800, 300 }, { 0, 100 }, { 3600, 100 }, { 4800, 500 }, { 0, 0 } };
+static const note_t P_GO[]     = { { 4000, 150 }, { 0, 0 } };
+static const note_t P_BEAT[]   = { { 3000, 20 }, { 0, 0 } };
+static const note_t P_ACCENT[] = { { 4000, 25 }, { 0, 0 } };
+static const note_t P_SIM_L[]  = { { 2200, 150 }, { 0, 0 } };
+static const note_t P_SIM_R[]  = { { 3200, 150 }, { 0, 0 } };
+static const note_t P_ALARM[]  = { { 4000, 100 }, { 0, 100 }, { 4000, 100 }, { 0, 100 }, { 4000, 100 }, { 0, 100 }, { 4000, 100 }, { 0, 600 }, { 0, 0 } };   /* beep beep beep beep ... pause, repeats */
+static const note_t *const PAT[SND_COUNT] = { 0, P_KEY, P_TICK, P_OK, P_BAD, P_WIN, P_LOSE, P_AWARD, P_GO, P_BEAT, P_ACCENT, P_SIM_L, P_SIM_R, P_ALARM };
+static void snd_play(uint8_t pat, uint8_t kind) {
+    if (W.alm_ring && pat != SND_ALARM) return;                          /* the alarm owns the buzzer */
+    if (kind == 0 && !W.set[C_KEYB]) return;                              /* key beeps: off by default */
+    if (kind == 1 && W.set[C_GAMEB]) return;                              /* game sounds: on by default (value 1 = off) */
+    if (kind != 2 && !io->bat_ok) return;                                 /* low battery: only the alarm may beep */
+    W.snd_pat = pat; W.snd_i = 0; W.snd_t = 0; W.snd_hz = PAT[pat][0].hz;
+}
+static void snd_step(uint16_t dt) {
+    if (!W.snd_pat) { W.snd_hz = 0; return; }
+    W.snd_t += dt;
+    for (;;) {
+        const note_t *n = &PAT[W.snd_pat][W.snd_i];
+        if (!n->ms) { if (W.snd_pat == SND_ALARM && W.alm_ring) { W.snd_i = 0; continue; } W.snd_pat = 0; W.snd_hz = 0; return; }
+        if (W.snd_t < n->ms) { W.snd_hz = n->hz; return; }
+        W.snd_t -= n->ms; W.snd_i++;
+    }
+}
+uint16_t watch_tone_hz(void) { return W.snd_hz; }
+
 /* ------------------------------------------------------------------ calendar ---- */
 static uint8_t is_leap(uint16_t y) { return (y % 4 == 0 && y % 100 != 0) || y % 400 == 0; }
 static uint8_t days_in(uint16_t y, uint8_t m) { return (uint8_t)(DAYS_IN[m - 1] + (m == 2 && is_leap(y) ? 1 : 0)); }
@@ -134,6 +173,7 @@ uint8_t watch_weekday_iso(void) { return weekday_iso(W.year, W.month, W.day); }
 static void hms(uint8_t *h, uint8_t *m, uint8_t *s) { uint32_t t = (W.rtc_ms / 1000UL) % 86400UL; *h = (uint8_t)(t / 3600); *m = (uint8_t)(t / 60 % 60); *s = (uint8_t)(t % 60); }
 void watch_set_time(uint8_t h, uint8_t m, uint8_t s) { W.rtc_ms = ((uint32_t)(h % 24) * 3600UL + (uint32_t)(m % 60) * 60UL + (s % 60)) * 1000UL; }
 void watch_set_cfg(uint8_t idx, uint8_t v) { if (idx < C_COUNT && v < CFG_COUNT[idx]) W.set[idx] = v; }
+void watch_set_alarm(uint8_t h, uint8_t m, uint8_t on) { W.alm_h = (uint8_t)(h % 24); W.alm_m = (uint8_t)(m % 60); W.alm_on = on ? 1 : 0; W.alm_armed = 0; }
 void watch_set_date(uint16_t y, uint8_t mo, uint8_t d) { W.year = y; W.month = mo; W.day = d > days_in(y, mo) ? days_in(y, mo) : d; }
 static void next_day(void) { W.day++; if (W.day > days_in(W.year, W.month)) { W.day = 1; W.month++; if (W.month > 12) { W.month = 1; W.year++; } } }
 
@@ -150,11 +190,18 @@ static void motion_wake(void) { if (!W.awake || W.ind_only) { wake(); if (!tmr_k
 static void to_mode(uint8_t m) {
     W.mode = m; W.idle = 0; W.date_peek = 0; W.peek = 0; W.menu_on = 0;
     if (m == M_SET) W.set_field = 0;
+    if (m == M_ALM) W.alm_field = 0;
     if (m == M_FUN) W.fun_playing = 0;                              /* entering FUN always shows the game picker */
 }
 static void menu_open(void) { W.menu_on = 1; W.menu_sel = W.mode; W.menu_from = W.mode; W.menu_t = 0; }
 static void menu_confirm(void) { uint8_t m = W.menu_sel; W.menu_on = 0; to_mode(m); }
 static void toggle_lock(void) { W.locked = !W.locked; W.lock_flash = 600; W.menu_on = 0; if (W.mode != M_TIME) to_mode(M_TIME); }
+static void alm_start(void) { W.alm_ring = 1; W.alm_t = 0; wake(); W.menu_on = 0; if (W.mode != M_TIME) to_mode(M_TIME); snd_play(SND_ALARM, 2); }
+static void alm_stop(void) { W.alm_ring = 0; if (W.snd_pat == SND_ALARM) { W.snd_pat = 0; W.snd_hz = 0; } W.idle = 0; }
+static void alm_add(void) {
+    switch (W.alm_field) { case 0: W.alm_h = (uint8_t)((W.alm_h + 1) % 24); break; case 1: W.alm_m = (uint8_t)((W.alm_m + 1) % 60); break; default: W.alm_on ^= 1; break; }
+    W.alm_armed = 0;                                                      /* re-armed as soon as the clock is not on the alarm minute */
+}
 
 static void set_add(void) {
     uint8_t h, m, s; hms(&h, &m, &s);
@@ -171,6 +218,7 @@ static void cfg_change(void) { W.set[W.cfg_sel] = (uint8_t)((W.set[W.cfg_sel] + 
 
 static void on_short(uint8_t b) {
     W.idle = 0;
+    if (!(W.mode == M_FUN && W.fun_playing && !W.menu_on)) snd_play(SND_KEY, 0);          /* games make their own sounds */
     if (W.menu_on) {                                                 /* Left = one mode left, Right = one mode right (wraps) */
         W.menu_sel = (uint8_t)((W.menu_sel + (b == 1 ? 1 : M_COUNT - 1)) % M_COUNT); W.menu_t = 0; return;
     }
@@ -181,6 +229,7 @@ static void on_short(uint8_t b) {
         if (b == 1) W.tmr_run = !W.tmr_run;
         else if (!W.tmr_run && W.tmr_el > 0) W.tmr_el = 0;
         break;
+    case M_ALM: if (b == 0) W.alm_field = (uint8_t)((W.alm_field + 1) % 3); else alm_add(); break;
     case M_BAT: W.bat_view = (uint8_t)((W.bat_view + (b == 1 ? 1 : 2)) % 3); break;
     case M_FUN:
         if (!W.fun_playing) {
@@ -191,12 +240,13 @@ static void on_short(uint8_t b) {
     }
 }
 static void on_long(uint8_t b) {
-    W.idle = 0;
-    if (W.menu_on) { if (b == 0) to_mode(M_TIME); else menu_confirm(); return; }
+    W.idle = 0; snd_play(SND_KEY, 0);
+    if (W.menu_on) { if (b == 0) to_mode(M_TIME); else { menu_confirm(); W.b[1].eat = 1; } return; }     /* the rest of this hold must not auto-repeat in the mode just entered */
     if (b == 0) { menu_open(); return; }
     switch (W.mode) {
     case M_TIME: W.peek = 2000; W.date_peek = 0; break;
     case M_SET: set_add(); break;                                     /* then auto-repeats while held */
+    case M_ALM: if (W.alm_field < 2) alm_add(); break;
     case M_TMR: W.tmr_run = 0; W.tmr_el = 0; break;
     case M_FUN:
         if (W.fun_playing && W.fun_g == G_PART) { if (W.pref_sand_mode == 4) W.g.part.bead_w = 0; else part_remove(4); }
@@ -205,7 +255,7 @@ static void on_long(uint8_t b) {
     default: break;
     }
 }
-static uint16_t long_ms(uint8_t i) { return (i == 1 && W.mode == M_SET) ? HOLD_MS : LONG_MS; }
+static uint16_t long_ms(uint8_t i) { return (i == 1 && (W.mode == M_SET || (W.mode == M_ALM && W.alm_field < 2))) ? HOLD_MS : LONG_MS; }
 
 static void buttons(uint16_t dt) {
     uint8_t down0 = io->btn & 1, down1 = (io->btn >> 1) & 1, both = down0 && down1;
@@ -218,7 +268,8 @@ static void buttons(uint16_t dt) {
         button_t *b = &W.b[i]; uint8_t d = i ? down1 : down0, other = i ? down0 : down1;
         if (d && !b->down) {                                          /* press */
             b->down = 1; b->t = 0; b->long_ = 0; b->chord = other; b->rep = 0; b->eat = 0; b->raw = 0;
-            if (!W.awake) {
+            if (W.alm_ring) { alm_stop(); b->eat = 1; }                /* any button stops the alarm (and does nothing else) */
+            else if (!W.awake) {
                 b->eat = 1;                                           /* a press on a dark watch is never also an action */
                 if (W.locked) { if (!b->chord) { wake_ind(); W.lock_flash = 600; } }   /* buttons do not wake a locked watch, they only show LCK */
                 else if (btn_wake_ok(i)) wake();
@@ -234,6 +285,8 @@ static void buttons(uint16_t dt) {
                     b->rep += dt; if (b->rep >= 200) { b->rep -= 200; part_remove(2); }
                 } else if (b->long_ && i == 1 && W.mode == M_SET && !W.menu_on) {
                     b->rep += dt; { int32_t gap = b->t > 2500 ? 50 : REPEAT_MS; if (b->rep >= gap) { b->rep -= gap; set_add(); } }
+                } else if (b->long_ && i == 1 && W.mode == M_ALM && W.alm_field < 2 && !W.menu_on) {
+                    b->rep += dt; { int32_t gap = b->t > 2500 ? 50 : REPEAT_MS; if (b->rep >= gap) { b->rep -= gap; alm_add(); } }
                 }
             }
         } else if (!d && b->down) {                                   /* release */
@@ -263,7 +316,7 @@ static void award_step(int32_t t) {                                  /* 10 s of 
         }
     }
     for (uint8_t i = 0; i < 10; i++) { uint32_t n = rnd_n(132); uint8_t r = n < 12 ? 0 : n < 72 ? 1 : 2; uint8_t k = (uint8_t)(r == 0 ? n : r == 1 ? n - 12 : n - 72); putr(r, k, 255); }
-    if ((t / 250) % 2 == 0) for (uint8_t i = 0; i < 5; i++) ind(i, 255);
+    if ((t / 250) % 2 == 0) for (uint8_t i = 0; i < I_LCK; i++) ind(i, 255);
 }
 static void game_over_display(uint16_t score, uint8_t award, int32_t t) { if (award && t < 10000) award_step(t); else show_score(score, t); }
 
@@ -386,7 +439,7 @@ static void run_step(uint16_t dt) {
     run_game_t *r = &W.g.run;
     if (r->over) {
         r->flash += dt; game_over_display(r->pts, r->award, r->flash);
-        if (r->flash < 8000 && (r->flash / 400) % 2 == 0) ind(3, 255);
+        if (r->flash < 8000 && (r->flash / 400) % 2 == 0) ind(I_FUN, 255);
         return;
     }
     int32_t speed = 9000L + 1200L * (r->passed / 10);                  /* rad/s * 10000: 0.9 plus 0.12 per 10 obstacles */
@@ -407,10 +460,11 @@ static void run_step(uint16_t dt) {
     uint8_t mk = ring_k(r->lane, (uint16_t)r->th);
     for (uint8_t i = 0; i < r->nobs; i++) {
         obs_t *o = &r->obs[i]; int32_t d = o->ang - r->th; if (d < 0) d = -d;
-        if (o->lane == r->lane && o->k == mk && d < RAD(0.35)) { r->over = 1; r->flash = 0; return; }
+        if (o->lane == r->lane && o->k == mk && d < RAD(0.35)) { r->over = 1; r->flash = 0; snd_play(SND_LOSE, 1); return; }
         if (!o->passed && r->th > o->ang + RAD(0.4)) {
             o->passed = 1; r->passed++; r->pts = (uint16_t)(r->pts + 10 > SCORE_CAP ? SCORE_CAP : r->pts + 10);   /* 10 points per obstacle */
-            if (r->pts >= SCORE_CAP) { r->over = 1; r->award = 1; r->flash = 0; return; }
+            snd_play(SND_TICK, 1);
+            if (r->pts >= SCORE_CAP) { r->over = 1; r->award = 1; r->flash = 0; snd_play(SND_AWARD, 1); return; }
         }
     }
     { uint8_t w = 0; for (uint8_t i = 0; i < r->nobs; i++) if (r->th - r->obs[i].ang < RAD(1.0)) r->obs[w++] = r->obs[i]; r->nobs = w; }   /* drop obstacles more than ~1 rad behind */
@@ -421,7 +475,7 @@ static void run_step(uint16_t dt) {
 /* ------------------------------------------------------------------ games: Target ---- */
 static void target_step(uint16_t dt) {
     tg_game_t *t = &W.g.tg; t->t += dt;
-    if (t->over) { game_over_display(t->pts, t->award, t->t); if (t->t < 8000 && (t->t / 400) % 2 == 0) ind(3, 255); return; }
+    if (t->over) { game_over_display(t->pts, t->award, t->t); if (t->t < 8000 && (t->t / 400) % 2 == 0) ind(I_FUN, 255); return; }
     t->pos_q16 += (uint32_t)((uint32_t)t->spd_q16 * dt / 1000UL); if (t->pos_q16 >= 60UL * 65536UL) t->pos_q16 -= 60UL * 65536UL;
     uint8_t nrun = (uint8_t)(1 + (t->lvl / 4 > 2 ? 2 : t->lvl / 4));
     uint32_t pos = t->pos_q16;
@@ -440,16 +494,16 @@ static void qd_step(uint16_t dt) {
     qd_game_t *q = &W.g.qd; q->t += dt; uint8_t blink = (W.tms / 300) % 2 == 0;
     uint8_t any = io->btn & 3;
     if (q->st == QD_IDLE) {                                            /* hold both buttons 0.5 s, release both = armed */
-        ind(3, blink ? 255 : 60);
+        ind(I_FUN, blink ? 255 : 60);
         if (W.b[0].down && W.b[1].down && W.b[0].t > 500 && W.b[1].t > 500) { q->arm_held = 1; for (uint8_t k = 0; k < 60; k++) if (k <= 1 || k == 59) putr(2, k, 180); }
         else if (q->arm_held && !W.b[0].down && !W.b[1].down) { q->arm_held = 0; q->st = QD_WAIT; q->t = 0; q->wait = 2000 + (int32_t)rnd_n(4000); }
     } else if (q->st == QD_WAIT) {
-        ind(3, 255);
-        if (any) { uint8_t who = (io->btn & 1) ? 0 : 1; q->win = (uint8_t)(1 - who); q->st = QD_RESULT; q->t = 0; q->was_false = 1; }
-        else if (q->t >= q->wait) { q->st = QD_GO; q->t = 0; }
+        ind(I_FUN, 255);
+        if (any) { uint8_t who = (io->btn & 1) ? 0 : 1; q->win = (uint8_t)(1 - who); q->st = QD_RESULT; q->t = 0; q->was_false = 1; snd_play(SND_BAD, 1); }
+        else if (q->t >= q->wait) { q->st = QD_GO; q->t = 0; snd_play(SND_GO, 1); }
     } else if (q->st == QD_GO) {
         bar_n(2, 60, 255); bar_n(1, 60, 255);
-        if (any) { q->win = (io->btn & 1) ? 0 : 1; q->st = QD_RESULT; q->t = 0; q->was_false = 0; }
+        if (any) { q->win = (io->btn & 1) ? 0 : 1; q->st = QD_RESULT; q->t = 0; q->was_false = 0; snd_play(SND_WIN, 1); }
         else if (q->t > 2500) q->st = QD_IDLE;
     } else {                                                           /* result: the winner's half lights */
         half_all(q->win == 0 ? 0 : 1, q->was_false ? ((q->t / 150) % 2 ? 255 : 90) : 255);
@@ -532,6 +586,7 @@ static void pacer_step(uint16_t dt) {
     if (p->show > 0) { p->show = (int16_t)(p->show - dt); show_score(W.pref_pc_kind ? W.pref_pc_br : W.pref_pc_bpm, 9000); return; }   /* the tempo as a number */
     if (W.pref_pc_kind == 0) {                                          /* metronome */
         int32_t per = 60000L / W.pref_pc_bpm, beat = p->t / per, since = p->t - beat * per;
+        if (beat != (p->t - dt) / per) snd_play(beat % 4 == 0 ? SND_ACCENT : SND_BEAT, 1);     /* a tick on every beat, accent on the first of four */
         for (uint8_t trail = 0; trail < 2; trail++) {
             int32_t t = p->t - (trail ? 60 : 0), tm = ((t % (2 * per)) + 2 * per) % (2 * per);
             int32_t pos = -cos16((uint16_t)(tm * 32768L / per));         /* Q15, -1 at a beat on the left, +1 on the right */
@@ -553,16 +608,16 @@ static void simon_press(uint8_t side) {
     sim_game_t *m = &W.g.sim;
     if (m->over) { game_start(G_SIMON); return; }
     if (m->st != SM_INPUT) return;                                      /* presses while the watch shows the sequence are ignored */
-    m->flash = 220; m->fside = side; m->t = 0;
+    m->flash = 220; m->fside = side; m->t = 0; snd_play(side ? SND_SIM_R : SND_SIM_L, 1);
     if (((m->seq >> m->i) & 1) == side) {
         m->i++; m->pts = (uint16_t)(m->pts + 5 > SCORE_CAP ? SCORE_CAP : m->pts + 5);
-        if (m->pts >= SCORE_CAP) { m->over = 1; m->award = 1; m->t = 0; }
+        if (m->pts >= SCORE_CAP) { m->over = 1; m->award = 1; m->t = 0; snd_play(SND_AWARD, 1); }
         else if (m->i == m->len) { m->st = SM_NEXT; m->t = 0; }
-    } else { m->over = 1; m->t = 0; }
+    } else { m->over = 1; m->t = 0; snd_play(SND_LOSE, 1); }
 }
 static void simon_step(uint16_t dt) {
     sim_game_t *m = &W.g.sim; m->t += dt;
-    if (m->over) { game_over_display(m->pts, m->award, m->t); if (m->t < 8000 && (m->t / 400) % 2 == 0) ind(3, 255); return; }
+    if (m->over) { game_over_display(m->pts, m->award, m->t); if (m->t < 8000 && (m->t / 400) % 2 == 0) ind(I_FUN, 255); return; }
     if (m->flash > 0) { m->flash = (int16_t)(m->flash - dt); sim_half(m->fside, 255); }
     bar_n(0, m->len > 12 ? 12 : m->len, 70);
     if (m->st == SM_READY || m->st == SM_NEXT) {
@@ -573,11 +628,12 @@ static void simon_step(uint16_t dt) {
         int32_t on = 600 - 22 * (int32_t)m->len; if (on < 200) on = 200;
         int32_t slot = on + 140, i = m->t / slot;
         if (i >= m->len) { m->st = SM_INPUT; m->i = 0; m->t = 0; return; }
+        if (m->t % slot < dt || m->t <= dt) snd_play(((m->seq >> i) & 1) ? SND_SIM_R : SND_SIM_L, 1);     /* each symbol has its own tone */
         if (m->t % slot < on) sim_half((uint8_t)((m->seq >> i) & 1), 255);
         return;
     }
     putr(1, 0, 170);                                                    /* "your turn" */
-    if (m->t > 4000) { m->over = 1; m->t = 0; }
+    if (m->t > 4000) { m->over = 1; m->t = 0; snd_play(SND_LOSE, 1); }
 }
 
 /* ------------------------------------------------------------------ games: Pong ---- */
@@ -586,6 +642,7 @@ static void pong_serve(uint8_t loser) { pg_game_t *g = &W.g.pg; g->st = PG_PLAY;
 static void pong_point(uint8_t winner) {
     pg_game_t *g = &W.g.pg; if (winner == 0) g->s1++; else g->s2++;
     g->winner = winner; g->t = 0; g->st = (g->s1 >= PONG_WIN || g->s2 >= PONG_WIN) ? PG_OVER : PG_POINT;
+    snd_play(g->st == PG_OVER ? SND_WIN : SND_OK, 1);
 }
 static void pong_press(uint8_t b) {
     pg_game_t *g = &W.g.pg;
@@ -596,13 +653,13 @@ static void pong_press(uint8_t b) {
     uint8_t in_zone = side == 0 ? g->pos_q16 <= PONG_Z_Q16 : g->pos_q16 >= 65536L - PONG_Z_Q16, toward = side == 0 ? g->dir < 0 : g->dir > 0;
     if (!in_zone || !toward) return;                                    /* a swing and a miss costs nothing */
     int32_t edge = side == 0 ? g->pos_q16 : 65536L - g->pos_q16;
-    g->dir = (int8_t)-g->dir; g->spd_q16 += 4588 + (edge < 3277 ? 7864 : 0); if (g->spd_q16 > 144179L) g->spd_q16 = 144179L; g->hit[side] = 200;
-    if (W.pref_pg_mode == 1) { g->pts = (uint16_t)(g->pts + 10 > SCORE_CAP ? SCORE_CAP : g->pts + 10); if (g->pts >= SCORE_CAP) { g->st = PG_OVER; g->award = 1; g->t = 0; } }
+    g->dir = (int8_t)-g->dir; g->spd_q16 += 4588 + (edge < 3277 ? 7864 : 0); if (g->spd_q16 > 144179L) g->spd_q16 = 144179L; g->hit[side] = 200; snd_play(SND_TICK, 1);
+    if (W.pref_pg_mode == 1) { g->pts = (uint16_t)(g->pts + 10 > SCORE_CAP ? SCORE_CAP : g->pts + 10); if (g->pts >= SCORE_CAP) { g->st = PG_OVER; g->award = 1; g->t = 0; snd_play(SND_AWARD, 1); } }
 }
 static void pong_step(uint16_t dt) {
     pg_game_t *g = &W.g.pg; g->t += dt; uint8_t solo = W.pref_pg_mode == 1;
     for (uint8_t i = 0; i < 2; i++) g->hit[i] = (int16_t)(g->hit[i] > (int16_t)dt ? g->hit[i] - (int16_t)dt : 0);
-    if (g->st == PG_OVER && solo) { game_over_display(g->pts, g->award, g->t); if (g->t < 8000 && (g->t / 400) % 2 == 0) ind(3, 255); return; }
+    if (g->st == PG_OVER && solo) { game_over_display(g->pts, g->award, g->t); if (g->t < 8000 && (g->t / 400) % 2 == 0) ind(I_FUN, 255); return; }
     for (uint8_t k = 0; k <= 30; k++) {                                 /* the field: paddle zones at both ends of the ball's path */
         int32_t pos = (int32_t)k * 65536L / 30; uint8_t inL = pos <= PONG_Z_Q16, inR = pos >= 65536L - PONG_Z_Q16;
         if (inL || inR) put(pong_led(pos), ((inL && g->hit[0] > 0) || (inR && g->hit[1] > 0)) ? 255 : 45);
@@ -617,7 +674,7 @@ static void pong_step(uint16_t dt) {
     if (g->st == PG_POINT) { put(pong_led(g->winner == 0 ? 0 : 65536L), 255); if (g->t > 900) pong_serve((uint8_t)(1 - g->winner)); return; }
     g->pos_q16 += (int32_t)g->dir * ((int32_t)g->spd_q16 * (int32_t)dt / 1000);
     if (g->pos_q16 <= 0) { if (solo) { g->pos_q16 = 0; g->dir = 1; } else { pong_point(1); return; } }
-    else if (g->pos_q16 >= 65536L) { if (solo) { g->st = PG_OVER; g->t = 0; return; } else { pong_point(0); return; } }
+    else if (g->pos_q16 >= 65536L) { if (solo) { g->st = PG_OVER; g->t = 0; snd_play(SND_LOSE, 1); return; } else { pong_point(0); return; } }
     put(pong_led(g->pos_q16), 255);
 }
 
@@ -655,9 +712,9 @@ static void game_button(uint8_t g, uint8_t b) {                        /* b: 0 =
             t->pts = (uint16_t)(t->pts + 10 + t->lvl > SCORE_CAP ? SCORE_CAP : t->pts + 10 + t->lvl); t->lvl++;
             t->spd_q16 = t->spd_q16 * 11UL / 10UL; if (t->spd_q16 > 90UL * 65536UL) t->spd_q16 = 90UL * 65536UL;
             t->tol_q16 = t->tol_q16 * 23UL / 25UL; if (t->tol_q16 < 39322UL) t->tol_q16 = 39322UL;    /* 0.6 LED minimum */
-            t->hit_flash = 600;
-            if (t->pts >= SCORE_CAP) { t->over = 1; t->award = 1; t->t = 0; }
-        } else { t->over = 1; t->t = 0; t->last_k = (uint8_t)k; }
+            t->hit_flash = 600; snd_play(SND_OK, 1);
+            if (t->pts >= SCORE_CAP) { t->over = 1; t->award = 1; t->t = 0; snd_play(SND_AWARD, 1); }
+        } else { t->over = 1; t->t = 0; t->last_k = (uint8_t)k; snd_play(SND_LOSE, 1); }
         break; }
     case G_ORBIT: W.pref_orb_pat = (uint8_t)((W.pref_orb_pat + (b == 1 ? 1 : 5)) % 6); break;
     case G_RNG:
@@ -676,6 +733,12 @@ static void game_button(uint8_t g, uint8_t b) {                        /* b: 0 =
 }
 
 /* ------------------------------------------------------------------ rendering of the modes ---- */
+static void render_alarm_edit(uint8_t blink2) {                          /* ALM mode: alarm hour (hour ring), minute (minute ring), on/off; PM = outer LED at 6 */
+    uint8_t f = W.alm_field, h12 = (uint8_t)(W.alm_h % 12 == 0 ? 12 : W.alm_h % 12), idle_lvl = W.alm_on ? 255 : 70;
+    put(hour_led(h12), f == 0 ? (blink2 ? 255 : 0) : idle_lvl); put(MINUTE_LED[W.alm_m], f == 1 ? (blink2 ? 255 : 0) : idle_lvl);
+    if (W.alm_h >= 12) putr(2, 30, 120);
+    if (W.alm_on) bar_n(2, 3, f == 2 ? (blink2 ? 255 : 0) : 255); else if (f == 2) putr(2, 0, blink2 ? 90 : 0);
+}
 static void render_time(void) {
     uint8_t h, m, s; hms(&h, &m, &s);
     put(hour_led((uint8_t)(h % 12 == 0 ? 12 : h % 12)), 255); put(MINUTE_LED[m], 255);
@@ -684,7 +747,7 @@ static void render_time(void) {
 static void render_date(int8_t blink_field, uint8_t blink_on) {          /* month: hour ring, day: minute ring, weekday: bar on the outer ring */
     uint8_t m_lvl = (blink_field == 3 && !blink_on) ? 0 : 255, d_lvl = (blink_field == 4 && !blink_on) ? 0 : 255;
     put(hour_led(W.month), m_lvl); put(MINUTE_LED[W.day], d_lvl);
-    bar_n(2, weekday_iso(W.year, W.month, W.day), (blink_field == 3 || blink_field == 4) ? 140 : 255);
+    ind((uint8_t)(weekday_iso(W.year, W.month, W.day) % 7), (blink_field == 3 || blink_field == 4) ? 140 : 255);     /* weekday: one indicator LED, Sunday = SET ... Saturday = LCK */
 }
 
 static void render(uint16_t dt) {
@@ -692,19 +755,20 @@ static void render(uint16_t dt) {
     W.tms += dt;
     uint8_t blink2 = (W.tms / 250) % 2 == 0, blink4 = (W.tms / 125) % 2 == 0;
     if (!W.awake) return;
+    if (W.alm_ring) { render_time(); ind(I_ALM, (W.alm_t / 125) % 2 == 0 ? 255 : 60); if ((W.alm_t / 250) % 2 == 0) bar_n(0, 12, 150); return; }   /* alarm ringing */
     uint8_t holding_both = W.both_t >= 400 && !W.lock_done;
     if (W.ind_only) {                                                    /* lock feedback: only the LCK LED */
         if (W.lock_flash > 0) W.lock_flash = (int16_t)(W.lock_flash - dt);
-        ind(5, (holding_both || W.lock_flash > 0) ? (blink4 ? 255 : 0) : (W.locked ? 255 : 0));
+        ind(I_LCK, (holding_both || W.lock_flash > 0) ? (blink4 ? 255 : 0) : (W.locked ? 255 : 0));
         return;
     }
     if (W.menu_on) { if (blink2) { if (W.menu_sel == 0) put(hour_led(12), 255); else ind((uint8_t)MODE_IND[W.menu_sel], 255); } return; }
-    if (W.dead) { if (blink4) ind(2, 255); return; }
+    if (W.dead) { if (blink4) ind(I_BAT, 255); return; }
     switch (W.mode) {
     case M_TIME:
-        if (W.peek > 0) { bar_n(0, (uint8_t)(((uint32_t)io->soc_pm * 12 + 500) / 1000), 255); ind(2, 255); W.peek = (int16_t)(W.peek - dt); }
+        if (W.peek > 0) { bar_n(0, (uint8_t)(((uint32_t)io->soc_pm * 12 + 500) / 1000), 255); ind(I_BAT, 255); W.peek = (int16_t)(W.peek - dt); }
         else if (W.date_peek > 0) { render_date(-1, 1); W.date_peek = (int16_t)(W.date_peek - dt); }
-        else render_time();
+        else { render_time(); if (W.alm_on) ind(I_ALM, 60); }                    /* a dim ALM LED shows that an alarm is set */
         break;
     case M_SET: {
         uint8_t h, m, s; hms(&h, &m, &s); uint8_t f = W.set_field, on = blink2, h12 = (uint8_t)(h % 12 == 0 ? 12 : h % 12), dim = 70;
@@ -715,12 +779,13 @@ static void render(uint16_t dt) {
     case M_TMR: {
         uint32_t e = W.tmr_el; put(SECOND_LED[e / 1000 % 60], 255); put(MINUTE_LED[e / 60000UL % 60], 160); put(hour_led(TENTHS_LED[e / 100 % 10]), 90);
         break; }
+    case M_ALM: render_alarm_edit(blink2); break;
     case M_BAT:
         if (W.bat_view == 0) bar_n(0, (uint8_t)(((uint32_t)io->soc_pm * 12 + 500) / 1000), 255);
         else if (W.bat_view == 1) bar_n(1, SOLAR_BAR[io->solar_mw > 30 ? 30 : io->solar_mw], 200);
         else if (io->charging) { uint8_t k = (uint8_t)((W.tms / 90) % 12); put(hour_led(k == 0 ? 12 : k), 255); put(hour_led((uint8_t)(((k + 11) % 12) ? (k + 11) % 12 : 12)), 90); }
         else put(hour_led(12), 120);
-        { uint8_t lvl = 255; if (io->charging && W.bat_view == 2) { int16_t sv = sin16((uint16_t)((W.tms % 1571UL) * 65536UL / 1571UL)); lvl = (uint8_t)(188 + ((67L * sv + 16384) >> 15)); } ind(2, lvl); }
+        { uint8_t lvl = 255; if (io->charging && W.bat_view == 2) { int16_t sv = sin16((uint16_t)((W.tms % 1571UL) * 65536UL / 1571UL)); lvl = (uint8_t)(188 + ((67L * sv + 16384) >> 15)); } ind(I_BAT, lvl); }
         break;
     case M_FUN:
         if (!W.fun_playing) put(hour_led((uint8_t)(W.fun_g + 1)), blink2 ? 255 : 120);          /* game picker: hour LED n = game n */
@@ -745,10 +810,10 @@ static void render(uint16_t dt) {
         }
     }
     if (MODE_IND[W.mode] >= 0 && W.mode != M_BAT) ind((uint8_t)MODE_IND[W.mode], 255);
-    if (W.locked && !holding_both) ind(5, 255);
-    if (holding_both && blink4) ind(5, 255);
-    if (W.lock_flash > 0) { W.lock_flash = (int16_t)(W.lock_flash - dt); if (blink4) for (uint8_t i = 0; i < 6; i++) ind(i, 255); }
-    if (!io->bat_ok && W.mode == M_TIME && blink4) ind(2, 255);
+    if (W.locked && !holding_both) ind(I_LCK, 255);
+    if (holding_both && blink4) ind(I_LCK, 255);
+    if (W.lock_flash > 0) { W.lock_flash = (int16_t)(W.lock_flash - dt); if (blink4) for (uint8_t i = 0; i < I_COUNT; i++) ind(i, 255); }
+    if (!io->bat_ok && W.mode == M_TIME && blink4) ind(I_BAT, 255);
 }
 
 /* ------------------------------------------------------------------ scan plan ---- */
@@ -783,6 +848,7 @@ void watch_init(uint32_t seed) {
     W.rtc_ms = (10UL * 3600UL + 8UL * 60UL + 37UL) * 1000UL; W.year = 2026; W.month = 10; W.day = 11;
     W.set[C_BRI] = 2; W.set[C_WAKE] = 1; W.set[C_DUR] = 3;
     W.pref_pc_bpm = 100; W.pref_pc_br = 6;
+    W.alm_h = 7; W.alm_armed = 1;
 }
 
 void watch_step(uint16_t dt_real, uint32_t dt_sim, const watch_io_t *in) {
@@ -798,13 +864,16 @@ void watch_step(uint16_t dt_real, uint32_t dt_sim, const watch_io_t *in) {
     if (shake_acc > SHAKE_JERK) { shake_acc = 0; W.shaken = 1; if (W.set[C_SHAKE] == 0 && !lock_dark) motion_wake(); }
     if (io->wake_strength > 0 && W.set[C_RAISE] == 0 && !lock_dark && io->wake_strength >= WAKE_SENS[W.set[C_WAKE]]) motion_wake();
     if (io->tap && W.set[C_TAP] == 0 && !lock_dark) motion_wake();
+    { uint8_t h, m, s; hms(&h, &m, &s); uint16_t now = (uint16_t)(h * 60 + m), at = (uint16_t)(W.alm_h * 60 + W.alm_m);
+      if (now != at) W.alm_armed = 1; else if (W.alm_on && W.alm_armed && !W.alm_ring) { W.alm_armed = 0; alm_start(); }
+      if (W.alm_ring) { W.alm_t += dt_real; if (W.alm_t >= 60000L) alm_stop(); } }                  /* the alarm rings for at most a minute */
     buttons(dt_real);
     if (W.menu_on) { W.menu_t += dt_real; if (W.menu_t >= MENU_CONFIRM_MS) menu_confirm(); }
     uint8_t always_on = W.locked && W.set[C_LOCKD] == 2;                 /* locked, display stays lit showing Time */
     if (W.awake) {
         W.idle += dt_real;
         uint32_t lim = W.dead ? 1000UL : W.ind_only ? 1200UL : W.mode == M_TIME ? DUR_MS[W.set[C_DUR]] : W.mode == M_FUN ? (W.fun_playing ? GAME_IDLE_MS : MODE_IDLE_MS) : tmr_keep() ? TMR_KEEP_MS : MODE_IDLE_MS;
-        if (always_on) W.idle = 0;
+        if (always_on || W.alm_ring) W.idle = 0;
         else if (W.idle > lim) {
             if (W.mode != M_TIME && !tmr_keep() && !W.ind_only) { to_mode(M_TIME); W.idle = 0; }
             else { W.awake = 0; W.ind_only = 0; W.menu_on = 0; }
@@ -813,6 +882,7 @@ void watch_step(uint16_t dt_real, uint32_t dt_sim, const watch_io_t *in) {
     if (always_on && !W.awake) { W.awake = 1; W.ind_only = 0; W.idle = 0; }
     if (W.tmr_run) W.tmr_el += dt_real;                                   /* the stopwatch keeps counting whatever the display is doing */
     render(dt_real);
+    snd_step(dt_real);
     uint32_t duty = BRI_Q16[W.set[C_BRI]];
     if (W.set[C_AUTO]) { duty = duty * (35UL + 165UL * io->ambient / 100UL) / 100UL; if (duty > 52429UL) duty = 52429UL; }
     if (!io->bat_ok) duty /= 2;

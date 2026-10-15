@@ -65,6 +65,10 @@ kbd{background:#232c47;border:1px solid var(--line);border-radius:4px;padding:0 
    <label>ambient light <input id="amb" type="range" min="0" max="1" step="0.05" value="0.5"><span id="ambv"></span></label>
    <label><input id="drain" type="checkbox"> drain / charge battery from simulated current (140 mAh)</label>
   </div>
+  <div class="panel"><h2>Sound (piezo)</h2>
+   <div class="row"><label><input id="snd" type="checkbox" checked> play the buzzer</label><label>volume <input id="vol" type="range" min="0" max="0.5" step="0.01" value="0.12"></label>
+    <button id="bAlarm">Alarm test (rings in 5 s)</button></div>
+   <div class="hint">The core only says which frequency the piezo should play (<code>out.tone</code>); this page plays it as a square wave. Beeps follow the settings: key beeps (CFG 11, off by default), game sounds (CFG 12, on by default); the alarm always sounds. Click anywhere first (the browser blocks sound until you do).</div></div>
   <div class="panel"><h2>Controls right now</h2>
    <div id="cyc" class="row" style="gap:4px"></div>
    <table id="ctl" style="width:100%;border-collapse:collapse"></table>
@@ -138,6 +142,19 @@ $('devori').onchange = e => {
     if (window.DeviceOrientationEvent && DeviceOrientationEvent.requestPermission) DeviceOrientationEvent.requestPermission().then(r => r === 'granted' && on()); else on();
   } else devOri = null;
 };
+
+/* ---------- sound: the piezo. out.tone = frequency in Hz (0 = silent) decided by the firmware core ---------- */
+let actx = null, osc = null, gain = null;
+function audioInit() {
+  if (actx) { if (actx.state === 'suspended') actx.resume(); return; }
+  try { actx = new (window.AudioContext || window.webkitAudioContext)(); osc = actx.createOscillator(); osc.type = 'square'; gain = actx.createGain(); gain.gain.value = 0; osc.connect(gain); gain.connect(actx.destination); osc.start(); } catch (e) { actx = null; }
+}
+addEventListener('pointerdown', audioInit, true); addEventListener('keydown', audioInit, true);
+function playTone(hz) {
+  if (!actx) return; const t = actx.currentTime;
+  if (hz > 0 && $('snd').checked) { osc.frequency.setValueAtTime(hz, t); gain.gain.setTargetAtTime(+$('vol').value, t, 0.003); } else gain.gain.setTargetAtTime(0, t, 0.003);
+}
+$('bAlarm').onclick = () => { const t = W.getHms(), n = (t.h * 60 + t.m + 1) % 1440; W.setAlarm(Math.floor(n / 60), n % 60, 1); W.setHms(t.h, t.m, 55); addLog('alarm set for the next minute, clock moved to ' + t.h + ':' + t.m + ':55'); };
 
 /* ---------- environment ---------- */
 let simSpeed = 1, socV = 0.8, drain = false;
@@ -214,7 +231,7 @@ function drawFace(out, slowSlot, rawVis) {
   cx.fillStyle = '#3d4868'; cx.font = (SC * 1.1) + 'px system-ui';
   [[12, 0], [3, 90], [6, 180], [9, 270]].forEach(([n, a]) => { const r = (F.radii.S + 3.1), t = a * Math.PI / 180; cx.fillText(n, X(r * Math.sin(t)), Y(-r * Math.cos(t)) + SC * 0.4); });
   // sand particles preview (physics positions), faint
-  if (out.awake && W.S.mode === 4 && W.S.fun.playing && W.S.fun.g === 0 && W.game().sand && W.game().sand.mode < 4 && $('slow').checked === false) {
+  if (out.awake && W.S.mode === 5 && W.S.fun.playing && W.S.fun.g === 0 && W.game().sand && W.game().sand.mode < 4 && $('slow').checked === false) {
     cx.fillStyle = 'rgba(120,170,255,.18)';
     for (const q of W.sandParticles()) { cx.beginPath(); cx.arc(X(q.x), Y(q.y), 0.8 * SC, 0, 7); cx.fill(); }
   }
@@ -233,7 +250,7 @@ function drawTilt(f) {
 let last = performance.now(), acc = { x: 0, y: 0, z: 1 }, slowIdx = 0, slowT = 0, energy = { mWh: 0 }, lastLogTxt = '';
 const logEl = $('log');
 fetch('MANUAL.md').then(r => r.text()).then(t => $('manual').textContent = t).catch(() => $('manual').textContent = '(serve this folder over http to see the manual here, or open MANUAL.md)');
-const MODES = ['TIME', 'SET', 'TMR', 'BAT', 'FUN', 'CFG']; let lastCtl = '';
+const MODES = ['TIME', 'SET', 'TMR', 'ALM', 'BAT', 'FUN', 'CFG']; let lastCtl = '';
 function drawControls() {
   const c = W.controls(), key = JSON.stringify([c, W.S.mode]);
   if (key === lastCtl) return; lastCtl = key;
@@ -275,6 +292,7 @@ function frame(now) {
   tap = false; ffEv = false;
   const out = W.step(dt, dt * simSpeed, io);
   for (const e of out.events) addLog(e);
+  playTone(out.tone);
   // battery model: LED current + MCU current; solar charges
   const mcuMa = out.awake ? 1.2 : 0.004;                                     // assumption: ~1.2 mA running at 4 MHz, ~4 uA asleep (RTC+IMU)
   const loadMa = out.scan.avgMa + mcuMa, solMa = solar / Math.max(3.0, io.vdd) * 0.8;
@@ -295,6 +313,7 @@ function frame(now) {
   const sc = out.scan;
   $('status').innerHTML =
     `<b>mode</b><span>${out.modeName}${out.sub ? ' - ' + out.sub : ''}${out.locked ? ' <span class="warn">[LOCKED]</span>' : ''}</span>` +
+    `<b>buzzer</b><span>${out.tone ? out.tone + ' Hz' : 'silent'}${W.S.alm.ring ? ' <span class="warn">ALARM</span>' : ''}</span>` +
     `<b>display</b><span>${out.awake ? 'on (idle ' + (W.S.idle / 1000).toFixed(1) + ' s)' : 'off, MCU in standby'}</span>` +
     `<b>VDD</b><span>${io.vdd.toFixed(2)} V  (BAT_OK ${io.batOk ? 'high' : '<span class="warn">low</span>'}${W.S.dead ? ', <span class="warn">dead</span>' : ''})</span>` +
     `<b>LED current</b><span>${sc.I.toFixed(2)} mA each, ${sc.m} per row-slot (row sink ≤ 10 mA)</span>` +

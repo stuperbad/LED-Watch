@@ -31,7 +31,7 @@ def parse(text):
     rows = []
     for line in text.strip().split("\n"):
         t = line.split(" ")
-        rows.append((tuple(int(x) for x in t[:7]), bytes.fromhex(t[7])))
+        rows.append((tuple(int(x) for x in t[:7]) + (int(t[8]),), bytes.fromhex(t[7])))      # header ends with the buzzer frequency
     return rows
 
 
@@ -42,8 +42,8 @@ def compare(name, js, c):
     bad = 0
     first = None
     for i, ((hj, fj), (hc, fc)) in enumerate(zip(js, c)):
-        if (hj != hc) if not (tol or allow) else (hj[:6] != hc[:6]):
-            return "step %d header differs (mode awake locked menu sel ind slots): js %s vs c %s" % (i, hj, hc)
+        if (hj != hc) if not (tol or allow) else (hj[:6] + hj[7:] != hc[:6] + hc[7:]):
+            return "step %d header differs (mode awake locked menu sel ind slots tone): js %s vs c %s" % (i, hj, hc)
         diff = [k for k in range(144) if abs(fj[k] - fc[k]) > tol and not (tol and max(fj[k], fc[k]) <= 20)]    # lenient: ignore near-dark LEDs
         if len(diff) > allow:
             bad += 1

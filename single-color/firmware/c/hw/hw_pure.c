@@ -53,3 +53,14 @@ int16_t raise_feed(raise_t *r, int16_t x, int16_t y, int16_t z) {
     int32_t s = r->max_d / RAISE_MG_PER_PERCENT;
     return (int16_t)(s > 100 ? 100 : s);
 }
+
+/* ---- buzzer plan ---- */
+static const uint16_t BZ_DIV[8] = { 1, 2, 4, 8, 16, 64, 256, 1024 };
+uint8_t buzzer_plan(uint16_t hz, uint32_t f_cpu, buzzer_plan_t *out) {
+    if (!hz) return 0;
+    for (uint8_t i = 0; i < 8; i++) {
+        uint32_t per1 = (f_cpu / BZ_DIV[i] + hz / 2u) / hz;            /* period in timer clocks */
+        if (per1 >= 4 && per1 <= 256) { out->div_idx = i; out->per = (uint8_t)(per1 - 1); return 1; }
+    }
+    return 0;
+}

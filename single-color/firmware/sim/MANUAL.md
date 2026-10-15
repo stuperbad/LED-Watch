@@ -13,14 +13,14 @@ MODE SELECTION (Left long, from anywhere)
 -----------------------------------------
    ONE indicator blinks: the highlighted mode (it starts on the mode you were in).
    Time has no indicator: it shows as the 12 o'clock hour LED blinking.
-   The buttons move the highlight like the row of indicators under the solar cell (SET TMR BAT FUN CFG LCK):
+   The buttons move the highlight like the row of indicators under the solar cell (SET TMR ALM BAT FUN CFG LCK):
    LEFT short  : move LEFT one mode        RIGHT short : move RIGHT one mode      (both wrap round)
-                 order left to right:  TIME  SET  TMR  BAT  FUN  CFG
+                 order left to right:  TIME  SET  TMR  ALM  BAT  FUN  CFG
    LEFT long   : jump to TIME
    RIGHT long  : enter the highlighted mode right now
    (do nothing) : after 2.5 s it enters the highlighted mode by itself - this is the normal way
 So "hold Left, tap Right, tap Right, wait" is a complete gesture. A stray short tap can never change mode.
-Indicators, left to right under the solar cell:   SET   TMR   BAT   FUN   CFG   LCK
+Indicators, left to right under the solar cell:   SET   TMR   ALM   BAT   FUN   CFG   LCK
 TIME lights none. LCK is not a mode: it shows the lock state (see LOCKING).
 
 DECAY (everything drifts back to Time on its own)
@@ -61,8 +61,9 @@ READING THE DATE (RIGHT short in TIME)
 Tap RIGHT in TIME: the date shows for 2 s, then the time returns.
    hour ring   = MONTH   (January = 1 o'clock ... November = 11, December = 12 o'clock)
    minute ring = DAY     (the LED at that minute mark: the 15th = the 15-minute LED)
-   outer ring  = WEEKDAY as a bar counted from 12 o'clock: Monday = 1 LED ... Sunday = 7 LEDs
-Example: Sunday 11 October = hour LED 10, minute LED 11, seven outer LEDs lit.
+   indicator row = WEEKDAY: ONE of the seven indicator LEDs lights. They are printed with the weekday letter under the mode name:
+                   SET-S = Sunday, TMR-M = Monday, ALM-T = Tuesday, BAT-W = Wednesday, FUN-T = Thursday, CFG-F = Friday, LCK-S = Saturday
+Example: Sunday 11 October = hour LED 10, minute LED 11, the SET indicator lit.
 (Weekdays are worked out from the date, leap years included; the date rolls over at midnight.)
 
 THE MODES
@@ -72,6 +73,7 @@ TIME  (no indicator)
    LEFT : -
    RIGHT short : the DATE for 2 s (see READING THE DATE)
    RIGHT long  : the BATTERY level for 2 s (hour ring fills like a bar, BAT lit)
+   A dim ALM indicator means an alarm is set.
 
 SET   (set the time and date)   - no "edit" step: you are editing as soon as you are in
    The unit being changed BLINKS. Units, in order: hour, minute, second, month, day, year.
@@ -81,6 +83,16 @@ SET   (set the time and date)   - no "edit" step: you are editing as soon as you
    Year: one minute-ring LED at the last two digits (2026 = the 26-minute LED) blinks; range 2024-2099.
    Changes apply immediately; there is no save step. The day clamps to the month length.
    Leave with LEFT long (mode selection).
+
+ALM   (alarm clock)   - like SET there is no edit step; the field being changed BLINKS. Fields: hour, minute, on/off.
+   hour LED = alarm hour (12-hour clock), minute LED = alarm minute, one outer LED at 6 o'clock = PM, three outer LEDs at 12 = alarm ON.
+   An alarm that is off shows dim.
+   LEFT short  : next field          RIGHT short : +1 hour / +1 minute / switch the alarm on or off
+   RIGHT hold  : auto-repeat +1 (hour and minute)
+   When the minute comes the alarm RINGS for up to a minute: beep beep beep beep, pause (4 kHz); the display wakes (even a locked or dark
+   watch), the 12 hour LEDs flash with the time and the ALM LED blinks. ANY button stops it (and does nothing else). No snooze yet.
+   With a low battery (BAT_OK low) the alarm still rings; every other sound is muted.
+   Setting the alarm to the current minute waits for tomorrow.
 
 TMR   (stopwatch)
    seconds LED = elapsed seconds, minute LED = elapsed minutes,
@@ -221,7 +233,7 @@ IDEAS FOR LATER GAMES (nothing built yet)
 CFG: HOW TO CHANGE A SETTING
 ----------------------------
 1. Open CFG from mode selection (hold LEFT, tap RIGHT until CFG blinks, then wait).
-2. The HOUR RING shows ONE steady LED: hour LED 1..10 = setting 1..10.
+2. The HOUR RING shows ONE steady LED: hour LED 1..12 = setting 1..12.
    The MINUTE RING shows a bar from 12 o'clock: bar length = which choice (short bar = first choice, full ring = last).
 3. RIGHT short = next value (wraps).   LEFT short = next setting.
 4. Changes apply immediately (no save step). Leave with LEFT long.
@@ -237,6 +249,8 @@ CFG: HOW TO CHANGE A SETTING
    8         wake by tap         on (default), off
    9         buttons that wake   either (default), left only, right only, none
    10        lock display        motion wakes it (default), stays dark, always on (low brightness, no seconds)
+   11        key beeps           off (default), on: a 3.5 kHz click on every button press (not inside games; games make their own sounds)
+   12        game sounds         on (default), off: hits, misses, wins, Simon tones, the metronome tick, Quick Draw GO
 
 POWER NOTES
 -----------
@@ -251,3 +265,16 @@ OPEN QUESTIONS (design calls to confirm)
    vs silkscreen ticks (60 LEDs do not divide by 7).
 2. Mode selection auto-enters after 2.5 s: right length? (This is now the main way to confirm.)
 3. Which game idea next?
+
+SOUNDS (the piezo, Murata PKMCS0909E4000-R1 on PB4/PB5)
+-------------------------------------------------------
+What beeps is decided by CFG 11 / CFG 12 and the alarm; the simulator plays the same frequencies the watch would (Sound panel).
+   alarm            beep beep beep beep, pause, repeating (4 kHz), up to a minute, always on while the alarm is set; any button stops it
+   key beeps        CFG 11 (off by default): short click on every press
+   games (CFG 12)   Ring Runner: tick per obstacle, falling tune on a crash   Target: rising pair on a hit, falling tune on a miss
+                    Quick Draw: a long beep on GO, a fanfare for the winner, a low double beep for a false start
+                    Simon: a low tone for LEFT, a high tone for RIGHT (while it shows the sequence and when you press), falling tune if wrong
+                    Pong: tick on every return, rising pair for a point, fanfare for the winner, falling tune when a solo game ends
+                    Pacer (metronome): a tick on every beat, a higher one on the first of four
+                    999 points: a longer fanfare with the award animation
+   A low battery (BAT_OK low) mutes everything except the alarm. No sound is shorter than 20 ms (the watch loop steps every 16 ms).

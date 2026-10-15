@@ -68,8 +68,10 @@ typedef struct {
     uint16_t year; uint8_t month, day;
     uint8_t  set_field, cfg_sel, bat_view;
     uint8_t  tmr_run; uint32_t tmr_el;
+    uint8_t  alm_on, alm_h, alm_m, alm_field, alm_ring, alm_armed; int32_t alm_t;   /* alarm: on/off, time, field being edited, ringing, ready to fire */
+    uint8_t  snd_pat, snd_i; uint16_t snd_hz; int32_t snd_t;                         /* buzzer: pattern playing, note index, current frequency (0 = silent) */
     uint8_t  fun_g, fun_playing;
-    uint8_t  set[10];                   /* CFG values, index = CFG number - 1 */
+    uint8_t  set[12];                   /* CFG values, index = CFG number - 1 (CFG 11 = key beeps, CFG 12 = game sounds) */
     uint8_t  pref_sand_mode, pref_orb_pat, pref_rng_mode, pref_pc_kind, pref_pg_mode;
     uint8_t  pref_pc_bpm, pref_pc_br;
     button_t b[2];
@@ -86,6 +88,8 @@ const watch_scan_t *watch_scan(void);   /* the plan computed by the last watch_s
 const watch_t    *watch_state(void);
 void              watch_set_time(uint8_t h, uint8_t m, uint8_t s);
 void              watch_set_date(uint16_t y, uint8_t mo, uint8_t d);
-void              watch_set_cfg(uint8_t idx, uint8_t v);     /* idx 0..9 = CFG 1..10; used by tests and to load saved settings */
+void              watch_set_cfg(uint8_t idx, uint8_t v);     /* idx 0..11 = CFG 1..12; used by tests and to load saved settings */
+void              watch_set_alarm(uint8_t h, uint8_t m, uint8_t on);
+uint16_t          watch_tone_hz(void);       /* frequency the piezo should play now (0 = silent), valid after watch_step() */
 uint8_t           watch_weekday_iso(void);   /* Monday = 1 ... Sunday = 7 */
 uint8_t           watch_awake(void);         /* 1 while the display is on (the MCU may sleep when 0) */

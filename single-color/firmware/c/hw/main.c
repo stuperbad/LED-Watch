@@ -28,6 +28,7 @@
 #include "matrix.h"
 #include "clock.h"
 #include "buttons.h"
+#include "buzzer.h"
 #include "vbat.h"
 #include "i2c.h"
 #include "imu.h"
@@ -49,7 +50,7 @@ static void unused_pins_off(void) {
     static const uint8_t present[6] = { 0xFF, 0x3F, 0xFF, 0xFF, 0x0F, 0x3C };       /* pins that exist (PF: only PF2..PF5 are free to configure) */
     uint8_t used[6] = {
         (uint8_t)(MATRIX_ALL_ROWS[0] | MATRIX_ALL_COLS[0] | (1u << HW_SDA_BIT) | (1u << HW_SCL_BIT)),    /* the I2C pins keep their input buffer */
-        (uint8_t)(MATRIX_ALL_ROWS[1] | MATRIX_ALL_COLS[1]),
+        (uint8_t)(MATRIX_ALL_ROWS[1] | MATRIX_ALL_COLS[1] | (1u << HW_BUZ_A_BIT) | (1u << HW_BUZ_B_BIT)),   /* the buzzer pins are outputs */
         (uint8_t)(MATRIX_ALL_ROWS[2] | MATRIX_ALL_COLS[2]),
         (uint8_t)(MATRIX_ALL_ROWS[3] | MATRIX_ALL_COLS[3]),
         (uint8_t)((1u << HW_BTN1_BIT) | (1u << HW_BTN2_BIT) | (1u << HW_IMU_INT_BIT) | (1u << HW_BAT_OK_BIT)), 0 };
@@ -65,20 +66,22 @@ static void wait_for_event(uint8_t light) {
     sei();
 }
 
-/* Power-on self-test shown on the six indicator LEDs for 2 seconds, so the first bring-up needs no serial cable or debugger:
+/* Power-on self-test shown on the seven indicator LEDs (left to right SET TMR ALM BAT FUN CFG LCK) for 2 seconds, so the first bring-up needs no serial cable or debugger:
  *   SET lit = the 32 kHz crystal started        TMR lit = the accelerometer answered        BAT lit = BAT_OK pin is high (battery fine)
- *   FUN lit = supply voltage reads above 3.0 V   CFG lit = supply voltage reads above 3.6 V   LCK is not used
+ *   FUN lit = supply voltage reads above 3.0 V   CFG lit = supply voltage reads above 3.6 V   ALM and LCK are not used (a short beep also confirms the piezo)
  * A missing SET means the watch is timing itself from the inaccurate internal oscillator. */
 static void boot_diag(uint8_t crystal, uint8_t imu_found, uint8_t bat_ok, uint16_t vdd_mv) {
-    uint8_t ok[5] = { crystal, imu_found, bat_ok, (uint8_t)(vdd_mv > 3000), (uint8_t)(vdd_mv > 3600) };
+    uint8_t ok[7] = { crystal, imu_found, 0, bat_ok, (uint8_t)(vdd_mv > 3000), (uint8_t)(vdd_mv > 3600), 0 };      /* index = MODE_LED index = position on the face */
     static watch_scan_t sc; static uint8_t fb[WATCH_ROWS * WATCH_COLS];
     memset(&sc, 0, sizeof sc); memset(fb, 0, sizeof fb);
-    for (uint8_t i = 0; i < 5; i++) if (ok[i]) { led_pos_t l = MODE_LED[i]; fb[l.row * WATCH_COLS + l.col] = 255; sc.slot[sc.n].row = l.row; sc.slot[sc.n].cols = (uint16_t)(1u << l.col); sc.n++; }
+    for (uint8_t i = 0; i < 7; i++) if (ok[i]) { led_pos_t l = MODE_LED[i]; fb[l.row * WATCH_COLS + l.col] = 255; sc.slot[sc.n].row = l.row; sc.slot[sc.n].cols = (uint16_t)(1u << l.col); sc.n++; }
     sc.m = 1; sc.on_q16 = 16000;                                    /* about 25 % of each slot: bright enough to see, gentle on the battery */
-    if (!sc.n) { sc.n = 1; sc.slot[0].row = MODE_LED[5].row; sc.slot[0].cols = 0; }   /* nothing OK: keep the display off (an empty slot lights nothing) */
+    if (!sc.n) { sc.n = 1; sc.slot[0].row = MODE_LED[6].row; sc.slot[0].cols = 0; }   /* nothing OK: keep the display off (an empty slot lights nothing) */
     matrix_update(&sc, fb);
     uint32_t t = 0; (void)clock_elapsed_ms();
-    while (t < 2000) { wait_for_event(1); if (clock_tick_pending()) t += clock_elapsed_ms(); pin_event = 0; }
+    buzzer_set(4000);                                                /* a 150 ms beep proves the piezo and its drive */
+    while (t < 2000) { wait_for_event(1); if (clock_tick_pending()) t += clock_elapsed_ms(); pin_event = 0; if (t >= 150) buzzer_set(0); }
+    buzzer_set(0);
     matrix_off();
 }
 
@@ -87,6 +90,7 @@ int main(void) {
     clock_init();
     inputs_init();
     matrix_init();
+    buzzer_init();                                  /* after unused_pins_off(): PB4/PB5 are outputs */
     vbat_init();
     i2c_init();
     imu_ok = imu_init();
@@ -137,6 +141,7 @@ int main(void) {
         /* ---- the watch ---- */
         watch_step((uint16_t)ms, ms, &io);
         matrix_update(watch_scan(), watch_fb());
+        buzzer_set(watch_awake() ? watch_tone_hz() : 0);                /* a tone only plays while the display is on (the alarm wakes it) */
 
         /* ---- how fast to run next ---- */
         if (motion_ms > 0) motion_ms -= (int32_t)ms;

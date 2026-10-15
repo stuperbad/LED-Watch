@@ -64,14 +64,14 @@ class Sc:
     def tilt(s, ax, ay, az):
         s.acc = (ax, ay, az)
 
-    def goto(s, mode):                                            # via mode selection: hold Left, move Right until it blinks, then Right long
+    def goto(s, mode):                                            # via mode selection (TIME 0, SET 1, TMR 2, ALM 3, BAT 4, FUN 5, CFG 6): hold Left, move Right until it blinks, then Right long
         s.long(0)
         for _ in range(mode):
             s.press(1)
         s.long(1)
 
     def game(s, g):
-        s.goto(4)
+        s.goto(5)
         for _ in range(g):
             s.press(0)
         s.press(1)
@@ -120,7 +120,7 @@ def build():
     out.append(s)
 
     s = Sc("05_battery")
-    s.press(1); s.goto(3)
+    s.press(1); s.goto(4)
     for v, sol, chg in [(800, 0, 0), (50, 3, 1), (990, 30, 1), (0, 7, 0)]:
         s.soc = v; s.solar = sol; s.chg = chg; s.idle(300)
         for i in range(3):
@@ -129,8 +129,8 @@ def build():
     out.append(s)
 
     s = Sc("06_config_and_wake_settings")
-    s.press(1); s.goto(5)
-    for k in range(10):
+    s.press(1); s.goto(6)
+    for k in range(12):
         s.idle(200)
         for i in range(3):
             s.press(1); s.idle(100)
@@ -207,6 +207,63 @@ def build():
     for p in range(6):
         s.idle(2500); s.press(1)
     s.tilt(300, -200, 900); s.idle(1000); s.press(0); s.idle(1000)
+    out.append(s)
+
+    # ---- alarm, weekday lights, key beeps, game sounds (the buzzer: out.tone must match between the cores)
+    s = Sc("18_alarm")
+    s.press(1); s.goto(3); s.idle(300)                                                                  # ALM mode: hour, minute, on/off
+    for i in range(3):
+        s.press(1); s.idle(100)
+    s.press(0); s.idle(100)
+    for i in range(3):
+        s.press(1); s.idle(100)
+    s.hold(2, 1500); s.idle(200)                                                                       # auto-repeat on the minute
+    s.press(0); s.press(1); s.idle(400)                                                                # on/off -> on
+    s.idle(16000)                                                                                      # back to Time, dim ALM LED
+    s.cmd("TIME 10 9 55"); s.cmd("ALARM 10 10 1"); s.idle(8000)                                        # rings at 10:10:00 (beeps, flashing)
+    s.idle(3000); s.press(1); s.idle(2000)                                                             # any button stops it (and does nothing else)
+    s.cmd("TIME 10 9 55"); s.idle(8000); s.idle(61000)                                                 # rings again, nobody presses: stops itself after a minute
+    s.cmd("TIME 10 9 55"); s.idle(8000); s.press(0); s.idle(500)                                       # dark watch? alarm still wakes it (not tested) / stop with Left
+    s.cmd("ALARM 7 30 1"); s.cmd("TIME 7 29 50"); s.idle(500); s.chord(2400); s.idle(12000)            # locked: the alarm still rings
+    s.press(1); s.idle(1500)
+    s.cmd("ALARM 23 59 0"); s.cmd("TIME 23 59 0"); s.idle(2000)                                        # off: silent
+    out.append(s)
+
+    s = Sc("19_weekday_and_key_beeps")
+    for d in range(1, 8):                                                                              # one week, Sunday 2026-10-11 first
+        s.cmd("DATE 2026 10 %d" % (10 + d)); s.press(1); s.idle(2300)                                  # Right short in Time = date + weekday LED
+    s.cmd("CFG 10 1"); s.press(1); s.goto(1); s.press(0); s.press(1); s.press(0); s.idle(300)          # key beeps on: clicks on short and long presses
+    s.long(0); s.idle(400); s.press(1); s.idle(2700)
+    s.bat = 0; s.press(1); s.idle(500)                                                                 # low battery: no key beeps
+    s.bat = 1; s.goto(6)
+    for k in range(10):
+        s.press(0)
+    s.press(1); s.press(1); s.idle(300)                                                                # CFG 11 / 12 are reachable (hour LEDs 11 and 12)
+    out.append(s)
+
+    s = Sc("20_game_sounds", seed=21)
+    def regame(cur, g):                                                                                # Left long -> mode selection (FUN highlighted) -> wait: back in the picker; Left = next game, Right = start
+        s.long(0); s.idle(2700)
+        for _ in range((g - cur) % 9):
+            s.press(0)
+        s.press(1)
+    s.press(1); s.game(2); s.idle(3000)                                                                # Target: hit / miss sounds (game sounds are ON by default)
+    for i in range(6):
+        s.press(i % 2, 40); s.idle(900 + 100 * i)
+    s.idle(1500); s.press(0); s.idle(500)
+    regame(2, 7); s.idle(6000)                                                                         # Simon: a tone per symbol
+    for i in range(6):
+        s.press(i % 2, 40); s.idle(450)
+    s.idle(9000)
+    regame(7, 8); s.press(0); s.idle(600); s.press(1); s.idle(900)                                     # Pong solo: hits and the miss
+    for i in range(8):
+        s.press(1, 30); s.idle(500)
+    s.idle(6000)
+    regame(8, 6); s.idle(4000); s.idle(6000)                                                           # Pacer: a tick per beat, accent every fourth
+    regame(6, 3); s.idle(800); s.hold(3, 800); s.idle(6000); s.press(1); s.idle(3500)                  # Quick Draw: GO sound, winner fanfare
+    s.cmd("CFG 11 1"); regame(3, 2); s.idle(3000)                                                      # game sounds OFF: silence
+    for i in range(4):
+        s.press(i % 2, 40); s.idle(900)
     out.append(s)
 
     for sc in out:

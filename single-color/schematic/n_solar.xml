@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <export version="E">
   <design>
-    <source>C:\Users\evanf\Desktop\LED Watch Single Color\schematic\watch_solar.kicad_sch</source>
-    <date>2026-10-12T23:26:29</date>
+    <source>C:\Users\evanf\Desktop\LED-Watch-repo\single-color\schematic\watch_solar.kicad_sch</source>
+    <date>2026-10-14T18:08:53</date>
     <tool>Eeschema 10.0.6</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
@@ -24,6 +24,36 @@
     </sheet>
   </design>
   <components>
+    <comp ref="BZ1">
+      <value>PKMCS0909E4000-R1</value>
+      <footprint>LEDWatch:Piezo_Murata_PKMCS0909E4000-R1_9x9mm</footprint>
+      <datasheet>https://www.murata.com/products/productdata/8796834160670/PKMCS0909E4000-R1.pdf</datasheet>
+      <description>Murata piezo sounder 9x9x1.9, externally driven, ~4 kHz: BUZ_A / BUZ_B are driven in antiphase (PB4 = WO4, PB5 = WO5 inverted)</description>
+      <fields>
+        <field name="MPN">PKMCS0909E4000-R1</field>
+        <field name="LCSC">C910763</field>
+        <field name="Footprint">LEDWatch:Piezo_Murata_PKMCS0909E4000-R1_9x9mm</field>
+        <field name="Datasheet">https://www.murata.com/products/productdata/8796834160670/PKMCS0909E4000-R1.pdf</field>
+        <field name="Description">Murata piezo sounder 9x9x1.9, externally driven, ~4 kHz: BUZ_A / BUZ_B are driven in antiphase (PB4 = WO4, PB5 = WO5 inverted)</field>
+      </fields>
+      <libsource lib="Device" part="Buzzer" description="Buzzer, polarized"/>
+      <property name="MPN" value="PKMCS0909E4000-R1"/>
+      <property name="LCSC" value="C910763"/>
+      <property name="Sheetname" value="watch_solar"/>
+      <property name="Sheetfile" value="watch_solar.kicad_sch"/>
+      <property name="ki_keywords" value="quartz resonator ceramic"/>
+      <property name="ki_fp_filters" value="*Buzzer*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>a1522131-a8bf-400b-a8a3-14d7663d4c14</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
     <comp ref="C10">
       <value>100n</value>
       <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
@@ -38,7 +68,7 @@
       <property name="ki_keywords" value="cap capacitor"/>
       <property name="ki_fp_filters" value="C_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>e65cca55-621a-43c5-a440-128135950922</tstamps>
+      <tstamps>51bf1be0-94e0-44c8-a6f0-effb82422d14</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -62,7 +92,7 @@
       <property name="ki_keywords" value="cap capacitor"/>
       <property name="ki_fp_filters" value="C_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>d9f3f5f3-89d0-40a1-9b11-bde8159d32d6</tstamps>
+      <tstamps>9e4ace81-3a08-443f-9eb8-62d764d6273e</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -86,7 +116,7 @@
       <property name="ki_keywords" value="cap capacitor"/>
       <property name="ki_fp_filters" value="C_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>528d1047-f99a-4dad-8720-02fdf07cd9c8</tstamps>
+      <tstamps>332bd132-5c65-477f-8eee-8701ea485849</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -110,7 +140,7 @@
       <property name="ki_keywords" value="cap capacitor"/>
       <property name="ki_fp_filters" value="C_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>78bf82f0-2615-4299-b7e8-c7cdf6fe024d</tstamps>
+      <tstamps>e7774887-e8d0-4800-bc1f-211bc161db6f</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -134,7 +164,7 @@
       <property name="ki_keywords" value="cap capacitor"/>
       <property name="ki_fp_filters" value="C_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>d14842d2-ea82-42ff-be7f-0d5971994e2c</tstamps>
+      <tstamps>c20fdc45-eafa-457b-8b80-6ba5bd1108e9</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -158,7 +188,7 @@
       <property name="ki_keywords" value="cap capacitor"/>
       <property name="ki_fp_filters" value="C_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>cfe4e593-6a6a-41da-8fae-2f02e9457a80</tstamps>
+      <tstamps>59ceb2c4-65b2-4452-8bd1-8528c01c410e</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -182,7 +212,7 @@
       <property name="ki_keywords" value="cap capacitor"/>
       <property name="ki_fp_filters" value="C_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>6ac85daf-f27b-4b4a-ba48-c827805b843a</tstamps>
+      <tstamps>dd671547-3d3d-4946-8248-61aa89bb5823</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -206,7 +236,7 @@
       <property name="ki_keywords" value="cap capacitor"/>
       <property name="ki_fp_filters" value="C_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>0b60a439-d785-4aa9-9c14-cc059cc0ab35</tstamps>
+      <tstamps>e7356a21-5b0f-4580-99d3-9fa1ef2854e7</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -230,7 +260,7 @@
       <property name="ki_keywords" value="cap capacitor"/>
       <property name="ki_fp_filters" value="C_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>9932f372-a188-4c02-9c47-b8f9aa9e41a3</tstamps>
+      <tstamps>c6f201d9-24d4-4084-9da8-f051542f4e4e</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -254,7 +284,7 @@
       <property name="ki_keywords" value="cap capacitor"/>
       <property name="ki_fp_filters" value="C_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>0232fcfd-df8f-475e-8bda-0061607e78fd</tstamps>
+      <tstamps>3fdd7d2c-67af-4970-b350-1a03687e6520</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -278,7 +308,7 @@
       <property name="ki_keywords" value="cap capacitor"/>
       <property name="ki_fp_filters" value="C_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>8248ff2d-e523-4343-b9a1-57c2cc67dda0</tstamps>
+      <tstamps>8e05eab4-ddff-4a7a-b19a-dfa75c436a0e</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -302,7 +332,7 @@
       <property name="ki_keywords" value="cap capacitor"/>
       <property name="ki_fp_filters" value="C_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>f4f57d71-4ca8-4926-a3b5-b2f9e7f69453</tstamps>
+      <tstamps>f0d4a8ba-e3a0-4a09-93ea-7cb5e4f67576</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -326,82 +356,7 @@
       <property name="ki_keywords" value="cap capacitor"/>
       <property name="ki_fp_filters" value="C_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>4e2905fc-2b5c-433d-9191-c4933ebb8f1f</tstamps>
-      <units>
-        <unit name="A">
-          <pins>
-            <pin num="1"/>
-            <pin num="2"/>
-          </pins>
-        </unit>
-      </units>
-    </comp>
-    <comp ref="C60">
-      <value>100n</value>
-      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
-      <description>COSMETIC DUMMY: not connected; keeps the compass-rose capacitor pairs at 3 and 9 o'clock complete</description>
-      <fields>
-        <field name="Footprint">Capacitor_SMD:C_0402_1005Metric</field>
-        <field name="Datasheet"/>
-        <field name="Description">COSMETIC DUMMY: not connected; keeps the compass-rose capacitor pairs at 3 and 9 o'clock complete</field>
-      </fields>
-      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
-      <property name="Sheetname" value="watch_solar"/>
-      <property name="Sheetfile" value="watch_solar.kicad_sch"/>
-      <property name="ki_keywords" value="cap capacitor"/>
-      <property name="ki_fp_filters" value="C_*"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamps>4f381569-95ef-4d2d-b6df-c7cdf43e21ea</tstamps>
-      <units>
-        <unit name="A">
-          <pins>
-            <pin num="1"/>
-            <pin num="2"/>
-          </pins>
-        </unit>
-      </units>
-    </comp>
-    <comp ref="C61">
-      <value>100n</value>
-      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
-      <description>COSMETIC DUMMY: not connected; keeps the compass-rose capacitor pairs at 3 and 9 o'clock complete</description>
-      <fields>
-        <field name="Footprint">Capacitor_SMD:C_0402_1005Metric</field>
-        <field name="Datasheet"/>
-        <field name="Description">COSMETIC DUMMY: not connected; keeps the compass-rose capacitor pairs at 3 and 9 o'clock complete</field>
-      </fields>
-      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
-      <property name="Sheetname" value="watch_solar"/>
-      <property name="Sheetfile" value="watch_solar.kicad_sch"/>
-      <property name="ki_keywords" value="cap capacitor"/>
-      <property name="ki_fp_filters" value="C_*"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamps>831afe64-a2a0-48ad-8505-561c9cd6b77c</tstamps>
-      <units>
-        <unit name="A">
-          <pins>
-            <pin num="1"/>
-            <pin num="2"/>
-          </pins>
-        </unit>
-      </units>
-    </comp>
-    <comp ref="C62">
-      <value>100n</value>
-      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
-      <description>COSMETIC DUMMY: not connected; keeps the compass-rose capacitor pairs at 3 and 9 o'clock complete</description>
-      <fields>
-        <field name="Footprint">Capacitor_SMD:C_0402_1005Metric</field>
-        <field name="Datasheet"/>
-        <field name="Description">COSMETIC DUMMY: not connected; keeps the compass-rose capacitor pairs at 3 and 9 o'clock complete</field>
-      </fields>
-      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
-      <property name="Sheetname" value="watch_solar"/>
-      <property name="Sheetfile" value="watch_solar.kicad_sch"/>
-      <property name="ki_keywords" value="cap capacitor"/>
-      <property name="ki_fp_filters" value="C_*"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamps>40e7b440-b3ab-4fe0-9cbd-be54272dd1f1</tstamps>
+      <tstamps>b1ff4db3-fe6b-413a-b8f5-e061d70a6a94</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -428,7 +383,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>39b3cddc-3740-4277-88e7-030379628f7e</tstamps>
+      <tstamps>8927f818-e826-45e3-8a49-9e8fa9df99e4</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -455,7 +410,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>22067748-e2bb-49d0-bec9-759ebae01825</tstamps>
+      <tstamps>26171137-4d11-4202-8c58-9d2af168b2fc</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -482,7 +437,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>46411eaa-5f5a-4cd2-8820-47d52c51bf77</tstamps>
+      <tstamps>1dcf0da0-877a-4585-b9aa-e942745161f3</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -509,7 +464,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>8e70c58c-9908-41e7-8571-91a222710907</tstamps>
+      <tstamps>e68dc409-4b21-48cc-ac12-67a0973ce704</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -536,7 +491,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>6fc1d0da-4739-448f-a6c6-7d12b66a1dc8</tstamps>
+      <tstamps>705c918e-abc5-481b-8d5b-d5db67d01554</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -563,7 +518,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>ccab31bc-d4d1-4a95-81c0-16930ae3a1db</tstamps>
+      <tstamps>58e3b07c-8f72-4129-8c0f-6351d26be299</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -590,7 +545,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>199207ca-af96-4c79-a63d-15851836008d</tstamps>
+      <tstamps>204dfe81-440e-44da-8fe4-b428706886eb</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -617,7 +572,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>969d17e2-c668-479e-b7ae-c1d0534e6383</tstamps>
+      <tstamps>1d2b3065-a6a3-4f6e-bd00-325ee1262d40</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -644,7 +599,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>e6cd192d-0e48-4a6b-bb6f-236023047ba2</tstamps>
+      <tstamps>f18f270c-e0da-465a-b108-65744e414a25</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -671,7 +626,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>c9d466f7-ceb8-4653-9093-dad0e4f404b6</tstamps>
+      <tstamps>f4287050-eff7-41ee-8818-b74d9409150a</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -698,7 +653,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>11bc835b-4624-492b-a026-c07359b6100a</tstamps>
+      <tstamps>1a2360ff-bfa9-49ca-99a8-7ce6f12f003c</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -725,7 +680,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>30a9d085-d3f9-4934-b6a8-a592ba16dcf7</tstamps>
+      <tstamps>242d9c68-a1dd-4897-b3c1-448244e18874</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -736,7 +691,7 @@
       </units>
     </comp>
     <comp ref="IND1">
-      <value>LED white 0402 (indicator)</value>
+      <value>SET</value>
       <footprint>LED_SMD:LED_0402_1005Metric</footprint>
       <description>mode indicator SET</description>
       <fields>
@@ -752,7 +707,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>070f9ced-8155-4ffa-b2e1-924d965389d7</tstamps>
+      <tstamps>baec651e-5315-4c40-9c85-ca53cb136de2</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -763,7 +718,7 @@
       </units>
     </comp>
     <comp ref="IND2">
-      <value>LED white 0402 (indicator)</value>
+      <value>TMR</value>
       <footprint>LED_SMD:LED_0402_1005Metric</footprint>
       <description>mode indicator TMR</description>
       <fields>
@@ -779,7 +734,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>c6d0db80-10ca-4e12-b09d-782a57ca37bd</tstamps>
+      <tstamps>cb012e2a-f895-4aea-8fd7-787ec7166a31</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -790,7 +745,7 @@
       </units>
     </comp>
     <comp ref="IND3">
-      <value>LED white 0402 (indicator)</value>
+      <value>BAT</value>
       <footprint>LED_SMD:LED_0402_1005Metric</footprint>
       <description>mode indicator BAT</description>
       <fields>
@@ -806,7 +761,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>4894d523-ce4e-47e7-933e-0ccdc9641a6a</tstamps>
+      <tstamps>75a9bd80-2c51-4b75-a712-89f9a8d9da82</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -817,7 +772,7 @@
       </units>
     </comp>
     <comp ref="IND4">
-      <value>LED white 0402 (indicator)</value>
+      <value>FUN</value>
       <footprint>LED_SMD:LED_0402_1005Metric</footprint>
       <description>mode indicator FUN</description>
       <fields>
@@ -833,7 +788,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>a3aafd11-4b68-42b9-a546-a72811d5578e</tstamps>
+      <tstamps>e8f058b9-b0b3-41dd-af01-4c7e6483fb42</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -844,7 +799,7 @@
       </units>
     </comp>
     <comp ref="IND5">
-      <value>LED white 0402 (indicator)</value>
+      <value>CFG</value>
       <footprint>LED_SMD:LED_0402_1005Metric</footprint>
       <description>mode indicator CFG</description>
       <fields>
@@ -860,7 +815,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>07006693-8797-4d1d-91d9-6c292bb09c36</tstamps>
+      <tstamps>b9b06149-df44-45bf-8813-397741a34ad6</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -871,7 +826,7 @@
       </units>
     </comp>
     <comp ref="IND6">
-      <value>LED white 0402 (indicator)</value>
+      <value>LCK</value>
       <footprint>LED_SMD:LED_0402_1005Metric</footprint>
       <description>mode indicator LCK</description>
       <fields>
@@ -887,7 +842,34 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>42090811-afdb-45d8-aa96-244fbac64afa</tstamps>
+      <tstamps>731d8390-12eb-475d-84d7-2d28538aa891</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="IND7">
+      <value>ALM</value>
+      <footprint>LED_SMD:LED_0402_1005Metric</footprint>
+      <description>mode indicator ALM</description>
+      <fields>
+        <field name="Sim.Pins">1=K 2=A</field>
+        <field name="Footprint">LED_SMD:LED_0402_1005Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description">mode indicator ALM</field>
+      </fields>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <property name="Sim.Pins" value="1=K 2=A"/>
+      <property name="Sheetname" value="watch_solar"/>
+      <property name="Sheetfile" value="watch_solar.kicad_sch"/>
+      <property name="ki_keywords" value="LED diode"/>
+      <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>70a2c767-94b6-4d3e-b4d7-7bcc7a5a4c01</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -911,7 +893,7 @@
       <property name="ki_keywords" value="connector"/>
       <property name="ki_fp_filters" value="Connector*:*_1x??_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>00574e27-e895-42ad-b4cc-f07e10d203d9</tstamps>
+      <tstamps>f4d5bbbb-c04e-40c3-8758-8033c09a505b</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -922,7 +904,7 @@
       </units>
     </comp>
     <comp ref="J1B">
-      <value>LiPo 2</value>
+      <value>LiPo</value>
       <footprint>Connector_JST:JST_SH_SM02B-SRSS-TB_1x02-1MP_P1.00mm_Horizontal</footprint>
       <fields>
         <field name="Footprint">Connector_JST:JST_SH_SM02B-SRSS-TB_1x02-1MP_P1.00mm_Horizontal</field>
@@ -935,7 +917,7 @@
       <property name="ki_keywords" value="connector"/>
       <property name="ki_fp_filters" value="Connector*:*_1x??_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>0e871df6-77a2-4744-b3d8-1a7fae242d31</tstamps>
+      <tstamps>db934782-b6a2-448c-ad6d-a4c4d0dd5901</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -946,54 +928,28 @@
       </units>
     </comp>
     <comp ref="J2">
-      <value>UPDI Tag-Connect TC2030-NL</value>
-      <footprint>Connector:Tag-Connect_TC2030-IDC-NL_2x03_P1.27mm_Vertical</footprint>
+      <value>UPDI pogo pads 1.27 mm (RESET VDD GND UPDI)</value>
+      <footprint>LEDWatch:UPDI_Pogo_1x4_P1.27mm_2Guide</footprint>
+      <description>programming pads, not a part: spring pins on the programmer jig touch them</description>
       <fields>
-        <field name="Footprint">Connector:Tag-Connect_TC2030-IDC-NL_2x03_P1.27mm_Vertical</field>
+        <field name="Footprint">LEDWatch:UPDI_Pogo_1x4_P1.27mm_2Guide</field>
         <field name="Datasheet"/>
-        <field name="Description"/>
+        <field name="Description">programming pads, not a part: spring pins on the programmer jig touch them</field>
       </fields>
-      <libsource lib="Connector_Generic" part="Conn_02x03_Odd_Even" description="Generic connector, double row, 02x03, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)"/>
-      <property name="Sheetname" value="watch_solar"/>
-      <property name="Sheetfile" value="watch_solar.kicad_sch"/>
-      <property name="ki_keywords" value="connector"/>
-      <property name="ki_fp_filters" value="Connector*:*_2x??_*"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamps>7c75526c-ee21-4dd5-8e2b-af9cf55dd546</tstamps>
-      <units>
-        <unit name="A">
-          <pins>
-            <pin num="1"/>
-            <pin num="3"/>
-            <pin num="5"/>
-            <pin num="2"/>
-            <pin num="4"/>
-            <pin num="6"/>
-          </pins>
-        </unit>
-      </units>
-    </comp>
-    <comp ref="J3">
-      <value>Solar cell KXOB25-05X3TF</value>
-      <footprint>Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical</footprint>
-      <description>KXOB25-05X3TF end pads (board: SC1+ / SC1-): pin 1 = + (SOLAR_IN), pin 2 = - (GND). Not placed as a part: plan_board.py draws the two 2.5 x 7.4 mm pads under the cell. VERIFY polarity of the physical cell (Voc) before soldering</description>
-      <fields>
-        <field name="Footprint">Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical</field>
-        <field name="Datasheet"/>
-        <field name="Description">KXOB25-05X3TF end pads (board: SC1+ / SC1-): pin 1 = + (SOLAR_IN), pin 2 = - (GND). Not placed as a part: plan_board.py draws the two 2.5 x 7.4 mm pads under the cell. VERIFY polarity of the physical cell (Voc) before soldering</field>
-      </fields>
-      <libsource lib="Connector_Generic" part="Conn_01x02" description="Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <libsource lib="Connector_Generic" part="Conn_01x04" description="Generic connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
       <property name="Sheetname" value="watch_solar"/>
       <property name="Sheetfile" value="watch_solar.kicad_sch"/>
       <property name="ki_keywords" value="connector"/>
       <property name="ki_fp_filters" value="Connector*:*_1x??_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>d912139d-9ba8-431a-a3a1-342a2288dc29</tstamps>
+      <tstamps>763c034b-7cb1-401a-9b30-0474d0dfaf4a</tstamps>
       <units>
         <unit name="A">
           <pins>
             <pin num="1"/>
             <pin num="2"/>
+            <pin num="3"/>
+            <pin num="4"/>
           </pins>
         </unit>
       </units>
@@ -1013,7 +969,7 @@
       <property name="ki_keywords" value="inductor choke coil reactor magnetic"/>
       <property name="ki_fp_filters" value="Choke_* *Coil* Inductor_* L_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>9d21fc7c-4a8c-477f-b1b5-e7d3e4225a29</tstamps>
+      <tstamps>bb71bdde-c12e-4d57-b2b1-6e55d5a97c81</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1038,7 +994,7 @@
       <property name="ki_keywords" value="inductor choke coil reactor magnetic"/>
       <property name="ki_fp_filters" value="Choke_* *Coil* Inductor_* L_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>88d4ad1d-a8db-4ddc-945a-cad398fef3d4</tstamps>
+      <tstamps>71272908-638a-49a6-9986-90aaced7655f</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1065,7 +1021,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>4e162eaa-62f3-4012-907d-33a55c223714</tstamps>
+      <tstamps>ea4efa2c-ce1b-4a85-9077-5e4f9cbded5f</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1092,7 +1048,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>333d597c-3e88-4e99-920b-cccbd7954d1f</tstamps>
+      <tstamps>8f922967-1db1-4879-ada4-47cde7a3bf7d</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1119,7 +1075,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>e567b043-06fd-46df-8868-031e3bef784a</tstamps>
+      <tstamps>70a6e57c-df26-4392-86bb-9577e8829577</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1146,7 +1102,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>367e2d9d-a434-4755-ac9b-ab63c797c73c</tstamps>
+      <tstamps>01d02b8b-ce5e-41b9-a8a9-db2c9dedb7d3</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1173,7 +1129,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>6e801a11-bec4-4848-ae51-90624001ce76</tstamps>
+      <tstamps>1bad66e2-9595-444b-92d9-44c93cc07999</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1200,7 +1156,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>126ff755-6176-4b61-83c7-a4b4aaea1fee</tstamps>
+      <tstamps>6458f0f7-81b1-4aa4-ae83-4d3d959f25c9</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1227,7 +1183,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>9a1764f1-8fb0-4285-bd88-e0911636db25</tstamps>
+      <tstamps>c86259df-80ce-42e0-b366-db9142b3c604</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1254,7 +1210,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>73e64ffc-ed50-433d-b795-f9e939a0f2a7</tstamps>
+      <tstamps>7bf88920-bcba-4fe1-91b3-0f6758d4331f</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1281,7 +1237,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>e15fe0e2-a7e9-4de3-a5c9-a5c42d909ac1</tstamps>
+      <tstamps>6f7e6e5d-c777-4220-88f7-f2f78ca294a1</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1308,7 +1264,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>f111fd8d-3233-4db4-9dcb-1576be91d88c</tstamps>
+      <tstamps>c4ea86ee-fb9b-4501-a3f9-974a9b5550cd</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1335,7 +1291,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>03e9d4c8-4a54-4744-b937-57a196fdfd76</tstamps>
+      <tstamps>297e7cf9-4212-4762-90c1-8fa205bd7d9f</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1362,7 +1318,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>fb443afe-4dbe-4038-9f70-81867987aaaf</tstamps>
+      <tstamps>0c25e696-2cd7-4fd2-a37b-4f1787daad3f</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1389,7 +1345,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>b8268887-6508-4a68-a4ea-b7378309e8ba</tstamps>
+      <tstamps>80710185-6fe4-416f-8f5d-0dfc541242dc</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1416,7 +1372,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>1c524eb7-b0c3-4653-aa9f-367c23d45da1</tstamps>
+      <tstamps>5d1b647b-2113-4486-b3c9-7c6759d3dee2</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1443,7 +1399,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>21f17a0d-1ecc-44c4-8b27-5d872da6dc92</tstamps>
+      <tstamps>f9fee3e1-e0f3-4caa-bc0f-08f76f117aa4</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1470,7 +1426,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>4ceca0c3-3c3f-4e74-adf6-ec7f63fb4360</tstamps>
+      <tstamps>7f6b9aaa-6ce6-489c-84ec-efe80bd1bc58</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1497,7 +1453,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>4484c49c-040a-4ff3-b88d-f14db70eb1e8</tstamps>
+      <tstamps>d3d3286a-7d89-460f-92a7-6f1da36ce8b8</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1524,7 +1480,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>f7caac9b-3aa7-4367-9236-46ae63f25eea</tstamps>
+      <tstamps>0fb83c58-9a7d-4342-8847-b4fd0b2cd08e</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1551,7 +1507,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>f82b0068-676e-4229-bd65-0f2852be8f20</tstamps>
+      <tstamps>83646a61-8821-4386-a65c-e7deb797985d</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1578,7 +1534,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>4cd2fc64-9702-4f4d-b011-016706a2b0b9</tstamps>
+      <tstamps>fa4e9a62-0aa9-43dc-a7ad-54d96113f562</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1605,7 +1561,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>73a251d2-b6d0-4588-aed3-00a4743dfa54</tstamps>
+      <tstamps>6662dac0-b062-41a1-bf73-47393a5fc571</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1632,7 +1588,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>13991166-4a43-4f47-a4a4-375a2d664c8d</tstamps>
+      <tstamps>b09762a4-2873-4031-afc4-50c8cc6c2112</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1659,7 +1615,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>64c7cb8c-3407-42e2-b9db-19d1705d8b6e</tstamps>
+      <tstamps>df57f2ef-7dcc-41ee-8025-176f49b777ce</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1686,7 +1642,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>f4e78afc-c6ad-4e6b-929b-d104665c317b</tstamps>
+      <tstamps>dbe70e48-097d-41a1-9627-40bbbac7b507</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1713,7 +1669,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>ce186500-3341-46b2-b08f-037d6ad5c56d</tstamps>
+      <tstamps>ab0afad9-921b-403d-b4bf-32cc95310b5d</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1740,7 +1696,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>3ae2d91d-9ee5-482a-8099-8fa338b2b359</tstamps>
+      <tstamps>167739ed-e135-4eca-8357-d022191a072a</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1767,7 +1723,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>9e412ce8-79aa-443d-b6b9-222251150795</tstamps>
+      <tstamps>24074f87-805b-4f39-a169-f0c394e04e08</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1794,7 +1750,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>3e1e9f61-55d7-4f9c-9e6d-62ae81f9e0cb</tstamps>
+      <tstamps>cf4a8c07-dcfc-4bb0-ad95-1ca13d628a52</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1821,7 +1777,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>aac6e008-18b2-4c20-9316-dad92cd5c0e5</tstamps>
+      <tstamps>b133a050-e44f-4671-9d95-373707b8c625</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1848,7 +1804,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>c2a7595e-02ec-41b3-84c2-8d947079ed5a</tstamps>
+      <tstamps>6fc61136-e5b6-4276-bde6-f050d4babc0c</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1875,7 +1831,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>51f3f64e-2943-4285-8e9a-18fd31d162a6</tstamps>
+      <tstamps>87add994-0926-4327-86a2-9d6042539746</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1902,7 +1858,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>8e1d8319-109c-4e22-9d29-b7f331ed5a61</tstamps>
+      <tstamps>3c34ca61-037c-459d-8372-f7bf7a4c5d4f</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1929,7 +1885,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>b5a4de67-4f9d-46c4-868e-00931066f905</tstamps>
+      <tstamps>355df729-8454-4b3a-a871-0f3e1604adaa</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1956,7 +1912,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>abf59c47-0b44-459f-98bb-9b990d204d02</tstamps>
+      <tstamps>be7b3ea9-249d-4da1-8f89-bcd4355eff1b</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1983,7 +1939,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>e7b1aff4-b235-47fc-92f0-e84e75441791</tstamps>
+      <tstamps>820f4db4-2638-4f24-9459-59b407999390</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2010,7 +1966,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>31e0b1d5-27e8-46f9-b694-87745f1f8ae9</tstamps>
+      <tstamps>c12e1513-80c4-409c-b71e-c2d03ca352ad</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2037,7 +1993,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>390f5d42-b732-49be-9f28-bb387ffe133a</tstamps>
+      <tstamps>4a6a8495-6a8d-433b-8e3b-5d7fee4c9b07</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2064,7 +2020,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>e3231782-6a4c-44ca-b0f5-7eabefb293d4</tstamps>
+      <tstamps>fc83faf9-7e02-4ef3-b018-0d1d7468220c</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2091,7 +2047,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>c31ba979-b917-4524-b499-f61d90a57d4b</tstamps>
+      <tstamps>4494937b-568b-4d04-a9ca-8e24c56f1c2e</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2118,7 +2074,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>45c4cc7e-088c-4334-84ef-be9ac0ce4845</tstamps>
+      <tstamps>bc91cdf6-a63e-472d-8cd3-fca14e637fd3</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2145,7 +2101,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>9289b994-dd93-48ed-bd5d-53e1f22d79e2</tstamps>
+      <tstamps>576bb91c-a41c-4b57-b091-5b01cf5e2dd9</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2172,7 +2128,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>613f54c6-88d1-4b2d-8e35-db8e791f5712</tstamps>
+      <tstamps>b668046b-ad94-404b-8422-0eba2ba5dbd6</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2199,7 +2155,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>54ed2136-5f46-4de5-86cd-4c5bef22fa15</tstamps>
+      <tstamps>b0a3f9a7-8c34-4f79-a4da-31b5296c9565</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2226,7 +2182,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>26d471a2-c208-4bed-bdc5-80c9fdf87938</tstamps>
+      <tstamps>62db03f1-d602-4b55-adc0-76f0b212f6de</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2253,7 +2209,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>fbff1423-5e2c-4ff9-9bb3-5996491060dd</tstamps>
+      <tstamps>5c16c895-0faf-47d5-8f05-1ece33161260</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2280,7 +2236,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>f40caba7-0baf-43d1-98c8-831fcb783175</tstamps>
+      <tstamps>0cccbc9e-637f-4671-b9f2-2521988bb243</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2307,7 +2263,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>80b54b14-e28f-43c7-ab53-37b3ab67bfcb</tstamps>
+      <tstamps>5423ab78-46e3-40d5-91c3-0bde2d03c50a</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2334,7 +2290,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>7c353abf-b098-4884-b2c6-106275244878</tstamps>
+      <tstamps>73478759-0559-4ee8-9986-ea2bc3bac9e9</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2361,7 +2317,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>2398b11f-aa40-4b57-816e-1d7b00a314e9</tstamps>
+      <tstamps>ba61b761-9da4-41e2-b3ae-fac6b1342b01</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2388,7 +2344,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>fa54cc02-a6f4-4c6c-8d2b-cde79e65fa20</tstamps>
+      <tstamps>fc8e5203-4928-4c1b-b570-fbe35b700fa0</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2415,7 +2371,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>fc247a26-931d-477d-a871-e0b22a7885c3</tstamps>
+      <tstamps>58ff288e-31d1-4420-86bd-3cb4c675b105</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2442,7 +2398,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>21aa3b1b-1b4c-4fe3-95b4-fdae400e551f</tstamps>
+      <tstamps>a67f7b22-fc38-4880-8b8f-296bb02f6296</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2469,7 +2425,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>15c2eea5-fdfb-4e5a-bfbe-ea3e9751afd0</tstamps>
+      <tstamps>a28a9bdd-ac1d-4c7f-aea0-fc711273a330</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2496,7 +2452,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>f16bc623-c560-4595-8e1d-fe2d42398207</tstamps>
+      <tstamps>0e0b8006-a5d4-4b84-a073-23da48ab6b3b</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2523,7 +2479,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>eeca8141-bd44-457b-bd17-4a4b9880b9bb</tstamps>
+      <tstamps>d0c46491-0bca-4c93-963e-0597b64df88e</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2550,7 +2506,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>f424dac5-7a51-41d8-990d-bca52322bcd5</tstamps>
+      <tstamps>4261d236-9060-45da-9318-0a213c06fb5c</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2577,7 +2533,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>525dd3c3-c84d-4ae7-a211-555e53637a4b</tstamps>
+      <tstamps>bc51f459-c947-4615-9f5b-ada336505c37</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2604,7 +2560,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>b5edaff0-0a13-40af-a382-5f03cdb3692d</tstamps>
+      <tstamps>d775fde5-2c0f-4844-8170-f0df23f3df27</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2631,7 +2587,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>02809e4e-03db-476d-bffd-1aea00b29d8e</tstamps>
+      <tstamps>826993de-b7e1-4465-93d5-8badb93c43b2</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2658,7 +2614,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>86678024-e893-473e-a679-2539b71bfc5f</tstamps>
+      <tstamps>12231bb5-e417-48a1-bae9-bea2ef717257</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2682,7 +2638,7 @@
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>5f1f49ec-6f87-4d76-bbe0-0b98514cf246</tstamps>
+      <tstamps>a24f3385-886a-456a-b61a-3fcef025cd49</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2706,7 +2662,7 @@
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>c4a43c02-1760-4d57-ab14-a34fb51a0f21</tstamps>
+      <tstamps>8c3e2a46-5b60-41c5-86ad-5bf4f7881786</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2730,7 +2686,7 @@
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>48445f72-82e3-4fff-b178-3cc0b405a94a</tstamps>
+      <tstamps>fe55972b-6291-489b-8108-523e87c12c0a</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2754,7 +2710,7 @@
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>3dbcde3b-65b1-499b-a0ff-dcfc8f319bb5</tstamps>
+      <tstamps>2f3bbb05-d84f-41e3-aa99-f3c2137e2200</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2778,7 +2734,7 @@
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>09828d97-be53-4ee2-a54c-a54b33877047</tstamps>
+      <tstamps>9f744e44-f239-4b7d-b94d-001472763897</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2802,7 +2758,7 @@
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>bb740505-280d-44fd-ac66-0721a2a01a9e</tstamps>
+      <tstamps>1f8eda3f-2ad0-4254-a0f3-61469d97bcae</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2826,7 +2782,7 @@
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>0ef0fe27-24e4-469e-a7b8-828ac6e8958e</tstamps>
+      <tstamps>b85c9f1c-364e-4faf-870e-81f47a540283</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2850,7 +2806,7 @@
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>d578010e-884f-433a-89c6-9185bf0f2a75</tstamps>
+      <tstamps>6933a668-59bc-40e1-95b7-eb68012f40e0</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2874,7 +2830,7 @@
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>017da9ce-d90a-43b2-aed5-5df5f5cd0dae</tstamps>
+      <tstamps>fab19aa9-9f2e-4a5a-b5d8-286452afed81</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2898,7 +2854,7 @@
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>c56322c4-e131-441d-91ce-fde06cc89142</tstamps>
+      <tstamps>b6f78a07-70ab-4384-a709-e55f98ee3783</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2922,7 +2878,7 @@
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>5be08e41-815a-4bfc-9aa1-33a59aed624e</tstamps>
+      <tstamps>9f4c3b6c-4c5a-4695-8af0-2c56a89598b1</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2946,7 +2902,7 @@
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>2ccc07bf-8706-44be-9c82-83e1bac1e265</tstamps>
+      <tstamps>d48ccc41-54d9-4aa1-b350-f0912d1bf9ca</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2970,7 +2926,7 @@
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>56189a42-2fdf-41df-9140-3dd50de2da0c</tstamps>
+      <tstamps>9c166f74-2b9a-4e28-80d9-04ea795d3be8</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2994,7 +2950,7 @@
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>d2c5e8ad-bebf-42d5-849c-5c6f157f83b6</tstamps>
+      <tstamps>3703011b-cf8d-4ad0-8a73-e870f1b4ab85</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3019,7 +2975,7 @@
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>a3f5675e-e773-4951-a089-2760c8ddf227</tstamps>
+      <tstamps>4d1dc40e-c2cf-471b-8a43-2153e3e55f6d</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3044,7 +3000,7 @@
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>136fccee-0767-4682-8d7b-a03af1791d84</tstamps>
+      <tstamps>00d96c16-dfba-4685-b8e9-afb0b9d625d2</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3069,7 +3025,7 @@
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>3f3462ac-51e0-4936-a928-df11fbfe8ae6</tstamps>
+      <tstamps>ca5ef619-df8e-4fff-83ad-e37b2c22b0e6</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3094,7 +3050,7 @@
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>0deefcad-4ba0-45bd-a7bc-11373c2c487a</tstamps>
+      <tstamps>f033c372-afbf-4b5e-b40f-b729f5cb88dd</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3119,7 +3075,7 @@
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>3a362901-2089-4677-b5bc-515d85740f54</tstamps>
+      <tstamps>6456f545-1edf-4df3-9861-478cd804082a</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3144,7 +3100,7 @@
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>0103aafe-bfc3-49ab-b394-589eb9f451d5</tstamps>
+      <tstamps>49680fdc-64a6-4b84-b227-fdc7f96aba31</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3169,7 +3125,7 @@
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>a0d703b3-a1a8-41a3-91c1-ea16ac2f8bda</tstamps>
+      <tstamps>8657b23b-d1a7-4810-a054-a6f8a79640aa</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3182,11 +3138,11 @@
     <comp ref="R57">
       <value>10k</value>
       <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
-      <description>COSMETIC DUMMY: not connected, sits beside the 12 / 6 o'clock hour LED so every hour LED has a part on each side</description>
+      <description>COSMETIC DUMMY: not connected, keeps the layout symmetric around the 3 / 6 / 9 / 12 o'clock parts</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0402_1005Metric</field>
         <field name="Datasheet"/>
-        <field name="Description">COSMETIC DUMMY: not connected, sits beside the 12 / 6 o'clock hour LED so every hour LED has a part on each side</field>
+        <field name="Description">COSMETIC DUMMY: not connected, keeps the layout symmetric around the 3 / 6 / 9 / 12 o'clock parts</field>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Sheetname" value="watch_solar"/>
@@ -3194,7 +3150,7 @@
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>692ca06a-9e87-4836-ab57-bc86b9ee5133</tstamps>
+      <tstamps>bd6e8acb-4f6a-46f8-bbff-1d7c43902f93</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3207,11 +3163,11 @@
     <comp ref="R58">
       <value>10k</value>
       <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
-      <description>COSMETIC DUMMY: not connected, sits beside the 12 / 6 o'clock hour LED so every hour LED has a part on each side</description>
+      <description>COSMETIC DUMMY: not connected, keeps the layout symmetric around the 3 / 6 / 9 / 12 o'clock parts</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0402_1005Metric</field>
         <field name="Datasheet"/>
-        <field name="Description">COSMETIC DUMMY: not connected, sits beside the 12 / 6 o'clock hour LED so every hour LED has a part on each side</field>
+        <field name="Description">COSMETIC DUMMY: not connected, keeps the layout symmetric around the 3 / 6 / 9 / 12 o'clock parts</field>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Sheetname" value="watch_solar"/>
@@ -3219,7 +3175,7 @@
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>28b19e20-8904-4ad6-aa0c-f96c70abeb53</tstamps>
+      <tstamps>f7b683e5-e543-4732-add5-7507fa30eb69</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3232,11 +3188,11 @@
     <comp ref="R59">
       <value>10k</value>
       <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
-      <description>COSMETIC DUMMY: not connected, sits beside the 12 / 6 o'clock hour LED so every hour LED has a part on each side</description>
+      <description>COSMETIC DUMMY: not connected, keeps the layout symmetric around the 3 / 6 / 9 / 12 o'clock parts</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0402_1005Metric</field>
         <field name="Datasheet"/>
-        <field name="Description">COSMETIC DUMMY: not connected, sits beside the 12 / 6 o'clock hour LED so every hour LED has a part on each side</field>
+        <field name="Description">COSMETIC DUMMY: not connected, keeps the layout symmetric around the 3 / 6 / 9 / 12 o'clock parts</field>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Sheetname" value="watch_solar"/>
@@ -3244,7 +3200,182 @@
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>ec3a06f5-3b63-4587-89ae-8f98ee3f1cc9</tstamps>
+      <tstamps>5f1242d4-980d-4623-9938-064ff0072e00</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R61">
+      <value>10k</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <description>COSMETIC DUMMY: not connected, keeps the layout symmetric around the 3 / 6 / 9 / 12 o'clock parts</description>
+      <fields>
+        <field name="Footprint">Resistor_SMD:R_0402_1005Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description">COSMETIC DUMMY: not connected, keeps the layout symmetric around the 3 / 6 / 9 / 12 o'clock parts</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Sheetname" value="watch_solar"/>
+      <property name="Sheetfile" value="watch_solar.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>cd6985d6-9a4f-46eb-81b5-816640b67c0b</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R62">
+      <value>10k</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <description>COSMETIC DUMMY: not connected, keeps the layout symmetric around the 3 / 6 / 9 / 12 o'clock parts</description>
+      <fields>
+        <field name="Footprint">Resistor_SMD:R_0402_1005Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description">COSMETIC DUMMY: not connected, keeps the layout symmetric around the 3 / 6 / 9 / 12 o'clock parts</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Sheetname" value="watch_solar"/>
+      <property name="Sheetfile" value="watch_solar.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>a98263e8-2b26-43af-9e71-a9fae8035816</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R63">
+      <value>10k</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <description>COSMETIC DUMMY: not connected, keeps the layout symmetric around the 3 / 6 / 9 / 12 o'clock parts</description>
+      <fields>
+        <field name="Footprint">Resistor_SMD:R_0402_1005Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description">COSMETIC DUMMY: not connected, keeps the layout symmetric around the 3 / 6 / 9 / 12 o'clock parts</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Sheetname" value="watch_solar"/>
+      <property name="Sheetfile" value="watch_solar.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>51f5d134-3364-4b7d-835b-7b8fe67417b0</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R64">
+      <value>10k</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <description>COSMETIC DUMMY: not connected, keeps the layout symmetric around the 3 / 6 / 9 / 12 o'clock parts</description>
+      <fields>
+        <field name="Footprint">Resistor_SMD:R_0402_1005Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description">COSMETIC DUMMY: not connected, keeps the layout symmetric around the 3 / 6 / 9 / 12 o'clock parts</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Sheetname" value="watch_solar"/>
+      <property name="Sheetfile" value="watch_solar.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>8ae15874-7750-4848-b9a2-deb380cda447</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R65">
+      <value>10k</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <description>COSMETIC DUMMY: not connected, keeps the layout symmetric around the 3 / 6 / 9 / 12 o'clock parts</description>
+      <fields>
+        <field name="Footprint">Resistor_SMD:R_0402_1005Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description">COSMETIC DUMMY: not connected, keeps the layout symmetric around the 3 / 6 / 9 / 12 o'clock parts</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Sheetname" value="watch_solar"/>
+      <property name="Sheetfile" value="watch_solar.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>e8613d24-0094-4b79-b225-14b8f9be2d2d</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R66">
+      <value>10k</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <description>COSMETIC DUMMY: not connected, keeps the layout symmetric around the 3 / 6 / 9 / 12 o'clock parts</description>
+      <fields>
+        <field name="Footprint">Resistor_SMD:R_0402_1005Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description">COSMETIC DUMMY: not connected, keeps the layout symmetric around the 3 / 6 / 9 / 12 o'clock parts</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Sheetname" value="watch_solar"/>
+      <property name="Sheetfile" value="watch_solar.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>013e8968-20b3-456e-a214-c635a1035fb0</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R67">
+      <value>10k</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <description>COSMETIC DUMMY: not connected, keeps the layout symmetric around the 3 / 6 / 9 / 12 o'clock parts</description>
+      <fields>
+        <field name="Footprint">Resistor_SMD:R_0402_1005Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description">COSMETIC DUMMY: not connected, keeps the layout symmetric around the 3 / 6 / 9 / 12 o'clock parts</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Sheetname" value="watch_solar"/>
+      <property name="Sheetfile" value="watch_solar.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>0a782451-c8e9-47c0-9400-59809c9facfd</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3271,7 +3402,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>5c21fa9b-dc76-4bec-bcd0-cfaa3f6da8df</tstamps>
+      <tstamps>c5861a7e-1d45-45a6-a32f-b2f668f87915</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3298,7 +3429,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>f8837fc1-49df-4f55-bba4-b03f5ae7457c</tstamps>
+      <tstamps>10471e13-2043-4ead-a44b-0ae6c320a3e8</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3325,7 +3456,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>d1ea5255-9ceb-489b-8b7b-4c89a1014bbb</tstamps>
+      <tstamps>dfd941b0-9c4e-4990-8514-baed3e453893</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3352,7 +3483,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>18bbc711-9253-419a-ae4c-d0b88a82af70</tstamps>
+      <tstamps>5859f003-dc93-49aa-8e9d-a25ea16b0c0f</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3379,7 +3510,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>3fa5d4fb-7206-4c9d-8d85-37bc2b2baa83</tstamps>
+      <tstamps>68985b13-ac1e-4112-b1b9-b7c77c72b1b5</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3406,7 +3537,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>855df481-b307-42f5-a43c-db38ab09dfa8</tstamps>
+      <tstamps>e58f0726-83ee-4a81-8093-9a8e7adc130f</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3433,7 +3564,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>48129f0a-9d8b-428b-bb9f-c5e8a7346555</tstamps>
+      <tstamps>805a8559-c3a8-4944-a242-75f88fac9752</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3460,7 +3591,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>d0958513-dc48-413a-b5a6-e90517f8e18f</tstamps>
+      <tstamps>e3a1ec8b-34ad-4f6a-9c54-89cacc7666e0</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3487,7 +3618,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>2e789e6a-41e6-481d-b558-4e308187285c</tstamps>
+      <tstamps>dd32f588-8fc6-4cdb-bd71-93f52bd27237</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3514,7 +3645,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>dd2cd962-08ab-4d87-bb7c-76c0d074ca58</tstamps>
+      <tstamps>72ecc10c-8fae-4a2d-8fd2-2cb23fb6d2f0</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3541,7 +3672,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>4b82152b-21a8-4bcc-a523-3a67427e39f8</tstamps>
+      <tstamps>97c2f5c1-5b5d-4d60-9c17-316671c82b11</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3568,7 +3699,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>b14bb19b-36af-4cea-b598-e61e1c73a5ed</tstamps>
+      <tstamps>750c53fa-3cc9-4dce-b7b3-72badf05655c</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3595,7 +3726,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>1bedde60-9ac2-4862-91b5-2c54d49ae855</tstamps>
+      <tstamps>070d4b75-1aff-4bc8-b363-7fc6b69093b3</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3622,7 +3753,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>09f34fa8-0616-4cd5-b25a-740205fb6173</tstamps>
+      <tstamps>a81436eb-73e7-43ea-ba9e-e1aad24aefec</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3649,7 +3780,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>f8bab33e-261b-49ed-9b09-237e2d4ce485</tstamps>
+      <tstamps>97dfc1c1-9a60-4b48-a066-c00bdad9e880</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3676,7 +3807,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>87b4b032-2ccc-49a6-80c0-c78554880c0c</tstamps>
+      <tstamps>422d189b-2f36-458a-9c13-036dde7fdbb1</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3703,7 +3834,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>ae064d25-b090-4cb5-94d1-12b6fc498845</tstamps>
+      <tstamps>fcf3eb86-dff6-4dfa-a070-aac2d0114fb9</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3730,7 +3861,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>5921c564-daa9-425c-b33f-3ba29cffcaea</tstamps>
+      <tstamps>ac167dd9-16e9-459f-b85f-4cb646277215</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3757,7 +3888,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>2ccf59bb-6a18-4b97-8003-97d56e07d89f</tstamps>
+      <tstamps>f5a796e1-4737-4b91-ae00-4fc13934527c</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3784,7 +3915,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>adfbb14a-10e6-4a77-9d87-39016162a261</tstamps>
+      <tstamps>4d5d98b4-2198-48e8-8284-208d31dc837e</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3811,7 +3942,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>802a9cfc-4cae-4082-83ea-854774b682ff</tstamps>
+      <tstamps>852ece52-dd0f-4207-a8d0-e030005fc8ec</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3838,7 +3969,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>fd9c524f-1edb-42cf-b6bb-ab8f090d2ae6</tstamps>
+      <tstamps>f80454a4-dc9a-40c0-b5d8-c958dfa401e4</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3865,7 +3996,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>e2bd2499-9a16-48a4-a30c-442f9d0c732b</tstamps>
+      <tstamps>81ee1c90-e83f-4f0f-86bb-2c8162bf9fdf</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3892,7 +4023,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>2f499e09-6359-4e3c-9b29-bc1d0a599363</tstamps>
+      <tstamps>d124bb3c-ddab-4dac-9111-381e06ba208e</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3919,7 +4050,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>9e34cf4d-6172-4cbb-b435-d0b93facce1d</tstamps>
+      <tstamps>c898231d-27ea-4da0-afbf-1b0f7a0274e0</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3946,7 +4077,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>c63bfa67-6fb7-49aa-9ff5-46e71a689a7c</tstamps>
+      <tstamps>5d083930-2a54-4e92-b0e7-95d705326395</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3973,7 +4104,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>9e142fd3-4d70-43c3-985a-b985e7e99150</tstamps>
+      <tstamps>c318394f-9f37-418f-b090-df73707f0fd6</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -4000,7 +4131,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>47c3525e-84b5-4b07-8334-0046f40c592d</tstamps>
+      <tstamps>667f94de-c220-4114-913b-3d0482ce3263</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -4027,7 +4158,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>7b6650c2-40bb-4a8f-b7fb-d6f76f1e2abd</tstamps>
+      <tstamps>cdd77a49-595c-402a-bf3a-74fc1aae2877</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -4054,7 +4185,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>098f6c99-3694-4ada-8444-ef589438fd05</tstamps>
+      <tstamps>9da7b0c0-ffe6-41fe-86fb-828c87978d5e</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -4081,7 +4212,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>b08c8d21-a6ad-431e-9f9c-5cdae06bc15a</tstamps>
+      <tstamps>8da9dff6-2b0f-43ac-8beb-c08022ab9d8a</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -4108,7 +4239,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>7908cab4-a9f7-4a30-b5d4-71771d27506c</tstamps>
+      <tstamps>49d79d81-de1c-439b-9b46-ca8ba28f2544</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -4135,7 +4266,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>6d3d232b-1d4c-45ed-8b05-e50d249aee28</tstamps>
+      <tstamps>ab0bb6e7-4912-4d81-8d6c-f593d129fede</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -4162,7 +4293,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>4a924873-29e3-4093-8734-649a7008208c</tstamps>
+      <tstamps>515109d6-4ed5-443e-8975-57b4ea5c6a88</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -4189,7 +4320,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>79bbbc64-12f5-410d-a297-7bc5dd94e72c</tstamps>
+      <tstamps>8e4cba88-41ae-48dd-8d5c-064be95041aa</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -4216,7 +4347,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>8772741c-0101-4d53-929a-dca3474e05d6</tstamps>
+      <tstamps>2caaa657-37e3-44ab-bf69-4fd4a0cc053f</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -4243,7 +4374,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>2f495a3a-ec5c-4cb3-bdbc-f8eef302d976</tstamps>
+      <tstamps>4a295c00-f784-45d6-90eb-5f5deb3dc267</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -4270,7 +4401,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>dbeb8934-3639-44c3-909a-38f86896cd8f</tstamps>
+      <tstamps>1b1b4d4d-c724-426b-ba66-3122e5348361</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -4297,7 +4428,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>7937e03e-a1a5-4261-bcc4-0a5baa4a0610</tstamps>
+      <tstamps>e56957e4-e9ec-450f-ac1f-9815449289f1</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -4324,7 +4455,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>7459052d-ce8e-41be-902c-3bc71786ba46</tstamps>
+      <tstamps>215b6b63-d308-447a-b621-8130cfbe79b2</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -4351,7 +4482,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>78be94a4-45aa-4f55-87fd-88f2f63afad9</tstamps>
+      <tstamps>79072c0f-0c6d-4c1d-963f-335386fd0676</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -4378,7 +4509,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>269abfd0-57d0-424d-ad4a-a616ed226ec4</tstamps>
+      <tstamps>79e7ddb8-4241-47cd-98be-8f67ba4fd934</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -4405,7 +4536,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>f1d283c7-a1f5-4951-a139-d392578f1c86</tstamps>
+      <tstamps>d789a462-8854-4e97-902b-660c8703b135</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -4432,7 +4563,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>9d4e4d59-5cba-4c68-87d5-cf9e4d91e972</tstamps>
+      <tstamps>66502990-3f8c-4268-b96c-063961fb1a2d</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -4459,7 +4590,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>393aa090-bbf7-4d49-858a-770c916c099d</tstamps>
+      <tstamps>e959315f-4520-4985-aae3-2df221371576</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -4486,7 +4617,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>38f87bc5-24eb-4b19-a709-387ddf854b56</tstamps>
+      <tstamps>15bfa268-df4c-4f29-8a43-475a2524c02d</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -4513,7 +4644,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>7e4babd0-76f9-42f5-9b0d-a5091d03ac6c</tstamps>
+      <tstamps>5c0c1710-5819-4fb7-be09-2da28973fa63</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -4540,7 +4671,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>76adb599-f700-4d32-bfe4-cffb338eefc5</tstamps>
+      <tstamps>9fb5946b-36d7-4bc1-87bf-98564b851fa5</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -4567,7 +4698,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>292a2080-986f-4cf0-b719-4a7c8152f408</tstamps>
+      <tstamps>265d001b-d164-4e63-9d82-d844d52c1496</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -4594,7 +4725,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>da6a4e9e-b632-488b-bad5-aef57bca2c2c</tstamps>
+      <tstamps>455385f9-22e7-4d14-b981-274e4c6bc827</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -4621,7 +4752,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>ca98e5f7-f178-4df6-9a85-9fce0fc0f0a2</tstamps>
+      <tstamps>1c3443b9-6faa-47c2-b6be-1fa330618eb1</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -4648,7 +4779,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>d5e3f298-b394-4dfe-b364-d79f40bf1da7</tstamps>
+      <tstamps>1d0f29bf-4b78-402f-9776-44ce9fdd508c</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -4675,7 +4806,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>5602aa46-f5f3-48f0-8bc0-f5e90ccf2472</tstamps>
+      <tstamps>20ef6750-bbaf-440b-98d9-e384fd1b6c04</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -4702,7 +4833,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>47a0bcb8-be1e-410f-9499-11e2cd83d451</tstamps>
+      <tstamps>4006e60d-682f-45e3-9f45-862a68a6a67b</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -4729,7 +4860,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>f5c3d600-b529-4d27-9d68-4f4caaaa3e9f</tstamps>
+      <tstamps>522931f3-a455-41a0-81c7-533825a42ea3</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -4756,7 +4887,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>028f11d3-6171-463b-bd2b-87a78798f863</tstamps>
+      <tstamps>d9cbe43a-032c-4140-9c11-15f543e6dce7</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -4783,7 +4914,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>48219ce8-53bd-4564-8d59-9cc3c09c1c69</tstamps>
+      <tstamps>b252438d-b0ce-4002-901c-69d2b7abb8d3</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -4810,7 +4941,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>42879b30-e08f-4c0f-b02c-92743c07e67a</tstamps>
+      <tstamps>cb649208-f56d-4cc0-91f2-f6dbc990534e</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -4837,7 +4968,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>26a7bb39-1627-4ee2-b26f-218b22a13423</tstamps>
+      <tstamps>e021e134-3368-44e0-b0f0-ba26924fdf0e</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -4864,12 +4995,60 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>b9f8a89f-1da6-48fc-b8b3-f124b4abf74d</tstamps>
+      <tstamps>524e9f99-a32d-4830-b8d2-270a53f306c7</tstamps>
       <units>
         <unit name="A">
           <pins>
             <pin num="1"/>
             <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="SC1+">
+      <value>cell pad</value>
+      <footprint>LEDWatch:KXOB25_cell_pad_2.5x7.4mm</footprint>
+      <description>KXOB25-05X3TF + end pad (SOLAR_IN). Not a part: just the 2.5 x 7.4 mm board pad under the cell. VERIFY polarity of the physical cell (Voc) before soldering</description>
+      <fields>
+        <field name="Footprint">LEDWatch:KXOB25_cell_pad_2.5x7.4mm</field>
+        <field name="Datasheet"/>
+        <field name="Description">KXOB25-05X3TF + end pad (SOLAR_IN). Not a part: just the 2.5 x 7.4 mm board pad under the cell. VERIFY polarity of the physical cell (Voc) before soldering</field>
+      </fields>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <property name="Sheetname" value="watch_solar"/>
+      <property name="Sheetfile" value="watch_solar.kicad_sch"/>
+      <property name="ki_keywords" value="test point tp"/>
+      <property name="ki_fp_filters" value="Pin* Test*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>1ad27c8b-1326-4be7-9f51-3a33b3ebda30</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="SC1-">
+      <value>cell pad</value>
+      <footprint>LEDWatch:KXOB25_cell_pad_2.5x7.4mm</footprint>
+      <description>KXOB25-05X3TF - end pad (GND). Not a part: just the board pad under the cell</description>
+      <fields>
+        <field name="Footprint">LEDWatch:KXOB25_cell_pad_2.5x7.4mm</field>
+        <field name="Datasheet"/>
+        <field name="Description">KXOB25-05X3TF - end pad (GND). Not a part: just the board pad under the cell</field>
+      </fields>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <property name="Sheetname" value="watch_solar"/>
+      <property name="Sheetfile" value="watch_solar.kicad_sch"/>
+      <property name="ki_keywords" value="test point tp"/>
+      <property name="ki_fp_filters" value="Pin* Test*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>cf7d6b8e-71c0-478c-8d42-12809975327d</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
           </pins>
         </unit>
       </units>
@@ -4887,7 +5066,7 @@
       <property name="Sheetfile" value="watch_solar.kicad_sch"/>
       <property name="ki_keywords" value="switch normally-open pushbutton push-button"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>155915e9-de47-4576-9165-e0e65156783d</tstamps>
+      <tstamps>64dfd355-01f4-493e-be61-f03b879b7c35</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -4910,7 +5089,7 @@
       <property name="Sheetfile" value="watch_solar.kicad_sch"/>
       <property name="ki_keywords" value="switch normally-open pushbutton push-button"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>cd62665d-cba4-4a52-8449-f721306862a0</tstamps>
+      <tstamps>e85adf5b-3a29-465a-b287-baa615a35b27</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -4936,7 +5115,7 @@
       <property name="ki_keywords" value="AVR 8bit Microcontroller AVR-DB"/>
       <property name="ki_fp_filters" value="QFN*1EP*6x6mm*P0.4mm*EP4.2x4.2mm*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>657957ad-5a3d-49d5-8926-cff0ca786eae</tstamps>
+      <tstamps>c436eb26-5037-4512-b33b-24e8918cbd7c</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -5011,7 +5190,7 @@
       <property name="ki_keywords" value="3-axis accelerometer spi mems"/>
       <property name="ki_fp_filters" value="LGA*2x2mm*P0.5mm*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>da4eb525-cbcb-45a5-86b8-7b386124b9a1</tstamps>
+      <tstamps>b889b474-136a-4b56-8b00-1fde79c3873f</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -5047,7 +5226,7 @@
       <property name="ki_keywords" value="harvester solar TEG charger li-on buck"/>
       <property name="ki_fp_filters" value="QFN*1EP*3.5x3.5mm*P0.5mm*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>14ca3859-4615-48dc-abb8-a6caeda9beb0</tstamps>
+      <tstamps>58eaf0b2-20ea-4363-a2fe-026458f35008</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -5093,7 +5272,7 @@
       <property name="ki_keywords" value="quartz ceramic resonator oscillator"/>
       <property name="ki_fp_filters" value="Crystal*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>7ef6934a-cf9d-4d12-9c60-71333f8ff424</tstamps>
+      <tstamps>ac45b3dc-97ee-4a32-89f9-c433378db501</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -5142,6 +5321,23 @@
         <pin num="21" name="VSS" type="passive"/>
       </pins>
     </libpart>
+    <libpart lib="Connector" part="TestPoint">
+      <description>test point</description>
+      <footprints>
+        <fp>Pin*</fp>
+        <fp>Test*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">TP</field>
+        <field name="Value">TestPoint</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">test point</field>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+      </pins>
+    </libpart>
     <libpart lib="Connector_Generic" part="Conn_01x02">
       <description>Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)</description>
       <footprints>
@@ -5159,25 +5355,40 @@
         <pin num="2" name="Pin_2" type="passive"/>
       </pins>
     </libpart>
-    <libpart lib="Connector_Generic" part="Conn_02x03_Odd_Even">
-      <description>Generic connector, double row, 02x03, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)</description>
+    <libpart lib="Connector_Generic" part="Conn_01x04">
+      <description>Generic connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)</description>
       <footprints>
-        <fp>Connector*:*_2x??_*</fp>
+        <fp>Connector*:*_1x??_*</fp>
       </footprints>
       <fields>
         <field name="Reference">J</field>
-        <field name="Value">Conn_02x03_Odd_Even</field>
+        <field name="Value">Conn_01x04</field>
         <field name="Footprint"/>
         <field name="Datasheet"/>
-        <field name="Description">Generic connector, double row, 02x03, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)</field>
+        <field name="Description">Generic connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)</field>
       </fields>
       <pins>
         <pin num="1" name="Pin_1" type="passive"/>
         <pin num="2" name="Pin_2" type="passive"/>
         <pin num="3" name="Pin_3" type="passive"/>
         <pin num="4" name="Pin_4" type="passive"/>
-        <pin num="5" name="Pin_5" type="passive"/>
-        <pin num="6" name="Pin_6" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="Buzzer">
+      <description>Buzzer, polarized</description>
+      <footprints>
+        <fp>*Buzzer*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">BZ</field>
+        <field name="Value">Buzzer</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">Buzzer, polarized</field>
+      </fields>
+      <pins>
+        <pin num="1" name="+" type="passive"/>
+        <pin num="2" name="-" type="passive"/>
       </pins>
     </libpart>
     <libpart lib="Device" part="C">
@@ -5383,6 +5594,9 @@
     <library logical="Battery_Management">
       <uri>${KICAD10_SYMBOL_DIR}/Battery_Management.kicad_sym</uri>
     </library>
+    <library logical="Connector">
+      <uri>${KICAD10_SYMBOL_DIR}/Connector.kicad_sym</uri>
+    </library>
     <library logical="Connector_Generic">
       <uri>${KICAD10_SYMBOL_DIR}/Connector_Generic.kicad_sym</uri>
     </library>
@@ -5429,7 +5643,15 @@
       <node ref="SW2" pin="1" pinfunction="1_1" pintype="passive"/>
       <node ref="U1" pin="32" pinfunction="PE2_32" pintype="bidirectional"/>
     </net>
-    <net code="6" name="/COL0" class="Default">
+    <net code="6" name="/BUZ_A" class="Default">
+      <node ref="BZ1" pin="1" pinfunction="+_1" pintype="passive"/>
+      <node ref="U1" pin="8" pinfunction="PB4_8" pintype="bidirectional"/>
+    </net>
+    <net code="7" name="/BUZ_B" class="Default">
+      <node ref="BZ1" pin="2" pinfunction="-_2" pintype="passive"/>
+      <node ref="U1" pin="9" pinfunction="PB5_9" pintype="bidirectional"/>
+    </net>
+    <net code="8" name="/COL0" class="Default">
       <node ref="H12" pin="2" pinfunction="A_2" pintype="passive"/>
       <node ref="IND1" pin="2" pinfunction="A_2" pintype="passive"/>
       <node ref="M0" pin="2" pinfunction="A_2" pintype="passive"/>
@@ -5444,11 +5666,11 @@
       <node ref="S3" pin="2" pinfunction="A_2" pintype="passive"/>
       <node ref="S4" pin="2" pinfunction="A_2" pintype="passive"/>
     </net>
-    <net code="7" name="/COL0_MCU" class="Default">
+    <net code="9" name="/COL0_MCU" class="Default">
       <node ref="R1" pin="2" pintype="passive"/>
       <node ref="U1" pin="44" pinfunction="XTALHF1/PA0_44" pintype="bidirectional"/>
     </net>
-    <net code="8" name="/COL1" class="Default">
+    <net code="10" name="/COL1" class="Default">
       <node ref="H1" pin="2" pinfunction="A_2" pintype="passive"/>
       <node ref="IND2" pin="2" pinfunction="A_2" pintype="passive"/>
       <node ref="M5" pin="2" pinfunction="A_2" pintype="passive"/>
@@ -5463,11 +5685,11 @@
       <node ref="S8" pin="2" pinfunction="A_2" pintype="passive"/>
       <node ref="S9" pin="2" pinfunction="A_2" pintype="passive"/>
     </net>
-    <net code="9" name="/COL1_MCU" class="Default">
+    <net code="11" name="/COL1_MCU" class="Default">
       <node ref="R2" pin="2" pintype="passive"/>
       <node ref="U1" pin="45" pinfunction="XTALHF2/PA1_45" pintype="bidirectional"/>
     </net>
-    <net code="10" name="/COL2" class="Default">
+    <net code="12" name="/COL2" class="Default">
       <node ref="H2" pin="2" pinfunction="A_2" pintype="passive"/>
       <node ref="IND3" pin="2" pinfunction="A_2" pintype="passive"/>
       <node ref="M10" pin="2" pinfunction="A_2" pintype="passive"/>
@@ -5482,11 +5704,11 @@
       <node ref="S13" pin="2" pinfunction="A_2" pintype="passive"/>
       <node ref="S14" pin="2" pinfunction="A_2" pintype="passive"/>
     </net>
-    <net code="11" name="/COL2_MCU" class="Default">
+    <net code="13" name="/COL2_MCU" class="Default">
       <node ref="R3" pin="2" pintype="passive"/>
       <node ref="U1" pin="48" pinfunction="PA4_48" pintype="bidirectional"/>
     </net>
-    <net code="12" name="/COL3" class="Default">
+    <net code="14" name="/COL3" class="Default">
       <node ref="H3" pin="2" pinfunction="A_2" pintype="passive"/>
       <node ref="IND4" pin="2" pinfunction="A_2" pintype="passive"/>
       <node ref="M15" pin="2" pinfunction="A_2" pintype="passive"/>
@@ -5501,11 +5723,11 @@
       <node ref="S18" pin="2" pinfunction="A_2" pintype="passive"/>
       <node ref="S19" pin="2" pinfunction="A_2" pintype="passive"/>
     </net>
-    <net code="13" name="/COL3_MCU" class="Default">
+    <net code="15" name="/COL3_MCU" class="Default">
       <node ref="R4" pin="2" pintype="passive"/>
       <node ref="U1" pin="1" pinfunction="PA5_1" pintype="bidirectional"/>
     </net>
-    <net code="14" name="/COL4" class="Default">
+    <net code="16" name="/COL4" class="Default">
       <node ref="H4" pin="2" pinfunction="A_2" pintype="passive"/>
       <node ref="IND5" pin="2" pinfunction="A_2" pintype="passive"/>
       <node ref="M20" pin="2" pinfunction="A_2" pintype="passive"/>
@@ -5520,11 +5742,11 @@
       <node ref="S23" pin="2" pinfunction="A_2" pintype="passive"/>
       <node ref="S24" pin="2" pinfunction="A_2" pintype="passive"/>
     </net>
-    <net code="15" name="/COL4_MCU" class="Default">
+    <net code="17" name="/COL4_MCU" class="Default">
       <node ref="R5" pin="2" pintype="passive"/>
       <node ref="U1" pin="2" pinfunction="PA6_2" pintype="bidirectional"/>
     </net>
-    <net code="16" name="/COL5" class="Default">
+    <net code="18" name="/COL5" class="Default">
       <node ref="H5" pin="2" pinfunction="A_2" pintype="passive"/>
       <node ref="IND6" pin="2" pinfunction="A_2" pintype="passive"/>
       <node ref="M25" pin="2" pinfunction="A_2" pintype="passive"/>
@@ -5539,12 +5761,13 @@
       <node ref="S28" pin="2" pinfunction="A_2" pintype="passive"/>
       <node ref="S29" pin="2" pinfunction="A_2" pintype="passive"/>
     </net>
-    <net code="17" name="/COL5_MCU" class="Default">
+    <net code="19" name="/COL5_MCU" class="Default">
       <node ref="R6" pin="2" pintype="passive"/>
       <node ref="U1" pin="3" pinfunction="PA7_3" pintype="bidirectional"/>
     </net>
-    <net code="18" name="/COL6" class="Default">
+    <net code="20" name="/COL6" class="Default">
       <node ref="H6" pin="2" pinfunction="A_2" pintype="passive"/>
+      <node ref="IND7" pin="2" pinfunction="A_2" pintype="passive"/>
       <node ref="M30" pin="2" pinfunction="A_2" pintype="passive"/>
       <node ref="M31" pin="2" pinfunction="A_2" pintype="passive"/>
       <node ref="M32" pin="2" pinfunction="A_2" pintype="passive"/>
@@ -5557,11 +5780,11 @@
       <node ref="S33" pin="2" pinfunction="A_2" pintype="passive"/>
       <node ref="S34" pin="2" pinfunction="A_2" pintype="passive"/>
     </net>
-    <net code="19" name="/COL6_MCU" class="Default">
+    <net code="21" name="/COL6_MCU" class="Default">
       <node ref="R7" pin="2" pintype="passive"/>
       <node ref="U1" pin="4" pinfunction="PB0_4" pintype="bidirectional"/>
     </net>
-    <net code="20" name="/COL7" class="Default">
+    <net code="22" name="/COL7" class="Default">
       <node ref="H7" pin="2" pinfunction="A_2" pintype="passive"/>
       <node ref="M35" pin="2" pinfunction="A_2" pintype="passive"/>
       <node ref="M36" pin="2" pinfunction="A_2" pintype="passive"/>
@@ -5575,11 +5798,11 @@
       <node ref="S38" pin="2" pinfunction="A_2" pintype="passive"/>
       <node ref="S39" pin="2" pinfunction="A_2" pintype="passive"/>
     </net>
-    <net code="21" name="/COL7_MCU" class="Default">
+    <net code="23" name="/COL7_MCU" class="Default">
       <node ref="R8" pin="2" pintype="passive"/>
       <node ref="U1" pin="5" pinfunction="PB1_5" pintype="bidirectional"/>
     </net>
-    <net code="22" name="/COL8" class="Default">
+    <net code="24" name="/COL8" class="Default">
       <node ref="H8" pin="2" pinfunction="A_2" pintype="passive"/>
       <node ref="M40" pin="2" pinfunction="A_2" pintype="passive"/>
       <node ref="M41" pin="2" pinfunction="A_2" pintype="passive"/>
@@ -5593,11 +5816,11 @@
       <node ref="S43" pin="2" pinfunction="A_2" pintype="passive"/>
       <node ref="S44" pin="2" pinfunction="A_2" pintype="passive"/>
     </net>
-    <net code="23" name="/COL8_MCU" class="Default">
+    <net code="25" name="/COL8_MCU" class="Default">
       <node ref="R9" pin="2" pintype="passive"/>
       <node ref="U1" pin="6" pinfunction="PB2_6" pintype="bidirectional"/>
     </net>
-    <net code="24" name="/COL9" class="Default">
+    <net code="26" name="/COL9" class="Default">
       <node ref="H9" pin="2" pinfunction="A_2" pintype="passive"/>
       <node ref="M45" pin="2" pinfunction="A_2" pintype="passive"/>
       <node ref="M46" pin="2" pinfunction="A_2" pintype="passive"/>
@@ -5611,11 +5834,11 @@
       <node ref="S48" pin="2" pinfunction="A_2" pintype="passive"/>
       <node ref="S49" pin="2" pinfunction="A_2" pintype="passive"/>
     </net>
-    <net code="25" name="/COL9_MCU" class="Default">
+    <net code="27" name="/COL9_MCU" class="Default">
       <node ref="R10" pin="2" pintype="passive"/>
       <node ref="U1" pin="7" pinfunction="PB3_7" pintype="bidirectional"/>
     </net>
-    <net code="26" name="/COL10" class="Default">
+    <net code="28" name="/COL10" class="Default">
       <node ref="H10" pin="2" pinfunction="A_2" pintype="passive"/>
       <node ref="M50" pin="2" pinfunction="A_2" pintype="passive"/>
       <node ref="M51" pin="2" pinfunction="A_2" pintype="passive"/>
@@ -5629,11 +5852,11 @@
       <node ref="S53" pin="2" pinfunction="A_2" pintype="passive"/>
       <node ref="S54" pin="2" pinfunction="A_2" pintype="passive"/>
     </net>
-    <net code="27" name="/COL10_MCU" class="Default">
+    <net code="29" name="/COL10_MCU" class="Default">
       <node ref="R11" pin="2" pintype="passive"/>
       <node ref="U1" pin="10" pinfunction="PC0_10" pintype="bidirectional"/>
     </net>
-    <net code="28" name="/COL11" class="Default">
+    <net code="30" name="/COL11" class="Default">
       <node ref="H11" pin="2" pinfunction="A_2" pintype="passive"/>
       <node ref="M55" pin="2" pinfunction="A_2" pintype="passive"/>
       <node ref="M56" pin="2" pinfunction="A_2" pintype="passive"/>
@@ -5647,33 +5870,37 @@
       <node ref="S58" pin="2" pinfunction="A_2" pintype="passive"/>
       <node ref="S59" pin="2" pinfunction="A_2" pintype="passive"/>
     </net>
-    <net code="29" name="/COL11_MCU" class="Default">
+    <net code="31" name="/COL11_MCU" class="Default">
       <node ref="R12" pin="2" pintype="passive"/>
       <node ref="U1" pin="11" pinfunction="PC1_11" pintype="bidirectional"/>
     </net>
-    <net code="30" name="/IMU_INT" class="Default">
+    <net code="32" name="/IMU_INT" class="Default">
       <node ref="U1" pin="30" pinfunction="PE0_30" pintype="bidirectional"/>
       <node ref="U2" pin="12" pinfunction="INT1_12" pintype="output"/>
     </net>
-    <net code="31" name="/LBOOST" class="Default">
+    <net code="33" name="/LBOOST" class="Default">
       <node ref="L1" pin="1" pinfunction="1_1" pintype="passive"/>
       <node ref="U4" pin="20" pinfunction="LBOOST_20" pintype="passive"/>
     </net>
-    <net code="32" name="/LBUCK" class="Default">
+    <net code="34" name="/LBUCK" class="Default">
       <node ref="L2" pin="1" pinfunction="1_1" pintype="passive"/>
       <node ref="U4" pin="16" pinfunction="LBUCK_16" pintype="passive"/>
     </net>
-    <net code="33" name="/OK_HYST" class="Default">
+    <net code="35" name="/OK_HYST" class="Default">
       <node ref="R52" pin="2" pintype="passive"/>
       <node ref="R53" pin="1" pintype="passive"/>
       <node ref="U4" pin="10" pinfunction="OK_HYST_10" pintype="input"/>
     </net>
-    <net code="34" name="/OK_PROG" class="Default">
+    <net code="36" name="/OK_PROG" class="Default">
       <node ref="R53" pin="2" pintype="passive"/>
       <node ref="R54" pin="1" pintype="passive"/>
       <node ref="U4" pin="11" pinfunction="OK_PROG_11" pintype="input"/>
     </net>
-    <net code="35" name="/ROW0" class="Default">
+    <net code="37" name="/RESET" class="Default">
+      <node ref="J2" pin="1" pinfunction="Pin_1_1" pintype="passive"/>
+      <node ref="U1" pin="40" pinfunction="~{RESET}/PF6_40" pintype="bidirectional"/>
+    </net>
+    <net code="38" name="/ROW0" class="Default">
       <node ref="H1" pin="1" pinfunction="K_1" pintype="passive"/>
       <node ref="H10" pin="1" pinfunction="K_1" pintype="passive"/>
       <node ref="H11" pin="1" pinfunction="K_1" pintype="passive"/>
@@ -5688,7 +5915,7 @@
       <node ref="H9" pin="1" pinfunction="K_1" pintype="passive"/>
       <node ref="U1" pin="12" pinfunction="PC2_12" pintype="bidirectional"/>
     </net>
-    <net code="36" name="/ROW1" class="Default">
+    <net code="39" name="/ROW1" class="Default">
       <node ref="M0" pin="1" pinfunction="K_1" pintype="passive"/>
       <node ref="M10" pin="1" pinfunction="K_1" pintype="passive"/>
       <node ref="M15" pin="1" pinfunction="K_1" pintype="passive"/>
@@ -5703,7 +5930,7 @@
       <node ref="M55" pin="1" pinfunction="K_1" pintype="passive"/>
       <node ref="U1" pin="13" pinfunction="PC3_13" pintype="bidirectional"/>
     </net>
-    <net code="37" name="/ROW2" class="Default">
+    <net code="40" name="/ROW2" class="Default">
       <node ref="M1" pin="1" pinfunction="K_1" pintype="passive"/>
       <node ref="M11" pin="1" pinfunction="K_1" pintype="passive"/>
       <node ref="M16" pin="1" pinfunction="K_1" pintype="passive"/>
@@ -5718,7 +5945,7 @@
       <node ref="M6" pin="1" pinfunction="K_1" pintype="passive"/>
       <node ref="U1" pin="16" pinfunction="PC4_16" pintype="bidirectional"/>
     </net>
-    <net code="38" name="/ROW3" class="Default">
+    <net code="41" name="/ROW3" class="Default">
       <node ref="M12" pin="1" pinfunction="K_1" pintype="passive"/>
       <node ref="M17" pin="1" pinfunction="K_1" pintype="passive"/>
       <node ref="M2" pin="1" pinfunction="K_1" pintype="passive"/>
@@ -5733,7 +5960,7 @@
       <node ref="M7" pin="1" pinfunction="K_1" pintype="passive"/>
       <node ref="U1" pin="17" pinfunction="PC5_17" pintype="bidirectional"/>
     </net>
-    <net code="39" name="/ROW4" class="Default">
+    <net code="42" name="/ROW4" class="Default">
       <node ref="M13" pin="1" pinfunction="K_1" pintype="passive"/>
       <node ref="M18" pin="1" pinfunction="K_1" pintype="passive"/>
       <node ref="M23" pin="1" pinfunction="K_1" pintype="passive"/>
@@ -5748,7 +5975,7 @@
       <node ref="M8" pin="1" pinfunction="K_1" pintype="passive"/>
       <node ref="U1" pin="18" pinfunction="PC6_18" pintype="bidirectional"/>
     </net>
-    <net code="40" name="/ROW5" class="Default">
+    <net code="43" name="/ROW5" class="Default">
       <node ref="M14" pin="1" pinfunction="K_1" pintype="passive"/>
       <node ref="M19" pin="1" pinfunction="K_1" pintype="passive"/>
       <node ref="M24" pin="1" pinfunction="K_1" pintype="passive"/>
@@ -5763,7 +5990,7 @@
       <node ref="M9" pin="1" pinfunction="K_1" pintype="passive"/>
       <node ref="U1" pin="19" pinfunction="PC7_19" pintype="bidirectional"/>
     </net>
-    <net code="41" name="/ROW6" class="Default">
+    <net code="44" name="/ROW6" class="Default">
       <node ref="S0" pin="1" pinfunction="K_1" pintype="passive"/>
       <node ref="S10" pin="1" pinfunction="K_1" pintype="passive"/>
       <node ref="S15" pin="1" pinfunction="K_1" pintype="passive"/>
@@ -5778,7 +6005,7 @@
       <node ref="S55" pin="1" pinfunction="K_1" pintype="passive"/>
       <node ref="U1" pin="20" pinfunction="PD0_20" pintype="bidirectional"/>
     </net>
-    <net code="42" name="/ROW7" class="Default">
+    <net code="45" name="/ROW7" class="Default">
       <node ref="S1" pin="1" pinfunction="K_1" pintype="passive"/>
       <node ref="S11" pin="1" pinfunction="K_1" pintype="passive"/>
       <node ref="S16" pin="1" pinfunction="K_1" pintype="passive"/>
@@ -5793,7 +6020,7 @@
       <node ref="S6" pin="1" pinfunction="K_1" pintype="passive"/>
       <node ref="U1" pin="21" pinfunction="PD1_21" pintype="bidirectional"/>
     </net>
-    <net code="43" name="/ROW8" class="Default">
+    <net code="46" name="/ROW8" class="Default">
       <node ref="S12" pin="1" pinfunction="K_1" pintype="passive"/>
       <node ref="S17" pin="1" pinfunction="K_1" pintype="passive"/>
       <node ref="S2" pin="1" pinfunction="K_1" pintype="passive"/>
@@ -5808,7 +6035,7 @@
       <node ref="S7" pin="1" pinfunction="K_1" pintype="passive"/>
       <node ref="U1" pin="22" pinfunction="PD2_22" pintype="bidirectional"/>
     </net>
-    <net code="44" name="/ROW9" class="Default">
+    <net code="47" name="/ROW9" class="Default">
       <node ref="S13" pin="1" pinfunction="K_1" pintype="passive"/>
       <node ref="S18" pin="1" pinfunction="K_1" pintype="passive"/>
       <node ref="S23" pin="1" pinfunction="K_1" pintype="passive"/>
@@ -5823,7 +6050,7 @@
       <node ref="S8" pin="1" pinfunction="K_1" pintype="passive"/>
       <node ref="U1" pin="23" pinfunction="PD3_23" pintype="bidirectional"/>
     </net>
-    <net code="45" name="/ROW10" class="Default">
+    <net code="48" name="/ROW10" class="Default">
       <node ref="S14" pin="1" pinfunction="K_1" pintype="passive"/>
       <node ref="S19" pin="1" pinfunction="K_1" pintype="passive"/>
       <node ref="S24" pin="1" pinfunction="K_1" pintype="passive"/>
@@ -5838,66 +6065,67 @@
       <node ref="S9" pin="1" pinfunction="K_1" pintype="passive"/>
       <node ref="U1" pin="24" pinfunction="PD4_24" pintype="bidirectional"/>
     </net>
-    <net code="46" name="/ROW11" class="Default">
+    <net code="49" name="/ROW11" class="Default">
       <node ref="IND1" pin="1" pinfunction="K_1" pintype="passive"/>
       <node ref="IND2" pin="1" pinfunction="K_1" pintype="passive"/>
       <node ref="IND3" pin="1" pinfunction="K_1" pintype="passive"/>
       <node ref="IND4" pin="1" pinfunction="K_1" pintype="passive"/>
       <node ref="IND5" pin="1" pinfunction="K_1" pintype="passive"/>
       <node ref="IND6" pin="1" pinfunction="K_1" pintype="passive"/>
+      <node ref="IND7" pin="1" pinfunction="K_1" pintype="passive"/>
       <node ref="U1" pin="25" pinfunction="PD5_25" pintype="bidirectional"/>
     </net>
-    <net code="47" name="/SCL" class="Default">
+    <net code="50" name="/SCL" class="Default">
       <node ref="R21" pin="2" pintype="passive"/>
       <node ref="U1" pin="47" pinfunction="PA3_47" pintype="bidirectional"/>
       <node ref="U2" pin="1" pinfunction="SCL/SPC_1" pintype="input"/>
     </net>
-    <net code="48" name="/SDA" class="Default">
+    <net code="51" name="/SDA" class="Default">
       <node ref="R20" pin="2" pintype="passive"/>
       <node ref="U1" pin="46" pinfunction="PA2_46" pintype="bidirectional"/>
       <node ref="U2" pin="4" pinfunction="SDA/SDI/SDO_4" pintype="bidirectional"/>
     </net>
-    <net code="49" name="/SOLAR_IN" class="Default">
+    <net code="52" name="/SOLAR_IN" class="Default">
       <node ref="C50" pin="1" pintype="passive"/>
-      <node ref="J3" pin="1" pinfunction="Pin_1_1" pintype="passive"/>
       <node ref="L1" pin="2" pinfunction="2_2" pintype="passive"/>
+      <node ref="SC1+" pin="1" pinfunction="1_1" pintype="passive"/>
       <node ref="U4" pin="2" pinfunction="VIN_DC_2" pintype="power_in"/>
     </net>
-    <net code="50" name="/UPDI" class="Default">
-      <node ref="J2" pin="1" pinfunction="Pin_1_1" pintype="passive"/>
+    <net code="53" name="/UPDI" class="Default">
+      <node ref="J2" pin="4" pinfunction="Pin_4_4" pintype="passive"/>
       <node ref="U1" pin="41" pinfunction="UPDI_41" pintype="input"/>
     </net>
-    <net code="51" name="/VBAT_OV" class="Default">
+    <net code="54" name="/VBAT_OV" class="Default">
       <node ref="R50" pin="2" pintype="passive"/>
       <node ref="R51" pin="1" pintype="passive"/>
       <node ref="U4" pin="7" pinfunction="VBAT_OV_7" pintype="input"/>
     </net>
-    <net code="52" name="/VOUT_SET" class="Default">
+    <net code="55" name="/VOUT_SET" class="Default">
       <node ref="R55" pin="2" pintype="passive"/>
       <node ref="R56" pin="1" pintype="passive"/>
       <node ref="U4" pin="12" pinfunction="VOUT_SET_12" pintype="input"/>
     </net>
-    <net code="53" name="/VRDIV" class="Default">
+    <net code="56" name="/VRDIV" class="Default">
       <node ref="R50" pin="1" pintype="passive"/>
       <node ref="R52" pin="1" pintype="passive"/>
       <node ref="R55" pin="1" pintype="passive"/>
       <node ref="U4" pin="8" pinfunction="VRDIV_8" pintype="output"/>
     </net>
-    <net code="54" name="/VREF_SAMP" class="Default">
+    <net code="57" name="/VREF_SAMP" class="Default">
       <node ref="C51" pin="1" pintype="passive"/>
       <node ref="U4" pin="4" pinfunction="VREF_SAMP_4" pintype="passive"/>
     </net>
-    <net code="55" name="/XTAL1" class="Default">
+    <net code="58" name="/XTAL1" class="Default">
       <node ref="C20" pin="1" pintype="passive"/>
       <node ref="U1" pin="34" pinfunction="XTAL32K1/PF0_34" pintype="bidirectional"/>
       <node ref="Y1" pin="1" pinfunction="1_1" pintype="passive"/>
     </net>
-    <net code="56" name="/XTAL2" class="Default">
+    <net code="59" name="/XTAL2" class="Default">
       <node ref="C21" pin="1" pintype="passive"/>
       <node ref="U1" pin="35" pinfunction="XTAL32K2/PF1_35" pintype="bidirectional"/>
       <node ref="Y1" pin="2" pinfunction="2_2" pintype="passive"/>
     </net>
-    <net code="57" name="GND" class="Default">
+    <net code="60" name="GND" class="Default">
       <node ref="C10" pin="2" pintype="passive"/>
       <node ref="C11" pin="2" pintype="passive"/>
       <node ref="C12" pin="2" pintype="passive"/>
@@ -5913,11 +6141,11 @@
       <node ref="C54" pin="2" pintype="passive"/>
       <node ref="J1" pin="2" pinfunction="Pin_2_2" pintype="passive"/>
       <node ref="J1B" pin="2" pinfunction="Pin_2_2" pintype="passive"/>
-      <node ref="J2" pin="6" pinfunction="Pin_6_6" pintype="passive"/>
-      <node ref="J3" pin="2" pinfunction="Pin_2_2" pintype="passive"/>
+      <node ref="J2" pin="3" pinfunction="Pin_3_3" pintype="passive"/>
       <node ref="R51" pin="2" pintype="passive"/>
       <node ref="R54" pin="2" pintype="passive"/>
       <node ref="R56" pin="2" pintype="passive"/>
+      <node ref="SC1-" pin="1" pinfunction="1_1" pintype="passive"/>
       <node ref="SW1" pin="2" pinfunction="2_2" pintype="passive"/>
       <node ref="SW2" pin="2" pinfunction="2_2" pintype="passive"/>
       <node ref="U1" pin="15" pinfunction="GND_15" pintype="power_in"/>
@@ -5936,7 +6164,7 @@
       <node ref="U4" pin="5" pinfunction="~{EN}_5" pintype="input"/>
       <node ref="U4" pin="9" pinfunction="VSS_9" pintype="passive"/>
     </net>
-    <net code="58" name="VBAT" class="Default">
+    <net code="61" name="VBAT" class="Default">
       <node ref="C10" pin="1" pintype="passive"/>
       <node ref="C11" pin="1" pintype="passive"/>
       <node ref="C12" pin="1" pintype="passive"/>
@@ -5951,79 +6179,85 @@
       <node ref="U4" pin="3" pinfunction="VOC_SAMP_3" pintype="input"/>
       <node ref="U4" pin="6" pinfunction="VOUT_EN_6" pintype="input"/>
     </net>
-    <net code="59" name="unconnected-(C60-Pad1)" class="Default">
-      <node ref="C60" pin="1" pintype="passive+no_connect"/>
-    </net>
-    <net code="60" name="unconnected-(C60-Pad2)" class="Default">
-      <node ref="C60" pin="2" pintype="passive+no_connect"/>
-    </net>
-    <net code="61" name="unconnected-(C61-Pad1)" class="Default">
-      <node ref="C61" pin="1" pintype="passive+no_connect"/>
-    </net>
-    <net code="62" name="unconnected-(C61-Pad2)" class="Default">
-      <node ref="C61" pin="2" pintype="passive+no_connect"/>
-    </net>
-    <net code="63" name="unconnected-(C62-Pad1)" class="Default">
-      <node ref="C62" pin="1" pintype="passive+no_connect"/>
-    </net>
-    <net code="64" name="unconnected-(C62-Pad2)" class="Default">
-      <node ref="C62" pin="2" pintype="passive+no_connect"/>
-    </net>
-    <net code="65" name="unconnected-(J2-Pin_3-Pad3)" class="Default">
-      <node ref="J2" pin="3" pinfunction="Pin_3_3" pintype="passive+no_connect"/>
-    </net>
-    <net code="66" name="unconnected-(J2-Pin_4-Pad4)" class="Default">
-      <node ref="J2" pin="4" pinfunction="Pin_4_4" pintype="passive+no_connect"/>
-    </net>
-    <net code="67" name="unconnected-(J2-Pin_5-Pad5)" class="Default">
-      <node ref="J2" pin="5" pinfunction="Pin_5_5" pintype="passive+no_connect"/>
-    </net>
-    <net code="68" name="unconnected-(R57-Pad1)" class="Default">
+    <net code="62" name="unconnected-(R57-Pad1)" class="Default">
       <node ref="R57" pin="1" pintype="passive+no_connect"/>
     </net>
-    <net code="69" name="unconnected-(R57-Pad2)" class="Default">
+    <net code="63" name="unconnected-(R57-Pad2)" class="Default">
       <node ref="R57" pin="2" pintype="passive+no_connect"/>
     </net>
-    <net code="70" name="unconnected-(R58-Pad1)" class="Default">
+    <net code="64" name="unconnected-(R58-Pad1)" class="Default">
       <node ref="R58" pin="1" pintype="passive+no_connect"/>
     </net>
-    <net code="71" name="unconnected-(R58-Pad2)" class="Default">
+    <net code="65" name="unconnected-(R58-Pad2)" class="Default">
       <node ref="R58" pin="2" pintype="passive+no_connect"/>
     </net>
-    <net code="72" name="unconnected-(R59-Pad1)" class="Default">
+    <net code="66" name="unconnected-(R59-Pad1)" class="Default">
       <node ref="R59" pin="1" pintype="passive+no_connect"/>
     </net>
-    <net code="73" name="unconnected-(R59-Pad2)" class="Default">
+    <net code="67" name="unconnected-(R59-Pad2)" class="Default">
       <node ref="R59" pin="2" pintype="passive+no_connect"/>
     </net>
-    <net code="74" name="unconnected-(U1-PB4-Pad8)" class="Default">
-      <node ref="U1" pin="8" pinfunction="PB4_8" pintype="bidirectional+no_connect"/>
+    <net code="68" name="unconnected-(R61-Pad1)" class="Default">
+      <node ref="R61" pin="1" pintype="passive+no_connect"/>
     </net>
-    <net code="75" name="unconnected-(U1-PB5-Pad9)" class="Default">
-      <node ref="U1" pin="9" pinfunction="PB5_9" pintype="bidirectional+no_connect"/>
+    <net code="69" name="unconnected-(R61-Pad2)" class="Default">
+      <node ref="R61" pin="2" pintype="passive+no_connect"/>
     </net>
-    <net code="76" name="unconnected-(U1-PD6-Pad26)" class="Default">
+    <net code="70" name="unconnected-(R62-Pad1)" class="Default">
+      <node ref="R62" pin="1" pintype="passive+no_connect"/>
+    </net>
+    <net code="71" name="unconnected-(R62-Pad2)" class="Default">
+      <node ref="R62" pin="2" pintype="passive+no_connect"/>
+    </net>
+    <net code="72" name="unconnected-(R63-Pad1)" class="Default">
+      <node ref="R63" pin="1" pintype="passive+no_connect"/>
+    </net>
+    <net code="73" name="unconnected-(R63-Pad2)" class="Default">
+      <node ref="R63" pin="2" pintype="passive+no_connect"/>
+    </net>
+    <net code="74" name="unconnected-(R64-Pad1)" class="Default">
+      <node ref="R64" pin="1" pintype="passive+no_connect"/>
+    </net>
+    <net code="75" name="unconnected-(R64-Pad2)" class="Default">
+      <node ref="R64" pin="2" pintype="passive+no_connect"/>
+    </net>
+    <net code="76" name="unconnected-(R65-Pad1)" class="Default">
+      <node ref="R65" pin="1" pintype="passive+no_connect"/>
+    </net>
+    <net code="77" name="unconnected-(R65-Pad2)" class="Default">
+      <node ref="R65" pin="2" pintype="passive+no_connect"/>
+    </net>
+    <net code="78" name="unconnected-(R66-Pad1)" class="Default">
+      <node ref="R66" pin="1" pintype="passive+no_connect"/>
+    </net>
+    <net code="79" name="unconnected-(R66-Pad2)" class="Default">
+      <node ref="R66" pin="2" pintype="passive+no_connect"/>
+    </net>
+    <net code="80" name="unconnected-(R67-Pad1)" class="Default">
+      <node ref="R67" pin="1" pintype="passive+no_connect"/>
+    </net>
+    <net code="81" name="unconnected-(R67-Pad2)" class="Default">
+      <node ref="R67" pin="2" pintype="passive+no_connect"/>
+    </net>
+    <net code="82" name="unconnected-(U1-PD6-Pad26)" class="Default">
       <node ref="U1" pin="26" pinfunction="PD6_26" pintype="bidirectional+no_connect"/>
     </net>
-    <net code="77" name="unconnected-(U1-PF2-Pad36)" class="Default">
+    <net code="83" name="unconnected-(U1-PF2-Pad36)" class="Default">
       <node ref="U1" pin="36" pinfunction="PF2_36" pintype="bidirectional+no_connect"/>
     </net>
-    <net code="78" name="unconnected-(U1-PF3-Pad37)" class="Default">
+    <net code="84" name="unconnected-(U1-PF3-Pad37)" class="Default">
       <node ref="U1" pin="37" pinfunction="PF3_37" pintype="bidirectional+no_connect"/>
     </net>
-    <net code="79" name="unconnected-(U1-PF4-Pad38)" class="Default">
+    <net code="85" name="unconnected-(U1-PF4-Pad38)" class="Default">
       <node ref="U1" pin="38" pinfunction="PF4_38" pintype="bidirectional+no_connect"/>
     </net>
-    <net code="80" name="unconnected-(U1-PF5-Pad39)" class="Default">
+    <net code="86" name="unconnected-(U1-PF5-Pad39)" class="Default">
       <node ref="U1" pin="39" pinfunction="PF5_39" pintype="bidirectional+no_connect"/>
     </net>
-    <net code="81" name="unconnected-(U1-VREFA/PD7-Pad27)" class="Default">
+    <net code="87" name="unconnected-(U1-VREFA/PD7-Pad27)" class="Default">
       <node ref="U1" pin="27" pinfunction="VREFA/PD7_27" pintype="bidirectional+no_connect"/>
     </net>
-    <net code="82" name="unconnected-(U1-~{RESET}/PF6-Pad40)" class="Default">
-      <node ref="U1" pin="40" pinfunction="~{RESET}/PF6_40" pintype="bidirectional+no_connect"/>
-    </net>
-    <net code="83" name="unconnected-(U2-INT2-Pad11)" class="Default">
+    <net code="88" name="unconnected-(U2-INT2-Pad11)" class="Default">
       <node ref="U2" pin="11" pinfunction="INT2_11" pintype="output+no_connect"/>
     </net>
   </nets>

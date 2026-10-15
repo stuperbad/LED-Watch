@@ -27,7 +27,10 @@
 #define PIN_COL10_MCU        PORTC, 0   // pin 10  PC0
 #define PIN_COL11_MCU        PORTC, 1   // pin 11  PC1
 #define PIN_BAT_OK           PORTE, 3   // pin 33  PE3
+#define PIN_BUZ_A            PORTB, 4   // pin 8  PB4
+#define PIN_BUZ_B            PORTB, 5   // pin 9  PB5
 #define PIN_IMU_INT          PORTE, 0   // pin 30  PE0
+#define PIN_RESET            PORTF, 6   // pin 40  ~{RESET}/PF6
 #define PIN_SCL              PORTA, 3   // pin 47  PA3
 #define PIN_SDA              PORTA, 2   // pin 46  PA2
 // UPDI                   pin 41  UPDI

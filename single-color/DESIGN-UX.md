@@ -1,7 +1,7 @@
-# Watch UX: modes, two buttons, six indicator LEDs, games
+# Watch UX: modes, two buttons, seven indicator LEDs, buzzer, games
 
 Revised 2026-10-11 (button model v3: mode selection) to match the simulator (`firmware/sim/`, behaviour in `firmware/sim/watch_core.js`). The user-facing wording lives in `firmware/sim/MANUAL.md`; this file is the design rationale and the spec the firmware is built to.
-Hardware assumed: 132 white ring LEDs (12 hour, 60 minute, 60 second), 6 indicator LEDs (SET TMR BAT FUN CFG LCK) on matrix row 11, 2 buttons (left, right; symmetric, low on the face), LIS2DW12 accelerometer (wake-up, tap, orientation, free-fall, ~1 uA), battery voltage read by the MCU itself, solar input.
+Hardware assumed: 132 white ring LEDs (12 hour, 60 minute, 60 second), 7 indicator LEDs (SET TMR ALM BAT FUN CFG LCK, board Y42), a piezo buzzer (Murata PKMCS0909E4000-R1 on PB4/PB5) on matrix row 11, 2 buttons (left, right; symmetric, low on the face), LIS2DW12 accelerometer (wake-up, tap, orientation, free-fall, ~1 uA), battery voltage read by the MCU itself, solar input.
 
 ## 1. Ground rules
 One idea: **inside a mode, both buttons belong to the mode. Left LONG is the way out, from everywhere: it opens MODE SELECTION.**
@@ -17,7 +17,7 @@ One idea: **inside a mode, both buttons belong to the mode. Left LONG is the way
 
 ### Mode selection
 Opened by Left long. **One** indicator blinks: the highlighted mode (Time has no indicator: it is shown as the 12 o'clock hour LED blinking). The highlight starts on the mode you were in.
-- **Left short / Right short**: move the highlight one mode LEFT / RIGHT along the physical indicator row, wrapping at the ends. Order left to right: TIME, SET, TMR, BAT, FUN, CFG.
+- **Left short / Right short**: move the highlight one mode LEFT / RIGHT along the physical indicator row, wrapping at the ends. Order left to right: TIME, SET, TMR, ALM, BAT, FUN, CFG.
 - **Wait 2.5 s**: enters the highlighted mode by itself. This is the normal way to confirm, so "hold Left, tap Right twice, wait" is a complete gesture.
 - **Right long**: enter the highlighted mode immediately.  **Left long**: jump to Time.
 Why: with Left long as the single way out, no mode has to give up a button for navigation, so games, the stopwatch and the editors can use both buttons freely; the two buttons map onto left/right movement along the indicator row; and a stray short tap can never change mode.
@@ -32,12 +32,13 @@ Why: with Left long as the single way out, no mode has to give up a button for n
 | **Stopwatch (running, or showing a time)** | **90 s** | **display off but stays in stopwatch mode; any wake returns to it; it keeps counting** |
 
 ## 2. Modes
-Mode selection moves along TIME, SET, TMR, BAT, FUN, CFG (left to right, wrapping). Left long opens it from any of them.
+Mode selection moves along TIME, SET, TMR, ALM, BAT, FUN, CFG (left to right, wrapping). Left long opens it from any of them.
 | Mode | Indicator | Left short | Right short | Right long | Ring display |
 |---|---|---|---|---|---|
-| **Time** | none | - | date for 2 s | battery for 2 s | hour LED + minute LED (+ second LED); date: month on hour ring, day on minute ring, weekday bar on outer ring; battery: hour-ring bar |
+| **Time** | none | - | date for 2 s | battery for 2 s | hour LED + minute LED (+ second LED); date: month on hour ring, day on minute ring, weekday = one indicator LED (SET = Sun ... LCK = Sat); battery: hour-ring bar |
 | **Set time and date** | SET | next unit | +1 on the blinking unit | HOLD: auto-repeat (faster after 2.5 s) | units: hour, minute, second, month, day, year (year = minute-ring LED at the last two digits); the unit being set blinks |
 | **Stopwatch** | TMR | reset (when stopped) | start / stop | reset | second LED = seconds, minute LED = minutes, hour ring = tenths (LEDs 1-5, 7-11; 6 and 12 skipped) |
+| **Alarm** | ALM | next field (hour, minute, on/off) | +1 on the field / switch on or off | HOLD: auto-repeat +1 | hour LED = alarm hour, minute LED = alarm minute, outer LED at 6 = PM, three outer LEDs at 12 = on; rings up to 1 min (beeps), any button stops it |
 | **Battery / status** | BAT | previous view | next view: charge, solar, charging | - | charge = hour-ring bar; solar = minute-ring bar (log); charging = spinner |
 | **Fun** | FUN | picker: next game; in a game: the game's left action | picker: START; in a game: the game's right action | in a game: the game's secondary action (Particles: remove) | see "Fun: the game picker" |
 | **Settings** | CFG | next setting | change value | - | hour LED n = setting n; minute-ring bar length = value |
@@ -73,18 +74,20 @@ Entering FUN never drops you straight into a game; it shows the **game picker**,
 | 8 | Wake by tap | on, off | on |
 | 9 | Buttons that wake | either, left only, right only, none | either |
 | 10 | Lock display | motion wakes it, stays dark, always on (low brightness, no seconds) | motion wakes it |
+| 11 | Key beeps | off, on (a click on every press outside the games) | off |
+| 12 | Game sounds | on, off (hits, misses, wins, Simon tones, metronome tick) | on |
 Protocol: open CFG from mode selection; the hour ring tells you WHICH setting, the minute-ring bar tells you its VALUE; Right short = next value, Left short = next setting; changes apply immediately (no save step); Left long to leave.
 
 ### Date display (Right short in Time; battery is Right long)
-Month on the hour ring (Jan = 1 o'clock ... Dec = 12), day on the minute ring (the 15th = the 15-minute LED), weekday as a bar of 1-7 LEDs on the outer ring counted from 12 (Mon = 1 ... Sun = 7). Weekday is computed from the date (leap years handled); the date rolls over at midnight. Alternatives considered: a single LED on a 7-position "hand" (outer LEDs 0, 9, 17, 26, 34, 43, 51; needs careful reading) or silkscreen ticks (60 LEDs do not divide by 7); the bar needs no labels and is countable.
+Month on the hour ring (Jan = 1 o'clock ... Dec = 12), day on the minute ring (the 15th = the 15-minute LED), weekday as ONE indicator LED: SET = Sunday, TMR = Monday, ALM = Tuesday, BAT = Wednesday, FUN = Thursday, CFG = Friday, LCK = Saturday (the board prints the weekday letter under each mode name, week starts on Sunday). Weekday is computed from the date (leap years handled); the date rolls over at midnight.
 
 ### Locking (not a mode)
 Hold BOTH buttons 2 s from anywhere to lock; again to unlock. The LCK LED blinks while you hold (even on a dark watch), then is steady while locked. Locking drops to Time.
 While locked no button acts and no button wakes the display; a press only lights LCK (about 1 s if the display was dark) to explain why nothing happened. CFG 10 chooses whether motion wakes a locked watch (default), nothing does, or the display stays on **at low brightness (quarter duty) with no seconds LED**. Motion wake in the locked state still obeys CFG 6-8.
 
 ## 3. Indicator LEDs
-Six tiny LEDs in a row under the solar cell, each with a 0.8 mm silkscreen label, left to right: **SET, TMR, BAT, FUN, CFG, LCK**. Time lights none. The indicator of the current mode (first five) is lit; in mode selection only the highlighted mode's indicator blinks; LCK shows the lock state and is not a mode.
-- Wiring: all six on a 12th matrix ROW (anode to the column nets, cathode to ROW11): one extra pin, no extra resistors, same brightness control as the ring.
+Seven tiny LEDs in a row under the solar cell, each with a silkscreen label (mode name and weekday letter), left to right: **SET, TMR, ALM, BAT, FUN, CFG, LCK**. Time lights none. The indicator of the current mode (first five) is lit; in mode selection only the highlighted mode's indicator blinks; LCK shows the lock state and is not a mode.
+- Wiring: all seven on a 12th matrix ROW (IND7 = ALM is on COL6, physically third from the left; firmware indexes them in face order) (anode to the column nets, cathode to ROW11): one extra pin, no extra resistors, same brightness control as the ring.
 - BAT blinks fast for low battery (BAT_OK low); low battery also halves brightness; below 3 % only BAT blinks.
 - LCK blinks while both buttons are held, and blinks briefly on lock/unlock.
 
@@ -183,13 +186,21 @@ Ideas: a computer opponent for solo-versus; zones that shrink as the rally goes 
 
 ## 6. What this asks of the hardware / schematic
 - Buttons: symmetric and low on the face; keep the KMR2 parts for now.
-- Indicators: six 0402/0201 LEDs on matrix row 11 (in the netlist as IND1..IND6; PD5 drives the row).
+- Indicators: seven 0402 LEDs on matrix row 11 (in the netlist as IND1..IND7; PD5 drives the row; IND7 = ALM sits between TMR and BAT).
 - Wake gestures use the accelerometer's wake-up and double-tap detection (INT on PE0); shake maps to the wake-up threshold, free-fall is read but not used to wake.
 - Battery readout needs no pin (ADC VDD/10 channel on the AVR128DB48).
 - Light meter / auto-brightness: reverse-bias a ring LED and time its discharge (to be prototyped).
 
 ## 7. Open questions
-1. Weekday display: bar of 1-7 outer LEDs (current) vs 7-position hand vs silkscreen.
+1. Weekday display: DECIDED 2026-10-13: one indicator LED lights (SET = Sunday ... LCK = Saturday).
 2. Mode selection auto-enters after 2.5 s (now the main way to confirm): right length? (Too short and you cannot read the highlight; too long and it feels slow.)
 3. Which of the game ideas in 5.8 do you want next?
 4. Indicator colours: all one colour, or several? (More part types.)
+
+## 8. Sound (piezo) - added 2026-10-14
+Hardware: Murata PKMCS0909E4000-R1 between PB4 and PB5, driven in antiphase by TCA1 (split mode); about 4 kHz is loudest. The core (`watch.c` / `watch_core.js`) only reports the frequency to play (`watch_tone_hz()` / `out.tone`); `hw/buzzer.c` drives the pins, the simulator plays it with WebAudio.
+- **Alarm** (ALM mode): rings when the clock reaches the set minute, up to 1 minute, 4 kHz beep-beep-beep-beep-pause. Wakes the display (also when locked), any button stops it and does nothing else, no snooze yet. Always sounds, even with a low battery.
+- **Key beeps** (CFG 11, off by default): 3.5 kHz click on every press, except inside games.
+- **Game sounds** (CFG 12, on by default): Ring Runner tick per obstacle / crash tune; Target hit pair / miss tune; Quick Draw GO beep, winner fanfare, false-start double beep; Simon low tone = Left, high tone = Right (shown and pressed), wrong tune; Pong tick on a return, pair on a point, fanfare for the winner, tune when a solo game ends; Pacer tick per beat with an accent on the first of four; a longer fanfare at 999 points.
+- A low battery (BAT_OK low) mutes everything except the alarm. Power: the piezo is a capacitor, so a beep costs very little; the loop stays awake while a sound plays.
+- Not built yet: snooze, a choice of alarm tunes, hourly chime, per-game volume.

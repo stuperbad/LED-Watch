@@ -14,11 +14,12 @@
 (function (global) {
   'use strict';
   const ROWS = 12, COLS = 12;
-  const MODE = { TIME: 0, SET: 1, TMR: 2, BAT: 3, FUN: 4, CFG: 5 };
-  const MODE_NAME = ['TIME', 'SET', 'TMR', 'BAT', 'FUN', 'CFG'];
-  const MODE_IND = [-1, 0, 1, 2, 3, 4];               // mode -> indicator index (IND1..IND6 = SET TMR BAT FUN CFG LCK); LCK is a state, not a mode
-  const IND_NAME = ['SET', 'TMR', 'BAT', 'FUN', 'CFG', 'LCK'];
-  const NEXT_MODE = [1, 2, 3, 4, 5, 0];            // LEFT SHORT while browsing: TIME > SET > TMR > BAT > FUN > CFG > TIME
+  const MODE = { TIME: 0, SET: 1, TMR: 2, ALM: 3, BAT: 4, FUN: 5, CFG: 6 };   // the order of the indicator row on the face (mode selection moves along it)
+  const MODE_NAME = ['TIME', 'SET', 'TMR', 'ALM', 'BAT', 'FUN', 'CFG'];
+  const I = { SET: 0, TMR: 1, ALM: 2, BAT: 3, FUN: 4, CFG: 5, LCK: 6 };      // indicator LEDs left to right = SET TMR ALM BAT FUN CFG LCK = the weekday lights Sun..Sat
+  const MODE_IND = [-1, 0, 1, 2, 3, 4, 5];            // mode -> indicator; LCK is a state, not a mode
+  const IND_NAME = ['SET', 'TMR', 'ALM', 'BAT', 'FUN', 'CFG', 'LCK'];
+  const NEXT_MODE = [1, 2, 3, 4, 5, 6, 0];            // mode selection: Left/Right move along TIME SET TMR ALM BAT FUN CFG (wraps)
   const LONG_MS = 1000, LOCK_MS = 2000, HOLD_MS = 400, REPEAT_MS = 120;   // HOLD_MS: Right hold in Time (date) and in Set (auto-repeat)
   const DAYS_IN = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
   const SET_FIELDS = ['hour', 'minute', 'second', 'month', 'day', 'year'];
@@ -45,11 +46,11 @@
     { name: 'oil',    damp: 5.0, rest: 0.05, fric: 0.00, mix: 0.00, press: 1, mu: 0 },   // thick liquid: slow, flows, finds its level
     { name: 'water',  damp: 0.4, rest: 0.35, fric: 0.00, mix: 0.00, press: 1, mu: 0 },   // thin liquid: sloshes
     { name: 'bead',   damp: 0,   rest: 0,    fric: 0,    mix: 0,    press: 0, mu: 0 } ]; // not particles: one bead rolling on a ring (Right = next ring)
-  const CFG_NAMES = ['brightness', 'raise sensitivity', 'wake duration', 'auto brightness', 'seconds LED', 'wake by raise', 'wake by shake', 'wake by tap', 'buttons that wake', 'lock display'];
-  const CFG_COUNT = [5, 3, 4, 2, 2, 2, 2, 2, 4, 3];
+  const CFG_NAMES = ['brightness', 'raise sensitivity', 'wake duration', 'auto brightness', 'seconds LED', 'wake by raise', 'wake by shake', 'wake by tap', 'buttons that wake', 'lock display', 'key beeps', 'game sounds'];
+  const CFG_COUNT = [5, 3, 4, 2, 2, 2, 2, 2, 4, 3, 2, 2];
   const MENU_CONFIRM_MS = 2500;                    // mode selection enters the highlighted mode by itself after this
   const TMR_KEEP_MS = 90000;                        // stopwatch mode keeps the display (and the mode) this long
-  const CFG_KEYS = ['bri', 'wake', 'dur', 'auto', 'sec', 'raise', 'shake', 'tap', 'btnw', 'lockd'];
+  const CFG_KEYS = ['bri', 'wake', 'dur', 'auto', 'sec', 'raise', 'shake', 'tap', 'btnw', 'lockd', 'keyb', 'gameb'];
   const TENTHS_LED = [1, 2, 3, 4, 5, 7, 8, 9, 10, 11];   // hour-ring LED for tenths 0..9 (6 and 12 o'clock left out)
   const SHAKE_JERK = 3.0;                           // accumulated |delta a| (g) that counts as a shake
   const GAME_IDLE_MS = 300000, MODE_IDLE_MS = 15000;
@@ -89,16 +90,46 @@
       for (let i = 0; i < n; i++) put(a[i], lvl);
     }
 
+    /* ---------- sound: the core only says which frequency the piezo should play now (out.tone); the simulator plays it, the hardware layer drives TCA1.
+       Piezo: loudest near 4 kHz. Kinds: 0 = key beep (CFG 11), 1 = game sound (CFG 12), 2 = alarm (always). ---------- */
+    const SND = { KEY: 1, TICK: 2, OK: 3, BAD: 4, WIN: 5, LOSE: 6, AWARD: 7, GO: 8, BEAT: 9, ACCENT: 10, SIM_L: 11, SIM_R: 12, ALARM: 13 };
+    const PAT = [null,
+      [[3500, 20]], [[3000, 20]], [[2600, 60], [3300, 90]], [[2000, 120], [1500, 220]],
+      [[2400, 80], [3000, 80], [3600, 80], [4200, 220]], [[3000, 100], [2400, 100], [1800, 100], [1300, 280]],
+      [[2400, 100], [3000, 100], [3600, 100], [4800, 300], [0, 100], [3600, 100], [4800, 500]],
+      [[4000, 150]], [[3000, 20]], [[4000, 25]], [[2200, 150]], [[3200, 150]],
+      [[4000, 100], [0, 100], [4000, 100], [0, 100], [4000, 100], [0, 100], [4000, 100], [0, 600]]];   // alarm: beep beep beep beep ... pause, repeats
+    function sndPlay(pat, kind) {
+      if (S.alm.ring && pat !== SND.ALARM) return;                       // the alarm owns the buzzer
+      if (kind === 0 && !S.set.keyb) return;                             // key beeps: off by default
+      if (kind === 1 && S.set.gameb) return;                             // game sounds: on by default (value 1 = off)
+      if (kind !== 2 && !io.batOk) return;                               // low battery: only the alarm may beep
+      S.snd.pat = pat; S.snd.i = 0; S.snd.t = 0; S.snd.hz = PAT[pat][0][0];
+    }
+    function sndStep(dt) {
+      const q = S.snd;
+      if (!q.pat) { q.hz = 0; return; }
+      q.t += dt;
+      for (;;) {
+        const n = PAT[q.pat][q.i];
+        if (!n) { if (q.pat === SND.ALARM && S.alm.ring) { q.i = 0; continue; } q.pat = 0; q.hz = 0; return; }
+        if (q.t < n[1]) { q.hz = n[0]; return; }
+        q.t -= n[1]; q.i++;
+      }
+    }
+
     /* ---------- persistent state ---------- */
     const S = {
       mode: MODE.TIME, awake: false, idle: 0, tms: 0, locked: false, lockFlash: 0,
       rtcMs: 10 * 3600e3 + 8 * 60e3 + 37e3,
-      set: { bri: 2, wake: 1, dur: 3, auto: 0, sec: 0, raise: 0, shake: 0, tap: 0, btnw: 0, lockd: 0 },   // 0 = first choice; raise/shake/tap 0 = ON (default)
+      set: { bri: 2, wake: 1, dur: 3, auto: 0, sec: 0, raise: 0, shake: 0, tap: 0, btnw: 0, lockd: 0, keyb: 0, gameb: 0 },   // 0 = first choice; raise/shake/tap 0 = ON (default); keyb 0 = off, gameb 0 = on
       peek: 0, datePeek: 0, indOnly: false, shaken: false,
       menu: { on: false, sel: 0, t: 0, from: 0 },        // mode selection (Left long from anywhere)
       date: { y: 2026, m: 10, d: 11 },
       setField: 0,
       tmr: { run: false, el: 0 },
+      alm: { on: false, h: 7, m: 0, field: 0, ring: false, armed: true, t: 0 },   // alarm
+      snd: { pat: 0, i: 0, t: 0, hz: 0 },                                         // buzzer pattern playing
       bat: { view: 0 },
       cfgSel: 0,
       fun: { g: 0, playing: false },
@@ -130,8 +161,16 @@
     function toMode(m) {
       S.mode = m; S.idle = 0; S.datePeek = 0; S.peek = 0; S.menu.on = false;
       if (m === MODE.SET) S.setField = 0;
+      if (m === MODE.ALM) S.alm.field = 0;
       if (m === MODE.FUN) S.fun.playing = false;                          // entering FUN always shows the game picker
       log('mode -> ' + MODE_NAME[m]);
+    }
+    function almStart() { S.alm.ring = true; S.alm.t = 0; wake(); S.menu.on = false; if (S.mode !== MODE.TIME) toMode(MODE.TIME); sndPlay(SND.ALARM, 2); log('ALARM!'); }
+    function almStop() { S.alm.ring = false; if (S.snd.pat === SND.ALARM) { S.snd.pat = 0; S.snd.hz = 0; } S.idle = 0; log('alarm stopped'); }
+    function almAdd() {
+      const A = S.alm;
+      if (A.field === 0) A.h = (A.h + 1) % 24; else if (A.field === 1) A.m = (A.m + 1) % 60; else A.on = !A.on;
+      A.armed = false;                                                   // re-armed as soon as the clock is not on the alarm minute
     }
     function menuOpen() { S.menu.on = true; S.menu.sel = S.mode; S.menu.from = S.mode; S.menu.t = 0; log('mode selection: Left = next mode, Right = enter it (or wait)'); }
     function menuConfirm() { const m = S.menu.sel; S.menu.on = false; toMode(m); }
@@ -144,6 +183,7 @@
        FUN: picker (Left next game, Right start) then the game owns both buttons  CFG: Left next setting, Right change value. */
     function onShort(b) {
       S.idle = 0;
+      if (!(S.mode === MODE.FUN && S.fun.playing && !S.menu.on)) sndPlay(SND.KEY, 0);        // games make their own sounds
       if (S.menu.on) {
         const n = NEXT_MODE.length;                                      // Left = one mode to the left, Right = one to the right (wraps)
         S.menu.sel = (S.menu.sel + (b === 1 ? 1 : n - 1)) % n; S.menu.t = 0; log('highlight: ' + MODE_NAME[S.menu.sel]);
@@ -159,6 +199,7 @@
           if (b === 1) { S.tmr.run = !S.tmr.run; log(S.tmr.run ? 'stopwatch start' : 'stopwatch stop'); }
           else if (!S.tmr.run && S.tmr.el > 0) { S.tmr.el = 0; log('stopwatch reset'); }
           break;
+        case MODE.ALM: if (b === 0) { S.alm.field = (S.alm.field + 1) % 3; log('alarm field: ' + ['hour', 'minute', 'on/off'][S.alm.field]); } else almAdd(); break;
         case MODE.BAT: S.bat.view = (S.bat.view + (b === 1 ? 1 : 2)) % 3; break;
         case MODE.FUN:
           if (!S.fun.playing) {
@@ -173,15 +214,16 @@
       }
     }
     function onLong(b) {
-      S.idle = 0;
+      S.idle = 0; sndPlay(SND.KEY, 0);
       if (S.menu.on) {                                                   // in mode selection: Left long = Time, Right long = enter now
-        if (b === 0) { toMode(MODE.TIME); } else menuConfirm();
+        if (b === 0) { toMode(MODE.TIME); } else { menuConfirm(); B[1].eat = true; }   // the rest of this hold must not auto-repeat in the mode just entered
         return;
       }
       if (b === 0) { menuOpen(); return; }
       switch (S.mode) {
         case MODE.TIME: S.peek = 2000; S.datePeek = 0; log('battery (2 s)'); break;
         case MODE.SET: setAdd(1); break;                                // then auto-repeats while held
+        case MODE.ALM: if (S.alm.field < 2) almAdd(); break;
         case MODE.TMR: S.tmr.run = false; S.tmr.el = 0; log('stopwatch reset'); break;
         case MODE.FUN:
           if (S.fun.playing && S.fun.g === 0) { if (G.sand.mode === 4) G.bead.w = 0; else sandRemove(4); }
@@ -189,7 +231,7 @@
           break;   // Particles: Right hold removes particles (repeats); bead mode: stops the bead
       }
     }
-    function longMs(i) { return i === 1 && S.mode === MODE.SET ? HOLD_MS : LONG_MS; }   // Right in SET: hold = auto-repeat after 0.4 s
+    function longMs(i) { return i === 1 && (S.mode === MODE.SET || (S.mode === MODE.ALM && S.alm.field < 2)) ? HOLD_MS : LONG_MS; }   // Right in SET: hold = auto-repeat after 0.4 s
     function setAdd(n) {
       const t = hms(), D = S.date;
       switch (S.setField) {
@@ -209,7 +251,7 @@
     function cfgValueText(i) {
       const v = S.set[CFG_KEYS[i]];
       return [BRI[v] * 100 + '%', ['low', 'medium', 'high'][v], DUR[v] / 1000 + ' s', v ? 'on' : 'off', SEC_MODE[v], v ? 'off' : 'on', v ? 'off' : 'on', v ? 'off' : 'on',
-        ['either', 'left only', 'right only', 'none'][v], ['motion wakes it', 'stays dark', 'always on'][v]][i];
+        ['either', 'left only', 'right only', 'none'][v], ['motion wakes it', 'stays dark', 'always on'][v], v ? 'on' : 'off', v ? 'off' : 'on'][i];
     }
 
     function toggleLock() {
@@ -230,7 +272,8 @@
         if (down[i] && !b.down) {                  // press
           b.down = true; b.t = 0; b.long = false; b.chord = down[1 - i]; b.rep = 0;
           b.eat = false; b.raw = false;
-          if (!S.awake) {
+          if (S.alm.ring) { almStop(); b.eat = true; }                // any button stops the alarm (and does nothing else)
+          else if (!S.awake) {
             b.eat = true;                                            // a press on a dark watch is never also an action
             if (S.locked) { if (!b.chord) { wakeInd(); S.lockFlash = 600; log('locked: LCK lit, hold both 2 s to unlock'); } }   // buttons do not wake a locked watch, they just show LCK
             else if (btnWakeOk(i)) wake();
@@ -244,6 +287,7 @@
             if (!b.long && b.t >= longMs(i)) { b.long = true; b.rep = 0; onLong(i); }
             else if (b.long && i === 1 && S.mode === MODE.FUN && S.fun.playing && S.fun.g === 0 && G.sand.mode < 4 && !S.menu.on) { b.rep += dt; if (b.rep >= 200) { b.rep -= 200; sandRemove(2); } }
             else if (b.long && i === 1 && S.mode === MODE.SET && !S.menu.on) { b.rep += dt; const gap = b.t > 2500 ? 50 : REPEAT_MS; if (b.rep >= gap) { b.rep -= gap; setAdd(1); } }   // hold RIGHT = auto-repeat
+            else if (b.long && i === 1 && S.mode === MODE.ALM && S.alm.field < 2 && !S.menu.on) { b.rep += dt; const gap = b.t > 2500 ? 50 : REPEAT_MS; if (b.rep >= gap) { b.rep -= gap; almAdd(); } }
           }
         } else if (!down[i] && b.down) {           // release
           b.down = false;
@@ -281,10 +325,11 @@
         if (t.over) { gameStart(2); return; }
         const k = Math.round(t.pos) % 60, dist = Math.min(k, 60 - k);                     // either button hits
         if (dist <= t.tol) {
+          sndPlay(SND.OK, 1);
           t.pts = Math.min(SCORE_CAP, t.pts + 10 + t.lvl); t.lvl++; t.spdq = Math.min(90 * 65536, Math.floor(t.spdq * 11 / 10)); t.tolq = Math.max(39322, Math.floor(t.tolq * 23 / 25)); t.spd = t.spdq / 65536; t.tol = t.tolq / 65536; t.hitFlash = 600;
           log('hit! level ' + t.lvl + ', ' + t.pts + ' points');
-          if (t.pts >= SCORE_CAP) { t.over = true; t.award = true; t.t = 0; log('999 - AWARD!'); }
-        } else { t.over = true; t.t = 0; t.lastK = k; log('missed by ' + dist + ' LEDs, score ' + t.pts); }
+          if (t.pts >= SCORE_CAP) { t.over = true; t.award = true; t.t = 0; sndPlay(SND.AWARD, 1); log('999 - AWARD!'); }
+        } else { t.over = true; t.t = 0; t.lastK = k; sndPlay(SND.LOSE, 1); log('missed by ' + dist + ' LEDs, score ' + t.pts); }
       } else if (g === 4) { G.orb.pat = (G.orb.pat + (b === 1 ? 1 : ORBIT_PATTERNS.length - 1)) % ORBIT_PATTERNS.length; log('orbit: ' + ORBIT_PATTERNS[G.orb.pat]); }   // Right: next pattern, Left: previous
       else if (g === 5) {                                                                    // Random
         const r = G.rng;
@@ -314,7 +359,7 @@
         for (let c = 0; c < 6; c++) for (let k = 0; k < 4; k++) put(ringAt(r, sp * ph + c * TAU / 6 - Math.sign(sp) * k * 0.09).led, Math.round(255 / (1 + k)));
       }
       for (let i = 0; i < 10; i++) put(allLeds[Math.floor(Math.random() * allLeds.length)], 255);
-      if (Math.floor(t / 250) % 2 === 0) for (let i = 0; i < 5; i++) ind(i, 255);
+      if (Math.floor(t / 250) % 2 === 0) for (let i = 0; i < I.LCK; i++) ind(i, 255);
     }
     function gameOverDisplay(score, award, t) {
       if (award && t < 10000) awardStep(t); else showScore(score, t);
@@ -398,7 +443,7 @@
       if (r.over) {
         r.flash += dt;
         gameOverDisplay(r.pts, r.award, r.flash);
-        if (r.flash < 8000 && Math.floor(r.flash / 400) % 2 === 0) ind(3, 255);
+        if (r.flash < 8000 && Math.floor(r.flash / 400) % 2 === 0) ind(I.FUN, 255);
         return;
       }
       const speed = 0.9 + 0.12 * Math.floor(r.passed / 10);               // faster every 10 obstacles
@@ -414,10 +459,11 @@
       }
       const me = ringAt(r.lane, r.th);
       for (const o of r.obs) {
-        if (o.lane === r.lane && o.k === me.k && Math.abs(o.ang - r.th) < 0.35) { r.over = true; r.flash = 0; log('crash! ' + r.pts + ' points'); return; }
+        if (o.lane === r.lane && o.k === me.k && Math.abs(o.ang - r.th) < 0.35) { r.over = true; r.flash = 0; sndPlay(SND.LOSE, 1); log('crash! ' + r.pts + ' points'); return; }
         if (!o.passed && r.th > o.ang + 0.4) {
           o.passed = true; r.passed++; r.pts = Math.min(SCORE_CAP, r.pts + 10);                    // 10 points per obstacle
-          if (r.pts >= SCORE_CAP) { r.over = true; r.award = true; r.flash = 0; log('999 - AWARD!'); return; }
+          sndPlay(SND.TICK, 1);
+          if (r.pts >= SCORE_CAP) { r.over = true; r.award = true; r.flash = 0; sndPlay(SND.AWARD, 1); log('999 - AWARD!'); return; }
         }
       }
       r.obs = r.obs.filter(o => r.th - o.ang < 1.0);
@@ -428,7 +474,7 @@
     function targetStep(dt) {
       const t = G.tg; t.t += dt;
       const ring = ringLeds[1], blink = Math.floor(S.tms / 250) % 2 === 0;
-      if (t.over) { gameOverDisplay(t.pts, t.award, t.t); if (t.t < 8000 && Math.floor(t.t / 400) % 2 === 0) ind(3, 255); return; }
+      if (t.over) { gameOverDisplay(t.pts, t.award, t.t); if (t.t < 8000 && Math.floor(t.t / 400) % 2 === 0) ind(I.FUN, 255); return; }
       t.posq = (t.posq + Math.floor(t.spdq * dt / 1000)) % (60 * 65536); t.pos = t.posq / 65536;
       const nrun = 1 + Math.min(2, Math.floor(t.lvl / 4));            // decoy lights join as you level up
       put(ring[Math.round(t.pos) % 60], 255);
@@ -445,17 +491,17 @@
       const half = (side, lvl) => { for (const L of allLeds) if ((side < 0 ? Math.sin(L.ang) < -0.02 : Math.sin(L.ang) > 0.02)) put(L, lvl); };
       const blink = Math.floor(S.tms / 300) % 2 === 0;
       if (q.st === 'idle') {                                           // hold both buttons 0.5 s, release both = armed
-        ind(3, blink ? 255 : 60);
+        ind(I.FUN, blink ? 255 : 60);
         if (B[0].down && B[1].down && B[0].t > 500 && B[1].t > 500) { q.armHeld = true; for (const L of ringLeds[2]) if (L.ang < 0.2 || L.ang > TAU - 0.2) put(L, 180); }
         else if (q.armHeld && !B[0].down && !B[1].down) { q.armHeld = false; q.st = 'wait'; q.t = 0; q.wait = 2000 + Math.floor(Math.random() * 4000); log('armed, wait for flash'); }
       } else if (q.st === 'wait') {
-        ind(3, 255);
-        if (io.btn[0] || io.btn[1]) { q.who = io.btn[0] ? 0 : 1; q.win = 1 - q.who; q.st = 'result'; q.t = 0; q.false = true; log('false start! player ' + (q.win + 1) + ' wins'); }
-        else if (q.t >= q.wait) { q.st = 'go'; q.t = 0; log('GO!'); }
+        ind(I.FUN, 255);
+        if (io.btn[0] || io.btn[1]) { q.who = io.btn[0] ? 0 : 1; q.win = 1 - q.who; q.st = 'result'; q.t = 0; q.false = true; sndPlay(SND.BAD, 1); log('false start! player ' + (q.win + 1) + ' wins'); }
+        else if (q.t >= q.wait) { q.st = 'go'; q.t = 0; sndPlay(SND.GO, 1); log('GO!'); }
       } else if (q.st === 'go') {
         for (const L of ringLeds[2]) put(L, 255);
         for (const L of ringLeds[1]) put(L, 255);
-        if (io.btn[0] || io.btn[1]) { q.win = io.btn[0] ? 0 : 1; log('player ' + (q.win + 1) + ' wins in ' + Math.round(q.t) + ' ms'); q.st = 'result'; q.t = 0; q.false = false; }
+        if (io.btn[0] || io.btn[1]) { q.win = io.btn[0] ? 0 : 1; sndPlay(SND.WIN, 1); log('player ' + (q.win + 1) + ' wins in ' + Math.round(q.t) + ' ms'); q.st = 'result'; q.t = 0; q.false = false; }
         else if (q.t > 2500) { q.st = 'idle'; }
       } else {                                                         // result: winner's side lights (left = 270 deg half)
         half(q.win === 0 ? -1 : 1, q.false ? (Math.floor(q.t / 150) % 2 ? 255 : 90) : 255);
@@ -522,6 +568,7 @@
       if (p.show > 0) { p.show -= dt; showScore(p.kind ? p.br : p.bpm, 9000); return; }   // the tempo as a number for 2.5 s after any change
       if (p.kind === 0) {                                                    // metronome: a dot swings along the bottom of the outer ring, ticking at the ends
         const per = 60000 / p.bpm, beat = Math.floor(p.t / per), since = p.t - beat * per;
+        { const perI = Math.floor(60000 / p.bpm); if (Math.floor(p.t / perI) !== Math.floor((p.t - dt) / perI)) sndPlay(Math.floor(p.t / perI) % 4 === 0 ? SND.ACCENT : SND.BEAT, 1); }   // a tick on every beat, accent on the first of four (integer ms, exactly like the C port)
         const pos = (t) => -Math.cos(Math.PI * t / per);
         put(ringAt(2, Math.PI - 1.3 * pos(p.t)).led, 255);
         put(ringAt(2, Math.PI - 1.3 * pos(p.t - 60)).led, 90);
@@ -540,16 +587,16 @@
       const m = G.sim;
       if (m.over) { gameStart(7); return; }
       if (m.st !== 'input') return;                                           // presses while the watch is showing the sequence are ignored
-      m.flash = 220; m.fside = side; m.t = 0;
+      m.flash = 220; m.fside = side; m.t = 0; sndPlay(side ? SND.SIM_R : SND.SIM_L, 1);
       if (m.seq[m.i] === side) {
         m.i++; m.pts = Math.min(SCORE_CAP, m.pts + 5);
-        if (m.pts >= SCORE_CAP) { m.over = true; m.award = true; m.t = 0; log('999 - AWARD!'); }
+        if (m.pts >= SCORE_CAP) { m.over = true; m.award = true; m.t = 0; sndPlay(SND.AWARD, 1); log('999 - AWARD!'); }
         else if (m.i === m.seq.length) { m.st = 'next'; m.t = 0; log('round ' + m.seq.length + ' done, ' + m.pts + ' points'); }
-      } else { m.over = true; m.t = 0; log('wrong! ' + m.pts + ' points'); }
+      } else { m.over = true; m.t = 0; sndPlay(SND.LOSE, 1); log('wrong! ' + m.pts + ' points'); }
     }
     function simonStep(dt) {
       const m = G.sim; m.t += dt;
-      if (m.over) { gameOverDisplay(m.pts, m.award, m.t); if (m.t < 8000 && Math.floor(m.t / 400) % 2 === 0) ind(3, 255); return; }
+      if (m.over) { gameOverDisplay(m.pts, m.award, m.t); if (m.t < 8000 && Math.floor(m.t / 400) % 2 === 0) ind(I.FUN, 255); return; }
       if (m.flash > 0) { m.flash -= dt; simHalf(m.fside, 255); }
       bar(0, Math.min(12, m.seq.length) / 12, 70);                           // sequence length on the hour ring
       if (m.st === 'ready' || m.st === 'next') {
@@ -559,11 +606,12 @@
       if (m.st === 'show') {
         const on = Math.max(200, 600 - 22 * m.seq.length), slot = on + 140, i = Math.floor(m.t / slot);
         if (i >= m.seq.length) { m.st = 'input'; m.i = 0; m.t = 0; return; }
+        if (m.t % slot < dt || m.t <= dt) sndPlay(m.seq[i] ? SND.SIM_R : SND.SIM_L, 1);   // each symbol has its own tone
         if (m.t % slot < on) simHalf(m.seq[i], 255);
         return;
       }
       put(ringLeds[1][0], 170);                                              // "your turn": a steady LED at 12 on the minute ring
-      if (m.t > 4000) { m.over = true; m.t = 0; log('too slow! ' + m.pts + ' points'); }
+      if (m.t > 4000) { m.over = true; m.t = 0; sndPlay(SND.LOSE, 1); log('too slow! ' + m.pts + ' points'); }
     }
 
     /* ---------- Pong: the ball travels the bottom half of the minute ring between two paddle zones (9 and 3 o'clock). ----------
@@ -574,8 +622,8 @@
     function pongPoint(winner) {
       const g = G.pg;
       if (winner === 0) g.s1++; else g.s2++;
-      if (g.s1 >= PONG_WIN || g.s2 >= PONG_WIN) { g.st = 'over'; g.t = 0; g.winner = winner; log('player ' + (winner + 1) + ' wins ' + g.s1 + '-' + g.s2); }
-      else { g.st = 'point'; g.t = 0; g.winner = winner; log('point to player ' + (winner + 1) + ': ' + g.s1 + '-' + g.s2); }
+      if (g.s1 >= PONG_WIN || g.s2 >= PONG_WIN) { g.st = 'over'; g.t = 0; g.winner = winner; sndPlay(SND.WIN, 1); log('player ' + (winner + 1) + ' wins ' + g.s1 + '-' + g.s2); }
+      else { g.st = 'point'; g.t = 0; g.winner = winner; sndPlay(SND.OK, 1); log('point to player ' + (winner + 1) + ': ' + g.s1 + '-' + g.s2); }
     }
     function pongPress(b) {
       const g = G.pg;
@@ -586,12 +634,12 @@
       const inZone = side === 0 ? g.pos <= PONG_Z : g.pos >= 1 - PONG_Z, toward = side === 0 ? g.dir < 0 : g.dir > 0;
       if (!inZone || !toward) return;                                        // a swing and a miss costs nothing
       const edge = side === 0 ? g.pos : 1 - g.pos;
-      g.dir = -g.dir; g.spd = Math.min(2.2, g.spd + 0.07 + (edge < 0.05 ? 0.12 : 0)); g.hit[side] = 200;
-      if (g.mode === 1) { g.pts = Math.min(SCORE_CAP, g.pts + 10); if (g.pts >= SCORE_CAP) { g.st = 'over'; g.award = true; g.t = 0; log('999 - AWARD!'); } }
+      g.dir = -g.dir; g.spd = Math.min(2.2, g.spd + 0.07 + (edge < 0.05 ? 0.12 : 0)); g.hit[side] = 200; sndPlay(SND.TICK, 1);
+      if (g.mode === 1) { g.pts = Math.min(SCORE_CAP, g.pts + 10); if (g.pts >= SCORE_CAP) { g.st = 'over'; g.award = true; g.t = 0; sndPlay(SND.AWARD, 1); log('999 - AWARD!'); } }
     }
     function pongStep(dt) {
       const g = G.pg; g.t += dt; g.hit[0] = Math.max(0, g.hit[0] - dt); g.hit[1] = Math.max(0, g.hit[1] - dt);
-      if (g.st === 'over' && g.mode === 1) { gameOverDisplay(g.pts, g.award, g.t); if (g.t < 8000 && Math.floor(g.t / 400) % 2 === 0) ind(3, 255); return; }
+      if (g.st === 'over' && g.mode === 1) { gameOverDisplay(g.pts, g.award, g.t); if (g.t < 8000 && Math.floor(g.t / 400) % 2 === 0) ind(I.FUN, 255); return; }
       for (let k = 0; k <= 30; k++) {                                        // the field: paddle zones at both ends of the ball's path
         const pos = k / 30, inL = pos <= PONG_Z, inR = pos >= 1 - PONG_Z;
         if (inL || inR) put(pongPos(pos), (inL && g.hit[0] > 0) || (inR && g.hit[1] > 0) ? 255 : 45);
@@ -606,7 +654,7 @@
       if (g.st === 'point') { put(pongPos(g.winner === 0 ? 0 : 1), 255); if (g.t > 900) pongServe(1 - g.winner); return; }
       g.pos += g.dir * g.spd * dt / 1000;
       if (g.pos <= 0) { if (g.mode === 1) { g.pos = 0; g.dir = 1; } else { pongPoint(1); return; } }
-      else if (g.pos >= 1) { if (g.mode === 1) { g.st = 'over'; g.t = 0; log('missed, ' + g.pts + ' points'); return; } else { pongPoint(0); return; } }
+      else if (g.pos >= 1) { if (g.mode === 1) { g.st = 'over'; g.t = 0; sndPlay(SND.LOSE, 1); log('missed, ' + g.pts + ' points'); return; } else { pongPoint(0); return; } }
       put(pongPos(Math.max(0, Math.min(1, g.pos))), 255);
     }
 
@@ -622,8 +670,13 @@
     function renderDate(blinkField, blinkOn) {
       const D = S.date, show = (f) => (blinkField === f ? (blinkOn ? 255 : 0) : 255);
       put(hourLed[D.m], show(3)); put(minLed[D.d], show(4));
-      const wd = weekdayIso(D.y, D.m, D.d); const a = ringLeds[2];
-      for (let i = 0; i < wd; i++) put(a[i], blinkField === 3 || blinkField === 4 ? 140 : 255);
+      ind(weekdayIso(D.y, D.m, D.d) % 7, blinkField === 3 || blinkField === 4 ? 140 : 255);   // weekday: one indicator LED, Sunday = SET ... Saturday = LCK
+    }
+    function renderAlarmEdit(blink2) {                                   // ALM mode: alarm hour (hour ring), minute (minute ring), on/off; PM = outer LED at 6
+      const A = S.alm, f = A.field, h12 = A.h % 12 === 0 ? 12 : A.h % 12, idle = A.on ? 255 : 70;
+      put(hourLed[h12], f === 0 ? (blink2 ? 255 : 0) : idle); put(minLed[A.m], f === 1 ? (blink2 ? 255 : 0) : idle);
+      if (A.h >= 12) put(ringLeds[2][30], 120);
+      if (A.on) { for (let i = 0; i < 3; i++) put(ringLeds[2][i], f === 2 ? (blink2 ? 255 : 0) : 255); } else if (f === 2) put(ringLeds[2][0], blink2 ? 90 : 0);
     }
 
     function render(dt) {
@@ -631,10 +684,11 @@
       S.tms += dt;
       const blink2 = Math.floor(S.tms / 250) % 2 === 0, blink4 = Math.floor(S.tms / 125) % 2 === 0;
       if (!S.awake) return;
+      if (S.alm.ring) { renderTime(); ind(I.ALM, Math.floor(S.alm.t / 125) % 2 === 0 ? 255 : 60); if (Math.floor(S.alm.t / 250) % 2 === 0) bar(0, 1, 150); return; }   // alarm ringing
       const holdingBoth = bothT >= 400 && !lockDone;
       if (S.indOnly) {                                                     // lock feedback: only the LCK LED
         if (S.lockFlash > 0) S.lockFlash -= dt;
-        ind(5, holdingBoth || S.lockFlash > 0 ? (blink4 ? 255 : 0) : (S.locked ? 255 : 0));
+        ind(I.LCK, holdingBoth || S.lockFlash > 0 ? (blink4 ? 255 : 0) : (S.locked ? 255 : 0));
         return;
       }
       if (S.menu.on) {                                                     // mode selection: only the highlighted mode's indicator blinks
@@ -643,12 +697,12 @@
         return;
       }
       const lowBat = !io.batOk;
-      if (S.dead) { if (blink4) ind(2, 255); return; }
+      if (S.dead) { if (blink4) ind(I.BAT, 255); return; }
       switch (S.mode) {
         case MODE.TIME:
-          if (S.peek > 0) { bar(0, io.soc, 255); ind(2, 255); S.peek -= dt; }
+          if (S.peek > 0) { bar(0, io.soc, 255); ind(I.BAT, 255); S.peek -= dt; }
           else if (S.datePeek > 0) { renderDate(-1, true); S.datePeek -= dt; }
-          else renderTime();
+          else { renderTime(); if (S.alm.on) ind(I.ALM, 60); }                   // a dim ALM LED shows that an alarm is set
           break;
         case MODE.SET: {                                                    // the unit being set blinks
           const t = hms(), f = S.setField, on = blink2;
@@ -664,11 +718,12 @@
           put(hourLed[TENTHS_LED[Math.floor(e / 100) % 10]], 90);   // tenths of a second on the hour ring: 10 LEDs, 6 and 12 skipped
           break;
         }
+        case MODE.ALM: renderAlarmEdit(blink2); break;
         case MODE.BAT:
           if (S.bat.view === 0) { bar(0, io.soc, 255); }
           else if (S.bat.view === 1) { bar(1, Math.min(1, Math.log10(1 + io.solarMw) / Math.log10(31)), 200); }
           else { if (io.charging) { const k = Math.floor(S.tms / 90) % 12; put(hourLed[k === 0 ? 12 : k], 255); put(hourLed[(k + 11) % 12 || 12], 90); } else put(hourLed[12], 120); }
-          ind(2, io.charging && S.bat.view === 2 ? Math.round(120 + 135 * (0.5 + 0.5 * Math.sin(S.tms / 250))) : 255);
+          ind(I.BAT, io.charging && S.bat.view === 2 ? Math.round(120 + 135 * (0.5 + 0.5 * Math.sin(S.tms / 250))) : 255);
           break;
         case MODE.FUN:
           if (!S.fun.playing) put(hourLed[S.fun.g + 1], blink2 ? 255 : 120);   // game picker: hour LED n = game n
@@ -687,10 +742,10 @@
         else if (g === 5) rngStep(dt); else if (g === 6) pacerStep(dt); else if (g === 7) simonStep(dt); else pongStep(dt);
       }
       if (MODE_IND[S.mode] >= 0 && !(S.mode === MODE.BAT)) ind(MODE_IND[S.mode], 255);
-      if (S.locked && !holdingBoth) ind(5, 255);
-      if (holdingBoth && blink4) ind(5, 255);
-      if (S.lockFlash > 0) { S.lockFlash -= dt; if (blink4) for (let i = 0; i < 6; i++) ind(i, 255); }
-      if (lowBat && S.mode === MODE.TIME && blink4) ind(2, 255);
+      if (S.locked && !holdingBoth) ind(I.LCK, 255);
+      if (holdingBoth && blink4) ind(I.LCK, 255);
+      if (S.lockFlash > 0) { S.lockFlash -= dt; if (blink4) for (let i = 0; i < 7; i++) ind(i, 255); }
+      if (lowBat && S.mode === MODE.TIME && blink4) ind(I.BAT, 255);
     }
 
     /* ---------- the scan plan: what the matrix driver would actually do ---------- */
@@ -729,13 +784,16 @@
       }
       if (io.tap && okM('tap')) motionWake('double tap');
       if (io.ff) log('free-fall detected (no wake: raise, shake and tap already cover it)');
+      { const t = hms(), now = t.h * 60 + t.m, at = S.alm.h * 60 + S.alm.m;                 // alarm
+        if (now !== at) S.alm.armed = true; else if (S.alm.on && S.alm.armed && !S.alm.ring) { S.alm.armed = false; almStart(); }
+        if (S.alm.ring) { S.alm.t += dtReal; if (S.alm.t >= 60000) almStop(); } }                // the alarm rings for at most a minute
       buttons(dtReal);
       if (S.menu.on) { S.menu.t += dtReal; if (S.menu.t >= MENU_CONFIRM_MS) menuConfirm(); }
       const alwaysOn = S.locked && S.set.lockd === 2;                     // locked, display stays lit showing Time
       if (S.awake) {
         S.idle += dtReal;
         const lim = S.dead ? 1000 : S.indOnly ? 1200 : S.mode === MODE.TIME ? DUR[S.set.dur] : S.mode === MODE.FUN ? (S.fun.playing ? GAME_IDLE_MS : MODE_IDLE_MS) : tmrKeep() ? TMR_KEEP_MS : MODE_IDLE_MS;
-        if (alwaysOn) S.idle = 0;
+        if (alwaysOn || S.alm.ring) S.idle = 0;
         else if (S.idle > lim) {
           if (S.mode !== MODE.TIME && !tmrKeep() && !S.indOnly) { toMode(MODE.TIME); S.idle = 0; log('idle: back to Time'); }
           else { S.awake = false; S.indOnly = false; S.menu.on = false; log('display off, MCU sleeps' + (tmrKeep() ? ' (stays in stopwatch mode)' : '')); }
@@ -744,13 +802,14 @@
       if (alwaysOn && !S.awake) { S.awake = true; S.indOnly = false; S.idle = 0; }
       if (S.tmr.run) S.tmr.el += dtReal;                                      // the stopwatch keeps counting whatever the display is doing
       render(dtReal);
+      sndStep(dtReal);
       let duty = BRI[S.set.bri];
       if (S.set.auto) duty = Math.min(0.8, duty * (0.35 + 1.65 * io.ambient));
       if (!io.batOk) duty *= 0.5;
       if (S.locked && S.set.lockd === 2) duty *= 0.25;                 // always-on lock display: low brightness
       const scan = S.awake ? scanPlan(io.vdd, duty) : { slots: [], N: 0, I: ledMa(io.vdd), m: 0, needed: 0, achievable: 0, limited: false, avgMa: 0, relBright: 1 };
-      return { fb, scan, duty, state: S, mode: S.mode, modeName: MODE_NAME[S.mode], awake: S.awake, locked: S.locked, events: evq.slice(), time: hms(), date: Object.assign({ wd: weekdayIso(S.date.y, S.date.m, S.date.d) }, S.date), menu: S.menu.on,
-               sub: S.menu.on ? 'MODE SELECTION: ' + MODE_NAME[S.menu.sel] : S.mode === MODE.FUN ? (S.fun.playing ? GAMES[S.fun.g] : 'pick a game: ' + GAMES[S.fun.g]) : S.mode === MODE.SET ? 'editing ' + SET_FIELDS[S.setField] : S.mode === MODE.CFG ? CFG_NAMES[S.cfgSel] + ' = ' + cfgValueText(S.cfgSel) : S.mode === MODE.BAT ? ['charge', 'solar', 'state'][S.bat.view] : '' };
+      return { fb, scan, duty, tone: S.snd.hz, state: S, mode: S.mode, modeName: MODE_NAME[S.mode], awake: S.awake, locked: S.locked, events: evq.slice(), time: hms(), date: Object.assign({ wd: weekdayIso(S.date.y, S.date.m, S.date.d) }, S.date), menu: S.menu.on,
+               sub: S.menu.on ? 'MODE SELECTION: ' + MODE_NAME[S.menu.sel] : S.mode === MODE.FUN ? (S.fun.playing ? GAMES[S.fun.g] : 'pick a game: ' + GAMES[S.fun.g]) : S.mode === MODE.SET ? 'editing ' + SET_FIELDS[S.setField] : S.mode === MODE.ALM ? 'alarm ' + (S.alm.on ? 'ON' : 'off') + ' ' + String(S.alm.h).padStart(2, '0') + ':' + String(S.alm.m).padStart(2, '0') + ', editing ' + ['hour', 'minute', 'on/off'][S.alm.field] : S.mode === MODE.CFG ? CFG_NAMES[S.cfgSel] + ' = ' + cfgValueText(S.cfgSel) : S.mode === MODE.BAT ? ['charge', 'solar', 'state'][S.bat.view] : '' };
     }
 
     /* what each button does RIGHT NOW (shown in the simulator, mirrored in MANUAL.md) */
@@ -766,10 +825,12 @@
         return c;
       }
       switch (S.mode) {
-        case MODE.TIME: c.ls = '-'; c.rs = 'show the DATE (2 s)'; c.rl = 'show the BATTERY (2 s)'; c.note = 'No indicator lit in Time. Date: month = hour ring, day = minute ring, weekday = bar on the outer ring (Mon 1 LED ... Sun 7). Battery: hour-ring bar, BAT lit.'; break;
+        case MODE.TIME: c.ls = '-'; c.rs = 'show the DATE (2 s)'; c.rl = 'show the BATTERY (2 s)'; c.note = 'No indicator lit in Time (a dim ALM LED = an alarm is set). Date: month = hour ring, day = minute ring, weekday = ONE indicator LED (SET = Sun, TMR = Mon, ALM = Tue, BAT = Wed, FUN = Thu, CFG = Fri, LCK = Sat). Battery: hour-ring bar, BAT lit.'; break;
         case MODE.SET: c.ls = 'next unit (' + SET_FIELDS[(S.setField + 1) % 6] + ')'; c.rs = '+1 on ' + SET_FIELDS[S.setField]; c.rl = 'HOLD: auto-repeat +1'; c.note = 'Units: hour, minute, second, month, day, year. The chosen unit blinks. Changes apply immediately.'; break;
         case MODE.TMR: c.ls = S.tmr.run ? '-' : (S.tmr.el > 0 ? 'RESET to zero' : '-'); c.rs = S.tmr.run ? 'stop' : 'start'; c.rl = 'reset to zero';
           c.note = 'Seconds LED = elapsed s, minute LED = elapsed min, hour ring = tenths (1-5, 7-11). Display stays on 90 s, then sleeps still in this mode.'; break;
+        case MODE.ALM: c.ls = 'next field (' + ['minute', 'on/off', 'hour'][S.alm.field] + ')'; c.rs = S.alm.field === 2 ? 'alarm ' + (S.alm.on ? 'OFF' : 'ON') : '+1 ' + ['hour', 'minute'][S.alm.field]; c.rl = S.alm.field < 2 ? 'HOLD: auto-repeat +1' : '-';
+          c.note = 'Alarm ' + (S.alm.on ? 'ON' : 'off') + ' at ' + String(S.alm.h).padStart(2, '0') + ':' + String(S.alm.m).padStart(2, '0') + '. Hour LED + minute LED show the time (an LED at 6 on the outer ring = PM; three LEDs at 12 on the outer ring = alarm on). The field being edited blinks. When it rings (up to 1 min) any button stops it.'; break;
         case MODE.BAT: c.ls = 'previous view'; c.rs = 'next view (charge / solar / charging)'; c.rl = '-'; c.note = 'Charge: hour-ring bar. Solar: minute-ring bar. Charging: spinner.'; break;
         case MODE.FUN:
           if (!S.fun.playing) { c.ls = 'next game (' + GAMES[(S.fun.g + 1) % GAMES.length] + ')'; c.rs = 'START ' + GAMES[S.fun.g]; c.rl = '-'; c.note = 'Game picker: hour LED n = game n (' + GAMES.map((g, i) => (i + 1) + ' ' + g).join(', ') + '). Left long = mode selection.'; }
@@ -791,7 +852,8 @@
       return c;
     }
 
-    return { controls, step, setHms, setDate, getHms: hms, S, ledMa, indLed, hourLed, minLed, secLed, ringLeds, GAMES, IND_NAME, MODE_NAME, ROWS, COLS, I_REF_MA,
+    function setAlarm(h, m, on) { S.alm.h = h % 24; S.alm.m = m % 60; S.alm.on = !!on; S.alm.armed = false; }
+    return { controls, step, setHms, setDate, setAlarm, getHms: hms, S, ledMa, indLed, hourLed, minLed, secLed, ringLeds, GAMES, IND_NAME, MODE_NAME, ROWS, COLS, I_REF_MA,
              dim: () => ({ rIn: R_IN, rOut: R_OUT }), sandParticles: () => (G.sand ? G.sand.p : []), game: () => G };
   }
   global.createWatch = createWatch;

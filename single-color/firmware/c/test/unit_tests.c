@@ -17,7 +17,7 @@ static void lng(int b) { press(b, 1100); }
 static watch_t *W(void) { return (watch_t *)watch_state(); }
 static int lit(void) { int n = 0; const uint8_t *f = watch_fb(); for (int i = 0; i < 144; i++) n += f[i] != 0; return n; }
 static void goto_mode(int m) { lng(0); for (int i = 0; i < m; i++) press(1, 100); lng(1); }
-static void enter_game(int g) { goto_mode(4); for (int i = 0; i < g; i++) press(0, 100); press(1, 100); }
+static void enter_game(int g) { goto_mode(5); for (int i = 0; i < g; i++) press(0, 100); press(1, 100); }
 static void fresh(void) { io_reset(); watch_init(12345); press(1, 100); }
 
 static int pct_low_half(int sign) {                            /* percentage of particles on the low side (sign = +1: y > 0, -1: y < 0) */
@@ -31,7 +31,7 @@ static int in_ring_area(void) {                                /* all particles 
 
 static void test_particles(void) {
     fresh(); enter_game(0);
-    CHECK(W()->mode == 4 && W()->fun_playing && W()->fun_g == 0, "entered Particles");
+    CHECK(W()->mode == 5 && W()->fun_playing && W()->fun_g == 0, "entered Particles");
     CHECK(W()->g.part.n == 14, "starts with 14 particles");
     for (int i = 0; i < 30; i++) press(1, 30);
     CHECK(W()->g.part.n == WATCH_MAX_PARTICLES, "adding stops at the cap");
@@ -47,7 +47,7 @@ static void test_particles(void) {
         {   /* liquids keep sloshing round the track, so average the share over a window */
             int acc = 0; for (int k = 0; k < 20; k++) { run(100); acc += pct_low_half(1); } acc /= 20;
             printf("  mode %d: on average %d%% of the particles are on the low side\n", mode, acc);
-            CHECK(acc >= (mode >= 2 ? 55 : 70), "particles fall to the low side (a grain balanced on top of the inner island may stay)");
+            CHECK(acc >= (mode >= 2 ? 55 : 65), "particles fall to the low side (a grain balanced on top of the inner island may stay; over 30 seeds sand/gravel give 66..100 %, the same on the Y43 and Y42 ring radii)");
         }
         CHECK(in_ring_area(), "particles stay inside the track");
         CHECK(lit() >= 3 && lit() < 40, "particles are drawn");
@@ -126,13 +126,48 @@ static void test_stress(void) {                                  /* random butto
         io.vdd_mv = (uint16_t)(3000 + rand() % 1201); io.soc_pm = (uint16_t)(rand() % 1001); io.bat_ok = rand() % 20 != 0; io.solar_mw = (uint8_t)(rand() % 40); io.charging = rand() % 2; io.ambient = (uint8_t)(rand() % 101);
         watch_step((uint16_t)(5 + rand() % 40), (uint32_t)(5 + rand() % 40), &io);
         const watch_t *w = watch_state(); const watch_scan_t *sc = watch_scan();
-        if (w->mode > 5 || w->fun_g > 8 || w->menu_sel > 5 || sc->n > WATCH_MAX_SLOTS || (w->g.part.n > WATCH_MAX_PARTICLES && w->mode == 4 && w->fun_g == 0)) { fails++; printf("FAIL: invariant broken at step %ld\n", step); return; }
+        if (w->mode > 6 || w->fun_g > 8 || w->menu_sel > 6 || sc->n > WATCH_MAX_SLOTS || (w->g.part.n > WATCH_MAX_PARTICLES && w->mode == 4 && w->fun_g == 0)) { fails++; printf("FAIL: invariant broken at step %ld\n", step); return; }
     }
     checks++;
 }
 
+/* ---- alarm, buzzer patterns, sound settings, weekday lights */
+static int max_tone(int ms) { int m = 0; for (int t = 0; t < ms; t += 10) { watch_step(10, 10, &io); if (watch_tone_hz() > m) m = watch_tone_hz(); } return m; }
+static void test_alarm_and_sound(void) {
+    /* alarm rings at its minute, any button stops it and does nothing else; auto-stop after a minute */
+    fresh(); watch_set_time(10, 9, 58); watch_set_alarm(10, 10, 1);
+    CHECK(max_tone(1500) == 0 && !W()->alm_ring, "alarm silent before its minute");
+    CHECK(max_tone(1500) == 4000 && W()->alm_ring && W()->awake, "alarm rings at 10:10 and wakes the display");
+    io.btn = 1; run(30); io.btn = 0; run(100);
+    CHECK(!W()->alm_ring && watch_tone_hz() == 0 && W()->mode == 0, "any button stops the alarm and nothing else happens");
+    run(20000); CHECK(!W()->alm_ring, "does not ring again within the same minute");
+    watch_set_time(10, 9, 58); run(2000); CHECK(W()->alm_ring, "rings again next day (re-armed)");
+    run(61000); CHECK(!W()->alm_ring && watch_tone_hz() == 0, "stops itself after a minute");
+    /* locked and low battery: the alarm still rings, nothing else does */
+    fresh(); io.bat_ok = 0; watch_set_time(7, 29, 58); watch_set_alarm(7, 30, 1); io.btn = 3; run(2400); io.btn = 0; run(100); CHECK(W()->locked, "locked");
+    CHECK(max_tone(3000) == 4000, "a locked, low-battery watch still sounds the alarm");
+    /* alarm off: silent; editing the alarm to the current minute does not fire it at once */
+    fresh(); watch_set_time(12, 0, 0); watch_set_alarm(12, 0, 0); CHECK(max_tone(3000) == 0, "alarm off is silent");
+    fresh(); watch_set_time(12, 0, 0); watch_set_alarm(12, 0, 1); CHECK(max_tone(3000) == 0 && !W()->alm_ring, "setting the alarm to the current minute waits for tomorrow");
+    /* ALM mode editing: Right = +1 hour; Left = next field; third field toggles on/off */
+    fresh(); goto_mode(3); CHECK(W()->mode == 3, "ALM is the 4th mode (TIME SET TMR ALM)"); press(1, 100); CHECK(W()->alm_h == 8, "Right adds an hour");
+    press(0, 100); press(1, 100); CHECK(W()->alm_m == 1, "Right adds a minute"); press(0, 100); press(1, 100); CHECK(W()->alm_on == 1, "third field toggles the alarm");
+    /* key beeps: off by default; on = a click on every press; low battery mutes it */
+    fresh(); CHECK(max_tone(0) == 0, "idle"); io.btn = 2; { int m = max_tone(120); CHECK(m == 0, "key beeps are off by default"); } io.btn = 0; run(200);
+    watch_set_cfg(10, 1); io.btn = 2; run(30); io.btn = 0; CHECK(max_tone(50) == 3500, "key beeps on: a click on release"); run(300);
+    io.bat_ok = 0; io.btn = 2; run(30); io.btn = 0; CHECK(max_tone(100) == 0, "low battery mutes the key beeps"); io.bat_ok = 1;
+    /* game sounds: Target hit/miss; CFG 12 turns them off */
+    fresh(); enter_game(2); run(500); { int m = 0; io.btn = 1; for (int t = 0; t < 200; t += 10) { watch_step(10, 10, &io); if (watch_tone_hz() > m) m = watch_tone_hz(); } io.btn = 0; CHECK(m > 0, "Target makes a sound on a hit or miss"); }
+    fresh(); watch_set_cfg(11, 1); enter_game(2); run(500); { int m = 0; io.btn = 1; for (int t = 0; t < 200; t += 10) { watch_step(10, 10, &io); if (watch_tone_hz() > m) m = watch_tone_hz(); } io.btn = 0; CHECK(m == 0 && max_tone(600) == 0, "game sounds off: silence"); }
+    /* weekday lights: Time + Right short shows the weekday on ONE indicator LED (Sunday = SET ... Saturday = LCK) */
+    for (int d = 0; d < 7; d++) {
+        fresh(); watch_set_date(2026, 10, 11 + d);            /* 2026-10-11 is a Sunday */
+        press(1, 100); { const uint8_t *f = watch_fb(); int on = 0, idx = -1; for (int i = 0; i < 7; i++) if (f[132 + (i == 2 ? 6 : i < 2 ? i : i - 1)]) { on++; idx = i; } CHECK(on == 1 && idx == d, "date shows the weekday on exactly one indicator LED"); }
+    }
+}
+
 int main(void) {
-    test_particles(); test_bead(); test_runner(); test_award(); test_scan_limits(); test_stress();
+    test_particles(); test_bead(); test_runner(); test_award(); test_scan_limits(); test_alarm_and_sound(); test_stress();
     printf("%d checks, %d failed\n", checks, fails);
     return fails ? 1 : 0;
 }

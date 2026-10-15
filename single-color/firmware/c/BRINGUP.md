@@ -50,3 +50,9 @@ avrdude -c <programmer> -p avr128db48 -U flash:w:hw\watch_fw.hex:i
 - **Particle games are probably too slow at 4 MHz.** The pair-collision loop is the heavy part; on the PC it does not matter, on the chip at 4 MHz it may run at only a few frames a second. Options: run the CPU at 24 MHz while that game is on screen (needs the scan timer and I2C divider re-timed), use fewer particles (`WATCH_MAX_PARTICLES` in `watch.h`), or add a neighbour grid. Measure first.
 - **Quick Draw / Pong timing** use the 15.6 ms heartbeat, so button reaction is resolved to about 16 ms plus the 15-30 ms debounce.
 - The debounce makes the first press after sleep take 16-31 ms longer to show (not noticeable).
+
+## Buzzer (added 2026-10-14)
+1. At power-up the watch plays a 150 ms 4 kHz beep together with the self-test LEDs (indicator row: SET crystal, TMR accelerometer, BAT battery OK, FUN > 3.0 V, CFG > 3.6 V). No beep = check PB4/PB5 (BUZ_A / BUZ_B) and the piezo solder joints (it is a 9 x 9 mm part with two 1.3 x 3.4 mm pads).
+2. Scope PB4 and PB5 together while the alarm test runs (ALM mode: switch the alarm on, set it to the next minute): the two pins must swing in OPPOSITE phase (about 6.6 V across the piezo at VDD 3.3 V) and both must sit LOW when silent. If they are in phase the inversion (`PORTB.PIN5CTRL`) is off.
+3. Listen at 2, 3, 4, 5 kHz (the key beeps are 3.5 kHz, the alarm 4 kHz, game tunes 1.3 - 4.8 kHz): the piezo is loudest near 4 kHz. The sound leaves through the slots under the two edges without terminals; keep them clear of tape or the strap. If it is too quiet or too loud change the alarm frequency in the `P_ALARM` pattern (both cores).
+4. Measure the supply current while a tone plays (a piezo is a capacitor, expect well under 1 mA extra) and check that sleep current is unchanged afterwards (timer stopped, both pins low).

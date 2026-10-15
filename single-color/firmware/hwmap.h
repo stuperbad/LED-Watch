@@ -9,6 +9,10 @@
 #define HW_BTN1_BIT 1
 #define HW_BTN2_PORT 'E'
 #define HW_BTN2_BIT 2
+#define HW_BUZ_A_PORT 'B'
+#define HW_BUZ_A_BIT 4
+#define HW_BUZ_B_PORT 'B'
+#define HW_BUZ_B_BIT 5
 #define HW_COL0_PORT 'A'
 #define HW_COL0_BIT 0
 #define HW_COL10_PORT 'C'

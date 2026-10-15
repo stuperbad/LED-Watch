@@ -29,3 +29,11 @@ python firmware/sim/export_face.py   # face_data.js (pass a board dir to use ano
 
 ## Assumptions to check against hardware
 LED current model (1.6 mA at 3.0 V to 4.8 mA at 4.2 V, from the handoff), MCU 1.2 mA awake / 4 uA asleep (guess), LiPo voltage curve, battery 140 mAh, solar-to-battery efficiency 80 %.
+
+## Board data from the real board (Y42)
+`python firmware/gen_pins.py` (pins.h, hwmap.h, ledmap.h, from the schematic netlist `schematic/n_solar.xml` + the board file for the indicator order) and
+`"C:\Program Files\KiCad.0in\python.exe" firmware/sim/export_face_board.py` (face_data.js straight from `boards/Y43/Y42_routed_v4.kicad_pcb`) replace `export_face.py` (which reads the old `plan.json`).
+Regenerate the netlist first when the schematic changes: `kicad-cli sch export netlist --format kicadxml -o schematic/n_solar.xml schematic/watch_solar.kicad_sch`.
+
+## Sound
+The Sound panel plays `out.tone` (Hz) from the core as a square wave (WebAudio; click the page once so the browser allows sound). "Alarm test" sets the alarm for the next minute and moves the clock to :55. The CFG settings 11 (key beeps) and 12 (game sounds) decide what beeps.
