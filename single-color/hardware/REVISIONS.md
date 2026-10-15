@@ -1,6 +1,6 @@
 # Hardware revisions
 
-One living set of files, `led-watch.*`, instead of a new filename per attempt. The revision is in the title block of the schematic and the board and in the
+One living set of files, `LED Watch - Single Color.*`, instead of a new filename per attempt. The revision is in the title block of the schematic and the board and in the
 Gerber job file; every released revision gets a git tag (`rev-A`, `rev-B`, ...), so `git checkout rev-A` brings back exactly what was ordered.
 
 | Rev | Date | Status | What it is |

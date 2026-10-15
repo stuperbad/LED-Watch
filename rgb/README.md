@@ -1,3 +1,19 @@
+# LED Watch - RGB
+
+The RGB version of the watch (132 RGB LEDs, ATmega-class MCU, never built). Open **`LED Watch - RGB.kicad_pro`**.
+
+| File / folder | What it is |
+|---|---|
+| `LED Watch - RGB.kicad_pro` / `.kicad_sch` / `.kicad_pcb` / `.net` | the current RGB project: schematic and board as of December 2025 (this was called just `LED Watch` before) |
+| `mechanical/` | watch outline drawings (SVG) and the 3D print (`LED Watch - RGB.stl`) |
+| `production/gerbers 2025-12-08/` | Gerbers of that board (used for an instant quote) |
+| `scripts/` | KiCad scripting-console script that places the LEDs on the three rings |
+| `archive/pre-claude/` | everything older, named by date: the first RGB schematic (2025-10-28), the empty/unrouted version and its Freerouting export (2025-11), the 4-layer routing attempts of 2025-11-19 ... 2025-11-25 (`...50PERCENT`, `...95PERCENT` = how far the routing got), KiCad backups, autosaves, a link to a Discord-hosted board file |
+
+Below: Evan's original notes (part links and ideas).
+
+---
+
 # LED-Watch
 first schematic progress commit. adding RGB sketch schematic as well as
 completed single LED ring sketch. need to add buttons and sort out AND

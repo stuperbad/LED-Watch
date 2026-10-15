@@ -1,6 +1,6 @@
 # Watch simulator (browser)
 
-Interactive model of the single-colour solar LED watch. It runs `watch_core.js` (the firmware logic, written C-style so it ports to the AVR128DB48) against the **real board data**: LED positions from `hardware/led-watch.kicad_pcb`, row/column wiring from the netlist, MCU pin names from `pins.h`.
+Interactive model of the single-colour solar LED watch. It runs `watch_core.js` (the firmware logic, written C-style so it ports to the AVR128DB48) against the **real board data**: LED positions from `hardware/LED Watch - Single Color.kicad_pcb`, row/column wiring from the netlist, MCU pin names from `pins.h`.
 
 ## Run
 ```
@@ -31,8 +31,8 @@ LED current model (1.6 mA at 3.0 V to 4.8 mA at 4.2 V, from the handoff), MCU 1.
 
 ## Board data from the real board (Y42)
 `python firmware/gen_pins.py` (pins.h, hwmap.h, ledmap.h, from the schematic netlist `hardware/netlist.xml` + the board file for the indicator order) and
-`export_face_board.py` (KiCad python) (face_data.js straight from `hardware/led-watch.kicad_pcb`) replace the old `plan.json` export (archived in `archive/early-layout-generators/`).
-Regenerate the netlist first when the schematic changes: `kicad-cli sch export netlist --format kicadxml -o hardware/netlist.xml hardware/led-watch.kicad_sch`.
+`export_face_board.py` (KiCad python) (face_data.js straight from `hardware/LED Watch - Single Color.kicad_pcb`) replace the old `plan.json` export (archived in `archive/early-layout-generators/`).
+Regenerate the netlist first when the schematic changes: `kicad-cli sch export netlist --format kicadxml -o hardware/netlist.xml hardware/LED Watch - Single Color.kicad_sch`.
 
 ## Sound
 The Sound panel plays `out.tone` (Hz) from the core as a square wave (WebAudio; click the page once so the browser allows sound). "Alarm test" sets the alarm for the next minute and moves the clock to :55. The CFG settings 11 (key beeps) and 12 (game sounds) decide what beeps.

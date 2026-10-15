@@ -4,7 +4,7 @@ Parametric schematic generator for the single-colour LED watch.
   "C:\\Program Files\\KiCad\\10.0\\bin\\python.exe" gen_schematic.py --variant usb
   "C:\\Program Files\\KiCad\\10.0\\bin\\python.exe" gen_schematic.py --variant solar
 
-Writes led-watch.kicad_sch (solar variant; the old pad-charged variant writes led-watch_usb.kicad_sch) next to this script. Everything is derived from the CONFIG
+Writes 'LED Watch - Single Color.kicad_sch' (solar variant; the old pad-charged variant writes '... _usb.kicad_sch') next to this script. Everything is derived from the CONFIG
 block and the pin-assignment tables, so changing LED sizes, resistor values or the MCU pin map is a re-run.
 
 Design (see ../README.md and ../docs/):
@@ -38,7 +38,7 @@ EXTRA_PINS = {"PA2": "SDA", "PA3": "SCL", "PE0": "IMU_INT", "PE1": "BTN1", "PE2"
               "PF6": "RESET"}                      # RESET (PF6) to pogo pad 1: high-voltage / reset recovery
 
 REVISION = "A"                        # board / schematic revision, see REVISIONS.md
-PROJECT = "led-watch"                 # = the KiCad project name (led-watch.kicad_pro): the symbol instances refer to it
+PROJECT = "LED Watch - Single Color"                 # = the KiCad project name (led-watch.kicad_pro): the symbol instances refer to it
 ROOT_UUID = str(uuid.uuid4())
 
 

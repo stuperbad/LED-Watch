@@ -6,28 +6,28 @@ Overview
 - Purpose: PCB and schematic design files for multiple board variants (RGB and empty-RGB variants). Work includes schematic edits, PCB layout, footprint placement scripting, and generating manufacturing outputs (gerbers, drill files, BOM).
 
 Big picture & architecture
-- Main artifacts: KiCad schematic files (`*.kicad_sch`), PCB layout (`*.kicad_pcb`), netlists (`*.net`), board rules (`*.rules`), gerbers (`*.gbr`, `*.drl`) and a gerber job (`LED Watch-job.gbrjob`).
+- Main artifacts: KiCad schematic files (`*.kicad_sch`), PCB layout (`*.kicad_pcb`), netlists (`*.net`), board rules (`*.rules`), gerbers (`*.gbr`, `*.drl`) and a gerber job (`rgb/production/gerbers 2025-12-08/LED Watch-job.gbrjob`).
 - Multiple variants: files include variant suffixes like `- RGB version` and `- empty RGB version`. Backups live in folders ending with `-backups` and autosaves have `~` or `_autosave` prefixes.
-- Scripts: the repo contains KiCad pcbnew Python scripts (example: `radial ring script`) that programmatically place footprints using the `pcbnew` Python API. Inspect scripts before changing board geometry.
+- Scripts: the repo contains KiCad pcbnew Python scripts (example: `rgb/scripts/radial ring script (KiCad python).py`) that programmatically place footprints using the `pcbnew` Python API. Inspect scripts before changing board geometry.
 
 Key files to consult first
 - `README.md` — project notes and parts links.
-- `LED Watch.kicad_pcb`, `LED Watch - RGB version.kicad_pcb`, `LED Watch - empty RGB version.kicad_pcb` — primary board files. Pick the variant explicitly before editing.
-- `radial ring script` — example pcbnew Python snippet that positions footprints (uses `board.FindFootprintByReference` and `SetPosition`). Run inside KiCad's PCB editor scripting console.
-- `LED Watch-job.gbrjob` and existing `*.gbr`/`*.drl` files — existing manufacturing outputs; update them after layout changes.
+- `rgb/LED Watch - RGB.kicad_pcb` (RGB) and `single-color/hardware/LED Watch - Single Color.kicad_pcb` (solar white-LED watch) — the two primary board files. Older RGB iterations are in `rgb/archive/pre-claude/`. Pick the variant explicitly before editing.
+- `rgb/scripts/radial ring script (KiCad python).py` — example pcbnew Python snippet that positions footprints (uses `board.FindFootprintByReference` and `SetPosition`). Run inside KiCad's PCB editor scripting console.
+- `rgb/production/gerbers 2025-12-08/LED Watch-job.gbrjob` and existing `*.gbr`/`*.drl` files — existing manufacturing outputs; update them after layout changes.
 - `*.csv` (e.g., `LED Watch - empty RGB version.csv`) — BOM/parts list exports.
 - `freerouting.dsn` / `temp-freerouting.dsn` — FreeRouting sessions / autorouter exports. These indicate autorouter usage and should be preserved if present.
 
 Developer workflows & actionable steps
 - Opening and editing: open `.kicad_pcb` files in KiCad PCBNew (GUI). Many changes (footprint positions, copper, silkscreen) are intended to be done inside KiCad so downstream files (gerbers) remain consistent.
-- Running placement scripts: open PCB editor → `Scripting Console` → run the script (the `radial ring script` uses `pcbnew` API). Example: open the script, paste into the console or run via KiCad's embedded Python.
-- Generating gerbers: use KiCad GUI `File → Plot` and `File → Fabrication Outputs → Drill Files`, or reuse the existing `LED Watch-job.gbrjob` as a template. There is no repository build system—this is a manual KiCad workflow.
+- Running placement scripts: open PCB editor → `Scripting Console` → run the script (the `rgb/scripts/radial ring script (KiCad python).py` uses `pcbnew` API). Example: open the script, paste into the console or run via KiCad's embedded Python.
+- Generating gerbers: use KiCad GUI `File → Plot` and `File → Fabrication Outputs → Drill Files`, or reuse the existing `rgb/production/gerbers 2025-12-08/LED Watch-job.gbrjob` as a template. There is no repository build system—this is a manual KiCad workflow.
 - Autorouting: `.dsn` files are FreeRouting sessions; to autoroute, export the appropriate session from KiCad and re-import as needed. Do not overwrite session files unless intended.
 - BOM and parts: BOM CSV files are present; update BOM from the schematic editor (`Tools → Generate Bill of Materials`) when changing parts.
 
 Project-specific conventions
 - Variant names: include `RGB` or `empty RGB` in filenames. When making edits, confirm which variant you are targeting and update only that variant unless user asks to unify variants.
-- Footprint references: the `radial ring script` expects footprints named like `U2..U133` (scripts build lists with `f"U{i}"`). When adding or renaming footprints, keep reference numbering consistent or update the script accordingly.
+- Footprint references: the `rgb/scripts/radial ring script (KiCad python).py` expects footprints named like `U2..U133` (scripts build lists with `f"U{i}"`). When adding or renaming footprints, keep reference numbering consistent or update the script accordingly.
 - Keep backups intact: do not delete or modify files in `*-backups/` or autosave files (`~*`, `_autosave*`) unless the user instructs.
 
 What agents should avoid / ask before doing
@@ -36,7 +36,7 @@ What agents should avoid / ask before doing
 - Ask before running destructive autorouter passes or large reposition scripts on the user's chosen board file.
 
 Examples from repo
-- The `radial ring script` uses:
+- The `rgb/scripts/radial ring script (KiCad python).py` uses:
   - `board.FindFootprintByReference(f"U{i}")` to locate footprints
   - `fp.SetPosition(pcbnew.VECTOR2I(...))` to place footprints
   Run it from KiCad's PCB editor scripting console rather than editing `.kicad_pcb` text by hand.

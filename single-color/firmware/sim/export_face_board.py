@@ -14,7 +14,7 @@ from pathlib import Path
 import pcbnew
 
 ROOT = Path(__file__).resolve().parents[2]
-board_file = Path(sys.argv[1]) if len(sys.argv) > 1 else ROOT / "hardware" / "led-watch.kicad_pcb"
+board_file = Path(sys.argv[1]) if len(sys.argv) > 1 else ROOT / "hardware" / "LED Watch - Single Color.kicad_pcb"
 b = pcbnew.LoadBoard(str(board_file))
 CX = CY = 100.0
 mm = pcbnew.ToMM

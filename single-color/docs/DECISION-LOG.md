@@ -1,4 +1,4 @@
-> **File layout changed on 2026-10-15.** Entries below were written with the old paths. Old -> new: `boards/Y43/Y42_routed_v4.*` = `hardware/led-watch.*` (revision A), `boards/Y43/fab42` = `hardware/production/gerbers`, `boards/Y43/asm42` = `hardware/production/assembly`, `schematic/` = `hardware/`, `footprints/` = `hardware/footprints/`, top-level `*.md` = `docs/`, older boards = `archive/`. Details: `archive/README.md`.
+> **File layout changed on 2026-10-15.** Entries below were written with the old paths. Old -> new: `boards/Y43/Y42_routed_v4.*` = `hardware/LED Watch - Single Color.*` (revision A), `boards/Y43/fab42` = `hardware/production/gerbers`, `boards/Y43/asm42` = `hardware/production/assembly`, `schematic/` = `hardware/`, `footprints/` = `hardware/footprints/`, top-level `*.md` = `docs/`, older boards = `archive/`. Details: `archive/README.md`.
 
 # LED Watch — Single-Color (white) version
 Started 2026-10-05. Separate from `Desktop\LED-Watch` (the RGB design), which is left alone.

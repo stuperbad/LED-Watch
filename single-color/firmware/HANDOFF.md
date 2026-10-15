@@ -38,7 +38,7 @@ Steps 1 and 4 (toolchain, mode state machine) are done in a different way than f
 
 ## Update 2026-10-14: ALM mode, weekday lights, buzzer (firmware session)
 Done in BOTH cores (`c/watch.c` and `sim/watch_core.js`, 20 scenarios match frame-for-frame including the buzzer frequency; 71 unit checks, 197 hardware-layer checks; AVR build 31.7 KB flash / 2.2 KB RAM):
-- **Seven indicators, face order** SET TMR ALM BAT FUN CFG LCK: `MODE_LED[7]` in `ledmap.h` is now generated in physical (left to right) order from the board file (`gen_pins.py` reads `hardware/led-watch.kicad_pcb`; IND7 = ALM = COL6 sits third). Mode ids follow the same order (TIME SET TMR ALM BAT FUN CFG), so mode selection walks the row.
+- **Seven indicators, face order** SET TMR ALM BAT FUN CFG LCK: `MODE_LED[7]` in `ledmap.h` is now generated in physical (left to right) order from the board file (`gen_pins.py` reads `hardware/LED Watch - Single Color.kicad_pcb`; IND7 = ALM = COL6 sits third). Mode ids follow the same order (TIME SET TMR ALM BAT FUN CFG), so mode selection walks the row.
 - **ALM mode** (alarm clock: hour, minute, on/off; rings up to 1 min, any button stops it, wakes even a locked watch) and a dim ALM LED in Time while an alarm is set.
 - **Weekday on the indicator LEDs** (SET = Sunday ... LCK = Saturday) instead of the outer-ring bar.
 - **Sound engine**: the core reports `watch_tone_hz()`; patterns for key click, game events (Runner, Target, Quick Draw, Simon tones, Pong, Pacer ticks), award and the alarm. **CFG 11 key beeps (off by default), CFG 12 game sounds (on by default)**, 12 settings now (`set[12]`). Low battery mutes all but the alarm.

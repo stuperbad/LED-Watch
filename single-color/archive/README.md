@@ -11,5 +11,5 @@ Nothing here is needed to build or order the current board (see `../hardware/`).
 | `work/` | scratch files from the RGB board outline |
 | `local-only/` (not in git) | ~250 MB of intermediate boards from the routing work (`Y43-intermediates/`, including the hand-edited `Y42_routed_v2.kicad_pcb`) and the old layout experiments (`layout-experiments/`); only on the author's disk |
 
-Old file names to current ones: `Y42_routed_v4` = `hardware/led-watch` (revision A), `Y43_mockD_pogo8` = `hardware/source/layout-D-hand-placement`,
-`schematic/watch_solar` = `hardware/led-watch.kicad_sch`, `boards/Y43/fab42` = `hardware/production/gerbers`, `boards/Y43/asm42` = `hardware/production/assembly`.
+Old file names to current ones: `Y42_routed_v4` = `hardware/LED Watch - Single Color` (revision A), `Y43_mockD_pogo8` = `hardware/source/layout-D-hand-placement`,
+`schematic/watch_solar` = `hardware/LED Watch - Single Color.kicad_sch`, `boards/Y43/fab42` = `hardware/production/gerbers`, `boards/Y43/asm42` = `hardware/production/assembly`.

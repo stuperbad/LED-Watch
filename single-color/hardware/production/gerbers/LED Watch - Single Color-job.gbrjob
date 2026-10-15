@@ -5,12 +5,12 @@
       "Application": "Pcbnew",
       "Version": "10.0.6"
     },
-    "CreationDate": "2026-10-14T22:04:32-07:00"
+    "CreationDate": "2026-10-14T22:23:23-07:00"
   },
   "GeneralSpecs": {
     "ProjectId": {
-      "Name": "led-watch",
-      "GUID": "6c65642d-7761-4746-9368-2e6b69636164",
+      "Name": "LED Watch - Single Color",
+      "GUID": "4c454420-5761-4746-9368-202d2053696e",
       "Revision": "A"
     },
     "Size": {
@@ -43,47 +43,47 @@
   ],
   "FilesAttributes": [
     {
-      "Path": "led-watch-F_Cu.gtl",
+      "Path": "LED Watch - Single Color-F_Cu.gtl",
       "FileFunction": "Copper,L1,Top",
       "FilePolarity": "Positive"
     },
     {
-      "Path": "led-watch-In1_Cu.g1",
+      "Path": "LED Watch - Single Color-In1_Cu.g1",
       "FileFunction": "Copper,L2,Inr",
       "FilePolarity": "Positive"
     },
     {
-      "Path": "led-watch-In2_Cu.g2",
+      "Path": "LED Watch - Single Color-In2_Cu.g2",
       "FileFunction": "Copper,L3,Inr",
       "FilePolarity": "Positive"
     },
     {
-      "Path": "led-watch-B_Cu.gbl",
+      "Path": "LED Watch - Single Color-B_Cu.gbl",
       "FileFunction": "Copper,L4,Bot",
       "FilePolarity": "Positive"
     },
     {
-      "Path": "led-watch-F_Silkscreen.gto",
+      "Path": "LED Watch - Single Color-F_Silkscreen.gto",
       "FileFunction": "Legend,Top",
       "FilePolarity": "Positive"
     },
     {
-      "Path": "led-watch-B_Silkscreen.gbo",
+      "Path": "LED Watch - Single Color-B_Silkscreen.gbo",
       "FileFunction": "Legend,Bot",
       "FilePolarity": "Positive"
     },
     {
-      "Path": "led-watch-F_Mask.gts",
+      "Path": "LED Watch - Single Color-F_Mask.gts",
       "FileFunction": "SolderMask,Top",
       "FilePolarity": "Negative"
     },
     {
-      "Path": "led-watch-B_Mask.gbs",
+      "Path": "LED Watch - Single Color-B_Mask.gbs",
       "FileFunction": "SolderMask,Bot",
       "FilePolarity": "Negative"
     },
     {
-      "Path": "led-watch-Edge_Cuts.gm1",
+      "Path": "LED Watch - Single Color-Edge_Cuts.gm1",
       "FileFunction": "Profile",
       "FilePolarity": "Positive"
     }
