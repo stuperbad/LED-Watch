@@ -1,0 +1,4 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "LEDWatch")(type "KiCad")(uri "${KIPRJMOD}/../../footprints/LEDWatch.pretty")(options "")(descr "project footprints: BQ25570 RGR, KXOB25 cell pad, Murata piezo, UPDI pogo pads"))
+)

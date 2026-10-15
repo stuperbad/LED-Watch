@@ -49,3 +49,4 @@ boards/Y43/asm/pos_raw.csv
 !boards/Y43/Y42_routed_v4_gerbers.zip
 !boards/Y43/render_Y42_v4_top.png
 !boards/Y43/render_Y42_v4_bottom.png
+!boards/Y43/fp-lib-table
