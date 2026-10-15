@@ -24,7 +24,7 @@ The checklist of what is still open is `docs/PRE-ORDER-CHECKLIST.md`; the reason
 | `hardware/renders/` | top and bottom pictures of the board |
 | `hardware/REVISIONS.md` | the revision table (A = the order candidate); revisions are git tags, not file names |
 | `firmware/` | the watch software: `c/` AVR firmware (portable core `watch.c`, hardware layer `hw/`), `sim/` browser simulator running the same logic, `HANDOFF.md` current status. Start with `firmware/HANDOFF.md` |
-| `docs/` | `DESIGN-UX.md` (modes, buttons, LEDs, sounds), `DECISION-LOG.md`, `PRE-ORDER-CHECKLIST.md`, `SCHEMATIC-GUIDE.md`, `JLCPCB-RULES.md`, `ASSEMBLY-AND-COST.md`, `mcu-pinmaps.md`; `datasheets/`; `research/` (solar, power, MCU studies, the power workbook) |
+| `docs/` | `BRING-UP.md` (first power-up: how the battery and power work, measurements, programming), `DESIGN-UX.md` (modes, buttons, LEDs, sounds), `DECISION-LOG.md`, `PRE-ORDER-CHECKLIST.md`, `SCHEMATIC-GUIDE.md`, `JLCPCB-RULES.md`, `ASSEMBLY-AND-COST.md`, `mcu-pinmaps.md`; `datasheets/`; `research/` (solar, power, MCU studies, the power workbook) |
 | `tools/` | the scripts that produced and checked the layout (routing pipeline, DRC helpers, BOM/placement export). KiCad's own Python is needed for the `pcbnew` ones |
 | `archive/` | older board generations and experiments; see `archive/README.md` |
 
