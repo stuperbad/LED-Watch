@@ -159,3 +159,9 @@ Files changed: schematic/gen_schematic.py (+ regenerated watch_solar.kicad_sch, 
 - **U4 (BQ25570, on the back):** the two foreign signals that passed under it, **BTN2 and SDA** (In1), were re-routed around it (outside the 4 x 4 mm core). What remains under U4 are only U4's own nets (fan-out of its pins, including LBUCK and OK_PROG pieces on In2 and LBUCK / VBAT on F.Cu on the other side of the plane); moving those was not possible (they start inside the exclusion).
 - **U2 (LIS2DW12):** pins 2 and 9 are tied on purpose: pin 2 is ~CS (must be high for the I2C interface, it is the SPI chip select) and pin 9 is VDD; with VDD_IO (pin 10) they are all the 3.3 V rail. Nothing to change.
 - **Cost of the change:** +74 mm of copper (0.1 mm tracks, resistance negligible against the 220 ohm column resistors), +16 vias. DRC 0 errors, 0 unconnected, same 7 deliberate silk warnings. Gerbers re-exported (`hardware/production`); BOM and placement files unchanged. The quote was made on the previous Gerbers: re-upload `LED Watch - Single Color - gerbers.zip` before ordering; JLCDFM has not been re-run on the new Gerbers yet.
+
+## 2026-10-15 (later): track ends snapped to via/pad centres
+
+- **Problem:** the router counted a track end as connected anywhere inside a via's or pad's copper (up to 0.17 mm from the centre), so 475 track ends landed off-centre. Electrically fine, but untidy and not how a hand-routed board looks.
+- **Fix:** `tools/snap_centers.py` moves every straight-track end that touches a via or pad of its own net to that via's/pad's centre (259 tracks that shrank to nothing inside a via were deleted), then the ground plane was refilled. DRC: 0 errors, 0 unconnected, same 7 silk warnings. Only the track end on U1's large exposed ground pad is not centred.
+- Gerbers re-exported (copper, mask, drill); the silkscreen files are unchanged. The zip must be re-uploaded to JLCPCB before ordering; JLCDFM not re-run.

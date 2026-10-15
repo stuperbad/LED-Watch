@@ -13,3 +13,4 @@ These scripts made and checked the revision A board. Most take the board file(s)
 | older pipeline | `route_*.py`, `export_dsn.py`, `import_ses.py`, `prep_dsn.py`, `ses_keep_nonpolar.py` (the Freerouting round trip used for the 43.5 mm board) |
 
 The story of the order the stages were run in, with the reasons, is in `../docs/DECISION-LOG.md`.
+| centre landing | `snap_centers.py` (move track ends on vias/pads to their centres) |

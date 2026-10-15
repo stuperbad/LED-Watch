@@ -264,7 +264,7 @@
     "pinned_symbol_libs": []
   },
   "meta": {
-    "filename": "led-watch.kicad_pro",
+    "filename": "LED Watch - Single Color.kicad_pro",
     "version": 3
   },
   "net_settings": {
@@ -313,8 +313,8 @@
     "legacy_lib_list": [],
     "top_level_sheets": [
       {
-        "filename": "led-watch.kicad_sch",
-        "name": "led-watch",
+        "filename": "LED Watch - Single Color.kicad_sch",
+        "name": "LED Watch - Single Color",
         "uuid": "00000000-0000-0000-0000-000000000000"
       }
     ]
