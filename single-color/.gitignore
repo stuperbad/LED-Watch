@@ -3,50 +3,12 @@ __pycache__/
 *.pyc
 *.lck
 *-backups/
+_autosave-*
 fp-info-cache
 *.kicad_prl
 ~*
 .DS_Store
 Thumbs.db
 
-# Older layout experiments (254 MB, regenerable with build_board*.sh); only the current board Y43 is tracked
-boards/*
-!boards/Y43/
-boards/Y43/*
-!boards/Y43/Y43_final.kicad_pcb
-!boards/Y43/Y43_final.kicad_pro
-!boards/Y43/Y43_arc.kicad_pcb
-!boards/Y43/Y43_arc.kicad_pro
-!boards/Y43/Y43_poly.kicad_pcb
-!boards/Y43/Y43_dog.kicad_pcb
-!boards/Y43/Y43_rip12.kicad_pcb
-!boards/Y43/plan.json
-!boards/Y43/nets_full.txt
-!boards/Y43/final_all_drc.json
-!boards/Y43/final_top.png
-!boards/Y43/final_bottom.png
-!boards/Y43/Y43_final_gerbers.zip
-!boards/Y43/fab/
-!boards/Y43/asm/
-boards/Y43/asm/pos_raw.csv
-
-# Board Y42 (42.0 mm, 2026-10-13): working placement, routed board, fab + assembly files
-!boards/X42/
-!boards/Y43/Y43_mockD_pogo8.kicad_pcb
-!boards/Y43/Y43_mockD_pogo8.kicad_pro
-!boards/Y43/Y42_routed_v4.kicad_pcb
-!boards/Y43/Y42_routed_v4.kicad_pro
-!boards/Y43/Y42_routed_v4_gerbers.zip
-!boards/Y43/fab42/
-!boards/Y43/asm42/
-!boards/Y43/nets42.txt
-!boards/Y43/crystal_exclude.txt
-!boards/Y43/render_Y42_top.png
-!boards/Y43/render_Y42_v2_bottom.png
-!boards/Y43/render_pogo8_top.png
-!boards/Y43/Y42_routed_v4.kicad_pcb
-!boards/Y43/Y42_routed_v4.kicad_pro
-!boards/Y43/Y42_routed_v4_gerbers.zip
-!boards/Y43/render_Y42_v4_top.png
-!boards/Y43/render_Y42_v4_bottom.png
-!boards/Y43/fp-lib-table
+# Big local-only leftovers (ignored intermediates of the layout work and old layout experiments, ~250 MB): kept on the author's disk, not in git
+archive/local-only/

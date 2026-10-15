@@ -34,7 +34,7 @@ avr-gcc -mmcu=avr128db48 -std=gnu99 -Os -I.. -ffunction-sections -fdata-sections
 ```
 
 ## The hardware layer (`c/hw/`)
-Connects the portable core to the AVR128DB48. Everything compiles with avr-gcc (`powershell -File cuild_fw.ps1` -> `c/hw/watch_fw.hex`); **none of it has run on a board yet** (`c/BRINGUP.md` is the guide for that day).
+Connects the portable core to the AVR128DB48. Everything compiles with avr-gcc (`powershell -File c\build_fw.ps1` -> `c/hw/watch_fw.hex`); **none of it has run on a board yet** (`c/BRINGUP.md` is the guide for that day).
 | File | What it does |
 |---|---|
 | `main.c` | the loop: sleep, read inputs, `watch_step()`, draw; power-on self-test on the indicator LEDs |

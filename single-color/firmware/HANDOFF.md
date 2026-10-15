@@ -6,9 +6,9 @@ Goal: firmware for the single-colour solar LED watch (AVR128DB48, VQFN-48), plus
 Steps 1 and 4 (toolchain, mode state machine) are done in a different way than first planned: the AVR toolchain is installed (`README.md`), the browser simulator `sim/` is the behaviour reference, and the whole core has been ported to portable C in `c/watch.c` (matches the simulator frame-for-frame on 17 scripted scenarios; 24 KB flash, 1 KB RAM). The mode list in this file is outdated: read `../DESIGN-UX.md` and `sim/MANUAL.md`. The hardware layer (matrix scan, buttons, RTC and sleep, battery voltage, LIS2DW12 driver) is now written and compiles (`c/hw/`, 29 KB flash, 2 KB RAM) but has never run on a board. Remaining: bring-up and tuning on the real board (`c/BRINGUP.md`), EEPROM settings, particle-game speed at 4 MHz.
 
 ## Read first
-- `SCHEMATIC-GUIDE.md` : what every part is, how the LED matrix works, net names.
-- `DESIGN-UX.md` : modes and button behaviour (SET, TMR, BAT, FUN, CFG, LCK).
-- `firmware/pins.h` : GENERATED pin map (`gen_pins.py` reads `schematic/n_solar.xml`). Never edit by hand; rerun the generator if the schematic changes.
+- `docs/SCHEMATIC-GUIDE.md` : what every part is, how the LED matrix works, net names.
+- `docs/DESIGN-UX.md` : modes and button behaviour (SET, TMR, BAT, FUN, CFG, LCK).
+- `firmware/pins.h` : GENERATED pin map (`gen_pins.py` reads `hardware/netlist.xml`). Never edit by hand; rerun the generator if the schematic changes.
 - `firmware/ledmap.h` : which row/column each of the 138 LEDs is on (hours H, minutes M, seconds S, indicators IND).
 - `firmware/sim/watch_sim.py` : renders the face from `plan.json` + the netlist (writes a PNG). Extend it into an interactive simulator that runs the same scan code.
 
@@ -38,7 +38,7 @@ Steps 1 and 4 (toolchain, mode state machine) are done in a different way than f
 
 ## Update 2026-10-14: ALM mode, weekday lights, buzzer (firmware session)
 Done in BOTH cores (`c/watch.c` and `sim/watch_core.js`, 20 scenarios match frame-for-frame including the buzzer frequency; 71 unit checks, 197 hardware-layer checks; AVR build 31.7 KB flash / 2.2 KB RAM):
-- **Seven indicators, face order** SET TMR ALM BAT FUN CFG LCK: `MODE_LED[7]` in `ledmap.h` is now generated in physical (left to right) order from the board file (`gen_pins.py` reads `boards/Y43/Y42_routed_v4.kicad_pcb`; IND7 = ALM = COL6 sits third). Mode ids follow the same order (TIME SET TMR ALM BAT FUN CFG), so mode selection walks the row.
+- **Seven indicators, face order** SET TMR ALM BAT FUN CFG LCK: `MODE_LED[7]` in `ledmap.h` is now generated in physical (left to right) order from the board file (`gen_pins.py` reads `hardware/led-watch.kicad_pcb`; IND7 = ALM = COL6 sits third). Mode ids follow the same order (TIME SET TMR ALM BAT FUN CFG), so mode selection walks the row.
 - **ALM mode** (alarm clock: hour, minute, on/off; rings up to 1 min, any button stops it, wakes even a locked watch) and a dim ALM LED in Time while an alarm is set.
 - **Weekday on the indicator LEDs** (SET = Sunday ... LCK = Saturday) instead of the outer-ring bar.
 - **Sound engine**: the core reports `watch_tone_hz()`; patterns for key click, game events (Runner, Target, Quick Draw, Simon tones, Pong, Pacer ticks), award and the alarm. **CFG 11 key beeps (off by default), CFG 12 game sounds (on by default)**, 12 settings now (`set[12]`). Low battery mutes all but the alarm.

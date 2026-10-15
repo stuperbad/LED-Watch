@@ -1,60 +1,61 @@
-# LED Watch (single colour): a bare-bones solar LED clock on a PCB
+# LED Watch (single colour, solar)
 
-A wrist-worn clock that tells time with 132 tiny white LEDs on three concentric rings (12 hour LEDs, 60 minute LEDs, 60 second LEDs), a motion sensor to wake it,
-two small solar cells and two small LiPo cells on the back, and no case. Status: **design phase. Nothing has been ordered or built.**
-Run by Evan Finkle with Claude (Anthropic) doing the research, scripting and layout work. Every number in these documents is tagged VERIFIED (read from a datasheet or live listing)
-or ESTIMATE/UNVERIFIED, so please keep those tags when you edit.
+A wrist-worn clock that tells the time with 132 tiny white LEDs on three concentric rings (12 hour, 60 minute, 60 second), seven mode LEDs that double as weekday lights,
+a piezo buzzer, a motion sensor to wake it, a solar cell and two LiPo cells on the back, and no case. Run by Evan Finkle with Claude (Anthropic) doing research, scripting and layout.
 
-## What it is
-| Item | Current choice | Why |
-|---|---|---|
-| Display | 12 x 0603 hour, 60 x 0402 minute, 60 x 0201 second white LEDs, rotated to their true angle | three sizes: hours large and inner, seconds small and outer |
-| Indicators | 6 x 0402 LEDs in an arc, labelled BAT SET CFG PLAY TMR LOCK | one light per mode (see DESIGN-UX.md) |
-| MCU | Microchip AVR128DB48, 6x6 mm VQFN | UPDI programming, enough pins, low sleep current (datasheet read) |
-| Motion sensor | ST LIS2DW12 | 50 nA power-down, wake-on-motion, tap, in stock at JLCPCB |
-| Power | 2 x Anysolar KXOB25-07X1TF in series -> TI BQ25570 harvester -> 2 x protected LiPo pouches in parallel | solar top-up; weekly or monthly charging is easy even without sun |
-| Buttons | two, symmetric, low on the face | left = navigate, right = act (DESIGN-UX.md) |
-| Board | 4-layer, about 43 mm circle plus two strap lugs with strap slots, 1.6 mm | shape reused from the earlier RGB board |
+**Status (2026-10-14): revision A is an order candidate, not ordered yet.** A quote for 5 assembled boards at JLCPCB is $308.63 (+ shipping). Nothing has been powered up.
+The checklist of what is still open is `docs/PRE-ORDER-CHECKLIST.md`; the reasoning behind every decision is `docs/DECISION-LOG.md`.
 
-## Where everything is
-| File / folder | What it is |
+| | |
 |---|---|
-| `README.md` | this page |
-| `PRE-ORDER-CHECKLIST.md` | every step between now and an order, with owner and status |
-| `ASSEMBLY-AND-COST.md` | one-sided vs two-sided assembly, home reflow, cost estimates for the white and RGB versions |
-| `POLAR-TRACES.md` | plan for a custom polar (radial + arc) trace generator |
-| `DESIGN-UX.md` | modes, buttons, indicator LEDs, game ideas |
-| `DECISION-LOG.md` | the running log of every decision and why (the old README) |
-| `mcu-pinmaps.md`, `mcu-sensor-shortlist.md`, `mcu-research.md` | datasheet-based pin maps and part research |
-| `solar-*.md`, `power-budget.md`, `Watch-Power-Calculator.xlsx` | solar and power research; the workbook is a live model with 18 tabs (LEDs, sensors, MCUs, batteries, board size, shortcomings, links) |
-| `datasheets/` | datasheets used (AVR128DB, ATmega169P, LIS2DW12) |
-| `schematic/` | generated KiCad schematics (`watch_usb` = pad-charged, `watch_solar` = solar) and the generator `gen_schematic.py` |
-| `gen_rings.py`, `plan_board.py`, `write_pcb.py` | parametric LED-ring and board generators (placement, outline, nets) |
-| `placement_test.py` | early courtyard-packing test (kept for reference) |
-| `boards/` | every layout option as a PNG + KiCad board; `boards/V1_2xKXOB25_D43/` is the current candidate |
+| Board | 42.0 mm circle with two strap lugs and 2.5 mm strap slots, 4 layers, 1.6 mm, JLCPCB rules (0.10 mm track/space, 0.15 mm vias) |
+| MCU | Microchip AVR128DB48 (VQFN-48), UPDI programming through 4 pogo pads (RESET, VDD, GND, UPDI) on the back |
+| Power | Anysolar KXOB25-05X3TF cell -> TI BQ25570 harvester -> 2 protected LiPo pouches (JST SH plugs) |
+| Sensor / sound | ST LIS2DW12 accelerometer (wrist raise, tap), Murata PKMCS0909E4000-R1 piezo on PB4/PB5 |
+| Buttons | two, symmetric, low on the face |
 
-## How to regenerate the current board
-```
-# 1. schematic -> netlist (KiCad 10 python)
-cd schematic
-"C:\Program Files\KiCad\10.0\bin\python.exe" gen_schematic.py --variant solar
-"C:\Program Files\KiCad\10.0\bin\kicad-cli.exe" sch export netlist --format kicadxml -o n_solar.xml watch_solar.kicad_sch
-cd ..
-# 2. plan the layout (system python: numpy, shapely, matplotlib)
-python plan_board.py --cell KXOB25 --cell-count 2 --diameter 43 --mcu-pkg qfn --safety 0.5 --btn-style bottom --ind-style arc --ind-count 6 --auto-cell-y --batt-conn jst-side --mcu-side front --battery tc70 --batt-count 2 --name V1_2xKXOB25_D43
-# 3. write the KiCad board with nets
-"C:\Program Files\KiCad\10.0\bin\python.exe" write_pcb.py V1_2xKXOB25_D43
-# 4. route (about 25 minutes): export Specctra, run freerouting, import the session (see PRE-ORDER-CHECKLIST.md section D)
-```
-Key knobs of `plan_board.py`: `--diameter` (0 = smallest that fits), `--band` (LED band width), `--hr/--min/--sec` (LED sizes), `--cell`, `--battery`, `--safety` (extra edge margin), `--slot-clear`, `--btn-x`, `--ind-count`, `--all-front`, `--back-strip`.
+## Folder map
 
-## Known problems right now (honest list)
-- The routed board has 6 unrouted connections and about 270 DRC errors against KiCad's default rules (hole and edge clearance). Rules have not yet been set to JLCPCB's real limits.
-- The schematic and board are slightly out of sync: the schematic still shows the TQFP MCU footprint, a two-pin solar connector, and one battery plug; the board has the VQFN MCU, four solar-cell contact pads, and two plugs.
-- The BQ25570 uses a stand-in footprint; the real RGR package land pattern still has to be built and checked against TI's drawing.
-- The TinyCircuits cell size is from a search summary; the Anysolar cell had no live stock when checked.
-- Brightness drops as the battery falls toward 3.0 V with the current 150 ohm resistors (the white LEDs need about 2.8 V).
-- Nothing has been checked against JLCPCB's assembly rules with the real placement file (arbitrary-angle LED rotation in particular).
+| Folder | What is in it |
+|---|---|
+| **`hardware/`** | **The KiCad project. Open `hardware/led-watch.kicad_pro`.** `led-watch.kicad_sch` (schematic, generated by `gen_schematic.py`), `led-watch.kicad_pcb` (the routed board), `footprints/LEDWatch.pretty` (custom footprints), `netlist.xml` (exported from the schematic, read by the firmware tools) |
+| `hardware/production/` | what you send to JLCPCB: `led-watch-gerbers.zip` (+ the loose `gerbers/`), `assembly/BOM.csv` and `CPL.csv` |
+| `hardware/source/` | inputs of the layout pipeline: `layout-D-hand-placement.kicad_pcb` (the hand placement the routing started from), `nets.txt`, `crystal_exclude.txt` |
+| `hardware/renders/` | top and bottom pictures of the board |
+| `hardware/REVISIONS.md` | the revision table (A = the order candidate); revisions are git tags, not file names |
+| `firmware/` | the watch software: `c/` AVR firmware (portable core `watch.c`, hardware layer `hw/`), `sim/` browser simulator running the same logic, `HANDOFF.md` current status. Start with `firmware/HANDOFF.md` |
+| `docs/` | `DESIGN-UX.md` (modes, buttons, LEDs, sounds), `DECISION-LOG.md`, `PRE-ORDER-CHECKLIST.md`, `SCHEMATIC-GUIDE.md`, `JLCPCB-RULES.md`, `ASSEMBLY-AND-COST.md`, `mcu-pinmaps.md`; `datasheets/`; `research/` (solar, power, MCU studies, the power workbook) |
+| `tools/` | the scripts that produced and checked the layout (routing pipeline, DRC helpers, BOM/placement export). KiCad's own Python is needed for the `pcbnew` ones |
+| `archive/` | older board generations and experiments; see `archive/README.md` |
+
+## Regenerating things
+
+```
+# schematic from its generator (KiCad's python), then the netlist the firmware tools read
+cd hardware
+"C:\Program Files\KiCad\10.0\bin\python.exe" gen_schematic.py
+"C:\Program Files\KiCad\10.0\bin\kicad-cli.exe" sch export netlist --format kicadxml -o netlist.xml led-watch.kicad_sch
+
+# firmware pin map and simulator face data from the schematic netlist and the board
+cd ..\firmware
+python gen_pins.py
+"C:\Program Files\KiCad\10.0\bin\python.exe" sim\export_face_board.py
+
+# production files from the board
+cd ..\hardware
+kicad-cli pcb export gerbers --subtract-soldermask --layers F.Cu,In1.Cu,In2.Cu,B.Cu,F.Mask,B.Mask,F.Silkscreen,B.Silkscreen,Edge.Cuts -o production\gerbers\ led-watch.kicad_pcb
+kicad-cli pcb export drill --format excellon --excellon-separate-th --generate-map --map-format gerberx2 -o production\gerbers\ led-watch.kicad_pcb
+kicad-cli pcb export pos --format csv --units mm --side both --smd-only --exclude-dnp -o production\assembly\pos_raw.csv led-watch.kicad_pcb
+python ..\tools\make_bom_cpl.py production\assembly\pos_raw.csv production\assembly
+```
+
+Firmware tests (PC): `python firmware\c\test\run_diff.py` (JavaScript vs C core, frame for frame), `run_unit.py`, `run_hw.py`. AVR build: `powershell -File firmware\c\build_fw.ps1`.
+Simulator: `python firmware\sim\serve.py 8765`, then open http://127.0.0.1:8765/index.html.
+
+## How the layout was made (so the tools make sense)
+Evan hand-placed the parts in KiCad (`hardware/source/layout-D-hand-placement`), then Claude's scripts in `tools/` did the symmetry tidy-up, the real footprints, the crystal ground
+guard, the polar routing of the LED rings (`polar_route.py`), a grid router for the rest (`grid_route2.py`), via/stub clean-up, the ground plane (`fix_gnd_zone.py`) and the checks
+(`check_pad_entry.py`, `dfm_gaps.py`, DRC). Evan then hand-edited the result in KiCad. The step by step story is in `docs/DECISION-LOG.md`.
 
 ## Related
-The earlier RGB version lives in `Desktop\LED-Watch` (132 RGB LEDs on a rectangular-ish 43 x 50 mm board, never built). We want to revisit the RGB direction later; see `POLAR-TRACES.md`.
+The earlier RGB version is in `../rgb/` (never built).
