@@ -1,0 +1,13 @@
+function,qty per board,LCSC #,part,JLCPCB library,stock 2026-10-15,unit price (qty 1) USD,note
+"RGB LED, common anode (primary)",139 (132 ring + 7 mode),C2917192,Nationstar NCD0808RGB1,extended,"6,179",0.0601,"Vf typ/max at 2 mA: R 1.9/2.2 V, G 2.5/3.2 V, B 2.6/3.2 V; IF max 10 mA; same pin positions as the Meihua part. Datasheet read 2026-10-15"
+"RGB LED, common anode (alternative)",139,C404279,Meihua MHPA0808RGBDT,extended,"13,228",0.0473,"Vf only given as min/max: R 1.7-2.3 V (5 mA), G and B 2.5-3.5 V (3 mA), no typical, no bins; IF max 20 mA. Cheaper, more stock, but a 1 V spread in green/blue"
+MCU,1,C1019767,Microchip AVR128DB64-I/MR (VQFN-64 9x9),extended,11,4.6631,"53 I/O (52 usable with the 32 kHz crystal). STOCK IS THIN: 11, plus 5 of the -E/MR tape-and-reel version C1518630 (4.355). 5 boards need 5; recheck the day before ordering"
+"MCU (fallback, other package)",1,C3228493,Microchip AVR64DB64-I/PT (TQFP-64 10x10),extended,77,4.5392,"same pinout, 64 KB flash instead of 128 KB, different (larger) footprint. Only if the QFN runs out"
+"Row switch, P-channel",24,C155329,Diodes DMP21D0UFB4-7B (X2-DFN1006-3),extended,"20,367",0.0692,"-20 V, RDS(on) max 495 mOhm at -4.5 V, -0.55 A, gate protected, 0.6 mm2 footprint. Pin order (gate/source/drain) must be confirmed on the datasheet drawing before the schematic is drawn"
+Row switch (clone of the same part),24,C2905648,DMP21D0UFB4-P (TECH PUBLIC),extended,"7,810",0.0464,"cheaper clone, same package"
+"Row switch (fallback, bigger)",24,C15127,Alpha & Omega AO3401A (SOT-23),BASIC,"578,366",0.102,"no extended fee, pin order known (1 gate, 2 source, 3 drain), but 3.9 x 3.5 mm courtyard: 24 of them do not fit on the front"
+"Column resistor, red line",6,C25117,470 ohm 1 % 0402,BASIC,"671,395",0.0027,"starting value for about 3 mA, to be tuned on the bench"
+"Column resistor, green and blue lines",12,C25099,270 ohm 1 % 0402,extended,"35,850",0.0031,"starting value; 300 ohm C25102 (762,323 in stock) is the alternative"
+Decoupling 100 nF,about 12,C1525,100 nF 0402,BASIC,"22,397,650",0.0049,"MCU: VDD x2, VDDIO2, AVDD + spare; accelerometer x2"
+"I2C pull-ups, button pull-ups",4,C25744,10 k 0402,BASIC,"21,993,624",0.0016,
+Everything else,,,"unchanged from the single-colour BOM (BQ25570 C506250, LIS2DW12 C189624, buzzer C910763, crystal C97606, JST C160402, KMR2 C72443, inductors, ladder resistors)",,,,"same parts, same stock check as before"
