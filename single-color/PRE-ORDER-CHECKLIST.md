@@ -76,3 +76,9 @@ Status key: [ ] open, [~] partly done, [x] done. Owner: E = Evan, C = Claude (ca
 - [ ] SOLDERING: the datasheet recommends Sn42/Bi58 paste at 220 C peak, or hand soldering 5 s below 400 C; JLCPCB's standard reflow is hotter, so the cell is NOT a JLCPCB assembly part - order it separately and hand-solder. No paste layer on the cell pads.
 - [ ] POLARITY: the datasheet back-side drawing shows + at the left end; seen from above through the cell that is the RIGHT end (SC1+ = SOLAR_IN on the board). Measure Voc on a real cell before soldering and confirm.
 - [ ] STOCK: DigiKey listings (cached regional pages) showed 1,866 in stock for KXOB25-05X3TF-TR at $3.45 (1), $2.82 (10); lead time 15 weeks. Check the live page.
+
+## Status 2026-10-14 (Y42 board, quote done, not ordered)
+- [x] Schematic == board: `schematic/watch_solar.kicad_sch` regenerated; 197 parts, all nets equal (far KMR2 switch pads aside). Supersedes the stale B1 line above (Tag-Connect, two series cells).
+- [x] D1/D9 JLCPCB rules + final DRC: `boards/Y43/Y42_routed_v4.kicad_pcb`, 0 errors / 0 unconnected; pad-landing stubs and 0.15 mm silk, two-line mode labels re-applied 2026-10-14 (they had been lost when v4 was rebuilt).
+- [x] E1/E3/E6 BOM + CPL (`boards/Y43/asm42/`): 24 BOM lines, 194 placed parts (176 top, 18 bottom), all stocked on 2026-10-14. Quote: redo with the corrected gerbers (the $296.56 made earlier used a stale zip; the earlier quote on fixed gerbers was $308.21 with ENIG).
+- [ ] Still open before ordering: LED (0201/0402/0603) and KMR2 switch pads against datasheets; IMU land pattern vs ST TN0018; JLCDFM findings to be reviewed; strap slot test with a real band; piezo sound path test; firmware (ALM, weekday lights, buzzer TCA1 split mode); bench test serial UPDI on AVR128DB48 with the Adafruit UPDI Friend (5893) and a 4-pad pogo jig; decide whether to save to cart (JLCPCB asks for login again).

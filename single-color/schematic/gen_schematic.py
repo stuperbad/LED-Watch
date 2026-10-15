@@ -33,7 +33,9 @@ CONFIG = dict(
 COL_PINS = ["PA0", "PA1", "PA4", "PA5", "PA6", "PA7", "PB0", "PB1", "PB2", "PB3", "PC0", "PC1"]   # 12 columns (sources)
 ROW_PINS = ["PC2", "PC3", "PC4", "PC5", "PC6", "PC7", "PD0", "PD1", "PD2", "PD3", "PD4", "PD5"]    # 12 rows (sinks); row 11 = the six mode-indicator LEDs
 EXTRA_PINS = {"PA2": "SDA", "PA3": "SCL", "PE0": "IMU_INT", "PE1": "BTN1", "PE2": "BTN2", "PE3": "CHG_STAT",
-              "XTAL32K1/PF0": "XTAL1", "XTAL32K2/PF1": "XTAL2", "UPDI": "UPDI"}
+              "XTAL32K1/PF0": "XTAL1", "XTAL32K2/PF1": "XTAL2", "UPDI": "UPDI",
+              "PB4": "BUZ_A", "PB5": "BUZ_B",      # piezo BZ1, driven in antiphase from TCA1 WO4/WO5 (split mode), see firmware/HANDOFF.md
+              "PF6": "RESET"}                      # RESET (PF6) to pogo pad 1: high-voltage / reset recovery
 
 PROJECT = "watch"
 ROOT_UUID = str(uuid.uuid4())
@@ -171,7 +173,7 @@ def build(variant):
     # ============ LED matrix =============
     X0, Y0, DX, DY = 50.8, 63.5, 22.86, 15.24
     cols, rows = 12, 12
-    IND_LABELS = ['SET', 'TMR', 'BAT', 'FUN', 'CFG', 'LCK']      # left to right on the face (Evan 2026-10-11)
+    IND_LABELS = ['SET', 'TMR', 'BAT', 'FUN', 'CFG', 'LCK', 'ALM']   # by column COL0..COL6 (= IND1..IND7); on the face ALM (COL6) sits between TMR and BAT, so left to right: SET TMR ALM BAT FUN CFG LCK = the weekday lights S M T W T F S
     row_taps = {r: [] for r in range(rows)}
     col_taps = {c: [] for c in range(cols)}
     for c in range(cols):
@@ -191,7 +193,7 @@ def build(variant):
                 ref = f"S{idx}"
             # rotated 180 deg: anode (pin 2) on the left -> sector bus COLn (MCU SOURCES, through the series resistor, one LED at a time);
             # cathode (pin 1) on the right -> slot bus ROWn (MCU SINKS up to 12 LEDs). The AVR128DB sinks 10 mA/pin but only sources 6 mA/pin (DS40002247B, table 39-6).
-            inst = s.place("Device", "LED", ref, cfg["led_value"][kind], cfg["led_fp"][kind], x, y, 180, show_ref=False, show_val=False,
+            inst = s.place("Device", "LED", ref, (IND_LABELS[idx] if kind == "I" else cfg["led_value"][kind]), cfg["led_fp"][kind], x, y, 180, show_ref=False, show_val=False,
                            extra={"Sim.Pins": "1=K 2=A"}, desc=(f"mode indicator {IND_LABELS[c]}" if r == 11 else f"white LED, sector {c}, slot {r}"))
             k_pt, a_pt = s.pin_end(inst, "1")[0], s.pin_end(inst, "2")[0]
             row_taps[r].append(k_pt)
@@ -294,12 +296,10 @@ def build(variant):
     for i, net in enumerate(("SDA", "SCL")):
         r = s.place("Device", "R", f"R{20 + i}", "10k", cfg["r_fp"], IX - 40 + i * 10.16, IY + 5, 0)
         s.net(r, "2", net); s.v33(s.pin_end(r, "1")[0])
-    for i in range(3):                      # cosmetic dummies: keep the hour-LED flanks symmetric at 12, 6 and 9 o'clock (same 10k 0402 as R20/R21 = no new BOM line; pins not connected)
-        r = s.place("Device", "R", f"R{57 + i}", "10k", cfg["r_fp"], IX - 40 + i * 10.16, IY + 18, 0, desc="COSMETIC DUMMY: not connected, sits beside the 12 / 6 o'clock hour LED so every hour LED has a part on each side")
+    DUMMIES = [57, 58, 59, 61, 62, 63, 64, 65, 66, 67]      # cosmetic dummies (same 10k 0402 as R20/R21 = no new BOM line; pins not connected): keep the hour-LED flanks and the compass-rose pairs symmetric
+    for i, n in enumerate(DUMMIES):
+        r = s.place("Device", "R", f"R{n}", "10k", cfg["r_fp"], IX - 40 + (i % 5) * 10.16, IY + 18 + (i // 5) * 12.7, 0, desc="COSMETIC DUMMY: not connected, keeps the layout symmetric around the 3 / 6 / 9 / 12 o'clock parts")
         s.nc(r, "1"); s.nc(r, "2")
-    for i in range(3):                      # cosmetic dummy 100 nF (same value as C10-C12/C30/C31 = no new BOM line): complete the capacitor pairs at 3 and 9 o'clock
-        c = s.place("Device", "C", f"C{60 + i}", "100n", cfg["c_fp"], IX + 25 + i * 10.16, IY + 25, 0, desc="COSMETIC DUMMY: not connected; keeps the compass-rose capacitor pairs at 3 and 9 o'clock complete")
-        s.nc(c, "1"); s.nc(c, "2")
     for i in range(2):
         c = s.place("Device", "C", f"C{30 + i}", "100n", cfg["c_fp"], IX + 25 + i * 10.16, IY + 5, 0)
         s.v33(s.pin_end(c, "1")[0]); s.gnd(s.pin_end(c, "2")[0])
@@ -319,15 +319,13 @@ def build(variant):
         s.net(sw, "1", net); s.gnd(s.pin_end(sw, "2")[0])
     s.text("Buttons: internal MCU pull-ups, active low", (370, 125), 2)
 
-    # ============ programming header =============
-    # Tag-Connect TC2030-IDC-NL (pads only, as in the first hand-built revision; Evan's choice 2026-10-11). Its 3 alignment holes drill through the board;
-    # holes may sit under a battery pouch (programme with the pouches unplugged), never under a plug/part. UPDI 6-pin mapping (Microchip): pad1 UPDI, pad2 VTG (VBAT), pad6 GND.
-    # NOTE: schematic/n_*.xml were patched by hand to this (Conn_02x03 with only pads 1, 2, 6 wired) until the .kicad_sch is regenerated.
-    j2 = s.place("Connector_Generic", "Conn_02x03_Odd_Even", "J2", "UPDI Tag-Connect TC2030-NL", "Connector:Tag-Connect_TC2030-IDC-NL_2x03_P1.27mm_Vertical", 380, 165, 0)
-    s.net(j2, "1", "UPDI"); s.vbat(s.pin_end(j2, "2")[0]); s.gnd(s.pin_end(j2, "6")[0])
-    for pn in ("3", "4", "5"):
-        s.nc(j2, pn)                                             # TC2030 pads 3-5 unused for UPDI
-    s.text("UPDI programming (Tag-Connect TC2030-IDC-NL): pad1 UPDI, pad2 VBAT, pad6 GND", (370, 155), 2)
+    # ============ programming pads =============
+    # 4 spring-contact (pogo) pads at 1.27 mm on the back, in the Microchip UPDI v2 order: 1 RESET (PF6), 2 VDD (VBAT), 3 GND, 4 UPDI; plus two unplated-net guide holes (unnumbered pads in the footprint).
+    # Only UPDI / VDD / GND are needed to program (e.g. Adafruit UPDI Friend 5893); RESET is for high-voltage / reset recovery.
+    j2 = s.place("Connector_Generic", "Conn_01x04", "J2", "UPDI pogo pads 1.27 mm (RESET VDD GND UPDI)", "LEDWatch:UPDI_Pogo_1x4_P1.27mm_2Guide", 380, 165, 0,
+                 desc="programming pads, not a part: spring pins on the programmer jig touch them")
+    s.net(j2, "1", "RESET"); s.vbat(s.pin_end(j2, "2")[0]); s.gnd(s.pin_end(j2, "3")[0]); s.net(j2, "4", "UPDI")
+    s.text("UPDI programming pads (1.27 mm pogo row, back side): 1 RESET, 2 VBAT, 3 GND, 4 UPDI", (370, 155), 2)
 
     # ============ battery connector =============
     j1 = s.place("Connector_Generic", "Conn_01x02", "J1", "LiPo", "Connector_JST:JST_SH_SM02B-SRSS-TB_1x02-1MP_P1.00mm_Horizontal", 380, 195, 0)
@@ -339,13 +337,19 @@ def build(variant):
     s.flag(s.pin_end(j1, "2")[0])
     s.text("LiPo (protected cell). Pin 1 = +, pin 2 = - : CHECK the cell's lead polarity against the JST pin order", (370, 185), 2)
     # second battery plug in parallel (two small pouches near the strap ends; board has J1 and J1B)
-    j1b = s.place("Connector_Generic", "Conn_01x02", "J1B", "LiPo 2", "Connector_JST:JST_SH_SM02B-SRSS-TB_1x02-1MP_P1.00mm_Horizontal", 410, 195, 0)
+    j1b = s.place("Connector_Generic", "Conn_01x02", "J1B", "LiPo", "Connector_JST:JST_SH_SM02B-SRSS-TB_1x02-1MP_P1.00mm_Horizontal", 410, 195, 0)
     if variant == "usb":
         s.vbat(s.pin_end(j1b, "1")[0])
     else:
         s.net(j1b, "1", "BATT")
     s.gnd(s.pin_end(j1b, "2")[0])
     s.text("Second pouch in parallel (J1B): same polarity rule as J1", (400, 185), 2)
+    # ============ piezo buzzer =============
+    bz = s.place("Device", "Buzzer", "BZ1", "PKMCS0909E4000-R1", "LEDWatch:Piezo_Murata_PKMCS0909E4000-R1_9x9mm", 450, 195, 0,
+                 extra={"Datasheet": "https://www.murata.com/products/productdata/8796834160670/PKMCS0909E4000-R1.pdf", "MPN": "PKMCS0909E4000-R1", "LCSC": "C910763"},
+                 desc="Murata piezo sounder 9x9x1.9, externally driven, ~4 kHz: BUZ_A / BUZ_B are driven in antiphase (PB4 = WO4, PB5 = WO5 inverted)")
+    s.net(bz, "1", "BUZ_A"); s.net(bz, "2", "BUZ_B")
+    s.text("Piezo BZ1: PB4 / PB5 drive it in antiphase (TCA1 split mode, PB5 inverted via PORTB.PIN5CTRL.INVEN)", (440, 185), 2)
 
     # ============ power variant =============
     PX, PY = 390.0, 250.0
@@ -408,11 +412,13 @@ def build(variant):
         if cfg.get("cells", 1) == 1:
             # ONE solar cell: Anysolar KXOB25-05X3TF (23 x 8 x 1.2 mm, 3 cells in series inside: Voc 2.07 V, Vmpp 1.67 V / 18.4 mA, 30.7 mW at 1 sun; datasheet Rev. Jun. 2026, preliminary).
             # Vmpp/Voc = 0.807 -> VOC_SAMP tied to VSTOR (80 %) is right. Two end pads 2.0 x 7.4 mm on the back; hand solder (Sn42/Bi58, 5 s below 400 C). Board pads SC1+/SC1- are drawn by plan_board.py/write_pcb.py.
-            j3 = s.place("Connector_Generic", "Conn_01x02", "J3", "Solar cell KXOB25-05X3TF", "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical", PX + 100, PY + 40, 0,
-                         desc="KXOB25-05X3TF end pads (board: SC1+ / SC1-): pin 1 = + (SOLAR_IN), pin 2 = - (GND). Not placed as a part: plan_board.py draws the two 2.5 x 7.4 mm pads under the cell. VERIFY polarity of the physical cell (Voc) before soldering")
-            s.net(j3, "1", "SOLAR_IN"); s.gnd(s.pin_end(j3, "2")[0])
+            scp = s.place("Connector", "TestPoint", "SC1+", "cell pad", "LEDWatch:KXOB25_cell_pad_2.5x7.4mm", PX + 100, PY + 40, 0,
+                          desc="KXOB25-05X3TF + end pad (SOLAR_IN). Not a part: just the 2.5 x 7.4 mm board pad under the cell. VERIFY polarity of the physical cell (Voc) before soldering")
+            scm = s.place("Connector", "TestPoint", "SC1-", "cell pad", "LEDWatch:KXOB25_cell_pad_2.5x7.4mm", PX + 100, PY + 60, 0,
+                          desc="KXOB25-05X3TF - end pad (GND). Not a part: just the board pad under the cell")
+            s.net(scp, "1", "SOLAR_IN"); s.gnd(s.pin_end(scm, "1")[0])
             s.text("One KXOB25-05X3TF (3 cells in series inside): Voc 2.07 V clears the BQ25570 cold-start minimum of 0.6 V (typ; 0.7 V max) even in dim light", (PX + 80, PY + 28), 2)
-            s.flag(s.pin_end(j3, "1")[0]); s.flag(s.pin_end(j1, "1")[0])
+            s.flag(s.pin_end(scp, "1")[0]); s.flag(s.pin_end(j1, "1")[0])
         else:
             # two solar cells in series (KXOB25-07X1TF, 11.35 x 8 mm): GND -> cell 2 -> SC_MID -> cell 1 -> SOLAR_IN. The contact pads (SC1+/SC1-/SC2+/SC2-, 1.5 mm pads under each cell) are drawn by plan_board.py/write_pcb.py
             j3 = s.place("Connector_Generic", "Conn_01x02", "J3", "Solar cell 1", "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical", PX + 100, PY + 40, 0,

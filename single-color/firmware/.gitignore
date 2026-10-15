@@ -1,0 +1,6 @@
+# build outputs
+*.exe
+*.elf
+*.o
+c/test/*.txt
+__pycache__/
