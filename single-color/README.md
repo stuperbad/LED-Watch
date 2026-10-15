@@ -1,4 +1,4 @@
-# LED Watch (single colour, solar)
+# LED Watch (single color, solar)
 
 A wrist-worn clock that tells the time with 132 tiny white LEDs on three concentric rings (12 hour, 60 minute, 60 second), seven mode LEDs that double as weekday lights,
 a piezo buzzer, a motion sensor to wake it, a solar cell and two LiPo cells on the back, and no case. Run by Evan Finkle with Claude (Anthropic) doing research, scripting and layout.
