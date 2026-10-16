@@ -23,6 +23,7 @@ ap.add_argument("--out", default=os.path.join(HERE, "..", "LED Watch - RGB.kicad
 ap.add_argument("--edge", type=float, default=0.6, help="courtyard to board edge, mm")
 ap.add_argument("--variant", default="back-db64", choices=["back-db64", "front-db48", "front-db64"], help="back-db64: MCU AVR128DB64 on the back (the default sketch); front-db48: AVR128DB48 on the front, row switches driven by three 74HC595 shift registers on the back; front-db64: AVR128DB64 on the front, solar cell shifted by --cell-dy")
 ap.add_argument("--cell-dy", type=float, default=0.0, help="shift of the solar cell (keep-out and pads) along y, mm")
+ap.add_argument("--hour-band", default="res", choices=["none", "res", "res+fet"], help="put the 18 column resistors (res) and optionally the 24 row switches (fet) in the gaps between the hour LEDs, like the series resistors of the single-colour board")
 ap.add_argument("--led-offset", type=float, default=0.0, help="extra LED rotation on top of the radial one (0, 90, 180, 270): which pad of the LED faces outward / clockwise")
 args = ap.parse_args()
 R = args.R
@@ -140,6 +141,11 @@ if args.variant != "back-db64":
             (COLR, "k", RES, "R", (7.5, -17.5, 21.5, 17.5), "B", 0.0, 0.15),
             (["R20", "R21"], "k", RES, "10k", (7.5, -17.5, 21.5, 17.5), "B", 0.0, 0.15),
         ]
+
+if args.hour_band != "none":
+    drop = set(COLR) | (set(ROWSW) if args.hour_band == "res+fet" else set())
+    AUTO[:] = [(([r_ for r_ in refs if r_ not in drop]), *rest) for (refs, *rest) in AUTO]
+    AUTO[:] = [a_ for a_ in AUTO if a_[0]]
 
 # ---------------------------------------------------------------- board
 b = pcbnew.CreateEmptyBoard()
@@ -261,6 +267,42 @@ for d in old:
             b.Add(NETS[nm])
         pd.SetNet(NETS[nm])
 
+
+def place_hour_band():
+    """the column resistors (and the row switches) in the 12 gaps between the hour LEDs, along the hour ring, long axis radial like the LEDs"""
+    items = [(ref, "res") for ref in COLR] + ([(ref, "fet") for ref in ROWSW] if args.hour_band == "res+fet" else [])
+    RESW, FETW, GAPW = 1.03, 1.29, 0.2                           # tangential widths of the courtyards (long axis radial) and the gap between neighbours
+    per_gap = [[] for _ in range(12)]
+    res_n = [ref for ref, k in items if k == "res"]
+    fet_n = [ref for ref, k in items if k == "fet"]
+    for i, ref in enumerate(res_n):                                # 18 resistors: 2 in every other gap, 1 in the rest (12 + 6)
+        per_gap[i % 12].append((ref, "res"))
+    for i, ref in enumerate(fet_n):                                # 24 switches: 2 per gap
+        per_gap[i % 12].append((ref, "fet"))
+    rh = RING[0]
+    for g, lst in enumerate(per_gap):
+        if not lst:
+            continue
+        lst.sort(key=lambda it: it[1])                             # resistors then switches, symmetric around the gap centre below
+        order = [lst[i] for i in range(len(lst)) if i % 2 == 0] + [lst[i] for i in range(len(lst)) if i % 2 == 1][::-1]
+        widths = [RESW if k == "res" else FETW for _, k in order]
+        total = sum(widths) + GAPW * (len(order) - 1)
+        s = -total / 2
+        theta_c = 30.0 * g + 15.0
+        for (ref, kind), w in zip(order, widths):
+            ang = theta_c + math.degrees((s + w / 2) / rh)
+            s += w + GAPW
+            x, y = rh * math.sin(math.radians(ang)), -rh * math.cos(math.radians(ang))
+            rot = (90.0 - ang + 180.0) % 360.0 - 180.0
+            if kind == "res":
+                placed[ref] = add_fp(ref, "k", "Resistor_SMD.pretty/R_0402_1005Metric", "R", x, y, round(rot, 3), "F")
+            else:
+                placed[ref] = add_fp(ref, "k", "Package_DFN_QFN.pretty/Diodes_DFN1006-3", "DMP21D0UFB4", x, y, round(rot, 3), "F")
+
+
+if args.hour_band != "none":
+    place_hour_band()
+
 for p in P:
     placed[p["ref"]] = add_fp(p["ref"], p["lib"], p["name"], p["value"], p["x"], p["y"], p["rot"], p["side"])
 
@@ -375,6 +417,22 @@ usable = R - args.edge
 FAILED = autopack(usable)
 
 
+def court_poly(f):
+    """the courtyard as a polygon set (a rectangle of the pad bounding box when the footprint has no courtyard)"""
+    lay = pcbnew.B_CrtYd if f.IsFlipped() else pcbnew.F_CrtYd
+    poly = f.GetCourtyard(lay)
+    if poly is not None and poly.OutlineCount() > 0:
+        return poly
+    bb = court_bb(f)
+    ps = pcbnew.SHAPE_POLY_SET()
+    ch = pcbnew.SHAPE_LINE_CHAIN()
+    for x_, y_ in ((bb.GetX(), bb.GetY()), (bb.GetX() + bb.GetWidth(), bb.GetY()), (bb.GetX() + bb.GetWidth(), bb.GetY() + bb.GetHeight()), (bb.GetX(), bb.GetY() + bb.GetHeight())):
+        ch.Append(int(x_), int(y_))
+    ch.SetClosed(True)
+    ps.AddOutline(ch)
+    return ps
+
+
 def bbox_mm(f):
     bb = court_bb(f)
     return (tomm(bb.GetX()) - CX, tomm(bb.GetY()) - CY, tomm(bb.GetX() + bb.GetWidth()) - CX, tomm(bb.GetY() + bb.GetHeight()) - CY)
@@ -405,22 +463,35 @@ for ref, bx in boxes.items():
         for k in KEEP_LIPO:
             if overlap(bx, k):
                 issues.append("LIPO  %-6s inside a battery keep-out" % ref)
+BQSET = {p_["ref"] for p_ in P if p_.get("group") == "bq"}
+polys = {ref_: court_poly(f_) for ref_, f_ in placed.items()}
+
+
+def hit(a, c):
+    """courtyards overlap: exact polygons; the harvester block, copied from the single-colour board, is allowed 0.3 mm of overlap"""
+    if not overlap(boxes[a], boxes[c], 0.0):
+        return False
+    if a in BQSET or c in BQSET:
+        return overlap(boxes[a], boxes[c], 0.3)
+    return polys[a].Collide(polys[c], 0)
+
+
 refs = sorted(boxes)
 for i, a in enumerate(refs):
     for c in refs[i + 1:]:
-        if side[a] == side[c] and overlap(boxes[a], boxes[c], 0.3):
+        if side[a] == side[c] and hit(a, c):
             la = a.startswith("U") and a[1:].isdigit() and 2 <= int(a[1:]) <= 133
             lc = c.startswith("U") and c[1:].isdigit() and 2 <= int(c[1:]) <= 133
             if la and lc:
                 continue
             issues.append("OVER  %-6s x %-6s" % (a, c))
 # distance of the interior parts (front) to the nearest ring LED
-ring_leds = [boxes[r] for r in boxes if r.startswith("U") and r[1:].isdigit() and 2 <= int(r[1:]) <= 133]
+ring_led_refs = [r for r in boxes if r.startswith("U") and r[1:].isdigit() and 2 <= int(r[1:]) <= 133]
 for ref, bx in boxes.items():
     if side[ref] != "F" or (ref.startswith("U") and ref[1:].isdigit() and 2 <= int(ref[1:]) <= 133):
         continue
-    for lb in ring_leds:
-        if overlap(bx, lb, -0.15):
+    for lref in ring_led_refs:
+        if overlap(bx, boxes[lref], -0.15) and polys[ref].Collide(polys[lref], mm(0.15)):
             issues.append("RING  %-6s closer than 0.15 mm to a ring LED" % ref)
             break
 for ref_, f_ in placed.items():            # keep the pictures readable: only the bigger parts show their reference
