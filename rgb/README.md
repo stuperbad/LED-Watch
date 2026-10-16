@@ -1,15 +1,19 @@
 # LED Watch - RGB
 
-The RGB version of the watch (132 RGB LEDs, ATmega-class MCU, never built). Open **`LED Watch - RGB.kicad_pro`**.
+The RGB watch: 132 RGB LEDs on three rings plus 7 RGB mode lights, JLCPCB-assemblable parts, AVR128DB64, solar harvester, two LiPo cells, buzzer, accelerometer and buttons. **Status (2026-10-15): placement sketch only**, no schematic, nothing routed. Open **`LED Watch - RGB.kicad_pro`** (it opens the board; the ring LED pads carry the row and colour nets, nothing else has nets yet).
+
+Read **`docs/DESIGN-SKETCH.md`** first: board size, what goes where, the LED choice and its brightness warning, how the matrix is driven, risks and next steps.
 
 | File / folder | What it is |
 |---|---|
-| `LED Watch - RGB.kicad_pro` / `.kicad_sch` / `.kicad_pcb` / `.net` | the current RGB project: schematic and board as of 2026-10-14 (your live working files; this was called just `LED Watch`) |
-| `mechanical/` | watch outline drawings (SVG), the 3D print (`LED Watch - RGB.stl`) and the Rhino layout (`watch layout 1.3dm`) |
-| `production/gerbers 2025-12-08/` | Gerbers of the December 2025 version of the board (used for an instant quote) |
-| `production/fab-rfq 2026-10-05/` | the October 2026 fabrication quote work for this board: BOM, placement files, Gerbers, DRC, quote screenshots, `OPEN-ISSUES.md`, `rfq-emails.md`, `jlc-alternatives.md` |
-| `scripts/` | KiCad scripting-console script that places the LEDs on the three rings |
-| `archive/pre-claude/` | everything older, named by date: the December 2025 version of this board (`2025-12-08 RGB board - last version committed ...`), snapshots taken before the October 2026 edits, the first RGB schematic (2025-10-28), the empty/unrouted version and its Freerouting export (2025-11), the 4-layer routing attempts of 2025-11-19 ... 2025-11-25 (`...50PERCENT`, `...95PERCENT` = how far the routing got), KiCad backups, autosaves, a link to a Discord-hosted board file |
+| `LED Watch - RGB.kicad_pro` / `.kicad_pcb` | the sketch: 44 mm round board with strap lugs, 132 + 7 LEDs, everything placed on the front and back |
+| `docs/` | `DESIGN-SKETCH.md`, `pin-plan.csv` (AVR128DB64 pins), `BOM-candidates.csv` (new parts with LCSC numbers and stock, 2026-10-15) |
+| `footprints/LEDWatchRGB.pretty` | the new common-anode LED footprint (fits Nationstar NCD0808RGB1 and Meihua MHPA0808RGBDT) |
+| `data/` | `led_matrix.csv` (which LED is which second/minute/hour, row and column), `old_ring.json` (ring data read from the old board) |
+| `tools/` | `build_sketch.py` makes the board (KiCad's Python: `"C:\Program Files\KiCad.0in\python.exe" toolsuild_sketch.py`), `extract_old_ring.py`, `check_pad_corners.py` |
+| `renders/` | `top.png` (front) and `bottom.png` (back, seen from behind) |
+| `mechanical/` | watch outline drawings (SVG), the 3D print and the Rhino layout, all of the **old 43 mm board**; not yet updated |
+| `archive/` | **`2026-10-14 old RGB board - routed, Harvatek LEDs, ATmega165PA/`**: the previous RGB project (schematic, fully routed board, project, its Gerbers and the October 2026 fab quote work incl. `OPEN-ISSUES.md` and `jlc-alternatives.md`, and the ring placement script); everything older is in `pre-claude/` |
 
 Below: Evan's original notes (part links and ideas).
 

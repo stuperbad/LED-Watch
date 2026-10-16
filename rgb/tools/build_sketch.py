@@ -1,6 +1,6 @@
-"""Placement sketch of the RGB v2 watch: board outline, the 132 ring LEDs (positions copied from the old routed RGB board), the interior parts from a table, and a fit check.
+"""Placement sketch of the new RGB watch: board outline, the 132 ring LEDs (positions copied from the old routed RGB board), the interior parts from a table, and a fit check.
 No nets except the LED pads, nothing is routed.  Everything that sets the layout is in the PARAMETERS and PARTS tables below.
-usage (KiCad python): build_sketch.py [--R 21.5] [--ring 14.0,16.5,19.0] [--out ../hardware/sketch.kicad_pcb]
+usage (KiCad python): build_sketch.py [--R 22.0] [--ring 15.0,17.5,20.0] [--out "../LED Watch - RGB.kicad_pcb"]
 The fit check prints: parts whose courtyards overlap (same side), parts outside the usable circle, parts inside the solar cell / battery keep-outs, and the free distance to the nearest ring LED."""
 import argparse
 import json
@@ -12,14 +12,14 @@ import pcbnew
 HERE = os.path.dirname(os.path.abspath(__file__))
 KICAD_FP = r"C:\Program Files\KiCad\10.0\share\kicad\footprints"
 SC_FP = os.path.join(HERE, "..", "..", "single-color", "hardware", "footprints", "LEDWatch.pretty")
-NEW_FP = os.path.join(HERE, "..", "hardware", "footprints", "RGBv2.pretty")
+NEW_FP = os.path.join(HERE, "..", "footprints", "LEDWatchRGB.pretty")
 mm, tomm = pcbnew.FromMM, pcbnew.ToMM
 V = pcbnew.VECTOR2I
 
 ap = argparse.ArgumentParser()
 ap.add_argument("--R", type=float, default=22.0, help="board radius, mm")
 ap.add_argument("--ring", default="15.0,17.5,20.0", help="hour, minute, second ring radius, mm")
-ap.add_argument("--out", default=os.path.join(HERE, "..", "hardware", "sketch.kicad_pcb"))
+ap.add_argument("--out", default=os.path.join(HERE, "..", "LED Watch - RGB.kicad_pcb"))
 ap.add_argument("--edge", type=float, default=0.6, help="courtyard to board edge, mm")
 args = ap.parse_args()
 R = args.R
@@ -31,7 +31,7 @@ CX = CY = 100.0
 KEEP_SOLAR = (-11.58, -4.08, 11.57, 4.07)                  # front: the cell body lies on the board here, nothing may stand in it
 KEEP_LIPO = [(-8.33, -19.58, 8.32, -3.42), (-8.33, 3.42, 8.32, 19.57)]     # back: the two pouch cells (16.5 x 16 x 5.25)
 
-# ---- parts table: ref, library ('k' = KiCad stock, 's' = single-colour LEDWatch, 'n' = new RGBv2), footprint, value, x, y, rot, side
+# ---- parts table: ref, library ('k' = KiCad stock, 's' = single-colour LEDWatch, 'n' = new LEDWatchRGB), footprint, value, x, y, rot, side
 # rot is the footprint rotation as in pcbnew (degrees); coordinates are board-frame mm, centre of the watch = 0,0, +y downward; the back side is NOT mirrored here
 P = []
 
@@ -184,8 +184,8 @@ def add_fp(ref, lib, name, value, x, y, rot, side):
 
 placed = {}
 NETS = {}
-# the ring LEDs: the old board's positions, scaled radially to the chosen ring radii, rotation +90 (see DESIGN.md: Meihua pin 1/2/3/4 land on the old pads 1/4/3/2)
-old = json.load(open(os.path.join(HERE, "..", "hardware", "old_ring.json")))
+# the ring LEDs: the old board's positions, scaled radially to the chosen ring radii, rotation +90 (see docs/DESIGN-SKETCH.md: Meihua pin 1/2/3/4 land on the old pads 1/4/3/2)
+old = json.load(open(os.path.join(HERE, "..", "data", "old_ring.json")))
 ring_of = {RING_OLD[0]: 0, RING_OLD[1]: 1, RING_OLD[2]: 2}
 colour_pad = {"4": "R", "3": "G", "2": "B"}
 for d in old:
