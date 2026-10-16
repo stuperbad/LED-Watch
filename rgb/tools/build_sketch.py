@@ -21,6 +21,9 @@ ap.add_argument("--R", type=float, default=22.0, help="board radius, mm")
 ap.add_argument("--ring", default="15.0,17.5,20.0", help="hour, minute, second ring radius, mm")
 ap.add_argument("--out", default=os.path.join(HERE, "..", "LED Watch - RGB.kicad_pcb"))
 ap.add_argument("--edge", type=float, default=0.6, help="courtyard to board edge, mm")
+ap.add_argument("--variant", default="back-db64", choices=["back-db64", "front-db48", "front-db64"], help="back-db64: MCU AVR128DB64 on the back (the default sketch); front-db48: AVR128DB48 on the front, row switches driven by three 74HC595 shift registers on the back; front-db64: AVR128DB64 on the front, solar cell shifted by --cell-dy")
+ap.add_argument("--cell-dy", type=float, default=0.0, help="shift of the solar cell (keep-out and pads) along y, mm")
+ap.add_argument("--led-offset", type=float, default=0.0, help="extra LED rotation on top of the radial one (0, 90, 180, 270): which pad of the LED faces outward / clockwise")
 args = ap.parse_args()
 R = args.R
 RING_OLD = (14.0, 16.5, 19.0)
@@ -28,7 +31,7 @@ RING = tuple(float(x) for x in args.ring.split(","))
 CX = CY = 100.0
 
 # ---- keep-outs copied from the single-colour board (board frame, centre = 0,0)
-KEEP_SOLAR = (-11.58, -4.08, 11.57, 4.07)                  # front: the cell body lies on the board here, nothing may stand in it
+KEEP_SOLAR = (-11.58, -4.08 + args.cell_dy, 11.57, 4.07 + args.cell_dy)                  # front: the cell body lies on the board here, nothing may stand in it
 KEEP_LIPO = [(-8.33, -19.58, 8.32, -3.42), (-8.33, 3.42, 8.32, 19.57)]     # back: the two pouch cells (16.5 x 16 x 5.25)
 
 # ---- parts table: ref, library ('k' = KiCad stock, 's' = single-colour LEDWatch, 'n' = new LEDWatchRGB), footprint, value, x, y, rot, side
@@ -41,10 +44,10 @@ def part(ref, lib, name, value, x, y, rot=0.0, side="F", group=""):
 
 
 # front, centre: solar cell pads, mode lights, accelerometer, buttons (positions of the single-colour board)
-part("SC1+", "s", "KXOB25_cell_pad_2.5x7.4mm", "cell pad", 10.75, 0.0)
-part("SC1-", "s", "KXOB25_cell_pad_2.5x7.4mm", "cell pad", -10.75, 0.0)
+part("SC1+", "s", "KXOB25_cell_pad_2.5x7.4mm", "cell pad", 10.75, args.cell_dy)
+part("SC1-", "s", "KXOB25_cell_pad_2.5x7.4mm", "cell pad", -10.75, args.cell_dy)
 for i in range(7):
-    part("IND%d" % (i + 1), "n", "RGB0808_CommonAnode", "NCD0808RGB1 / MHPA0808RGBDT", -10.2 + 3.4 * i, 4.9, 90.0, group="mode")
+    part("IND%d" % (i + 1), "n", "RGB0808_CommonAnode", "NCD0808RGB1 / MHPA0808RGBDT", -10.2 + 3.4 * i, 4.9 + args.cell_dy, 90.0, group="mode")
 part("IMU", "k", "Package_LGA.pretty/LGA-12_2x2mm_P0.5mm", "LIS2DW12", 0.0, 8.35)
 part("SW1", "k", "Button_Switch_SMD.pretty/SW_Push_1P1T_NO_CK_KMR2", "SW", -4.45, 9.1)
 part("SW2", "k", "Button_Switch_SMD.pretty/SW_Push_1P1T_NO_CK_KMR2", "SW", 4.45, 9.1)
@@ -84,6 +87,59 @@ AUTO = [
     (["C30", "C31"], "k", "Capacitor_SMD.pretty/C_0402_1005Metric", "100n", (-9.5, 5.0, 9.5, 8.0), "F", 0.0, 0.15),
     (["R20", "R21"], "k", "Resistor_SMD.pretty/R_0402_1005Metric", "10k", (9.0, 5.8, 21.0, 16.0), "B", 0.0, 0.15),
 ]
+
+# ---------------------------------------------------------------- variants: MCU on the front
+FOOT = lambda lib, name: (lib, name)
+if args.variant != "back-db64":
+    P[:] = [p_ for p_ in P if p_["ref"] not in ("MCU", "IMU", "SW1", "SW2") and not p_["ref"].startswith("IND")]
+    AUTO[:] = []
+    QFN48 = "Package_DFN_QFN.pretty/QFN-48-1EP_6x6mm_P0.4mm_EP4.2x4.2mm"
+    QFN64 = "Package_DFN_QFN.pretty/VQFN-64-1EP_9x9mm_P0.5mm_EP5.4x5.4mm"
+    CAP, RES = "Capacitor_SMD.pretty/C_0402_1005Metric", "Resistor_SMD.pretty/R_0402_1005Metric"
+    SW = "Button_Switch_SMD.pretty/SW_Push_1P1T_NO_CK_KMR2"
+    dy = args.cell_dy
+    if args.variant == "front-db48":
+        # the single-colour front, position for position
+        part("MCU", "k", QFN48, "AVR128DB48-I/6LX", 0.0, -8.13, 180.0, "F", "mcu")
+        part("Y1", "k", "Crystal.pretty/Crystal_SMD_3215-2Pin_3.2x1.5mm", "32.768kHz", -5.45, -6.8, 90.0, "F")
+        for ref, val, x, y in (("C20", "18p", -7.5, -7.92), ("C21", "18p", -7.5, -5.67), ("C10", "100n", 1.83, -12.35), ("C11", "100n", -4.48, -10.24), ("C12", "100n", 4.55, -7.55), ("C13", "10u", 4.54, -5.5)):
+            part(ref, "k", CAP, val, x, y, 0.0, "F")
+        part("IMU", "k", "Package_LGA.pretty/LGA-12_2x2mm_P0.5mm", "LIS2DW12", 0.0, 8.35)
+        part("SW1", "k", SW, "SW", -4.45, 9.1)
+        part("SW2", "k", SW, "SW", 4.45, 9.1)
+        part("C30", "k", CAP, "100n", -0.8, 10.75)
+        part("C31", "k", CAP, "100n", 0.8, 10.75)
+        for i in range(7):
+            part("IND%d" % (i + 1), "n", "RGB0808_CommonAnode", "NCD0808RGB1 / MHPA0808RGBDT", -10.2 + 3.4 * i, 5.0 + dy, 90.0, group="mode")
+        P[:] = [p_ for p_ in P if p_["ref"] != "J2"]
+        part("J2", "s", "UPDI_Pogo_1x4_P1.27mm_2Guide", "UPDI pogo", ENV("J2_X", "14.0"), ENV("J2_Y", "0.0"), 0.0, "B", "pogo")
+        SRS = ["SR%d" % i for i in range(1, 4)]
+        AUTO += [
+            (ROWSW, "k", "Package_DFN_QFN.pretty/Diodes_DFN1006-3", "DMP21D0UFB4", (7.5, -17.5, 21.5, 17.5), "B", 0.0, 0.15),
+            (SRS, "k", "Package_DFN_QFN.pretty/DHVQFN-16-1EP_2.5x3.5mm_P0.5mm_EP1x2mm", "74HC595BQ", (7.5, -17.5, 21.5, 17.5), "B", 0.0, 0.3),
+            (["CS1", "CS2", "CS3"], "k", CAP, "100n", (7.5, -17.5, 21.5, 17.5), "B", 0.0, 0.15),
+            (COLR, "k", RES, "R", (7.5, -17.5, 21.5, 17.5), "B", 0.0, 0.15),
+            (["R20", "R21"], "k", RES, "10k", (7.5, -17.5, 21.5, 17.5), "B", 0.0, 0.15),
+        ]
+    else:
+        # DB64 on the front: the cell is shifted by --cell-dy (see front_mcu_study.py); MCU above it, buttons and mode lights below
+        part("MCU", "k", QFN64, "AVR128DB64-I/MR", 0.0, ENV("FMCU_Y", "-8.3"), 0.0, "F", "mcu")
+        P[:] = [p_ for p_ in P if p_["ref"] != "J2"]
+        part("J2", "s", "UPDI_Pogo_1x4_P1.27mm_2Guide", "UPDI pogo", ENV("J2_X", "14.0"), ENV("J2_Y", "0.0"), 0.0, "B", "pogo")
+        FR = (-14.5, -14.5, 14.5, 14.5)
+        left, right = (-13.0, -13.0, -5.4, -2.5), (5.4, -13.0, 13.0, -2.5)
+        low = (-13.0, 6.2 + dy, 13.0, 14.0)
+        AUTO += [
+            (["SW1", "SW2"], "k", SW, "SW", low, "F", 0.0, 0.3),
+            (["IMU"], "k", "Package_LGA.pretty/LGA-12_2x2mm_P0.5mm", "LIS2DW12", low, "F", 0.0, 0.3),
+            (["IND%d" % (i + 1) for i in range(7)], "n", "RGB0808_CommonAnode", "NCD0808RGB1 / MHPA0808RGBDT", (-12.5, 4.0 + dy, 12.5, 8.5 + dy), "F", 90.0, 0.4),
+            (["Y1"], "k", "Crystal.pretty/Crystal_SMD_3215-2Pin_3.2x1.5mm", "32.768kHz", left, "F", 0.0, 0.2),
+            (["C20", "C21"], "k", CAP, "18p", left, "F", 0.0, 0.2),
+            (["CM%d" % i for i in range(1, 8)], "k", CAP, "100n", right, "F", 0.0, 0.2),
+            (ROWSW, "k", "Package_DFN_QFN.pretty/Diodes_DFN1006-3", "DMP21D0UFB4", (7.5, -17.5, 21.5, 17.5), "B", 0.0, 0.15),
+            (COLR, "k", RES, "R", (7.5, -17.5, 21.5, 17.5), "B", 0.0, 0.15),
+            (["R20", "R21"], "k", RES, "10k", (7.5, -17.5, 21.5, 17.5), "B", 0.0, 0.15),
+        ]
 
 # ---------------------------------------------------------------- board
 b = pcbnew.CreateEmptyBoard()
@@ -184,7 +240,7 @@ def add_fp(ref, lib, name, value, x, y, rot, side):
 
 placed = {}
 NETS = {}
-# the ring LEDs: the old board's positions, scaled radially to the chosen ring radii, rotation +90 (see docs/DESIGN-SKETCH.md: Meihua pin 1/2/3/4 land on the old pads 1/4/3/2)
+# the ring LEDs: the old board's positions (angles and the row/column assignment), scaled radially to the chosen ring radii; each LED is turned to its radial angle like on the single-colour board (rotation = 90 - clock angle, local +x outward). LED footprint at rotation 0: pad 4 top-left, 1 top-right, 3 bottom-left, 2 bottom-right, so outward = right and clockwise = down: pad 1 = outer / counter-clockwise (common anode), 2 = outer / clockwise (red), 3 = inner / clockwise (green), 4 = inner / counter-clockwise (blue)
 old = json.load(open(os.path.join(HERE, "..", "data", "old_ring.json")))
 ring_of = {RING_OLD[0]: 0, RING_OLD[1]: 1, RING_OLD[2]: 2}
 colour_pad = {"4": "R", "3": "G", "2": "B"}
@@ -192,7 +248,9 @@ for d in old:
     r0 = round(math.hypot(d["x"], d["y"]), 1)
     k = RING[ring_of[r0]] / r0
     x, y = d["x"] * k, d["y"] * k
-    f = add_fp(d["ref"], "n", "RGB0808_CommonAnode", "NCD0808RGB1 / MHPA0808RGBDT", x, y, 90.0, "F")
+    theta = math.degrees(math.atan2(x, -y)) % 360.0              # clock angle, clockwise from 12 o'clock
+    rot = (90.0 - theta + args.led_offset + 180.0) % 360.0 - 180.0   # as on the single-colour board: rotation = 90 - clock angle; local +x of the LED points outward
+    f = add_fp(d["ref"], "n", "RGB0808_CommonAnode", "NCD0808RGB1 / MHPA0808RGBDT", x, y, round(rot, 3), "F")
     placed[d["ref"]] = f
     # nets: old pad 1 = row (common), old pad 4 = R column, 3 = G, 2 = B  ->  new pad numbers 1, 2, 3, 4 (rotation +90 puts new pin 2 (R) on old pad 4, new 3 (G) on old 3, new 4 (B) on old 2)
     m = {"1": d["pads"]["1"]["net"], "2": d["pads"]["4"]["net"], "3": d["pads"]["3"]["net"], "4": d["pads"]["2"]["net"]}
