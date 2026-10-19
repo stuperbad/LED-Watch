@@ -23,7 +23,7 @@ Black solder mask, lead-free HASL, 1.6 mm, 4 layers, 0.15 mm vias (the via size 
 2. **LCSC part numbers** in `asm/BOM.csv`: package, value, ratings (inductor saturation current for the BQ25570, 22 uF cap voltage rating, switch footprint).
 3. **Part rotations** (`asm/CPL.csv`, KiCad convention). JLCPCB's own preview looked right but each part was not individually verified, especially U1, U2, U4, Y1, the JST plugs, and the LEDs (polarity!).
 4. **LED colour.** The 0402 LED (XL-1005UWC, C20613596) is listed at 15,000 K by JLCPCB (another listing of the same part says 4,000-8,000 K); the 0201 LED is 5,500-6,000 K. They may look different in colour. Not yet resolved.
-5. **Battery plug polarity** (J1/J1B: pin 1 = +) against the TinyCircuits cells, and the solar cell pad polarity (SC1+/SC1-) against the real KXOB25-05X3TF.
+5. **Battery plug polarity** (J1/J1B: pin 1 = GND, pin 2 = +, swapped on 2026-10-18 to match TinyCircuits' header wiring) against the TinyCircuits cells, and the solar cell pad polarity (SC1+/SC1-) against the real KXOB25-05X3TF.
 6. **Crystal circuit**: 18 pF load caps and the guard layout (AVR128DB datasheet 4.5.1).
 7. **Thermal pad / via-in-pad rules** for the VQFN parts, and the 0.10 mm track / 0.10 mm space we use (JLCPCB minimum is 0.09).
 

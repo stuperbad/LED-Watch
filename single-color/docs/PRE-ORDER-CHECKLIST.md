@@ -39,6 +39,7 @@ Status key: [ ] open, [~] partly done, [x] done. Owner: E = Evan, C = Claude (ca
 - [ ] D6 Check part heights in a 3D view (cells 5.25 mm, battery plugs, inductors) so nothing touches the strap.
 - [ ] D7 Fiducials and panelisation (JLCPCB can add rails; avoid breaking the lugs).
 - [ ] D8 Stack-up and finish: 4-layer 1.6 mm, ENIG (skin contact, sweat) unless cost says otherwise; confirm via-in-pad rules for the VQFN thermal pad.
+- [ ] D8b (2026-10-18) After the battery-polarity swap: re-run JLCDFM on the new gerbers zip and the full assembled quote (26 BOM lines); in the placement preview check the LED rotation and the J1/J1B pin 1 orientation; look at the back silkscreen "+"/"-" marks.
 - [ ] D9 Final DRC clean and a second pair of eyes (EE review of pin 1 orientation, crystal traces, antenna-free zones, analog traces).
 
 ## E. BOM and assembly files (JLCPCB)

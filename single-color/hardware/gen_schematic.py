@@ -331,19 +331,19 @@ def build(variant):
     # ============ battery connector =============
     j1 = s.place("Connector_Generic", "Conn_01x02", "J1", "LiPo", "Connector_JST:JST_SH_SM02B-SRSS-TB_1x02-1MP_P1.00mm_Horizontal", 380, 195, 0)
     if variant == "usb":
-        s.vbat(s.pin_end(j1, "1")[0])
+        s.vbat(s.pin_end(j1, "2")[0])
     else:
-        s.net(j1, "1", "BATT")             # solar variant: the cell sits on the harvester's VBAT pin, the system rail is VSTOR
-    s.gnd(s.pin_end(j1, "2")[0])
-    s.flag(s.pin_end(j1, "2")[0])
-    s.text("LiPo (protected cell). Pin 1 = +, pin 2 = - : CHECK the cell's lead polarity against the JST pin order", (370, 185), 2)
+        s.net(j1, "2", "BATT")             # solar variant: the cell sits on the harvester's VBAT pin, the system rail is VSTOR
+    s.gnd(s.pin_end(j1, "1")[0])
+    s.flag(s.pin_end(j1, "1")[0])
+    s.text("LiPo (protected cell). Pin 1 = - (GND), pin 2 = + (BATT): TinyCircuits' own wiring (their datasheet fig. 4); still measure the pouch's leads first", (370, 185), 2)
     # second battery plug in parallel (two small pouches near the strap ends; board has J1 and J1B)
     j1b = s.place("Connector_Generic", "Conn_01x02", "J1B", "LiPo", "Connector_JST:JST_SH_SM02B-SRSS-TB_1x02-1MP_P1.00mm_Horizontal", 410, 195, 0)
     if variant == "usb":
-        s.vbat(s.pin_end(j1b, "1")[0])
+        s.vbat(s.pin_end(j1b, "2")[0])
     else:
-        s.net(j1b, "1", "BATT")
-    s.gnd(s.pin_end(j1b, "2")[0])
+        s.net(j1b, "2", "BATT")
+    s.gnd(s.pin_end(j1b, "1")[0])
     s.text("Second pouch in parallel (J1B): same polarity rule as J1", (400, 185), 2)
     # ============ piezo buzzer =============
     bz = s.place("Device", "Buzzer", "BZ1", "PKMCS0909E4000-R1", "LEDWatch:Piezo_Murata_PKMCS0909E4000-R1_9x9mm", 450, 195, 0,
@@ -419,7 +419,7 @@ def build(variant):
                           desc="KXOB25-05X3TF - end pad (GND). Not a part: just the board pad under the cell")
             s.net(scp, "1", "SOLAR_IN"); s.gnd(s.pin_end(scm, "1")[0])
             s.text("One KXOB25-05X3TF (3 cells in series inside): Voc 2.07 V clears the BQ25570 cold-start minimum of 0.6 V (typ; 0.7 V max) even in dim light", (PX + 80, PY + 28), 2)
-            s.flag(s.pin_end(scp, "1")[0]); s.flag(s.pin_end(j1, "1")[0])
+            s.flag(s.pin_end(scp, "1")[0]); s.flag(s.pin_end(j1, "2")[0])
         else:
             # two solar cells in series (KXOB25-07X1TF, 11.35 x 8 mm): GND -> cell 2 -> SC_MID -> cell 1 -> SOLAR_IN. The contact pads (SC1+/SC1-/SC2+/SC2-, 1.5 mm pads under each cell) are drawn by plan_board.py/write_pcb.py
             j3 = s.place("Connector_Generic", "Conn_01x02", "J3", "Solar cell 1", "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical", PX + 100, PY + 40, 0,
@@ -429,7 +429,7 @@ def build(variant):
                          desc="cell 2 contact pads (board: SC2+ / SC2-): pin 1 = + (SC_MID), pin 2 = - (GND). Not placed as a part")
             s.net(j4, "1", "SC_MID"); s.gnd(s.pin_end(j4, "2")[0])
             s.text("Two cells in series: 2 x ~0.7 V cold-start check on the bench (BQ25570 needs >= 0.6 V), Vmpp about twice one cell", (PX + 80, PY + 28), 2)
-            s.flag(s.pin_end(j3, "1")[0]); s.flag(s.pin_end(j1, "1")[0])      # SOLAR_IN and BATT are fed from outside the schematic (one flag per net: J1B is on the same BATT net)
+            s.flag(s.pin_end(j3, "1")[0]); s.flag(s.pin_end(j1, "2")[0])      # SOLAR_IN and BATT are fed from outside the schematic (one flag per net: J1B is on the same BATT net)
         enp = s.pin_end(h, "~{EN}")[0]
         s.gnd(enp)
     s.write(os.path.join(os.path.dirname(os.path.abspath(__file__)), (f"{PROJECT}.kicad_sch" if variant == "solar" else f"{PROJECT}_{variant}.kicad_sch")))

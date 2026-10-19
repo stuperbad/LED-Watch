@@ -16,15 +16,15 @@ There is no power switch. The battery plugs into J1 and/or J1B (both go to the s
 | Sleep current target of the whole watch | a few uA | `power-budget.md` (estimate) |
 
 ## Before anything is connected (no battery, no programmer)
-Use the meter in resistance mode. Probe points: battery plug J1 (pin 1 = battery +, pin 2 = GND; the connectors are right-angle JST SH on the back), pogo pad row J2 (pad 1 RESET, 2 `VBAT` rail, 3 GND, 4 UPDI), and either pad of C54 for `+3V3`.
-1. `BATT` (J1 pin 1) to GND: should not be a short (expect open or the charge of a cap, rising).
+Use the meter in resistance mode. Probe points: battery plug J1 (pin 1 = GND, pin 2 = battery +; the connectors are right-angle JST SH on the back), pogo pad row J2 (pad 1 RESET, 2 `VBAT` rail, 3 GND, 4 UPDI), and either pad of C54 for `+3V3`.
+1. `BATT` (J1 pin 2) to GND: should not be a short (expect open or the charge of a cap, rising).
 2. `VBAT` rail (pogo pad 2) to GND: not a short.
 3. `+3V3` (C54) to GND: not a short.
 4. Optional: look at the BQ25570 (U4) and the accelerometer (U2) under a microscope for bridged pins (JLCPCB places them; the BQ25570 has a thermal pad underneath).
 
 ## Battery polarity: the one thing that can kill the board
 **The board has no reverse-polarity protection**, and the connectors do not stop a reversed battery. Do this before the first battery goes in:
-- Look up the pin order of your battery's JST SH plug (red lead = battery +). Confirm that it lands on **J1 pin 1**.
+- Look up the pin order of your battery's JST SH plug (red lead = battery +). Confirm that it lands on **J1 pin 2** (the pin next to the "+" mark; pin 1 = GND). TinyCircuits' own boards wire it this way (datasheet figure 4).
 - Measure the pigtail with a meter first (plug it into a breakout or a spare connector) rather than trusting wire colours.
 - The TinyCircuits / generic pouch cells are protected cells; a protected cell that has tripped its protection looks like 0 V and may need charging before it will wake (see "Flat battery" below).
 

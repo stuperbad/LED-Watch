@@ -26,7 +26,7 @@ two-step energy path
 | **R50 6.49 M / R51 5.11 M** | divider | Sets the battery **over-voltage** limit (about 4.12 V): charging stops there. |
 | **R52 1.47 M / R53 6.49 M / R54 3.74 M** | divider | Sets the **BAT_OK** thresholds: falls at 3.31 V, rises at 3.78 V. BAT_OK goes to the MCU as a "battery good" flag. |
 | **R55 6.49 M / R56 3.74 M** | divider | Sets the **3.3 V** output voltage of the buck. |
-| **J1 / J1B** | JST-SH 2-pin plugs | Two small LiPo pouches (TinyCircuits 70 mAh) in parallel, one near each strap end. Pin 1 = +, pin 2 = -; check the pouch lead polarity before plugging. The pouches must have a built-in protection circuit. |
+| **J1 / J1B** | JST-SH 2-pin plugs | Two small LiPo pouches (TinyCircuits 70 mAh) in parallel, one near each strap end. Pin 1 = - (GND), pin 2 = + (BATT), as on TinyCircuits' own boards; check the pouch lead polarity before plugging. The pouches must have a built-in protection circuit. |
 
 Why a harvester IC and not just a charger: the cell makes only about 1.1 V to 2 V at 10-20 mA, far below a LiPo's 3-4.2 V; a boost converter that finds the maximum power point is the only way to get useful charge from indoor light.
 

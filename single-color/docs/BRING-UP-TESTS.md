@@ -5,11 +5,14 @@ The idea: prove, step by step, that power, charging and the processor work, usin
 ## Tools
 - A multimeter that can measure DC current down to microamps and up to about 20 mA (most can; use the separate current jack). A second meter or a bench supply with a current limit is nice, not needed.
 - A bright lamp (a LED floodlight or halogen 20-30 cm from the cell) or direct sunlight; a phone for the clock; a UPDI programmer (Adafruit UPDI Friend, 3 V setting).
-- Where to probe (back of the board): **pogo pad row**: pad 1 RESET, **pad 2 VBAT (system rail)**, pad 3 GND, pad 4 UPDI. **Battery plug J1, pin 1 = battery + (BATT)**. **Solar input (SOLAR_IN)** = the + cell pad. **3.3 V rail** = a pad of C54. Ground = pogo pad 3.
+- Where to probe (back of the board): **pogo pad row**: pad 1 RESET, **pad 2 VBAT (system rail)**, pad 3 GND, pad 4 UPDI. **Battery plug J1: pin 1 = GND, pin 2 = battery + (BATT)** (swapped 2026-10-18, review section 7; the back silkscreen marks "+" and "-" beside each plug). **Solar input (SOLAR_IN)** = the + cell pad. **3.3 V rail** = a pad of C54. Ground = pogo pad 3.
+
+## What works without the solar cell
+Steps 0-3 and 7 need only the battery, so you can bring the board up completely and check the processor, the display, the accelerometer, the sleep current and the polarity **before soldering on the solar cell**, and keep a damaged-cell mistake out of the soldering. Steps 4-6 need the cell.
 
 ## Step 0. Before any battery (5 minutes)
 1. Resistance to ground at the pogo VBAT pad, at the battery + pin and at the C54 pad: not zero (a short). 
-2. **Battery polarity:** measure the pouch's two wires with the meter in voltage mode (it should read about 3.7-4.2 V, red probe on +). Plug it into a spare JST connector, or touch the wires, and confirm which wire lands on **J1 pin 1**. Do not trust wire colours. Same for the **solar cell**: under the lamp, the cell's + end must go to the + pad (the datasheet's back drawing and the view through the cell are mirrored, so measure).
+2. **Battery polarity:** measure the pouch's two wires with the meter in voltage mode (it should read about 3.7-4.2 V, red probe on +). Then look at the plug: the board's silkscreen "+" must be on the side of the **red wire**, and the TinyCircuits red wire should read positive. For a meter check without plugging in, push the probe tips against the J1 pins' copper through the plug (or touch the J1 solder pads' ends): the pad marked "+" (pin 2) must read positive against the ground pad. Do not trust wire colours alone. Same for the **solar cell**: under the lamp, the cell's + end must go to the + pad (the datasheet's back drawing and the view through the cell are mirrored, so measure).
 3. Do **not** connect the programmer's supply and a battery at the same time (see the review, section 2).
 
 ## Step 1. First power-up from a current-limited source
@@ -35,7 +38,7 @@ Cell soldered on, battery **unplugged**, board powered from nothing else.
 - Wrong? **Near 0 V in good light:** cell polarity or a bad solder joint on the cell pads. **A reading that is always about 0.5 V:** the cell is loaded by something (short).
 
 ## Step 5. Does it charge the battery? (the key test)
-Battery connected **through your meter in the milliamp range** (meter between the cell battery's + and J1 pin 1, or between a bench supply and the board), the lamp or sun on the cell, display off.
+Battery connected **through your meter in the milliamp range** (meter between the battery's + and J1 pin 2, or between a bench supply and the board), the lamp or sun on the cell, display off.
 - Expect (est.): in **full sun about 4-7 mA** flowing *into* the battery (the cell gives about 30 mW at its best point; after the converter about 25 mW into a 3.7 V cell); with a close lamp **1-3 mA**; at a desk in room light only **5-30 uA** (barely more than the sleep current: this is normal, the cell is small).
 - Also: **battery voltage rising** over 30-60 minutes of sun by roughly 10-40 mV (the cell is only 70 mAh x 2); BAT_OK stays high.
 - Wrong? **No current at all in sun, but step 4 was fine:** the harvester is not starting: check the 3.3 V rail, the VOC_SAMP connection (to the system rail) and L1; the cold-start needs at least 0.6 V from the cell. **Current flows out of the battery in sun:** the harvester is off and the MCU is drawing; same suspects.
