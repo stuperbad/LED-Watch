@@ -86,3 +86,12 @@ Status key: [ ] open, [~] partly done, [x] done. Owner: E = Evan, C = Claude (ca
 - [x] E1/E3/E6 BOM + CPL (`boards/Y43/asm42/`): 24 BOM lines, 194 placed parts (176 top, 18 bottom), all stocked on 2026-10-14. Quote: redo with the corrected gerbers (the $296.56 made earlier used a stale zip; the earlier quote on fixed gerbers was $308.21 with ENIG).
 - [x] Datasheet pad checks 2026-10-14: 0201/0402/0603 LEDs (vendor pads smaller than our stock pads, OK), KMR2 (matches, G ground tab omitted), crystal, MCU, BQ25570 - see DECISION-LOG. JLCDFM run: only the known 0.10 mm rule items red. Quote on the corrected files: $308.63.
 - [ ] Still open before ordering: IMU land pattern vs ST TN0018 (ST site unreachable), JST/inductor drawings; strap slot test with a real band; piezo sound path test; firmware on the real board (ALM, weekday lights, buzzer TCA1 split mode: written and tested on the PC, not yet run on hardware); bench test serial UPDI on AVR128DB48 with the Adafruit UPDI Friend (5893) and a 4-pad pogo jig; decide whether to save to cart (JLCPCB asks for login again).
+
+## Pre-order review (2026-10-18)
+- [x] BQ25570 pin-by-pin and ladders rechecked against the datasheet; R55/R56 changed to 7.32 M / 4.22 M (see `PRE-ORDER-REVIEW-2026-10-18.md`).
+- [x] Overvoltage review done; rule: program with the battery unplugged.
+- [x] Firmware host tests pass (71 / 197 / 20).
+- [ ] Engineer review of the power block, crystal and battery polarity (D9).
+- [ ] Check live solar cell stock and lead time (DigiKey Canada showed 0 in stock, 12 weeks).
+- [ ] Re-run the full JLCPCB assembly quote on the final Gerbers + the new 26-line BOM, check LED rotations and polarity in the placement preview.
+- [ ] Order: 2 batteries (+ spare), solar cell (+ spare), multimeter with mA range if needed (`BRING-UP-TESTS.md`).

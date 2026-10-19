@@ -31293,7 +31293,7 @@
 				(justify mirror)
 			)
 		)
-		(property "Value" "3.74M"
+		(property "Value" "4.22M"
 			(at 0 -1.17 90)
 			(layer "B.Fab")
 			(hide yes)
@@ -31471,7 +31471,7 @@
 				(justify mirror)
 			)
 		)
-		(property "Value" "6.49M"
+		(property "Value" "7.32M"
 			(at 0 -1.17 90)
 			(layer "B.Fab")
 			(hide yes)

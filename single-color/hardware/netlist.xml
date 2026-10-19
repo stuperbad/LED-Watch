@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <export version="E">
   <design>
-    <source>C:\Users\evanf\Desktop\LED-Watch-repo\single-color\hardware\LED Watch - Single Color.kicad_sch</source>
-    <date>2026-10-14T22:23:21</date>
+    <source>C:\Users\evanf\Desktop\LED Watch\single-color\hardware\LED Watch - Single Color.kicad_sch</source>
+    <date>2026-10-18T21:53:51</date>
     <tool>Eeschema 10.0.6</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
@@ -44,7 +44,7 @@
       <property name="ki_keywords" value="quartz resonator ceramic"/>
       <property name="ki_fp_filters" value="*Buzzer*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>8e33e0bd-7286-4b5e-9eed-7e0bd1446a17</tstamps>
+      <tstamps>266ce790-9778-4bc3-88ae-e0c6bcafb0c3</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -68,7 +68,7 @@
       <property name="ki_keywords" value="cap capacitor"/>
       <property name="ki_fp_filters" value="C_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>8f19ae88-b791-48a3-9e20-f21364f14392</tstamps>
+      <tstamps>9ef41458-0933-4f6b-948e-fd2a806b355e</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -92,7 +92,7 @@
       <property name="ki_keywords" value="cap capacitor"/>
       <property name="ki_fp_filters" value="C_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>1b97c226-8ca7-4c99-af5c-801fdeb61618</tstamps>
+      <tstamps>0378d44f-e0bf-45b0-a37e-b205f095d1e2</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -116,7 +116,7 @@
       <property name="ki_keywords" value="cap capacitor"/>
       <property name="ki_fp_filters" value="C_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>8e409aab-eeff-49f1-87f9-d8dd4e1b0111</tstamps>
+      <tstamps>fa051e4a-6aa9-42ab-8c3f-9b1790cdb7b5</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -140,7 +140,7 @@
       <property name="ki_keywords" value="cap capacitor"/>
       <property name="ki_fp_filters" value="C_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>6ccabbfa-582b-47e3-89df-41c81fe160a5</tstamps>
+      <tstamps>61c14a25-5e7e-424f-883c-d7e7b83e9d8a</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -164,7 +164,7 @@
       <property name="ki_keywords" value="cap capacitor"/>
       <property name="ki_fp_filters" value="C_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>03f7d2d1-2e81-4cb0-9fbe-0e3724c368d3</tstamps>
+      <tstamps>5f1ef26f-18ec-41f1-a21a-5ecc90fccfa6</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -188,7 +188,7 @@
       <property name="ki_keywords" value="cap capacitor"/>
       <property name="ki_fp_filters" value="C_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>7f20a79d-36bf-4b31-9911-76c50a22feb6</tstamps>
+      <tstamps>6cf41d6a-f7b8-4c16-933c-d70e6cac3b87</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -212,7 +212,7 @@
       <property name="ki_keywords" value="cap capacitor"/>
       <property name="ki_fp_filters" value="C_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>8aba632c-c2cd-45db-aec7-827b66103e0c</tstamps>
+      <tstamps>6b520bb4-da1c-45f1-aae7-d3f35ba81bbf</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -236,7 +236,7 @@
       <property name="ki_keywords" value="cap capacitor"/>
       <property name="ki_fp_filters" value="C_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>494a975e-8ac0-4d57-931e-31608de67fb1</tstamps>
+      <tstamps>91b29550-5e93-4b26-83e5-133935574daf</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -260,7 +260,7 @@
       <property name="ki_keywords" value="cap capacitor"/>
       <property name="ki_fp_filters" value="C_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>46c909b0-4467-40a7-ae6c-4c8838324f15</tstamps>
+      <tstamps>317bb250-77c0-4027-b89d-bbbbca2af15e</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -284,7 +284,7 @@
       <property name="ki_keywords" value="cap capacitor"/>
       <property name="ki_fp_filters" value="C_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>5e451b5c-0f52-4e90-9117-3633437d90e1</tstamps>
+      <tstamps>1cdb0697-a29c-4f84-9f3a-619134fc19bc</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -308,7 +308,7 @@
       <property name="ki_keywords" value="cap capacitor"/>
       <property name="ki_fp_filters" value="C_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>f5ba1400-97d5-471c-9bed-04d2cc458429</tstamps>
+      <tstamps>87ebacd9-032a-4750-a129-ca5253775eaf</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -332,7 +332,7 @@
       <property name="ki_keywords" value="cap capacitor"/>
       <property name="ki_fp_filters" value="C_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>056798be-8d53-4827-9137-327e073b61ef</tstamps>
+      <tstamps>96bf99fc-6ed9-4654-a84d-868cc86f0d9f</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -356,7 +356,7 @@
       <property name="ki_keywords" value="cap capacitor"/>
       <property name="ki_fp_filters" value="C_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>f69e8b2d-0673-4d54-935e-0f3a0e6dd8b6</tstamps>
+      <tstamps>55ed9b26-560e-47b7-b004-0a1eced9394e</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -383,7 +383,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>1288df8c-698c-4958-91f9-1c5b22975c42</tstamps>
+      <tstamps>bc0f6508-ea56-4295-b604-2f600d62ff97</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -410,7 +410,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>56384b6e-3aa3-46fa-ad3b-082e15723f55</tstamps>
+      <tstamps>e75f446b-8e52-44ab-8017-0f3c6febe1af</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -437,7 +437,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>c9466067-0110-4ce6-b958-ed0303b60949</tstamps>
+      <tstamps>44a39832-45ce-4487-bc53-7c8b07d46acd</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -464,7 +464,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>6b683daf-48b6-432a-b1ca-9d598720b6f0</tstamps>
+      <tstamps>2ecfd99f-1ae2-4aa9-8a76-98296f42b282</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -491,7 +491,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>e043254a-e1ee-481d-8efd-8a73a168bdc1</tstamps>
+      <tstamps>1a8180db-651d-428f-971b-406577b48875</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -518,7 +518,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>0e2db39d-cfaf-473c-8107-8750d08d1b24</tstamps>
+      <tstamps>ed54e3df-eff0-4d8d-85de-50b333d660e6</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -545,7 +545,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>69541ba6-d1cf-4eeb-8001-0a685ddda211</tstamps>
+      <tstamps>bb5ce805-dedc-4f76-9e32-0a3f3d970a15</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -572,7 +572,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>08fc226a-c05c-45b6-80ad-422ac44a3320</tstamps>
+      <tstamps>ea8beccd-2a3c-4d28-b443-cd3d5cf55809</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -599,7 +599,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>35387dad-f82e-41c0-9805-92e061504d9b</tstamps>
+      <tstamps>1389368b-4663-483d-935c-1db4e6cd85e5</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -626,7 +626,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>258779e5-fb0b-4ab1-a718-9dcb3d299078</tstamps>
+      <tstamps>04d367bd-3b9b-4e3f-9dc8-75fd7c7636a4</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -653,7 +653,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>717ba6b3-a852-4b6c-b171-dc359f6dd379</tstamps>
+      <tstamps>18b122a0-9894-4489-9316-c6f5a0bfe62c</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -680,7 +680,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>2acc5e13-608e-4ebf-89cf-8b2fc27866ea</tstamps>
+      <tstamps>8e33f595-5042-45c0-b3dd-ac157b05116a</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -707,7 +707,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>36153c6e-0b35-4427-8b58-e0a352ac5df0</tstamps>
+      <tstamps>2330ce40-8e03-4544-934d-1d79ca36d20c</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -734,7 +734,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>71e72e3a-5972-4710-9ecc-d67ca5bbcee3</tstamps>
+      <tstamps>d5d69728-9185-4c4d-91d4-608da2c9b78b</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -761,7 +761,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>4a7597a2-c420-4e66-a4b0-0c9ce917d063</tstamps>
+      <tstamps>91a48489-7fe3-40c3-9547-0f7ad0eedc3b</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -788,7 +788,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>0c556567-38e5-43d5-82bd-370275f29abd</tstamps>
+      <tstamps>4428a043-05ee-4c28-8b28-a61a4b01a8b2</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -815,7 +815,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>d1aa4b5c-03cd-4ceb-a8ad-2d632c229639</tstamps>
+      <tstamps>3ab93b66-4e4c-46e5-bee1-1fdaa33ae2a6</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -842,7 +842,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>33741e59-f005-429f-a592-6adbcb185ef6</tstamps>
+      <tstamps>4a151159-83d9-46fc-b885-6db31f83a5ab</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -869,7 +869,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>f564f360-112d-444a-a240-005b1a632caa</tstamps>
+      <tstamps>ac1a830e-cef0-4adf-8f80-5c8620fa132c</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -893,7 +893,7 @@
       <property name="ki_keywords" value="connector"/>
       <property name="ki_fp_filters" value="Connector*:*_1x??_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>65afac9a-43ea-4e23-88d4-6258f8df84b6</tstamps>
+      <tstamps>91340ea0-1462-44dd-9c45-9b396b5abe9f</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -917,7 +917,7 @@
       <property name="ki_keywords" value="connector"/>
       <property name="ki_fp_filters" value="Connector*:*_1x??_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>45ce9239-ae04-4c40-8622-710147d7653d</tstamps>
+      <tstamps>8405662a-0545-401b-b44a-66bcfcfa09e3</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -942,7 +942,7 @@
       <property name="ki_keywords" value="connector"/>
       <property name="ki_fp_filters" value="Connector*:*_1x??_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>fbf4725a-5b12-4611-8123-dbd861cc85e5</tstamps>
+      <tstamps>35c2a826-bb64-4268-9823-b0c5f589a522</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -969,7 +969,7 @@
       <property name="ki_keywords" value="inductor choke coil reactor magnetic"/>
       <property name="ki_fp_filters" value="Choke_* *Coil* Inductor_* L_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>2c9797a0-723e-4b53-924c-2ae2ea267324</tstamps>
+      <tstamps>9631a45c-9873-4adb-89a5-fd352808aba2</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -994,7 +994,7 @@
       <property name="ki_keywords" value="inductor choke coil reactor magnetic"/>
       <property name="ki_fp_filters" value="Choke_* *Coil* Inductor_* L_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>bd9eaa9f-80a0-44db-b7cd-e33489dd145a</tstamps>
+      <tstamps>71d6b0be-2bc7-4a0f-9371-b3d81e9a8d97</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1021,7 +1021,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>ed46867e-5793-46dc-b24f-bc7755b392bd</tstamps>
+      <tstamps>3fc47097-b550-46c2-924f-be3353973ccd</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1048,7 +1048,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>7887dde3-1d5c-45fc-b418-e3a76f5d381e</tstamps>
+      <tstamps>0be0bd54-2bee-4002-99f6-678fdd7e6241</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1075,7 +1075,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>a80cb0f6-0990-4fef-b177-7493bb71501d</tstamps>
+      <tstamps>1a0e35a7-c7f8-4e1d-8fc4-1ab6fc2db75d</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1102,7 +1102,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>abfb3017-a648-40e7-a300-c02c8f5afcd9</tstamps>
+      <tstamps>1482fc33-21aa-4d36-9b9f-f28bd02f1a2a</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1129,7 +1129,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>f027aceb-1168-4e34-9b58-fab42baf5c48</tstamps>
+      <tstamps>fc407056-9518-4b40-bd7e-b51131f294fd</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1156,7 +1156,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>de2b2e38-0048-44da-9cee-38a4b93631b3</tstamps>
+      <tstamps>511c9d42-8f74-404d-9f65-f31fdea353c5</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1183,7 +1183,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>ee87369a-3b86-4e39-bb0e-887571394a3f</tstamps>
+      <tstamps>52432139-3c3a-47fb-9624-62773fe2f12c</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1210,7 +1210,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>337d3d2c-a27a-40fd-acd4-c88226857bf4</tstamps>
+      <tstamps>5a2b7f0c-d83e-4874-b41b-b306be648bc3</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1237,7 +1237,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>001eb65f-6bec-4aac-9e19-42e847894385</tstamps>
+      <tstamps>9e30ab11-bd68-4d4d-baea-d10d8cca4297</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1264,7 +1264,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>d1bb6697-dd46-4085-8838-c0a85180e810</tstamps>
+      <tstamps>72989856-0f11-434a-9eea-5724004ca58c</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1291,7 +1291,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>5d4f08a5-d381-4310-bf4a-4c9fe4a9826a</tstamps>
+      <tstamps>af7de48e-8811-4cdc-aaf1-dade024a4100</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1318,7 +1318,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>e4b594b0-9207-4f68-b006-93ec7e7383f3</tstamps>
+      <tstamps>3f31fc1e-8647-4d9f-bfff-cde3b940a945</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1345,7 +1345,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>bcf01b21-47af-4979-b54a-04b4eae31660</tstamps>
+      <tstamps>f7ea8c4a-77a7-4add-91b8-d7f8c89fb73c</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1372,7 +1372,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>36ed4622-7594-4a69-8c4b-ca46b7034922</tstamps>
+      <tstamps>2d3b3ea0-fee2-4f41-913e-9776916a665b</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1399,7 +1399,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>dcb04f2e-4910-41d8-8bb0-3675eabf212a</tstamps>
+      <tstamps>0518d59f-a7e3-4a79-b3b0-3d8ff72cf85a</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1426,7 +1426,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>a1072347-f108-4223-8bb0-622d76ff6c91</tstamps>
+      <tstamps>dc502683-4646-4140-937a-61e00a9ba710</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1453,7 +1453,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>cdc7b461-8482-4635-841b-78dca440bb39</tstamps>
+      <tstamps>2909d1e4-0e7f-40df-bb4a-4d7211be510c</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1480,7 +1480,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>34fee8fb-b902-49fb-b3d6-4b50e6ccd010</tstamps>
+      <tstamps>9f8ea2e8-23be-4a5f-897a-2ef33deeb31a</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1507,7 +1507,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>c6a2dcb2-fe0e-4f63-9a51-b45c427a2913</tstamps>
+      <tstamps>58a8dc42-68cf-4a19-9b38-c3ad81dca4a8</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1534,7 +1534,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>da7eff7e-6ab7-4efb-a849-8c25b6d171ce</tstamps>
+      <tstamps>a2c1a1fd-ddcb-4c1e-87c0-3226309a33a8</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1561,7 +1561,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>a9006fef-9a48-4d64-a5e6-d333bc621a3e</tstamps>
+      <tstamps>f13af198-d3e4-4bc8-8e29-8cf7dbaba3d1</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1588,7 +1588,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>70cdd513-3413-457a-b267-4353ab16665b</tstamps>
+      <tstamps>6bc8906e-27f4-419e-a196-fe565de2ece7</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1615,7 +1615,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>5a61c1c4-0c7f-49e6-865e-28371ef62e73</tstamps>
+      <tstamps>fc157df5-dd27-4543-a1a2-b44a45ba6686</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1642,7 +1642,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>03ac62f6-af63-4d0b-a1f9-2c1eca226f76</tstamps>
+      <tstamps>445f3561-8f5e-49f0-8040-6b10a64a70aa</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1669,7 +1669,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>bb559de0-7f1b-41b4-a039-7de1a936dd95</tstamps>
+      <tstamps>f09d5c16-c61f-40b0-b89e-e8a5de14f90e</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1696,7 +1696,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>357f040b-f024-4636-b324-74cf8db66d82</tstamps>
+      <tstamps>e921483b-daa1-48cc-9af3-b50a8bb9b242</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1723,7 +1723,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>41aaa84b-1205-42c1-8c13-4cca8e08d465</tstamps>
+      <tstamps>30f22da5-0e4b-4091-86f2-54f2163803d2</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1750,7 +1750,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>9f9ad347-0315-46cb-964a-2707d69b34c7</tstamps>
+      <tstamps>3b252832-7221-4ba3-9803-6848d7db211f</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1777,7 +1777,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>f7d7eb1e-569b-44b2-a82d-dd94daceaa6b</tstamps>
+      <tstamps>58a96df6-26b7-4e86-a482-413f300c850c</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1804,7 +1804,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>9ed1e112-4d73-42db-ae3e-df870059e421</tstamps>
+      <tstamps>b1c363d2-cac1-4337-bcff-fc849cdba539</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1831,7 +1831,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>fc441119-beb9-49d0-9680-1f0504c2944a</tstamps>
+      <tstamps>4f2eab6e-bb61-4b4c-8822-f9c2ee54cbda</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1858,7 +1858,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>8fe18f34-cf3c-44fe-bf2d-08caa816f33a</tstamps>
+      <tstamps>863affe0-68ca-40c4-b66a-ecc923528f50</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1885,7 +1885,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>06692ebd-778f-4858-8902-449c9509d5ca</tstamps>
+      <tstamps>bc6108dd-c7b3-4993-aed6-251016b7bbe2</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1912,7 +1912,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>31900d66-5530-45e3-95ef-5fd83ab4131f</tstamps>
+      <tstamps>67129e2a-6e15-41e3-9303-7cf7bfa0b52e</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1939,7 +1939,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>5c1a20f6-703a-4dd8-b3ae-8e1d7eaae518</tstamps>
+      <tstamps>f7bf0e08-bbb6-4413-b2a0-be67ce2aa8a8</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1966,7 +1966,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>a7befe40-9a6a-4a27-aede-e8531be77567</tstamps>
+      <tstamps>c24e96be-98e8-4c99-a327-492bf3d009ea</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1993,7 +1993,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>571ac422-854b-4016-a48c-fc6ceec36175</tstamps>
+      <tstamps>9f080a62-4da2-4f48-94b9-2fd408a9c0fd</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2020,7 +2020,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>b87ac25c-6e12-4c4b-8f05-a67c34999dfb</tstamps>
+      <tstamps>82a5770c-dc30-4f7d-a832-53411b826bf6</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2047,7 +2047,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>839d0809-9e1e-44ad-83ef-ae90761b4c4c</tstamps>
+      <tstamps>000d1c90-76dc-4034-941c-39c111d23afa</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2074,7 +2074,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>20cded55-7082-4a35-bf5d-8d5783c817d2</tstamps>
+      <tstamps>74064b59-b65c-4b17-83b7-45f373d3b072</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2101,7 +2101,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>f27661e9-a05b-43dc-848a-ca4773b735d3</tstamps>
+      <tstamps>a5b5b708-4ecb-4ec5-ba2c-c4d0a96857b3</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2128,7 +2128,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>0abdb1dc-ada2-4086-b873-92e98a887da0</tstamps>
+      <tstamps>3b32f730-54a5-4ecf-9c18-d2ccf8ab336c</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2155,7 +2155,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>69d5332c-7b46-429d-9877-21c667b41427</tstamps>
+      <tstamps>fed02367-90ac-4198-893d-f3c206362e08</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2182,7 +2182,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>ae0f4ccf-32e2-442e-a5d3-a0001684ab57</tstamps>
+      <tstamps>6a7c6503-c2b7-4cc5-9e69-e0d589e29af7</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2209,7 +2209,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>937a4cf2-bd85-4c08-ba43-728a584c5784</tstamps>
+      <tstamps>98ea3e5c-b45e-4dfe-92d3-5adc546b0889</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2236,7 +2236,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>5471ef56-6196-43d7-9f93-4d3832dddc60</tstamps>
+      <tstamps>1eb8c9aa-184b-4130-8c57-386a40a9066d</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2263,7 +2263,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>aabe0873-fdf2-4817-a258-5c7ba5faad87</tstamps>
+      <tstamps>87007a92-4953-41a0-bfb2-9ad197030569</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2290,7 +2290,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>7fafcc94-fbb3-4e31-89d0-8b673803e2fc</tstamps>
+      <tstamps>c35ce9a2-7a40-4d3e-b40a-49ae2e871481</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2317,7 +2317,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>4299d2e2-c40e-4d08-aeb7-bc7449307704</tstamps>
+      <tstamps>67d95ce2-8354-4715-a4b3-302857342e00</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2344,7 +2344,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>56f15bfc-4743-41f7-885e-6067044b9c84</tstamps>
+      <tstamps>34369f8e-1e92-404c-a29e-641751c9e45a</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2371,7 +2371,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>9537b64c-53f4-4e64-bca3-2220639ed659</tstamps>
+      <tstamps>f8cf2bfe-cdf3-4d09-9cd7-6f7c1a7282e6</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2398,7 +2398,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>200dac19-9a5e-421b-957a-ac9e2d07d742</tstamps>
+      <tstamps>cff27a01-1c05-458c-a765-bdb0d9b16238</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2425,7 +2425,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>48ffb2d7-eac7-4d0f-9211-d457f97f5252</tstamps>
+      <tstamps>36105c53-a035-4188-a1a0-fa3fcf3bb22b</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2452,7 +2452,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>2a8371b4-44c1-4b09-a52d-59c339305b31</tstamps>
+      <tstamps>6d8c5099-01c1-4be4-b740-2125dc8e3505</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2479,7 +2479,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>ec9dda1a-d278-4d24-8cae-ddb8a5081de2</tstamps>
+      <tstamps>87d100ed-9a4e-44d8-bf96-62b04a3cfcf7</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2506,7 +2506,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>fb500283-6cb2-4343-a97b-3476c939535b</tstamps>
+      <tstamps>88adf3b4-5905-4fe0-9a78-64c98e8b38b5</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2533,7 +2533,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>4ceca484-d5a8-4ffe-baa1-4fe687a3075f</tstamps>
+      <tstamps>490c577c-8526-4c52-b5cb-dbf5a20d059e</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2560,7 +2560,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>80bd728b-ab96-48b2-9a0c-6324deeccf67</tstamps>
+      <tstamps>992f7218-92d3-4cde-801e-c618d4fbc795</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2587,7 +2587,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>0c9eb88e-7f80-4487-8d0a-19f656fa6d52</tstamps>
+      <tstamps>215b3d22-dd9f-4a76-af6e-87de726b4ca2</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2614,7 +2614,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>aa0846fc-db67-4a62-87fe-df89f21b475c</tstamps>
+      <tstamps>4e98443d-4c4d-4ccc-8a36-b71f3cee3cfc</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2638,7 +2638,7 @@
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>ef490e75-d796-471c-87b8-5ddd5792f329</tstamps>
+      <tstamps>69a0906b-cef5-484e-9d20-7cc54ec175c4</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2662,7 +2662,7 @@
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>dc91306b-e345-42a4-bc73-a2138131edd5</tstamps>
+      <tstamps>11220c13-18a6-4261-b119-e63f3c008034</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2686,7 +2686,7 @@
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>25c6fe8d-df13-484a-a547-56f92a654d1b</tstamps>
+      <tstamps>5fbcb9a6-55dc-43af-ac35-95203fd8cccf</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2710,7 +2710,7 @@
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>0e47321e-053c-4672-b747-10e0b9d8e587</tstamps>
+      <tstamps>6c3b62c5-bb4e-4ca0-99ed-36084ee896f2</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2734,7 +2734,7 @@
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>c1218861-1a2b-445a-b73b-4af3447f32d9</tstamps>
+      <tstamps>920aa8aa-b0d1-4aba-ae9d-1f1aca4229ac</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2758,7 +2758,7 @@
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>46a22003-d56c-4745-b6f8-d9cddc61029e</tstamps>
+      <tstamps>0a289c03-a19d-4edd-b430-60f67078853f</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2782,7 +2782,7 @@
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>6444241d-6605-493a-98c7-4f7283f4eaa5</tstamps>
+      <tstamps>f7ac6c00-a63d-4b82-a1ad-41d4e464f319</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2806,7 +2806,7 @@
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>cdc8b4e4-547b-4a1a-975e-81e66be74745</tstamps>
+      <tstamps>694cc82a-3232-4340-a63c-ea0e87d1a820</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2830,7 +2830,7 @@
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>ba2112bd-dd2f-48f6-8679-ac5a59bf60ed</tstamps>
+      <tstamps>ccad590e-0d8b-41e7-a393-2406efb28600</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2854,7 +2854,7 @@
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>94baf366-0eed-4ea2-abac-42b209a12089</tstamps>
+      <tstamps>534c37c5-543a-44cd-8dbf-f75bf645ce9e</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2878,7 +2878,7 @@
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>39445731-47cc-439e-8ec3-e782f033ca89</tstamps>
+      <tstamps>4c3f7bc9-c85c-48b6-8d42-baa2f2d88386</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2902,7 +2902,7 @@
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>026bf698-7e77-43e4-9d66-c84398ef4739</tstamps>
+      <tstamps>3fd06d75-3946-4bb7-94ed-229ddecca447</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2926,7 +2926,7 @@
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>1a64cdc0-7c2e-4504-8586-9bdd7a584208</tstamps>
+      <tstamps>e9ae9e49-2bd2-4475-b8b9-61f032e85813</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2950,7 +2950,7 @@
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>dd4ec2c7-235e-4a7a-b227-4c79c609ff2e</tstamps>
+      <tstamps>3a9a8a1c-2aac-463f-b542-4f4584a2207a</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2975,7 +2975,7 @@
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>b72b8bf9-521a-42ac-9bfa-5367069711ba</tstamps>
+      <tstamps>5b0e7322-08df-4fc0-bc9e-85f22d4ade7f</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3000,7 +3000,7 @@
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>3ee6afc6-8902-4d36-ae5e-043c3df0fb0e</tstamps>
+      <tstamps>d1856e2f-9a42-43de-ac31-6bf8d00b9acb</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3025,7 +3025,7 @@
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>458639cc-857f-4ba0-ba17-69d56cc031c3</tstamps>
+      <tstamps>d2441de5-8b1f-4d76-b535-31c399262015</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3050,7 +3050,7 @@
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>b004a8f8-6a77-43cd-a6b9-84d0a7ad4d53</tstamps>
+      <tstamps>8077d5a4-8495-477a-873d-3b96dbbfdad2</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3075,7 +3075,7 @@
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>7162a5f2-58b7-4259-a8d7-c1405054c5db</tstamps>
+      <tstamps>3e3bef32-2897-4328-90de-71d9c2005f2b</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3086,7 +3086,7 @@
       </units>
     </comp>
     <comp ref="R55">
-      <value>6.49M</value>
+      <value>7.32M</value>
       <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
       <description>1% 0402; value from BQ25570 design procedure</description>
       <fields>
@@ -3100,7 +3100,7 @@
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>920eb03d-c808-4bb5-9d7f-1e2077c9447b</tstamps>
+      <tstamps>6ca66d31-3e83-4f1e-ab1d-ac0b901a0962</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3111,7 +3111,7 @@
       </units>
     </comp>
     <comp ref="R56">
-      <value>3.74M</value>
+      <value>4.22M</value>
       <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
       <description>1% 0402; value from BQ25570 design procedure</description>
       <fields>
@@ -3125,7 +3125,7 @@
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>6ffd840c-3acc-49ed-a5bc-0c3c2d92e456</tstamps>
+      <tstamps>6c15a538-bd55-4871-bd0a-b20573a49422</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3150,7 +3150,7 @@
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>73346b44-0df3-403a-a76d-dc8846d3e394</tstamps>
+      <tstamps>25238c8d-1ec4-49a4-869c-dc4b9df4bbb4</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3175,7 +3175,7 @@
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>c7e012b0-5cd2-4567-b431-4bd8ee4036ce</tstamps>
+      <tstamps>ca9f8b77-2bc1-4590-9a03-b56ffd20b861</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3200,7 +3200,7 @@
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>b87e1d61-edb1-4818-83e5-0c376a21d5ab</tstamps>
+      <tstamps>7015a162-8d9c-47ee-b584-bbabc93bfd62</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3225,7 +3225,7 @@
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>327491e4-d215-4744-82af-0ffe8ec3d238</tstamps>
+      <tstamps>748bb302-350f-4b1d-a94c-48457b919183</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3250,7 +3250,7 @@
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>8f7db22b-c477-47a9-83b6-36c6dad36a48</tstamps>
+      <tstamps>b031e1e1-5871-4e05-8bdd-eb50dced991c</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3275,7 +3275,7 @@
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>478d881a-5987-4043-a141-37802e320317</tstamps>
+      <tstamps>d1f93ddd-28f4-4a21-9776-a67aa3cf48a3</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3300,7 +3300,7 @@
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>fc6c1f52-76ed-41a3-877d-66410d73e85f</tstamps>
+      <tstamps>5eaed2ab-212b-415d-a00c-a384c968ca92</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3325,7 +3325,7 @@
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>ade84215-fc20-472d-85c0-d1b90db68d2e</tstamps>
+      <tstamps>43cf13c1-f59a-41b5-8ef4-96b990aeb829</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3350,7 +3350,7 @@
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>451b6a0e-490e-4be3-a642-390a9cdfc83b</tstamps>
+      <tstamps>b44c288d-f301-4761-b3cf-250ea12d37c6</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3375,7 +3375,7 @@
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>7f7413af-9ba0-4b40-9da4-9ebd7a57169b</tstamps>
+      <tstamps>62955762-0cad-44a2-95ce-8b0fd1abb72e</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3402,7 +3402,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>6aa11e36-faec-466a-8c7d-baae5e1b91e6</tstamps>
+      <tstamps>7289cdee-0a52-4a73-bc91-88428cb5eacf</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3429,7 +3429,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>531b9bed-9cfe-40fa-9788-41a25692fc63</tstamps>
+      <tstamps>0b574cee-117c-4c95-b284-836a052f8f7d</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3456,7 +3456,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>78c3b42e-304a-4168-8a4b-86078d1910e3</tstamps>
+      <tstamps>6c4ab1dc-1ea0-44f6-b901-6bb50174dd2f</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3483,7 +3483,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>468d9c71-e2ad-4e47-8b68-afc6539d3355</tstamps>
+      <tstamps>0e88d25a-9477-425b-8ccd-c704360fabca</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3510,7 +3510,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>57af1025-1f01-45bf-9a3d-eb4638cc7f78</tstamps>
+      <tstamps>c5fc62dc-a1fe-4efd-adf4-156299f0891c</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3537,7 +3537,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>69f9f8ea-92a5-4c03-a1e4-96532c82b4db</tstamps>
+      <tstamps>217e4aa1-6f46-45e1-9e3d-5636fcf4d90f</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3564,7 +3564,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>8377ee4c-48fe-4e2e-bb6f-15cc20967ce1</tstamps>
+      <tstamps>837ea5e7-a237-4881-acb8-3ba31d872af4</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3591,7 +3591,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>7141d0d6-64d3-4a90-809e-4be0e6cc4a5f</tstamps>
+      <tstamps>d865e14c-edb6-4ac8-8c9d-12c8d6e6592b</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3618,7 +3618,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>008320ba-ad26-4089-a29a-2db8446f78f6</tstamps>
+      <tstamps>7adf0d42-9a5d-4361-becd-19fe66f46a9e</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3645,7 +3645,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>953224ad-8b6c-456b-8450-0eafdd2fa546</tstamps>
+      <tstamps>92b76f32-776d-40a8-84c3-ab851646c79c</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3672,7 +3672,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>bd88267f-2398-4495-ba5c-43b1014eab74</tstamps>
+      <tstamps>e19c415d-a4eb-42b2-87e5-1e22fd4d2ff7</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3699,7 +3699,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>f7ea8fff-58ff-4607-a861-1d9661494a58</tstamps>
+      <tstamps>78ed1174-df56-4ed5-9de9-8abbe7483659</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3726,7 +3726,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>42ea4c1d-d699-4cfe-b7af-1da9842a4c8a</tstamps>
+      <tstamps>d5e6c76d-1826-40a9-9db1-cbb9be5bf09b</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3753,7 +3753,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>11d556f2-2345-43cf-ba5e-ce14f0bbca67</tstamps>
+      <tstamps>180dab3d-4930-4fa1-8c49-a483f6695c89</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3780,7 +3780,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>a1a34d20-8690-4df2-b5c2-b6d7631b2faf</tstamps>
+      <tstamps>18447abd-b618-4a8e-88a1-e83d55db587d</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3807,7 +3807,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>d48fc95a-63fa-4e8f-be3a-8c6a7b3f4f0e</tstamps>
+      <tstamps>24c494ca-bd51-4736-b70a-5316ff5a820e</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3834,7 +3834,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>aeb48a9d-1bea-40c9-b889-8e1ea5415be9</tstamps>
+      <tstamps>5f84be9b-276c-4472-a26f-77a8214f590c</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3861,7 +3861,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>cb735dc9-2864-478d-97d0-81e8fc3e1f7c</tstamps>
+      <tstamps>1095e359-c4f3-4063-b105-67351558c7f1</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3888,7 +3888,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>813ba498-39ab-4f49-905d-97aef67013b8</tstamps>
+      <tstamps>b39a6e5f-931d-4253-a29f-e63cbb55d583</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3915,7 +3915,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>9d5fa908-fb22-48fe-8605-e393da1aa5c2</tstamps>
+      <tstamps>483e99be-0195-481f-9ad9-64d17ca739be</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3942,7 +3942,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>24736ad5-353c-402c-9718-f4dcb22e936e</tstamps>
+      <tstamps>43a1ccef-091f-43c2-b17d-e03af03e887b</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3969,7 +3969,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>2a580be9-09ef-4039-a025-4abef7fb100d</tstamps>
+      <tstamps>7ae5940b-2098-4346-be5e-beace6ff8faa</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -3996,7 +3996,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>0363f503-76d6-4c28-95a6-887461d77765</tstamps>
+      <tstamps>18cacc74-e35b-4855-ad46-8863ca5d7e3e</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -4023,7 +4023,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>e3abb6a1-b997-4756-8749-1bde5f25b88b</tstamps>
+      <tstamps>79d57a8d-95b1-4d29-8626-a29d768b2db5</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -4050,7 +4050,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>9cbec326-4c63-41ea-8c0c-fc7067ed9ca9</tstamps>
+      <tstamps>c45b245e-fb9e-4ec6-96c2-028d6252ed54</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -4077,7 +4077,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>59f13d4d-d83a-4055-992a-9897b9b1f4a3</tstamps>
+      <tstamps>4f28202e-8252-4263-a937-417d7e8d9079</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -4104,7 +4104,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>312544ee-243a-4fbd-8285-5da251a3a610</tstamps>
+      <tstamps>230c2042-7ea3-4eb8-a2d6-eb14047bfec5</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -4131,7 +4131,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>711dbf85-b223-42e4-bbda-cfbfe0f5514e</tstamps>
+      <tstamps>2a3086f7-ec0f-4d4d-970f-e0908a7c3d3d</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -4158,7 +4158,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>b08c484f-0b22-441a-bd84-3fa5eb4490d9</tstamps>
+      <tstamps>d58cbd91-3dd9-418c-84d2-757369928929</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -4185,7 +4185,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>4bdad830-f108-4e11-9060-ad794f2bb17e</tstamps>
+      <tstamps>0febed68-77b4-4fc1-9124-44ccdb77a1cd</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -4212,7 +4212,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>4c82d74b-db70-4cbd-9239-c52fee26864c</tstamps>
+      <tstamps>d9ad8c81-52c5-434d-9238-28d86c73a1d0</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -4239,7 +4239,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>2e23ea03-f548-4422-918a-7fe15ca0a802</tstamps>
+      <tstamps>d759bf7b-10cd-446c-8d0a-fa293f9b6cb2</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -4266,7 +4266,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>be8d09fb-cc54-44a2-a099-3af920845453</tstamps>
+      <tstamps>cea8d4da-19cb-483c-95d2-b10665c12727</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -4293,7 +4293,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>769f7719-b55c-40df-9516-3c7b2b5830f3</tstamps>
+      <tstamps>b267b61c-7b31-443e-8494-b0f7108f6e3a</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -4320,7 +4320,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>22dca9ea-1efe-48eb-ab12-60eaf1e692d6</tstamps>
+      <tstamps>80f3b974-d00b-4f56-9c52-df602f11a5bd</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -4347,7 +4347,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>edcfabd2-5606-43d6-acb1-329f4d6f6567</tstamps>
+      <tstamps>6166371f-7d0a-4c83-b6d6-c779b6cd88ad</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -4374,7 +4374,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>f41b3f43-e616-451d-a002-0dc4a52a9553</tstamps>
+      <tstamps>a84a2c1e-83d3-4a64-97ce-df6cd089ce10</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -4401,7 +4401,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>be587282-8edc-45d5-86cd-7fb862c7d42e</tstamps>
+      <tstamps>99d4adc3-2089-4ece-9e4f-88cbe9bf06a2</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -4428,7 +4428,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>b8775e59-8a03-4a7a-9a12-a8c4fe99a334</tstamps>
+      <tstamps>42a0f26d-eba0-47c0-8010-d7b80da235f8</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -4455,7 +4455,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>feb522be-da1d-4faf-b57f-d84770697ea1</tstamps>
+      <tstamps>eacadc70-a53e-4a88-a008-50adb9794e0a</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -4482,7 +4482,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>c769c785-9c3d-4804-9eb5-cb7d89a494f6</tstamps>
+      <tstamps>c3f1c3e9-bd19-4807-a7c7-b9446b460422</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -4509,7 +4509,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>0b5f9fb8-e96f-4410-8012-62daac2e2388</tstamps>
+      <tstamps>4870bd97-656e-4f29-9c4e-7494daa6a0d9</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -4536,7 +4536,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>cf0816ea-b711-444a-8048-1971c056f385</tstamps>
+      <tstamps>185f01f9-f2b9-4982-87ea-756261dff4ec</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -4563,7 +4563,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>c369c395-e449-4b0d-aff0-73161116ea67</tstamps>
+      <tstamps>d90f9d90-abb5-48c9-8993-42449cfedf87</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -4590,7 +4590,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>987d9183-0930-4a83-8e61-e9f988ecd16b</tstamps>
+      <tstamps>00fecb54-1157-4295-86c8-4e4be8117891</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -4617,7 +4617,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>0077a0a6-bd0d-4bf9-8f5b-bdb7b2c54b58</tstamps>
+      <tstamps>b2329bca-d65c-4bb8-90b0-d06b5d61cbef</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -4644,7 +4644,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>a1440329-d4ba-43ea-9397-09ab0cd4fe2b</tstamps>
+      <tstamps>7c0e12ab-9916-4795-b780-4dd52b47ee5e</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -4671,7 +4671,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>e341f936-e293-4755-93d8-3d96353cace6</tstamps>
+      <tstamps>0845615a-1f84-45a0-825a-d29338a78aa2</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -4698,7 +4698,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>c0e4be17-842b-433c-b338-e57824dd387f</tstamps>
+      <tstamps>5297b9af-5cd6-4fa9-aa00-821e8925c50e</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -4725,7 +4725,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>2453410f-9186-442d-9c1a-db140207440d</tstamps>
+      <tstamps>eeb6050f-d6df-4a4a-9b37-c738d64c90f6</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -4752,7 +4752,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>de1212b5-9a36-45bf-9acd-e8800d07e6e7</tstamps>
+      <tstamps>c8cd7c7f-3703-41d9-b9aa-e9738b418843</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -4779,7 +4779,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>c8170b04-fb9d-4fe0-9598-8f8e14dc02bf</tstamps>
+      <tstamps>77a77a7b-37ab-46d0-9eb3-591ccbeed8d4</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -4806,7 +4806,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>fdd1f96d-2a15-4d8b-93a5-e333b306718e</tstamps>
+      <tstamps>c1837b88-27f1-465d-bf7c-d7980a682acd</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -4833,7 +4833,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>485337af-7e76-4299-83f3-7db7c787255f</tstamps>
+      <tstamps>9c0f0a4a-e104-43fc-9783-2f4688cd728d</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -4860,7 +4860,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>3222efc6-bea0-48c7-ac92-47c4b889e394</tstamps>
+      <tstamps>ab82f033-aac5-4aba-9853-1064cf29f59e</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -4887,7 +4887,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>791af08e-fb64-4db2-9a95-b4c1c987eb7f</tstamps>
+      <tstamps>8a77e47c-b8d4-4e37-9ecb-a089ad8099d0</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -4914,7 +4914,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>7b9a8db9-d3ba-46d9-ba6a-4ac7bcc93ea3</tstamps>
+      <tstamps>cf8f83d0-ffa4-4502-9c97-5cca52190fac</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -4941,7 +4941,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>cd2301c4-663f-4502-ad49-2d7d16452394</tstamps>
+      <tstamps>ae3a6bf5-748d-4639-8063-0ea09224c2b4</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -4968,7 +4968,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>11e0ad4d-b1f5-4c33-99ba-2fa890331d2d</tstamps>
+      <tstamps>d62a4754-006c-497d-9d73-5f1d75988a29</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -4995,7 +4995,7 @@
       <property name="ki_keywords" value="LED diode"/>
       <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>d1830f3b-eaa1-4c8d-b2ee-29ee63047cec</tstamps>
+      <tstamps>03ec6066-24c2-4ec9-89ec-f92268d80139</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -5020,7 +5020,7 @@
       <property name="ki_keywords" value="test point tp"/>
       <property name="ki_fp_filters" value="Pin* Test*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>a2875c59-5e52-4abb-ad84-379166f06ad9</tstamps>
+      <tstamps>4610ea72-2e00-4c23-bc0a-53076cbceeeb</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -5044,7 +5044,7 @@
       <property name="ki_keywords" value="test point tp"/>
       <property name="ki_fp_filters" value="Pin* Test*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>4cbfca04-57d8-4aa5-a756-b101d9364977</tstamps>
+      <tstamps>8948825e-6422-4c1f-b190-8db63b39b52a</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -5066,7 +5066,7 @@
       <property name="Sheetfile" value="LED Watch - Single Color.kicad_sch"/>
       <property name="ki_keywords" value="switch normally-open pushbutton push-button"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>91dac3cd-4351-42f8-8534-0679255be4e2</tstamps>
+      <tstamps>4ec3e22c-9ef0-46e6-92fc-99fcc70f27b7</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -5089,7 +5089,7 @@
       <property name="Sheetfile" value="LED Watch - Single Color.kicad_sch"/>
       <property name="ki_keywords" value="switch normally-open pushbutton push-button"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>ae16cbc8-b08f-49c1-a30c-1390065d8066</tstamps>
+      <tstamps>ccf8fb3d-ea58-4f31-bc34-64b826772198</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -5115,7 +5115,7 @@
       <property name="ki_keywords" value="AVR 8bit Microcontroller AVR-DB"/>
       <property name="ki_fp_filters" value="QFN*1EP*6x6mm*P0.4mm*EP4.2x4.2mm*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>9f677fbf-a7cb-42a6-bad3-5c0bcb4f24ff</tstamps>
+      <tstamps>12a827ed-195c-4374-b7ad-17b6366c1d5e</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -5190,7 +5190,7 @@
       <property name="ki_keywords" value="3-axis accelerometer spi mems"/>
       <property name="ki_fp_filters" value="LGA*2x2mm*P0.5mm*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>e63fdffe-da39-4872-b7eb-c7484aae426d</tstamps>
+      <tstamps>f27d5fc4-0c9e-4c25-8331-a80375487725</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -5226,7 +5226,7 @@
       <property name="ki_keywords" value="harvester solar TEG charger li-on buck"/>
       <property name="ki_fp_filters" value="QFN*1EP*3.5x3.5mm*P0.5mm*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>6f53b3de-1c73-4ecf-a64a-f290ffac88e6</tstamps>
+      <tstamps>2221886c-a63e-474f-b524-956ce399e329</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -5272,7 +5272,7 @@
       <property name="ki_keywords" value="quartz ceramic resonator oscillator"/>
       <property name="ki_fp_filters" value="Crystal*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>ce307365-691a-4c00-b94a-f3fbc056d8c3</tstamps>
+      <tstamps>e56fec9d-d06c-4b26-9755-125640b90d98</tstamps>
       <units>
         <unit name="A">
           <pins>

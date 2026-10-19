@@ -395,7 +395,7 @@ def build(variant):
                 s.net(r, "1", top); (s.gnd(s.pin_end(r, "2")[0]) if bot == "GND" else s.net(r, "2", bot))
         ladder("OV", PX - 40, PY + 10, [("R50", "6.49M", "VRDIV", "VBAT_OV"), ("R51", "5.11M", "VBAT_OV", "GND")])
         ladder("OK", PX - 20, PY + 10, [("R52", "1.47M", "VRDIV", "OK_HYST"), ("R53", "6.49M", "OK_HYST", "OK_PROG"), ("R54", "3.74M", "OK_PROG", "GND")])
-        ladder("OUT", PX, PY + 10, [("R55", "6.49M", "VRDIV", "VOUT_SET"), ("R56", "3.74M", "VOUT_SET", "GND")])
+        ladder("OUT", PX, PY + 10, [("R55", "7.32M", "VRDIV", "VOUT_SET"), ("R56", "4.22M", "VOUT_SET", "GND")])
         s.text("Ladders: VBAT_OV=4.12 V (R50/R51), BAT_OK falls 3.31 V / rises 3.78 V (R52-R54), VOUT=3.31 V (R55/R56). Equations: BQ25570 datasheet 7.3.3, 7.3.4, 7.3.6.", (PX - 45, PY - 8), 2)
         # passives
         for ref, val, net_a, net_b, dx2 in (("C50", "4u7", "SOLAR_IN", "GND", 60), ("C51", "10n", "VREF_SAMP", "GND", 72), ("C52", "4u7", "VBAT", "GND", 84),

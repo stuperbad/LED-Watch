@@ -185,3 +185,10 @@ Files changed: schematic/gen_schematic.py (+ regenerated watch_solar.kicad_sch, 
 ## 2026-10-15 (late): battery datasheet
 
 - Added `docs/datasheets/TinyCircuits-ASR00011-70mAh-datasheet.pdf` (+ `.txt`) from TinyCircuits' GitHub (linked from their product page, ASR00011). Facts used: 70 mAh, 3.0 V discharge cut-off, charge 4.2 V, standard charge 35 mA, maximum 70 mA (1C) per cell, charge 10-45 C and discharge -10 to +45 C, protection board DW01 + 8205A (overdischarge 2.5 V / release 2.9 V, overcharge 4.28 V / release 4.15 V, overcurrent 2-3.6 A), 0 V recharge allowed, 15 x 15 x 5.0 +-0.5 mm, 1.9 g, wires 26 +-5 mm, plug JST SHR-02V-S-B mating our SM02B-SRSS-TB. Consequences: the pouch's own cutoff (2.5 V) acts long before the BQ25570's 1.95 V disconnect; two in parallel allow 140 mA charge, far above what the cell can give; the BQ25570 has no battery temperature input, so solar charging below 10 C is not prevented (a known limitation). The datasheet does not give the wire polarity or the side the wires exit: measure on the real cell (checklist A2).
+
+## 2026-10-18 - pre-order review
+
+- Full read-through before ordering: `docs/PRE-ORDER-REVIEW-2026-10-18.md` (BQ25570 pin by pin, overvoltage table, firmware tests, what is not verifiable) and a no-oscilloscope test plan `docs/BRING-UP-TESTS.md`.
+- **Change: R55 6.49 Mohm -> 7.32 Mohm (C423137), R56 3.74 Mohm -> 4.22 Mohm (C423173).** The VOUT divider (10.23 Mohm) was 7 % below the datasheet's recommended 11-15 Mohm; the new pair gives 11.54 Mohm and VOUT 3.309 V. Netlist compared old vs new: only these two values differ, no connection changed; copper and Gerbers unchanged; BOM 24 -> 26 lines (two more extended part types, about $6 per order). Both resistor values are in stock now (about 10,000 each); the earlier shortage was for different LCSC numbers.
+- Real overvoltage hazards are outside the board: a programmer supplying power while a battery is plugged in, a reversed battery, a high-voltage test panel. Rule: program with the battery unplugged.
+- Firmware tests re-run: 71 unit, 197 hardware-layer, 20 scenarios matching the simulator, all passing. Nothing has run on a real chip.

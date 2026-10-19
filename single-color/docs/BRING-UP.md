@@ -30,7 +30,7 @@ Use the meter in resistance mode. Probe points: battery plug J1 (pin 1 = battery
 
 ## First power-up, one battery
 1. Put a meter in series with the battery (current range), or use a current-limited supply set to 3.7 V and about 50 mA through the JST pigtail instead of a cell.
-2. Plug the **one** battery into J1. A blank processor does nothing visible; expect the current to settle to a few microamps to tens of microamps once the 22 uF and other capacitors have charged.
+2. Plug the **one** battery into J1. A blank processor does nothing visible, but it is not asleep: an unprogrammed AVR runs through its empty flash at the default clock, so expect a few milliamps (an estimate, not measured) until it is programmed; the microamp sleep level only comes with the firmware.
 3. Measure with the cell still connected:
    - pogo pad 2 (`VBAT` rail) = the battery voltage (the switch is closed);
    - C54 pad (`+3V3`) = about 3.3 V (with a battery above about 3.4 V; a buck cannot output more than its input, so expect it to sag as the battery drops below that);
