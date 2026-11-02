@@ -266,6 +266,19 @@ def build():
         s.press(i % 2, 40); s.idle(900)
     out.append(s)
 
+    s = Sc("21_ring_levels")                                                                           # CFG page 2: Right long switches pages, Left = next ring, Right = next brightness step
+    s.press(1); s.goto(6); s.idle(400)
+    s.press(1); s.idle(200); s.long(1); s.idle(400)                                                    # page 2, hour ring
+    for r in range(4):
+        for i in range(8):
+            s.press(1); s.idle(150)                                                                    # every step of this ring, once round
+        s.press(0); s.idle(200)                                                                        # next ring
+    s.press(1); s.idle(200); s.press(1); s.idle(200); s.long(1); s.idle(400); s.press(1); s.idle(200)  # back to page 1 (settings), one value changes there as before
+    s.cmd("RING 0 7"); s.cmd("RING 1 0"); s.cmd("RING 2 5"); s.cmd("RING 3 1"); s.cmd("RING 9 3"); s.cmd("RING 1 8")   # direct setter: the last two are out of range and ignored
+    s.long(0); s.idle(300); s.long(0); s.idle(300); s.press(1, 60); s.idle(1500); s.press(1); s.idle(400)   # leave CFG to Time, show the date (indicator LEDs) at the new levels
+    s.idle(12000); s.event(wake=60); s.idle(1500)
+    out.append(s)
+
     for sc in out:
         sc.save()
     return [o.name for o in out]

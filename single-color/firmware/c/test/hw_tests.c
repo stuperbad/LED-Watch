@@ -97,7 +97,31 @@ static void test_frame_brightness(void) {
     CHECK(lit >= 2, "the time screen lights LEDs");
     CHECK(ok, "every lit LED gets some on-time in the frame");
     /* the planned on-time of a full LED equals slot_us * on_q16 */
-    for (int k = 0; k < 144; k++) if (fb[k] == 255) CHECK(on_us[k] > 0 && on_us[k] <= slot_us, "full LED on-time within its slot");
+    /* the brightest LEDs of the picture (no LED reaches 255 any more: every ring has its own level) get the longest on-time */
+    int mx = 0; for (int k = 0; k < 144; k++) if (fb[k] > mx) mx = fb[k];
+    for (int k = 0; k < 144; k++) if (fb[k] == mx) CHECK(on_us[k] > 0 && on_us[k] <= slot_us, "brightest LED on-time within its slot");
+}
+
+/* Per-ring brightness: the time screen draws one LED on each ring at level 255; each ring scales it by its own level (defaults: hour 50, minute 35, second 25 %). */
+static void ring_max(const uint8_t *fb, int *hour, int *minute, int *second) {
+    *hour = *minute = *second = 0;
+    for (int r = 0; r < 11; r++) for (int c = 0; c < 12; c++) { int v = fb[r * 12 + c]; int *m = r == 0 ? hour : r <= 5 ? minute : second; if (v > *m) *m = v; }
+}
+static void test_ring_levels(void) {
+    watch_init(5);
+    watch_io_t io; memset(&io, 0, sizeof io); io.az = 1000; io.vdd_mv = 3700; io.soc_pm = 700; io.bat_ok = 1; io.ambient = 50;
+    io.btn = 2; for (int i = 0; i < 20; i++) watch_step(10, 10, &io);
+    io.btn = 0; for (int i = 0; i < 20; i++) watch_step(10, 10, &io);
+    const uint8_t *fb = watch_fb(); int h, m, s;
+    ring_max(fb, &h, &m, &s);
+    CHECK(h == 128 && m == 89 && s == 64, "defaults: hour ring 50 %, minute ring 35 %, second ring 25 % of 255");
+    watch_set_ring(0, 0); watch_set_ring(1, 1); watch_set_ring(2, 7); watch_step(10, 10, &io);
+    ring_max(fb, &h, &m, &s);
+    CHECK(h == 255 && m == 179 && s == 20, "levels 100 / 70 / 8 % scale 255 to 255 / 179 / 20");
+    watch_set_ring(0, 8); watch_set_ring(4, 3); watch_step(10, 10, &io);
+    ring_max(fb, &h, &m, &s);
+    CHECK(h == 255, "an out-of-range level or ring is ignored");
+    CHECK(watch_state()->ring_lvl[3] == 2, "the indicator LEDs start at 50 %");
 }
 
 static void test_inputs_and_math(void) {
@@ -189,7 +213,7 @@ static void test_buzzer_plan(void) {
 }
 
 int main(void) {
-    test_pin_map(); test_slot_timing(); test_buzzer_plan(); test_frame_brightness(); test_inputs_and_math(); test_raise(); test_imu_driver();
+    test_pin_map(); test_slot_timing(); test_buzzer_plan(); test_frame_brightness(); test_ring_levels(); test_inputs_and_math(); test_raise(); test_imu_driver();
     printf("%d checks, %d failed\n", checks, fails);
     return fails ? 1 : 0;
 }

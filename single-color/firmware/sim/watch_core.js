@@ -78,7 +78,19 @@
     const fb = new Uint8Array(ROWS * COLS);
     const evq = [];
     function log(m) { evq.push(m); }
-    function put(led, lvl) { if (led) { const i = led.row * COLS + led.col; if (lvl > fb[i]) fb[i] = lvl; } }
+    // Per-ring brightness: four "rings" (hour ROW0, minute ROW1-5, second ROW6-10, indicator LEDs ROW11) each have a level 0..7 (a percentage of the chosen duty), set in
+    // CFG page 2 (CFG, Right long). The defaults are STARTING VALUES (docs/LED-SELECTION.md: hours 100 / minutes 70 / seconds 45 %, all scaled to start at half): to be calibrated
+    // on the real board (reel-to-reel scatter 2-3 x). Settings live in RAM, so every start uses the defaults.
+    const LEVEL_PCT = [100, 70, 50, 35, 25, 18, 12, 8];
+    const RING_DEF_LVL = [2, 3, 4, 2];                  // hour 50 %, minute 35 %, second 25 %, indicators 50 %
+    const RING_LEN = [12, 60, 60, 7];
+    const RING_NAME = ['hour ring', 'minute ring', 'second ring', 'indicator LEDs'];
+    const ringOfRow = (row) => row === 0 ? 0 : row <= 5 ? 1 : row <= 10 ? 2 : 3;
+    function ringGain(row, lvl) {
+      const g = Math.floor((lvl * LEVEL_PCT[S.ringLvl[ringOfRow(row)]] + 50) / 100);
+      return (lvl && !g) ? 1 : g;                       // any lit LED stays at least 1
+    }
+    function put(led, lvl) { if (led) { const i = led.row * COLS + led.col; lvl = ringGain(led.row, lvl | 0); if (lvl > fb[i]) fb[i] = lvl; } }
     function ind(i, lvl) { put(indLed[i], lvl); }
     function ringAt(r, ang) {                       // nearest LED on ring r to an angle (rad, cw from 12)
       const a = ringLeds[r], n = a.length;
@@ -131,7 +143,7 @@
       alm: { on: false, h: 7, m: 0, field: 0, ring: false, armed: true, t: 0 },   // alarm
       snd: { pat: 0, i: 0, t: 0, hz: 0 },                                         // buzzer pattern playing
       bat: { view: 0 },
-      cfgSel: 0,
+      cfgSel: 0, cfgPage: 0, ringSel: 0, ringLvl: RING_DEF_LVL.slice(),
       fun: { g: 0, playing: false },
       dead: false
     };
@@ -208,7 +220,11 @@
           } else gameButton(S.fun.g, b, false);
           break;
         case MODE.CFG:
-          if (b === 0) { S.cfgSel = (S.cfgSel + 1) % CFG_COUNT.length; log('setting: ' + CFG_NAMES[S.cfgSel] + ' = ' + cfgValueText(S.cfgSel)); }
+          if (S.cfgPage) {
+            if (b === 0) { S.ringSel = (S.ringSel + 1) % 4; log('ring: ' + RING_NAME[S.ringSel] + ' = ' + LEVEL_PCT[S.ringLvl[S.ringSel]] + '%'); }
+            else { S.ringLvl[S.ringSel] = (S.ringLvl[S.ringSel] + 1) % 8; log(RING_NAME[S.ringSel] + ' = ' + LEVEL_PCT[S.ringLvl[S.ringSel]] + '%'); }
+          }
+          else if (b === 0) { S.cfgSel = (S.cfgSel + 1) % CFG_COUNT.length; log('setting: ' + CFG_NAMES[S.cfgSel] + ' = ' + cfgValueText(S.cfgSel)); }
           else cfgChange();
           break;
       }
@@ -229,6 +245,7 @@
           if (S.fun.playing && S.fun.g === 0) { if (G.sand.mode === 4) G.bead.w = 0; else sandRemove(4); }
           else if (S.fun.playing && S.fun.g === 6) { G.pc.kind = 1 - G.pc.kind; G.pc.t = 0; G.pc.show = 2500; log(G.pc.kind ? 'breath pacer' : 'metronome'); }
           break;   // Particles: Right hold removes particles (repeats); bead mode: stops the bead
+        case MODE.CFG: S.cfgPage ^= 1; log(S.cfgPage ? 'CFG page 2: ring levels' : 'CFG page 1: settings'); break;   // Right long switches the settings page and the ring-levels page
       }
     }
     function longMs(i) { return i === 1 && (S.mode === MODE.SET || (S.mode === MODE.ALM && S.alm.field < 2)) ? HOLD_MS : LONG_MS; }   // Right in SET: hold = auto-repeat after 0.4 s
@@ -729,6 +746,12 @@
           if (!S.fun.playing) put(hourLed[S.fun.g + 1], blink2 ? 255 : 120);   // game picker: hour LED n = game n
           break;
         case MODE.CFG: {
+          if (S.cfgPage) {                                    // page 2: a bar on the selected ring, drawn through its own level (longer bar = brighter step)
+            const r = S.ringSel, n = Math.floor((RING_LEN[r] * (8 - S.ringLvl[r]) + 7) / 8);
+            if (r === 3) { for (let i = 0; i < n; i++) ind(i, 255); } else bar(r, n / RING_LEN[r], 255);
+            if (blink2) ind(I.CFG, 255);                      // the CFG LED blinks on page 2, steady on page 1
+            break;
+          }
           put(hourLed[S.cfgSel + 1], 255);
           const v = S.set[CFG_KEYS[S.cfgSel]];
           bar(1, (v + 1) / CFG_COUNT[S.cfgSel], 255);
@@ -741,7 +764,7 @@
         else if (g === 1) runStep(dt); else if (g === 2) targetStep(dt); else if (g === 3) qdStep(dt); else if (g === 4) orbitStep(dt, f);
         else if (g === 5) rngStep(dt); else if (g === 6) pacerStep(dt); else if (g === 7) simonStep(dt); else pongStep(dt);
       }
-      if (MODE_IND[S.mode] >= 0 && !(S.mode === MODE.BAT)) ind(MODE_IND[S.mode], 255);
+      if (MODE_IND[S.mode] >= 0 && !(S.mode === MODE.BAT) && !(S.mode === MODE.CFG && S.cfgPage)) ind(MODE_IND[S.mode], 255);
       if (S.locked && !holdingBoth) ind(I.LCK, 255);
       if (holdingBoth && blink4) ind(I.LCK, 255);
       if (S.lockFlash > 0) { S.lockFlash -= dt; if (blink4) for (let i = 0; i < 7; i++) ind(i, 255); }
@@ -809,7 +832,7 @@
       if (S.locked && S.set.lockd === 2) duty *= 0.25;                 // always-on lock display: low brightness
       const scan = S.awake ? scanPlan(io.vdd, duty) : { slots: [], N: 0, I: ledMa(io.vdd), m: 0, needed: 0, achievable: 0, limited: false, avgMa: 0, relBright: 1 };
       return { fb, scan, duty, tone: S.snd.hz, state: S, mode: S.mode, modeName: MODE_NAME[S.mode], awake: S.awake, locked: S.locked, events: evq.slice(), time: hms(), date: Object.assign({ wd: weekdayIso(S.date.y, S.date.m, S.date.d) }, S.date), menu: S.menu.on,
-               sub: S.menu.on ? 'MODE SELECTION: ' + MODE_NAME[S.menu.sel] : S.mode === MODE.FUN ? (S.fun.playing ? GAMES[S.fun.g] : 'pick a game: ' + GAMES[S.fun.g]) : S.mode === MODE.SET ? 'editing ' + SET_FIELDS[S.setField] : S.mode === MODE.ALM ? 'alarm ' + (S.alm.on ? 'ON' : 'off') + ' ' + String(S.alm.h).padStart(2, '0') + ':' + String(S.alm.m).padStart(2, '0') + ', editing ' + ['hour', 'minute', 'on/off'][S.alm.field] : S.mode === MODE.CFG ? CFG_NAMES[S.cfgSel] + ' = ' + cfgValueText(S.cfgSel) : S.mode === MODE.BAT ? ['charge', 'solar', 'state'][S.bat.view] : '' };
+               sub: S.menu.on ? 'MODE SELECTION: ' + MODE_NAME[S.menu.sel] : S.mode === MODE.FUN ? (S.fun.playing ? GAMES[S.fun.g] : 'pick a game: ' + GAMES[S.fun.g]) : S.mode === MODE.SET ? 'editing ' + SET_FIELDS[S.setField] : S.mode === MODE.ALM ? 'alarm ' + (S.alm.on ? 'ON' : 'off') + ' ' + String(S.alm.h).padStart(2, '0') + ':' + String(S.alm.m).padStart(2, '0') + ', editing ' + ['hour', 'minute', 'on/off'][S.alm.field] : S.mode === MODE.CFG ? (S.cfgPage ? RING_NAME[S.ringSel] + ' = ' + LEVEL_PCT[S.ringLvl[S.ringSel]] + '%' : CFG_NAMES[S.cfgSel] + ' = ' + cfgValueText(S.cfgSel)) : S.mode === MODE.BAT ? ['charge', 'solar', 'state'][S.bat.view] : '' };
     }
 
     /* what each button does RIGHT NOW (shown in the simulator, mirrored in MANUAL.md) */
@@ -847,7 +870,7 @@
             c.note = GAMES[g] + (g === 0 ? ' (mode ' + (sm + 1) + ': ' + PARTICLE_MODES[sm].name + (sm < 4 ? ', ' + G.sand.p.length + ' particles' : '') + '). Tilt to move things.' : g === 4 ? ' (' + ORBIT_PATTERNS[G.orb.pat] + ').' : g === 5 ? ' (' + RNG_MODES[rg] + ').' : g === 6 ? ' (' + (pc.kind ? 'breath pacer' : 'metronome') + ').' : '.') + ' Left long = mode selection (FUN is highlighted: wait to come back to the game picker).';
           }
           break;
-        case MODE.CFG: c.ls = 'next setting (' + CFG_NAMES[(S.cfgSel + 1) % CFG_COUNT.length] + ')'; c.rs = 'change value'; c.rl = '-'; c.note = 'Hour LED ' + (S.cfgSel + 1) + ' = ' + CFG_NAMES[S.cfgSel] + '; minute-ring bar = value (' + cfgValueText(S.cfgSel) + ').'; break;
+        case MODE.CFG: if (S.cfgPage) { c.ls = 'next ring (' + RING_NAME[(S.ringSel + 1) % 4] + ')'; c.rs = 'next brightness step'; c.rl = 'back to the settings page'; c.note = 'Ring levels: the bar is drawn on the selected ring (' + RING_NAME[S.ringSel] + ', ' + LEVEL_PCT[S.ringLvl[S.ringSel]] + '%), longer bar = brighter step; the CFG LED blinks.'; } else { c.ls = 'next setting (' + CFG_NAMES[(S.cfgSel + 1) % CFG_COUNT.length] + ')'; c.rs = 'change value'; c.rl = 'ring levels page'; c.note = 'Hour LED ' + (S.cfgSel + 1) + ' = ' + CFG_NAMES[S.cfgSel] + '; minute-ring bar = value (' + cfgValueText(S.cfgSel) + ').'; } break;
       }
       return c;
     }

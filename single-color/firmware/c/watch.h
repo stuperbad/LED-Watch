@@ -71,6 +71,7 @@ typedef struct {
     uint8_t  alm_on, alm_h, alm_m, alm_field, alm_ring, alm_armed; int32_t alm_t;   /* alarm: on/off, time, field being edited, ringing, ready to fire */
     uint8_t  snd_pat, snd_i; uint16_t snd_hz; int32_t snd_t;                         /* buzzer: pattern playing, note index, current frequency (0 = silent) */
     uint8_t  fun_g, fun_playing;
+    uint8_t  cfg_page, ring_sel, ring_lvl[4];   /* CFG page 2: which ring is selected, brightness level 0..7 of hour / minute / second ring and the indicator LEDs */
     uint8_t  set[12];                   /* CFG values, index = CFG number - 1 (CFG 11 = key beeps, CFG 12 = game sounds) */
     uint8_t  pref_sand_mode, pref_orb_pat, pref_rng_mode, pref_pc_kind, pref_pg_mode;
     uint8_t  pref_pc_bpm, pref_pc_br;
@@ -89,6 +90,7 @@ const watch_t    *watch_state(void);
 void              watch_set_time(uint8_t h, uint8_t m, uint8_t s);
 void              watch_set_date(uint16_t y, uint8_t mo, uint8_t d);
 void              watch_set_cfg(uint8_t idx, uint8_t v);     /* idx 0..11 = CFG 1..12; used by tests and to load saved settings */
+void              watch_set_ring(uint8_t ring, uint8_t lvl);  /* ring 0..3 = hour / minute / second ring, indicator LEDs; lvl 0..7 = 100, 70, 50, 35, 25, 18, 12, 8 % */
 void              watch_set_alarm(uint8_t h, uint8_t m, uint8_t on);
 uint16_t          watch_tone_hz(void);       /* frequency the piezo should play now (0 = silent), valid after watch_step() */
 uint8_t           watch_weekday_iso(void);   /* Monday = 1 ... Sunday = 7 */

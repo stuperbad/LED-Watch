@@ -118,7 +118,19 @@ static uint8_t in_half(uint8_t r, uint8_t k, uint8_t side) {           /* side 0
     return side ? s > 655 : s < -655;
 }
 
-static void put(led_pos_t l, uint8_t lvl) { if (l.row < WATCH_ROWS) { uint8_t *p = &fb[(uint8_t)(l.row * WATCH_COLS + l.col)]; if (lvl > *p) *p = lvl; } }
+/* Per-ring brightness: four "rings" (hour ROW0, minute ROW1-5, second ROW6-10, indicator LEDs ROW11) each have a level 0..7 (a percentage of the chosen duty), set in CFG page 2
+ * (CFG, Right long). The defaults are STARTING VALUES (the study in docs/LED-SELECTION.md gives hours 100 / minutes 70 / seconds 45 %, all scaled to start at half): to be calibrated
+ * on the real board, the reel-to-reel LED scatter can be 2-3 x. Settings live in RAM, so every boot starts from the defaults. */
+#define RING_N 4
+static const uint8_t LEVEL_PCT[8]    = { 100, 70, 50, 35, 25, 18, 12, 8 };
+static const uint8_t RING_DEF_LVL[RING_N] = { 2, 3, 4, 2 };                 /* hour 50 %, minute 35 %, second 25 %, indicators 50 % */
+static const uint8_t RING_LEN[RING_N] = { 12, 60, 60, 7 };
+static uint8_t ring_of_row(uint8_t row) { return row == 0 ? 0 : row <= 5 ? 1 : row <= 10 ? 2 : 3; }
+static uint8_t ring_gain(uint8_t row, uint8_t lvl) {
+    uint8_t g = (uint8_t)(((uint16_t)lvl * LEVEL_PCT[W.ring_lvl[ring_of_row(row)]] + 50) / 100);
+    return (lvl && !g) ? 1 : g;                   /* any lit LED stays at least 1 */
+}
+static void put(led_pos_t l, uint8_t lvl) { if (l.row < WATCH_ROWS) { uint8_t *p = &fb[(uint8_t)(l.row * WATCH_COLS + l.col)]; lvl = ring_gain(l.row, lvl); if (lvl > *p) *p = lvl; } }
 static void ind(uint8_t i, uint8_t lvl) { put(MODE_LED[i], lvl); }
 static void putr(uint8_t r, uint8_t k, uint8_t lvl) { put(ring_led(r, k), lvl); }
 static void bar_n(uint8_t r, uint8_t n, uint8_t lvl) { uint8_t len = ring_len(r); if (n > len) n = len; for (uint8_t i = 0; i < n; i++) putr(r, i, lvl); }   /* n LEDs clockwise from 12 */
@@ -173,6 +185,7 @@ uint8_t watch_weekday_iso(void) { return weekday_iso(W.year, W.month, W.day); }
 static void hms(uint8_t *h, uint8_t *m, uint8_t *s) { uint32_t t = (W.rtc_ms / 1000UL) % 86400UL; *h = (uint8_t)(t / 3600); *m = (uint8_t)(t / 60 % 60); *s = (uint8_t)(t % 60); }
 void watch_set_time(uint8_t h, uint8_t m, uint8_t s) { W.rtc_ms = ((uint32_t)(h % 24) * 3600UL + (uint32_t)(m % 60) * 60UL + (s % 60)) * 1000UL; }
 void watch_set_cfg(uint8_t idx, uint8_t v) { if (idx < C_COUNT && v < CFG_COUNT[idx]) W.set[idx] = v; }
+void watch_set_ring(uint8_t ring, uint8_t lvl) { if (ring < RING_N && lvl < 8) W.ring_lvl[ring] = lvl; }
 void watch_set_alarm(uint8_t h, uint8_t m, uint8_t on) { W.alm_h = (uint8_t)(h % 24); W.alm_m = (uint8_t)(m % 60); W.alm_on = on ? 1 : 0; W.alm_armed = 0; }
 void watch_set_date(uint16_t y, uint8_t mo, uint8_t d) { W.year = y; W.month = mo; W.day = d > days_in(y, mo) ? days_in(y, mo) : d; }
 static void next_day(void) { W.day++; if (W.day > days_in(W.year, W.month)) { W.day = 1; W.month++; if (W.month > 12) { W.month = 1; W.year++; } } }
@@ -236,7 +249,10 @@ static void on_short(uint8_t b) {
             if (b == 0) W.fun_g = (uint8_t)((W.fun_g + 1) % G_COUNT); else { W.fun_playing = 1; game_start(W.fun_g); }
         } else game_button(W.fun_g, b);
         break;
-    default: if (b == 0) W.cfg_sel = (uint8_t)((W.cfg_sel + 1) % C_COUNT); else cfg_change(); break;
+    default:
+        if (W.cfg_page) { if (b == 0) W.ring_sel = (uint8_t)((W.ring_sel + 1) % RING_N); else W.ring_lvl[W.ring_sel] = (uint8_t)((W.ring_lvl[W.ring_sel] + 1) % 8); }
+        else if (b == 0) W.cfg_sel = (uint8_t)((W.cfg_sel + 1) % C_COUNT); else cfg_change();
+        break;
     }
 }
 static void on_long(uint8_t b) {
@@ -252,7 +268,7 @@ static void on_long(uint8_t b) {
         if (W.fun_playing && W.fun_g == G_PART) { if (W.pref_sand_mode == 4) W.g.part.bead_w = 0; else part_remove(4); }
         else if (W.fun_playing && W.fun_g == G_PACER) { W.pref_pc_kind ^= 1; W.g.pc.t = 0; W.g.pc.show = 2500; }
         break;
-    default: break;
+    default: W.cfg_page ^= 1; break;                                 /* CFG: Right long switches between the settings page and the ring-levels page */
     }
 }
 static uint16_t long_ms(uint8_t i) { return (i == 1 && (W.mode == M_SET || (W.mode == M_ALM && W.alm_field < 2))) ? HOLD_MS : LONG_MS; }
@@ -791,6 +807,12 @@ static void render(uint16_t dt) {
         if (!W.fun_playing) put(hour_led((uint8_t)(W.fun_g + 1)), blink2 ? 255 : 120);          /* game picker: hour LED n = game n */
         break;
     default: {
+        if (W.cfg_page) {                                           /* page 2: a bar on the selected ring, drawn through its own level (longer bar = brighter step) */
+            uint8_t r = W.ring_sel, n = (uint8_t)((RING_LEN[r] * (8 - W.ring_lvl[r]) + 7) / 8);
+            if (r == 3) { for (uint8_t i = 0; i < n; i++) ind(i, 255); } else bar_n(r, n, 255);
+            if (blink2) ind(I_CFG, 255);                          /* the CFG LED blinks on page 2, steady on page 1 */
+            break;
+        }
         put(hour_led((uint8_t)(W.cfg_sel + 1)), 255);
         uint8_t v = W.set[W.cfg_sel], cnt = CFG_COUNT[W.cfg_sel];
         bar_n(1, (uint8_t)((2 * (v + 1) * 60 + cnt) / (2 * cnt)), 255);
@@ -809,7 +831,7 @@ static void render(uint16_t dt) {
         default: pong_step(dt); break;
         }
     }
-    if (MODE_IND[W.mode] >= 0 && W.mode != M_BAT) ind((uint8_t)MODE_IND[W.mode], 255);
+    if (MODE_IND[W.mode] >= 0 && W.mode != M_BAT && !(W.mode == M_CFG && W.cfg_page)) ind((uint8_t)MODE_IND[W.mode], 255);
     if (W.locked && !holding_both) ind(I_LCK, 255);
     if (holding_both && blink4) ind(I_LCK, 255);
     if (W.lock_flash > 0) { W.lock_flash = (int16_t)(W.lock_flash - dt); if (blink4) for (uint8_t i = 0; i < I_COUNT; i++) ind(i, 255); }
@@ -847,6 +869,7 @@ void watch_init(uint32_t seed) {
     rng_state = seed ? seed : 1; px = 0; py = 0; pz = 1000; shake_acc = 0;
     W.rtc_ms = (10UL * 3600UL + 8UL * 60UL + 37UL) * 1000UL; W.year = 2026; W.month = 10; W.day = 11;
     W.set[C_BRI] = 2; W.set[C_WAKE] = 1; W.set[C_DUR] = 3;
+    for (uint8_t i = 0; i < RING_N; i++) W.ring_lvl[i] = RING_DEF_LVL[i];
     W.pref_pc_bpm = 100; W.pref_pc_br = 6;
     W.alm_h = 7; W.alm_armed = 1;
 }

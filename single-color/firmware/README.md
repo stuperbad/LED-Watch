@@ -21,11 +21,11 @@ Differences from the JavaScript simulator: at most 40 particles instead of 60 (c
 
 ## Tests (run from `firmware/c/test`)
 ```
-python gen_scenarios.py      # writes scn/*.scn (17 scripted button / motion / battery timelines)
+python gen_scenarios.py      # writes scn/*.scn (21 scripted button / motion / battery timelines)
 python run_diff.py           # runs each on the JS simulator AND the C core, compares every frame (exact except a few animations)
 python run_unit.py           # particle physics, bead, Ring Runner, the 999 award, scan limits, and a 400,000-step random-input stress run
 ```
-Needs node and the host gcc (`winget install BrechtSanders.WinLibs.POSIX.UCRT`, installed 2026-10-12; path used by the scripts). Last result: all 17 scenarios match; unit and stress tests pass. The sanitizers (undefined-behaviour checking) are not available in this MinGW build, so integer-overflow bugs that only exist on the 16-bit AVR are guarded by coding rules (see the comment at the top of `watch.c`) and by compiling the real target with `-Wall -Wextra`.
+Needs node and the host gcc (`winget install BrechtSanders.WinLibs.POSIX.UCRT`, installed 2026-10-12; path used by the scripts). Last result: all 21 scenarios match; unit and stress tests pass. The sanitizers (undefined-behaviour checking) are not available in this MinGW build, so integer-overflow bugs that only exist on the 16-bit AVR are guarded by coding rules (see the comment at the top of `watch.c`) and by compiling the real target with `-Wall -Wextra`.
 
 ## Size (real, linked for the chip)
 `c/size_probe.c` links the core with a trivial main: 24,389 bytes of flash (19 %), 968 bytes of RAM (6 %) at `-Os`. Command:

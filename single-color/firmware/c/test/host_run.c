@@ -1,6 +1,6 @@
 /* host_run.c - run the C watch core on a scenario file and print one line per step (for differential tests against the JS simulator).
  *
- * scenario commands:   SEED n | TIME h m s | DATE y m d | CFG idx v
+ * scenario commands:   SEED n | TIME h m s | DATE y m d | CFG idx v | RING idx v
  *                      ALARM h m on
  *                      R count dt btn ax ay az wake tap ff vdd_mv soc_pm bat solar chg ambient   (repeat a step `count` times)
  * output per step:     mode awake locked menu_on menu_sel ind_only n_slots <144 hex bytes of framebuffer> tone_hz
@@ -23,6 +23,7 @@ int main(int argc, char **argv) {
         else if (!strcmp(cmd, "DATE")) { sscanf(line, "DATE %d %d %d", &a, &b, &c); watch_set_date((uint16_t)a, (uint8_t)b, (uint8_t)c); }
         else if (!strcmp(cmd, "ALARM")) { sscanf(line, "ALARM %d %d %d", &a, &b, &c); watch_set_alarm((uint8_t)a, (uint8_t)b, (uint8_t)c); }
         else if (!strcmp(cmd, "CFG")) { sscanf(line, "CFG %d %d", &a, &b); watch_set_cfg((uint8_t)a, (uint8_t)b); }
+        else if (!strcmp(cmd, "RING")) { sscanf(line, "RING %d %d", &a, &b); watch_set_ring((uint8_t)a, (uint8_t)b); }
         else if (!strcmp(cmd, "R")) {
             if (!inited) { watch_init(seed); inited = 1; }
             int n, dt, btn, ax, ay, az, wake, tap, ff, vdd, soc, bat, solar, chg, amb;

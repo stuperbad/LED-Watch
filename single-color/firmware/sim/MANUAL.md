@@ -252,6 +252,16 @@ CFG: HOW TO CHANGE A SETTING
    11        key beeps           off (default), on: a 3.5 kHz click on every button press (not inside games; games make their own sounds)
    12        game sounds         on (default), off: hits, misses, wins, Simon tones, the metronome tick, Quick Draw GO
 
+CFG PAGE 2: BRIGHTNESS OF EACH RING
+-----------------------------------
+In CFG, hold RIGHT (long) to switch to page 2 (hold RIGHT again to come back). The CFG indicator BLINKS on page 2 and is steady on page 1.
+Four levels, on top of the global brightness (CFG 1), one for each group of LEDs: hour ring, minute ring, second ring, the seven indicator LEDs.
+   LEFT short  = next ring (hour, minute, second, indicators)
+   RIGHT short = next brightness step: 100, 70, 50, 35, 25, 18, 12, 8 %, then back to 100 %
+The picture is a BAR drawn on the selected ring, at that ring's real brightness: a longer bar = a brighter step.
+Every start begins at hour 50 %, minute 35 %, second 25 %, indicators 50 % (hours brightest, seconds dimmest; the values are not saved).
+The level also applies to everything else shown on that ring (date, battery, menus, games).
+
 POWER NOTES
 -----------
 Only about 3 LEDs are lit at a time in normal use. Games and bars light more, and because each row

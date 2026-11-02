@@ -16,6 +16,7 @@ for (const line of fs.readFileSync(process.argv[2], 'utf8').split('\n')) {
   else if (t[0] === 'DATE') W.setDate(n[0], n[1], n[2]);
   else if (t[0] === 'ALARM') W.setAlarm(n[0], n[1], n[2]);
   else if (t[0] === 'CFG') W.S.set[KEYS[n[0]]] = n[1];
+  else if (t[0] === 'RING') { if (n[0] >= 0 && n[0] < 4 && n[1] >= 0 && n[1] < 8) W.S.ringLvl[n[0]] = n[1]; }
   else if (t[0] === 'R') {
     const [cnt, dt, btn, ax, ay, az, wake, tap, ff, vdd, soc, bat, solar, chg, amb] = n;
     const io = { btn: [!!(btn & 1), !!(btn & 2)], accel: { x: ax / 1000, y: ay / 1000, z: az / 1000 }, wakeStrength: wake / 100, tap: !!tap, ff: !!ff,

@@ -76,6 +76,7 @@ Entering FUN never drops you straight into a game; it shows the **game picker**,
 | 10 | Lock display | motion wakes it, stays dark, always on (low brightness, no seconds) | motion wakes it |
 | 11 | Key beeps | off, on (a click on every press outside the games) | off |
 | 12 | Game sounds | on, off (hits, misses, wins, Simon tones, metronome tick) | on |
+**Page 2: ring levels (Right long in CFG switches between page 1 and page 2).** Four brightness levels, one per group of LEDs, on top of the global duty in CFG 1: hour ring, minute ring, second ring and the seven indicator LEDs. Page 2 draws a **bar on the selected ring through its own level**: Left short = next ring (hour, minute, second, indicators), Right short = next step (100, 70, 50, 35, 25, 18, 12, 8 %, wrapping); a longer bar = a brighter step; the CFG LED blinks on page 2 and is steady on page 1. **Starting values (every boot, nothing is saved): hour 50 %, minute 35 %, second 25 %, indicators 50 %**: the hierarchy of `LED-SELECTION.md` (hours brightest, seconds dimmest) scaled to start at half. The levels also scale everything else drawn on that ring (menus, games, date, battery). To be calibrated on the real board.
 Protocol: open CFG from mode selection; the hour ring tells you WHICH setting, the minute-ring bar tells you its VALUE; Right short = next value, Left short = next setting; changes apply immediately (no save step); Left long to leave.
 
 ### Date display (Right short in Time; battery is Right long)
