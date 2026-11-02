@@ -12,6 +12,8 @@ LCSC = {
  ("SW_Push", "SW_Push_1P1T_NO_CK_KMR2"): "C72443", ("LiPo", "JST_SH_SM02B-SRSS-TB_1x02-1MP_P1.00mm_Horizontal"): "C160402",
  ("32.768kHz", "Crystal_SMD_3215-2Pin_3.2x1.5mm"): "C97606", ("AVR128DB48-I/6LX", "QFN-48-1EP_6x6mm_P0.4mm_EP4.2x4.2mm"): "C1019768",
  ("LIS2DW12TR", "LGA-12_2x2mm_P0.5mm"): "C189624", ("BQ25570RGRR", "BQ25570RGR_VQFN-20_3.5x3.5mm_P0.5mm_EP2.05mm"): "C506250",
+ ("1u", "C_0402_1005Metric"): "C52923", ("5.1k", "R_0402_1005Metric"): "C25905", ("8.2k", "R_0402_1005Metric"): "C25924", ("1k", "R_0402_1005Metric"): "C11702",   # USB-C mock-up (2026-11-02), JLCPCB pages checked 2026-11-02
+ ("BQ21040DBV", "SOT-23-6"): "C202311", ("BAT54WS", "D_SOD-323"): "C304155", ("USB-C power + UPDI (GCT USB4110)", "USB_C_Receptacle_GCT_USB4110"): "C5143397",
  ("PKMCS0909E4000-R1", "Piezo_Murata_PKMCS0909E4000-R1_9x9mm"): "C910763", ("10uH", "L_1210_3225Metric"): "C74563", ("22uH", "L_1210_3225Metric"): "C90320",
 }
 # JLCPCB rotation corrections per footprint (their part model vs KiCad footprint zero), checked in the

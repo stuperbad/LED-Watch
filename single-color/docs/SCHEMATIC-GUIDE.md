@@ -34,7 +34,7 @@ Why a harvester IC and not just a charger: the cell makes only about 1.1 V to 2 
 
 | Ref | Part | What it does |
 |---|---|---|
-| **U1** | Microchip **AVR128DB48** (VQFN-48, 6 x 6 mm) | The MCU: 128 KB flash, runs from VSTOR (3.0-4.2 V). Drives the LED matrix directly from its pins, reads buttons, talks to the IMU, keeps time with the 32 kHz crystal, sleeps at a few uA. Pin use: 12 column pins (COL*_MCU) + 12 row pins (ROW0-11; row 11 is the six mode LEDs) + 2 buttons + IMU interrupt + I2C (SDA/SCL) + BAT_OK + crystal + UPDI. 12 spare pins (PB4, PB5, PD6, PD7, PF2-PF5, reset). |
+| **U1** | Microchip **AVR128DB48** (VQFN-48, 6 x 6 mm) | The MCU: 128 KB flash, runs from VSTOR (3.0-4.2 V). Drives the LED matrix directly from its pins, reads buttons, talks to the IMU, keeps time with the 32 kHz crystal, sleeps at a few uA. Pin use: 12 column pins (COL*_MCU) + 12 row pins (ROW0-11; row 11 is the six mode LEDs) + 2 buttons + IMU interrupt + I2C (SDA/SCL) + BAT_OK + crystal + UPDI. Revision B pin plan: COL0-7 = PA0-7, COL8-11 = PB0-3, ROW0-7 = PC0-7, ROW8-11 = PD0-3, I2C on PF2/PF3 (TWI1), buzzer on PB4/PB5; 6 free pins (PD4-PD7, PF4, PF5). |
 | **Y1** 32.768 kHz + **C20, C21** 18 pF | watch crystal and its load caps | Gives the RTC accurate time (about 2 uA). 18 pF is derived from the datasheet's per-pin pin capacitance (5 pF) and a 12.5 pF crystal. Layout rule: caps right at the crystal, nothing under it, grounded guard around it. |
 | **C10, C11, C12** 100 nF + **C13** 10 uF | MCU decoupling | One 100 nF per supply pin (VDD, AVDD, VDDIO2) and one bulk cap on the VBAT rail. |
 | **U2** | ST **LIS2DW12** accelerometer (LGA-12) | Motion sensing: wake-on-motion, tap, wrist-raise detection; its INT1 pin wakes the MCU (IMU_INT). Runs from the 3.3 V rail. |

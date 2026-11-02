@@ -36,11 +36,11 @@ static void test_pin_map(void) {
         tot += __builtin_popcount(MATRIX_ALL_ROWS[p]) + __builtin_popcount(MATRIX_ALL_COLS[p]);
     }
     CHECK(tot == 24, "24 matrix pins in all");
-    /* the wiring facts we rely on (from the schematic): ROW0 = PC2, COL0 = PA0 */
+    /* revision B wiring (from the schematic): bit n of the 12-bit column pattern is pin n of the port: COL0-7 = PA0-7, COL8-11 = PB0-3; ROW0-7 = PC0-7, ROW8-11 = PD0-3 */
     uint8_t m[MATRIX_PORTS];
-    matrix_row_masks(0, m); CHECK(m[2] == (1 << 2), "ROW0 is PC2");
-    matrix_col_masks(0, m); CHECK(m[0] == (1 << 0), "COL0 is PA0");
-    matrix_col_masks(10, m); CHECK(m[2] == (1 << 0), "COL10 is PC0");
+    for (int c = 0; c < 12; c++) { matrix_col_masks((uint8_t)c, m); CHECK(m[c < 8 ? 0 : 1] == (uint8_t)(1u << (c & 7)), "column n is bit n of port A (0-7) or B (8-11)"); }
+    for (int r = 0; r < 12; r++) { matrix_row_masks((uint8_t)r, m); CHECK(m[r < 8 ? 2 : 3] == (uint8_t)(1u << (r & 7)), "row n is bit n of port C (0-7) or D (8-11)"); }
+    CHECK(MATRIX_ALL_COLS[0] == 0xFF && MATRIX_ALL_COLS[1] == 0x0F && MATRIX_ALL_ROWS[2] == 0xFF && MATRIX_ALL_ROWS[3] == 0x0F, "whole ports: A = 8 columns, B low nibble = 4 columns, C = 8 rows, D low nibble = 4 rows");
 }
 
 static void test_slot_timing(void) {

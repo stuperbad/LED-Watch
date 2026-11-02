@@ -5,13 +5,13 @@
       "Application": "Pcbnew",
       "Version": "10.0.6"
     },
-    "CreationDate": "2026-10-18T23:23:20-07:00"
+    "CreationDate": "2026-11-02T07:24:31-08:00"
   },
   "GeneralSpecs": {
     "ProjectId": {
       "Name": "LED Watch - Single Color",
       "GUID": "4c454420-5761-4746-9368-202d2053696e",
-      "Revision": "A"
+      "Revision": "C"
     },
     "Size": {
       "X": 42.1,

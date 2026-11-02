@@ -42,7 +42,7 @@ Connects the portable core to the AVR128DB48. Everything compiles with avr-gcc (
 | `clock.c` | 4 MHz main clock, 32.768 kHz crystal, RTC counter = all timekeeping, periodic wake-up (64 Hz awake, 1 Hz asleep) |
 | `buttons.c` | the two buttons, accelerometer interrupt pin and BAT_OK (port E), wake from sleep on pin change |
 | `vbat.c` | battery voltage from the ADC's internal VDD/10 input |
-| `i2c_twi.c`, `imu.c` | I2C host (TWI0) and the LIS2DW12 accelerometer driver (register map from datasheet DS11811) |
+| `i2c_twi.c`, `imu.c` | I2C host (TWI1, on PF2/PF3) and the LIS2DW12 accelerometer driver (register map from datasheet DS11811) |
 | `hw_pure.c` | the calculations with no hardware in them: debounce, battery curve, time conversion, accelerometer scaling, wrist-raise classifier |
 | `hw_config.h` | every number that must be tuned on the real board |
 PC tests of the hardware-free parts: `python c/test/run_hw.py` (161 checks: pin map, scan timing, debounce, battery maths, accelerometer register sequence against a pretend sensor, raise detection).

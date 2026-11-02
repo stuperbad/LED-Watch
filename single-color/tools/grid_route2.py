@@ -20,7 +20,7 @@ from shapely.ops import unary_union
 from shapely.strtree import STRtree
 
 args = sys.argv[1:]
-opt = {"--res": 0.05, "--clr": 0.10, "--w": 0.10, "--via-cost": 60.0, "--layers": "F,In1,B", "--in2-cost": 2.5, "--rip-cost": 25.0, "--max-attempts": 400, "--max-nodes": 1500000, "--via-pad-area": 1.0, "--exclude": "", "--edge": 0.3, "--margin": 0.03}
+opt = {"--res": 0.05, "--clr": 0.10, "--w": 0.10, "--via-cost": 60.0, "--layers": "F,In1,B", "--in2-cost": 2.5, "--rip-cost": 25.0, "--max-attempts": 400, "--max-nodes": 1500000, "--via-pad-area": 1.0, "--exclude": "", "--edge": 0.3, "--margin": 0.03, "--hist": 4.0, "--prefer": "", "--pref-pen": 3.0}
 pos = []
 i = 0
 while i < len(args):
@@ -44,7 +44,7 @@ INF_T = CLR + W / 2 + MARGIN            # track centre to other copper
 INF_V = 0.2 + VIA_DRILL / 2 + MARGIN     # via centre to other copper (hole to copper 0.2)
 INF_VP = CLR + VIA_D / 2 + MARGIN        # via centre to copper (pad clearance)
 INF_V = max(INF_V, INF_VP)
-INF_TV = CLR + VIA_D / 2 + MARGIN        # track centre to an existing via of another net
+INF_TV = CLR + W / 2 + MARGIN            # added to the via's own outline (radius VIA_D / 2): via edge to track centre = clearance + half a track (+ raster margin)
 
 d = json.load(open(GRID))
 x0, y0 = d["bbox"][0] - 1.0, d["bbox"][1] - 1.0
@@ -105,6 +105,24 @@ vstack = [np.zeros((Hc, Wc), dtype=np.int32) for _ in ALL_LAYERS]   # inflated f
 cstack = [np.zeros((Hc, Wc), dtype=np.int32) for _ in ALL_LAYERS]   # raw copper (net ids), for sources / targets
 tsoft = [np.zeros((Hc, Wc), dtype=np.int32) for _ in ALL_LAYERS]    # copper routed in this run (rippable), inflated for tracks
 vsoft = [np.zeros((Hc, Wc), dtype=np.int32) for _ in ALL_LAYERS]    # same, inflated for via centres
+hist = [np.zeros((Hc, Wc), dtype=np.float32) for _ in ALL_LAYERS]   # negotiated-congestion history: raised where a routed net had to be ripped up, so that the next tries keep away from contested cells
+
+# preferred routing directions (--prefer "x0,y0,x1,y1,In1:H,B:V;..."): inside the rectangle a move along the NON-preferred axis of that layer costs --pref-pen times as much
+# (H = x direction, V = y direction; a diagonal step counts half and half).  Used for a breakout: radial spokes on one layer, the ring road around the via ring on another.
+wH = [np.ones((Hc, Wc), dtype=np.float32) for _ in ALL_LAYERS]
+wV = [np.ones((Hc, Wc), dtype=np.float32) for _ in ALL_LAYERS]
+for rule in [r for r in opt["--prefer"].split(";") if r.strip()]:
+    f_ = rule.split(",")
+    px0, py0, px1, py1 = (float(v) for v in f_[:4])
+    ca, cb = int((px0 - x0) / RES), int((px1 - x0) / RES) + 1
+    ra, rb = int((py0 - y0) / RES), int((py1 - y0) / RES) + 1
+    for lv in f_[4:]:
+        ln_, dr_ = lv.split(":")
+        k_ = LI[LNAME[ln_]]
+        if dr_ == "H":
+            wV[k_][ra:rb, ca:cb] = opt["--pref-pen"]
+        else:
+            wH[k_][ra:rb, ca:cb] = opt["--pref-pen"]
 items = []   # (net, layer, geom)
 for p in d["pads"]:
     g = Polygon(p["pts"]).buffer(0)
@@ -260,6 +278,9 @@ def astar(net_o, src_mask, dst_mask, rip=None):
     vok = vok.ravel()
     vsf = vsf.ravel().tolist()
     free = [f.tolist() for f in free]
+    histl = [hist[ln].ravel().tolist() for ln in RL]
+    wHl = [wH[ln].ravel().tolist() for ln in RL]
+    wVl = [wV[ln].ravel().tolist() for ln in RL]
     vok = vok.tolist()
     dsts = [dst_mask[ln].ravel().tolist() for ln in RL]
     # heuristic: distance to the bounding box of the target cells
@@ -286,6 +307,7 @@ def astar(net_o, src_mask, dst_mask, rip=None):
             continue
         pops += 1
         if pops > MAX_NODES:
+            globals()['LAST_REACH'] = [np.array(gk) < 1e17 for gk in g]
             return None, pops
         if dsts[k][i]:
             path = []
@@ -304,7 +326,8 @@ def astar(net_o, src_mask, dst_mask, rip=None):
             j = ny * Wc + nx
             if not fk[j]:
                 continue
-            ng = gc + c * LCOST[k] + (rip if (rip and soft[k][j]) else 0.0)
+            wm = wHl[k][j] if dy == 0 else (wVl[k][j] if dx == 0 else 0.5 * (wHl[k][j] + wVl[k][j]))
+            ng = gc + c * LCOST[k] * wm + (rip if (rip and soft[k][j]) else 0.0) + histl[k][j]
             if ng < g[k][j]:
                 g[k][j] = ng
                 came[k][j] = (k, i)
@@ -320,6 +343,7 @@ def astar(net_o, src_mask, dst_mask, rip=None):
                         g[k2][i] = ng
                         came[k2][i] = (k, i)
                         heapq.heappush(pq, (ng, ng, k2, i))
+    globals()['LAST_REACH'] = [np.array(gk) < 1e17 for gk in g]
     return None, pops
 
 
@@ -387,12 +411,15 @@ for ko in d.get("keepouts", []):
 # (AVR datasheet 4.5.1: nothing but the ground plane under or around the 32 kHz crystal and its load caps).  Copper zones such as the F.Cu
 # guard around the crystal are NOT obstacles for the rasteriser, so they have to be listed here.
 for rect in [r for r in opt["--exclude"].split(";") if r.strip()]:
+    rect, _, lay = rect.partition("@")           # optional "@F,In1": tracks are only kept off these layers (vias are always kept out: a via is copper on every layer)
+    tl = [LI[LNAME[x]] for x in lay.split(",")] if lay else range(4)
     ex0, ey0, ex1, ey1 = [float(v) for v in rect.split(",")]
     eg = Polygon([(ex0, ey0), (ex1, ey0), (ex1, ey1), (ex0, ey1)])
     for ln in range(4):
-        paint(tstack, eg.buffer(W / 2 + MARGIN, 4), -1, ln)
+        if ln in tl:
+            paint(tstack, eg.buffer(W / 2 + MARGIN, 4), -1, ln)
         paint(vstack, eg.buffer(VIA_D / 2 + MARGIN, 4), -1, ln)
-    print("exclusion zone on all layers:", rect, flush=True)
+    print("exclusion zone on", lay or "all", "layers:", rect, flush=True)
 
 routes = {}                       # net -> list of ops ('seg', layer, p1, p2) / ('via', p)
 added = {}                        # net -> copper pieces added by the router (for connectivity)
@@ -489,7 +516,28 @@ def victims_of(net, segs):
     return vs
 
 
+def raise_history(ops):
+    inc = opt["--hist"]
+    if inc <= 0:
+        return
+    for op in ops:
+        if op[0] == "seg":
+            (xa, ya), (xb, yb) = op[2], op[3]
+            n = max(2, int(math.hypot(xb - xa, yb - ya) / (RES / 2)) + 1)
+            ln = LI[op[1]]
+            for t_ in range(n + 1):
+                cx = int((xa + (xb - xa) * t_ / n - x0) / RES)
+                cy = int((ya + (yb - ya) * t_ / n - y0) / RES)
+                hist[ln][max(0, cy - 1):cy + 2, max(0, cx - 1):cx + 2] += inc / 3.0
+        else:
+            cx = int((op[1][0] - x0) / RES)
+            cy = int((op[1][1] - y0) / RES)
+            for ln in range(4):
+                hist[ln][max(0, cy - 3):cy + 4, max(0, cx - 3):cx + 4] += inc
+
+
 def rip_net(v):
+    raise_history(routes.get(v, []))
     routes.pop(v, None)
     added.pop(v, None)
     rips[v] = rips.get(v, 0) + 1
@@ -544,6 +592,19 @@ def route_net(net, rip=None):
             if rip is None and "--dump" in sys.argv:
                 pa_, pb_ = astar(o, mb, ma)[1], pops
                 print(f"      reach from piece A: {pb_} cells, from piece B: {pa_} cells (the small one is boxed in)", flush=True)
+                # reach pictures: blue = cells reachable from piece A, orange = from piece B, grey = blocked for tracks
+                astar(o, ma, mb)
+                rA = [r.reshape(Hc, Wc) for r in LAST_REACH]
+                astar(o, mb, ma)
+                rB = [r.reshape(Hc, Wc) for r in LAST_REACH]
+                ya, yb, xa, xb = int((84 - y0) / RES), int((106 - y0) / RES), int((84 - x0) / RES), int((106 - x0) / RES)
+                for k, ln in enumerate(RL):
+                    t = tstack[ln][ya:yb, xa:xb]
+                    img = np.zeros(t.shape + (3,), dtype=np.uint8) + 255
+                    img[(t != 0) & (t != nid(net))] = (170, 170, 170)
+                    img[rA[k][ya:yb, xa:xb]] = (90, 130, 230)
+                    img[rB[k][ya:yb, xa:xb]] = (240, 150, 40)
+                    Image.fromarray(img).resize((img.shape[1] * 2, img.shape[0] * 2), Image.NEAREST).save("reach_%s_%s.png" % (net.strip("/"), ALL_LAYERS[ln][:3]))
                 small = ma if pa_ > pb_ else mb
                 other = mb if pa_ > pb_ else ma
                 dump_fail(net, small, other)

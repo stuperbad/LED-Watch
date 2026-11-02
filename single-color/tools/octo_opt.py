@@ -16,6 +16,17 @@ V = pcbnew.VECTOR2I
 src, dst = sys.argv[1], sys.argv[2]
 skip = set(json.load(open(sys.argv[3]))) if len(sys.argv) > 3 else set()
 CLR, HOLE_CLR, EDGE_CLR = mm(0.105), mm(0.205), mm(0.305)
+import os
+BOX = [float(v) for v in os.environ["OCTO_BOX"].split(",")] if os.environ.get("OCTO_BOX") else None     # x0,y0,x1,y1 in mm: only chains lying completely inside are re-drawn
+REF_KEYS = None
+if os.environ.get("OCTO_REF"):          # only chains that contain a piece which is NOT in this reference board are re-drawn (the user's own copper stays untouched)
+    _rb = pcbnew.LoadBoard(os.environ["OCTO_REF"])
+    REF_KEYS = set()
+    for _t in _rb.GetTracks():
+        if _t.GetClass() == "PCB_TRACK":
+            _a, _c = (round(_t.GetStart().x / 2000), round(_t.GetStart().y / 2000)), (round(_t.GetEnd().x / 2000), round(_t.GetEnd().y / 2000))
+            REF_KEYS.add((_t.GetNetname(), _t.GetLayer()) + tuple(sorted([_a, _c])))
+OLAYERS = set(os.environ["OCTO_LAYERS"].split(",")) if os.environ.get("OCTO_LAYERS") else None     # e.g. In1.Cu,B.Cu: only chains on these layers are re-drawn
 CELL = 1000000
 b = pcbnew.LoadBoard(src)
 
@@ -341,7 +352,17 @@ for pieces in chains:
     info.append(dict(id=cid, bbox=[tomm(min(xs)), tomm(min(ys)), tomm(max(xs)), tomm(max(ys))], pts=[[tomm(x_), tomm(y_)] for x_, y_ in pts]))
     len_before += length(pts)
     angles_before += sum(1 for a, c in zip(pts[:-1], pts[1:]) if not is_octo(a, c))
-    if cid in skip:
+    inside_box = BOX is None or (BOX[0] <= tomm(min(xs)) and BOX[1] <= tomm(min(ys)) and tomm(max(xs)) <= BOX[2] and tomm(max(ys)) <= BOX[3])
+    if REF_KEYS is not None:
+        _new = False
+        for _rr, _fa, _fb in pieces:
+            _k = (_rr["net"], _rr["layer"]) + tuple(sorted([(round(_fa[0] / 2000), round(_fa[1] / 2000)), (round(_fb[0] / 2000), round(_fb[1] / 2000))]))
+            if _k not in REF_KEYS:
+                _new = True
+                break
+        if not _new:
+            inside_box = False
+    if cid in skip or not inside_box or (OLAYERS is not None and b.GetLayerName(layer) not in OLAYERS):
         len_after += length(pts)
         angles_after += sum(1 for a, c in zip(pts[:-1], pts[1:]) if not is_octo(a, c))
         continue

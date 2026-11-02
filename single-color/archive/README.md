@@ -5,6 +5,7 @@ Nothing here is needed to build or order the current board (see `../hardware/`).
 | Folder | What it is |
 |---|---|
 | `boards/43.5mm-and-earlier/` | the previous board generation: `Y43_final` (43.5 mm, 2026-10-12) and its routing attempts (`Y43_arc`, `Y43_poly`, `Y43_dog`, `Y43_rip12`), its Gerbers (`fab/`), assembly files (`asm/`) and plan |
+| `boards/rev-B-pogo/` | **pogo-b**: revision B as it was on 2026-11-02 when revision C (USB-C) became the main design: charge and program over the 4-pad pogo row J2 (UPDI and RESET on the pogo pads). A complete KiCad project in `hardware/` (board, schematic, netlist, production files, footprints, symbol library, clean `.kicad_pro`) plus `DEPRECATED.md`. **Known problem: the solar cell pad SC1+ is on a differently named net and not connected, do not order it as it is.** |
 | `boards/X42/` | the first 42 mm placement study |
 | `early-layout-generators/` | the first, fully scripted layout generators (`gen_rings.py`, `plan_board.py`, `write_pcb.py`), early ring/solar experiments (`rings*`, `scan*`, `sweep_top*`), and the old simulator data export that read `plan.json` |
 | `schematic-old/` | the pad/USB-charged schematic variant and the old schematic project file |

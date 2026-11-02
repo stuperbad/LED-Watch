@@ -19,7 +19,7 @@ Nothing in this firmware has run on a real board yet. This file says what to do 
 - Developing without the board: nothing more is needed; the simulator in `firmware/sim` and the tests in `firmware/c/test` already run on this PC.
 
 ## 2. First programming (the chip ships with the wrong power-supply fuse)
-The AVR128DB48 comes with its "multi-voltage I/O" fuse set to dual-supply. Port C (our LED rows 0-5 and columns 10-11) is the multi-voltage port, and our board has VDDIO2 tied to VBAT, so the fuse must be set to **single supply** (datasheet DS40002247B section 19, fuse SYSCFG1 bits 4:3 = 0b10).
+The AVR128DB48 comes with its "multi-voltage I/O" fuse set to dual-supply. Port C (our LED rows 0-7) is the multi-voltage port, and our board has VDDIO2 tied to VBAT, so the fuse must be set to **single supply** (datasheet DS40002247B section 19, fuse SYSCFG1 bits 4:3 = 0b10).
 ```
 avrdude -c <programmer> -p avr128db48 -v                      # should report an AVR128DB48; stop here if it does not
 avrdude -c <programmer> -p avr128db48 -U syscfg1:w:0x10:m     # single supply (factory value is 0x08 = dual)

@@ -44,19 +44,23 @@ static uint8_t fast = 1, imu_is_awake = 1;
 static int32_t motion_ms;                     /* time left in the fast loop after the accelerometer reported motion */
 
 /* Pins nobody drives would float, and a floating input with its input buffer on can draw current. Switch the buffers off on every unused pin of the
- * 48-pin chip (ports A-F). The pins the design uses are set up afterwards by their own init functions. PF0/PF1 (crystal) and PF6 (reset) are left alone. */
+ * 48-pin chip (ports A-F). The pins the design uses are set up afterwards by their own init functions. PF0/PF1 (crystal) are left alone; PF6 (the reset pin, no connector since revision C, schematic no-connect) gets its internal pull-up so it cannot float. */
+_Static_assert(HW_SDA_PORT == 'F' && HW_SDA_BIT == 2 && HW_SCL_PORT == 'F' && HW_SCL_BIT == 3, "i2c_twi.c drives TWI1, whose default pins are PF2/PF3: change the driver together with the schematic");
+_Static_assert(HW_BUZ_A_PORT == 'B' && HW_BUZ_B_PORT == 'B', "unused_pins_off() and buzzer.c assume the buzzer pins are on port B");
 static void unused_pins_off(void) {
     static PORT_t *const P[6] = { &PORTA, &PORTB, &PORTC, &PORTD, &PORTE, &PORTF };
     static const uint8_t present[6] = { 0xFF, 0x3F, 0xFF, 0xFF, 0x0F, 0x3C };       /* pins that exist (PF: only PF2..PF5 are free to configure) */
     uint8_t used[6] = {
-        (uint8_t)(MATRIX_ALL_ROWS[0] | MATRIX_ALL_COLS[0] | (1u << HW_SDA_BIT) | (1u << HW_SCL_BIT)),    /* the I2C pins keep their input buffer */
+        (uint8_t)(MATRIX_ALL_ROWS[0] | MATRIX_ALL_COLS[0]),
         (uint8_t)(MATRIX_ALL_ROWS[1] | MATRIX_ALL_COLS[1] | (1u << HW_BUZ_A_BIT) | (1u << HW_BUZ_B_BIT)),   /* the buzzer pins are outputs */
         (uint8_t)(MATRIX_ALL_ROWS[2] | MATRIX_ALL_COLS[2]),
         (uint8_t)(MATRIX_ALL_ROWS[3] | MATRIX_ALL_COLS[3]),
-        (uint8_t)((1u << HW_BTN1_BIT) | (1u << HW_BTN2_BIT) | (1u << HW_IMU_INT_BIT) | (1u << HW_BAT_OK_BIT)), 0 };
+        (uint8_t)((1u << HW_BTN1_BIT) | (1u << HW_BTN2_BIT) | (1u << HW_IMU_INT_BIT) | (1u << HW_BAT_OK_BIT)),
+        (uint8_t)((1u << HW_SDA_BIT) | (1u << HW_SCL_BIT)) };                                            /* the I2C pins (PF2/PF3, TWI1) keep their input buffer */
     for (uint8_t p = 0; p < 6; p++)
         for (uint8_t b = 0; b < 8; b++)
             if ((present[p] >> b & 1) && !(used[p] >> b & 1)) (&P[p]->PIN0CTRL)[b] = PORT_ISC_INPUT_DISABLE_gc;
+    PORTF.PIN6CTRL = PORT_PULLUPEN_bm;      /* PF6: input (fuse default) or reset pin: either way the pull-up holds it high */
 }
 
 static void wait_for_event(uint8_t light) {

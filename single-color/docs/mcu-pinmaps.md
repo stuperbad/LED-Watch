@@ -25,38 +25,39 @@ Rule: LEDs lit at the same instant in one row x peak current per LED must be 10 
 - With **row driver transistors** (11 tiny N-channel MOSFETs, a couple of cents each, the MCU pin only drives the gate) the full 12-LED row works and the game reaches the full 0.3 mA per LED. Cost: 11 more parts that can sit anywhere along the row traces (or under them).
 - Recommendation: build without drivers, schedule in software (works today), and leave a footprint option on the board for the transistors if the game looks too dim.
 
-## 4. Single colour: AVR128DB48-I/PT (TQFP-48 7x7)
+## 4. Single colour: AVR128DB48 (VQFN-48 6x6), revision B pin assignment
+Revision B (2026-10-29) puts every matrix line on a whole port in pin order: COL0-7 = PA0-7, COL8-11 = PB0-3, ROW0-7 = PC0-7, ROW8-11 = PD0-3, so bit n of the 12-bit column pattern is pin n of its port. I2C is on TWI1 (PF2/PF3), the buzzer stays on TCA1 / PB4-PB5. Revision A's table is in `../archive/boards/rev-A-2026-10-29-pre-repin/DEPRECATED.md`.
 Usable I/O after the dedicated pins: PA0-7, PB0-5, PC0-7, PD0-7, PE0-3, PF2-5 = 38 GPIO. PF0/PF1 are the 32 kHz crystal, PF6 is RESET (input only), UPDI has its own pin. Need: 12 columns + 11 rows + 2 I2C + 3 INT/buttons + charge-status = 29, so **9 spare**.
 
 | Pin | Name | Assigned to |
 |---|---|---|
-| 1 | PA5 | COLUMN (anode side, SOURCE, series resistor) |
-| 2 | PA6 | COLUMN (anode side, SOURCE, series resistor) |
-| 3 | PA7 | COLUMN (anode side, SOURCE, series resistor) |
-| 4 | PB0 | COLUMN (anode side, SOURCE, series resistor) |
-| 5 | PB1 | COLUMN (anode side, SOURCE, series resistor) |
-| 6 | PB2 | COLUMN (anode side, SOURCE, series resistor) |
-| 7 | PB3 | COLUMN (anode side, SOURCE, series resistor) |
+| 1 | PA5 | COLUMN 5 (anode side, SOURCE, series resistor) |
+| 2 | PA6 | COLUMN 6 (anode side, SOURCE, series resistor) |
+| 3 | PA7 | COLUMN 7 (anode side, SOURCE, series resistor) |
+| 4 | PB0 | COLUMN 8 (anode side, SOURCE, series resistor) |
+| 5 | PB1 | COLUMN 9 (anode side, SOURCE, series resistor) |
+| 6 | PB2 | COLUMN 10 (anode side, SOURCE, series resistor) |
+| 7 | PB3 | COLUMN 11 (anode side, SOURCE, series resistor) |
 | 8 | PB4 | BUZ_A: piezo drive, TCA1 WO4 (split mode, high byte HCMP1), default PORTB route |
 | 9 | PB5 | BUZ_B: piezo drive, TCA1 WO5 (split mode, HCMP2); set PORTB.PIN5CTRL.INVEN for opposite phase |
-| 10 | PC0 | COLUMN (anode side, SOURCE, series resistor) |
-| 11 | PC1 | COLUMN (anode side, SOURCE, series resistor) |
-| 12 | PC2 | ROW (cathode side, SINK) |
-| 13 | PC3 | ROW (cathode side, SINK) |
+| 10 | PC0 | ROW 0 (cathode side, SINK) |
+| 11 | PC1 | ROW 1 (cathode side, SINK) |
+| 12 | PC2 | ROW 2 (cathode side, SINK) |
+| 13 | PC3 | ROW 3 (cathode side, SINK) |
 | 14 | VDDIO2 | power: tie to VDD (single-supply fuse), 100 nF |
 | 15 | GND | ground |
-| 16 | PC4 | ROW (cathode side, SINK) |
-| 17 | PC5 | ROW (cathode side, SINK) |
-| 18 | PC6 | ROW (cathode side, SINK) |
-| 19 | PC7 | ROW (cathode side, SINK) |
-| 20 | PD0 | ROW (cathode side, SINK) |
-| 21 | PD1 | ROW (cathode side, SINK) |
-| 22 | PD2 | ROW (cathode side, SINK) |
-| 23 | PD3 | ROW (cathode side, SINK) |
-| 24 | PD4 | ROW (cathode side, SINK) |
-| 25 | PD5 | spare GPIO |
+| 16 | PC4 | ROW 4 (cathode side, SINK) |
+| 17 | PC5 | ROW 5 (cathode side, SINK) |
+| 18 | PC6 | ROW 6 (cathode side, SINK) |
+| 19 | PC7 | ROW 7 (cathode side, SINK) |
+| 20 | PD0 | ROW 8 (cathode side, SINK) |
+| 21 | PD1 | ROW 9 (cathode side, SINK) |
+| 22 | PD2 | ROW 10 (cathode side, SINK) |
+| 23 | PD3 | ROW 11 (cathode side, SINK) |
+| 24 | PD4 | free (was ROW10 in revision A) |
+| 25 | PD5 | free (was ROW11 in revision A) |
 | 26 | PD6 | spare GPIO |
-| 27 | PD7 | spare GPIO |
+| 27 | PD7 | spare GPIO (VREFA, unused) |
 | 28 | AVDD | power: tie to VDD, 100 nF |
 | 29 | GND | ground |
 | 30 | PE0 | LIS2DW12 INT1 (set INLVL=TTL) |
@@ -65,19 +66,19 @@ Usable I/O after the dedicated pins: PA0-7, PB0-5, PC0-7, PD0-7, PE0-3, PF2-5 = 
 | 33 | PE3 | CHG_STAT (A) / BAT_OK (B) |
 | 34 | PF0 | 32.768 kHz crystal XTAL32K1 |
 | 35 | PF1 | 32.768 kHz crystal XTAL32K2 |
-| 36 | PF2 | spare GPIO |
-| 37 | PF3 | spare GPIO |
+| 36 | PF2 | I2C SDA (TWI1, default pins) |
+| 37 | PF3 | I2C SCL (TWI1, default pins) |
 | 38 | PF4 | spare GPIO |
 | 39 | PF5 | spare GPIO |
 | 40 | PF6/RESET | RESET (input only; leave open or pull up) |
 | 41 | UPDI | UPDI programming |
 | 42 | VDD | power: VBAT, 100 nF |
 | 43 | GND | ground |
-| 44 | PA0 | COLUMN (anode side, SOURCE, series resistor) |
-| 45 | PA1 | COLUMN (anode side, SOURCE, series resistor) |
-| 46 | PA2 | I2C SDA (TWI0) |
-| 47 | PA3 | I2C SCL (TWI0) |
-| 48 | PA4 | COLUMN (anode side, SOURCE, series resistor) |
+| 44 | PA0 | COLUMN 0 (anode side, SOURCE, series resistor) |
+| 45 | PA1 | COLUMN 1 (anode side, SOURCE, series resistor) |
+| 46 | PA2 | COLUMN 2 (anode side, SOURCE, series resistor) |
+| 47 | PA3 | COLUMN 3 (anode side, SOURCE, series resistor) |
+| 48 | PA4 | COLUMN 4 (anode side, SOURCE, series resistor) |
 
 Hazards found in the datasheet:
 - **Port C is powered from VDDIO2** (pin 14). It must be tied to VDD and the single-supply fuse (MVSYSCFG) must be set, or every Port C pin is dead. Check the fuse before first power-up.

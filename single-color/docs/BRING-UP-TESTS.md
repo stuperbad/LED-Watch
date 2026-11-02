@@ -5,24 +5,30 @@ The idea: prove, step by step, that power, charging and the processor work, usin
 ## Tools
 - A multimeter that can measure DC current down to microamps and up to about 20 mA (most can; use the separate current jack). A second meter or a bench supply with a current limit is nice, not needed.
 - A bright lamp (a LED floodlight or halogen 20-30 cm from the cell) or direct sunlight; a phone for the clock; a UPDI programmer (Adafruit UPDI Friend, 3 V setting).
-- Where to probe (back of the board): **pogo pad row**: pad 1 RESET, **pad 2 VBAT (system rail)**, pad 3 GND, pad 4 UPDI. **Battery plug J1: pin 1 = GND, pin 2 = battery + (BATT)** (swapped 2026-10-18, review section 7; the back silkscreen marks "+" and "-" beside each plug). **Solar input (SOLAR_IN)** = the + cell pad. **3.3 V rail** = a pad of C54. Ground = pogo pad 3.
+- Where to probe (back of the board): **revision C: the pogo row is gone** (A / B had pad 1 RESET, pad 2 VBAT, pad 3 GND, pad 4 UPDI): probe the **VBAT system rail at C10 pad 1** (front, beside U1) or C52 pad 1 (back); UPDI is on the **USB-C receptacle J2's SBU pins** (A8 / B8); VBUS at C55 pad 1, charger output at C56 pad 1. **Battery plug J1: pin 1 = GND, pin 2 = battery + (BATT)** (swapped 2026-10-18, review section 7; the back silkscreen marks "+" and "-" beside each plug). **Solar input (SOLAR_IN)** = the + cell pad. **3.3 V rail** = a pad of C54. Ground = pogo pad 3.
 
 ## What works without the solar cell
 Steps 0-3 and 7 need only the battery, so you can bring the board up completely and check the processor, the display, the accelerometer, the sleep current and the polarity **before soldering on the solar cell**, and keep a damaged-cell mistake out of the soldering. Steps 4-6 need the cell.
 
 ## Step 0. Before any battery (5 minutes)
-1. Resistance to ground at the pogo VBAT pad, at the battery + pin and at the C54 pad: not zero (a short). 
+1. Resistance to ground at C10 pad 1 (VBAT), at VBUS (C55 pad 1), at the battery + pin and at the C54 pad: not zero (a short). 
 2. **Battery polarity:** measure the pouch's two wires with the meter in voltage mode (it should read about 3.7-4.2 V, red probe on +). Then look at the plug: the board's silkscreen "+" must be on the side of the **red wire**, and the TinyCircuits red wire should read positive. For a meter check without plugging in, push the probe tips against the J1 pins' copper through the plug (or touch the J1 solder pads' ends): the pad marked "+" (pin 2) must read positive against the ground pad. Do not trust wire colours alone. Same for the **solar cell**: under the lamp, the cell's + end must go to the + pad (the datasheet's back drawing and the view through the cell are mirrored, so measure).
 3. Do **not** connect the programmer's supply and a battery at the same time (see the review, section 2).
 
 ## Step 1. First power-up from a current-limited source
-Bench supply 3.7 V with a 20 mA limit on the VBAT pogo pad (or a battery through your meter in the mA range).
+Bench supply 3.7 V with a 20 mA limit on C10 pad 1 (VBAT; revision A / B: the VBAT pogo pad), or a battery through your meter in the mA range.
 - Expect: a blank (unprogrammed) AVR is **not** asleep: it runs through empty flash at its default clock, so a **few mA (est. 1-3 mA)** is normal until it is programmed. Anything above about 10 mA, or a board that warms up, is a problem.
-- Measure: rail at pogo pad 2 about the supply voltage; **3.3 V rail 3.31 V** (a buck cannot exceed its input, so with a 3.7 V supply you should see about 3.3 V; if the supply drops below about 3.4 V it will follow it down).
+- Measure: rail at C10 pad 1 about the supply voltage; **3.3 V rail 3.31 V** (a buck cannot exceed its input, so with a 3.7 V supply you should see about 3.3 V; if the supply drops below about 3.4 V it will follow it down).
 - Wrong? **Rail does not follow the supply:** the BQ25570's battery switch is not closing: is the supply above 2 V, is the polarity right. **3.3 V missing:** the buck is not enabled or the inductor L2 is not soldered. **Large current:** a short; remove power.
 
+## Step 1b. USB-C charging (revision C only, new)
+Battery plugged, programmer not connected, a plain 5 V USB source (not a PD-only charger) through a USB-C cable.
+- Expect: VBUS at C55 pad 1 about 5 V; `BATT` (C56 pad 1) follows the battery and climbs toward 4.2 V; charge current about **54 mA** (540 / R70 10 k, BQ21040) with the meter in series in the battery lead, less for a nearly full pouch (the two pouches in parallel are 140 mAh, so about 0.4 C). The charger's status pin (~CHG, U5 pin 3) is not connected to anything.
+- Wrong? **No VBUS:** the cable or source (CC1 / CC2 each have 5.1 k to ground, the source must see a sink). **VBUS present, no charge:** TS (U5 pin 1) must be pulled to ground by R71 10 k; check R70 10 k on ISET (U5 pin 4).
+- Not yet known (first board): that the 5 V source starts with only the 5.1 k pull-downs (it should, 5 V default), the real charge current, and whether UPDI over SBU works while a source is plugged.
+
 ## Step 2. Program (once per board)
-1. Battery unplugged, programmer on its 3 V setting through the pogo jig (UPDI, VDD, GND).
+1. Battery unplugged, programmer on its 3 V setting, connected to J2 through a USB-C cable with SBU and the splitter (UPDI -> SBU, GND; revision A / B: the pogo jig).
 2. `avrdude ... -v` must name an AVR128DB48; then **set the fuse** `-U syscfg1:w:0x10:m` (single supply) and flash the hex (`BRINGUP.md` section 2).
 3. Expect at power-up: the **self-test** for 2 seconds and a 4 kHz beep. The six indicator LEDs: SET = crystal started, TMR = accelerometer answered, BAT = battery OK, FUN = supply above 3.0 V, CFG = supply above 3.6 V.
 - Wrong? **Nothing at all:** most likely the fuse (programming did not finish) or a missing rail. **SET dark:** crystal or its two capacitors; the watch still runs on its internal clock. **TMR dark:** the accelerometer did not answer on I2C (soldering or the land pattern). **BAT dark with a good battery:** BAT_OK is low, so the BQ25570's ladder or the battery voltage is below 3.31 V: check the battery with the meter first. **No beep:** buzzer pins or the 3.3 V logic.

@@ -186,7 +186,7 @@ Ideas: a computer opponent for solo-versus; zones that shrink as the rally goes 
 
 ## 6. What this asks of the hardware / schematic
 - Buttons: symmetric and low on the face; keep the KMR2 parts for now.
-- Indicators: seven 0402 LEDs on matrix row 11 (in the netlist as IND1..IND7; PD5 drives the row; IND7 = ALM sits between TMR and BAT).
+- Indicators: seven 0402 LEDs on matrix row 11 (in the netlist as IND1..IND7; PD3 drives the row (ROW11, revision B); IND7 = ALM sits between TMR and BAT).
 - Wake gestures use the accelerometer's wake-up and double-tap detection (INT on PE0); shake maps to the wake-up threshold, free-fall is read but not used to wake.
 - Battery readout needs no pin (ADC VDD/10 channel on the AVR128DB48).
 - Light meter / auto-brightness: reverse-bias a ring LED and time its discharge (to be prototyped).

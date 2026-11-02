@@ -23,7 +23,7 @@ void inputs_init(void) {
     PORTE.DIRCLR = (uint8_t)(BIT_L | BIT_R | BIT_I | BIT_B);
     (&PORTE.PIN0CTRL)[HW_BTN1_BIT] = PORT_PULLUPEN_bm | PORT_ISC_BOTHEDGES_gc;
     (&PORTE.PIN0CTRL)[HW_BTN2_BIT] = PORT_PULLUPEN_bm | PORT_ISC_BOTHEDGES_gc;
-    (&PORTE.PIN0CTRL)[HW_IMU_INT_BIT] = PORT_ISC_BOTHEDGES_gc;                 /* the sensor drives this pin actively */
+    (&PORTE.PIN0CTRL)[HW_IMU_INT_BIT] = PORT_INLVL_bm | PORT_ISC_BOTHEDGES_gc; /* the sensor drives this pin actively, only up to 3.3 V - 0.2 V while VDD can be 4.2 V: needs the TTL input level (VIH 2.0 V; the default Schmitt trigger wants 0.8 x VDD = 3.36 V at 4.2 V) */
     (&PORTE.PIN0CTRL)[HW_BAT_OK_BIT] = PORT_ISC_INTDISABLE_gc;                 /* just read it; the BQ25570 drives it */
     PORTE.INTFLAGS = 0xFF;
 }

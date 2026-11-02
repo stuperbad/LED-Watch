@@ -1,0 +1,12 @@
+(footprint "KXOB25_cell_pad_2.5x7.4mm"
+	(version 20240108)
+	(generator "pcbnew")
+	(layer "F.Cu")
+	(descr "One end contact pad for a KXOB25-05X3TF SolarBIT (cell pads 2.0 x 7.4 mm per Anysolar drawing, KXOB25-05X3TF datasheet p.3). 2.5 mm long: the outer 0.5 mm sticks out past the cell edge as a soldering fillet / iron access area. Copper and mask only (no paste: the cell is hand soldered with Sn42/Bi58, datasheet p.3).")
+	(tags "solar cell pad hand solder")
+	(property "Reference" "REF**" (at 0 -4.6 0) (layer "F.SilkS") (uuid "f3088382-6716-40c1-b2b6-337f05f5d073") (effects (font (size 1 1) (thickness 0.15))))
+	(property "Value" "cell pad" (at 0 4.6 0) (layer "F.Fab") (uuid "5f434788-c625-4776-9dc4-de7f7b054269") (effects (font (size 1 1) (thickness 0.15))))
+	(attr smd)
+	(pad "1" smd rect (at 0 0) (size 2.5 7.4) (layers "F.Cu" "F.Mask") (uuid "c7f5177b-be5a-4fbb-8f42-a3c92c9c84a8"))
+	(fp_rect (start -1.25 -3.7) (end 1.25 3.7) (stroke (width 0.05) (type solid)) (fill none) (layer "F.CrtYd") (uuid "16c781ad-1d86-4676-b1d3-4ded4dcc9187"))
+)

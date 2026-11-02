@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>U1 pin map</title>
+<style>
+:root{
+  --bg:#f6f5f1; --panel:#ffffff; --ink:#1d2330; --muted:#5d6678; --line:#d5d8df; --chip:#2b3140; --chipink:#e9ecf3;
+  --col:#ffd27a; --row:#8ec5ff; --buz:#f3a6e0; --i2c:#9be3a8; --inp:#8fe0d6; --xtal:#f6ee8a; --sys:#ff9a9a; --pwr:#c9ccd4; --free:#ffffff;
+  --cellink:#1d2330; --moved:#e11d48; --ok:#15803d; --bad:#b91c1c;
+  --pA:#7c3aed; --pB:#0ea5e9; --pC:#f97316; --pD:#16a34a; --pE:#db2777; --pF:#64748b; --pN:#9ca3af;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#14171e; --panel:#1d222c; --ink:#e8ebf2; --muted:#a2abbd; --line:#343b4a; --chip:#0e1016; --chipink:#e9ecf3;
+    --col:#8a5a00; --row:#124f8f; --buz:#7a2a6a; --i2c:#1b6a31; --inp:#0d6b63; --xtal:#7a7410; --sys:#8f2a2a; --pwr:#3d4250; --free:#1d222c;
+    --cellink:#f3f5fa; --moved:#fb7185; --ok:#4ade80; --bad:#f87171;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#14171e; --panel:#1d222c; --ink:#e8ebf2; --muted:#a2abbd; --line:#343b4a; --chip:#0e1016; --chipink:#e9ecf3;
+  --col:#8a5a00; --row:#124f8f; --buz:#7a2a6a; --i2c:#1b6a31; --inp:#0d6b63; --xtal:#7a7410; --sys:#8f2a2a; --pwr:#3d4250; --free:#1d222c;
+  --cellink:#f3f5fa; --moved:#fb7185; --ok:#4ade80; --bad:#f87171;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,Segoe UI,Roboto,sans-serif}
+.wrap{max-width:1280px;margin:0 auto;padding:20px 16px 40px}
+h1{font-size:22px;margin:0 0 2px}
+.sub{color:var(--muted);margin:0 0 14px;max-width:80ch}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}
+.tabs button,.tog button{font:inherit;color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:7px 14px;cursor:pointer}
+.tabs button[aria-pressed="true"],.tog button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.tabs .rec::after{content:" \2605"}
+.grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(300px,1fr);gap:16px;align-items:start}
+@media (max-width:900px){.grid{grid-template-columns:1fr}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.card h2{font-size:16px;margin:0 0 6px}
+.tog{display:flex;gap:8px;margin:0 0 8px;align-items:center;flex-wrap:wrap}
+.tog span{color:var(--muted);font-size:13px}
+svg{width:100%;height:auto;display:block}
+.cell rect.f{stroke:var(--line);stroke-width:1}
+.cell text{fill:var(--cellink);font-family:inherit}
+.cell .l1{font-size:15px;font-weight:700}
+.cell .l2{font-size:11px;opacity:.8}
+.cell .l3{font-size:10px;fill:var(--moved);font-weight:700}
+.moved rect.f{stroke:var(--moved);stroke-width:3.5}
+.freed rect.f{stroke:var(--moved);stroke-width:3;stroke-dasharray:6 4}
+.freecell rect.f{stroke-dasharray:4 4}
+.g-col rect.f{fill:var(--col)} .g-row rect.f{fill:var(--row)} .g-buz rect.f{fill:var(--buz)} .g-i2c rect.f{fill:var(--i2c)}
+.g-inp rect.f{fill:var(--inp)} .g-xtal rect.f{fill:var(--xtal)} .g-sys rect.f{fill:var(--sys)} .g-pwr rect.f{fill:var(--pwr)} .g-free rect.f{fill:var(--free)}
+.chipbody{fill:var(--chip)} .chiptext{fill:var(--chipink);font-family:inherit}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;margin:10px 0 0;font-size:13px}
+.legend i{display:inline-block;width:14px;height:14px;border-radius:4px;border:1px solid var(--line);vertical-align:-2px;margin-right:5px}
+.legend .mv{border:3px solid var(--moved);background:transparent}
+.legend .fr{border:3px dashed var(--moved);background:transparent}
+.verdict{font-weight:700;font-size:17px;margin:0 0 6px}
+.verdict.good{color:var(--ok)} .verdict.bad{color:var(--bad)}
+ul{margin:6px 0 10px;padding-left:20px} li{margin:2px 0}
+table{border-collapse:collapse;width:100%;font-size:13.5px}
+th,td{text-align:left;padding:5px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--muted);font-weight:600}
+td.warn{color:#b45309;font-weight:700} td.ok{color:var(--ok);font-weight:700} td.bad{color:var(--bad);font-weight:700}
+.pb{display:inline-block;width:18px;height:18px;border-radius:5px;color:#fff;text-align:center;font-size:12px;font-weight:700;line-height:18px;margin-right:6px}
+.small{font-size:13px;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>U1 (AVR128DB48) pin map</h1>
+  <p class="sub">The chip as it sits on the board: 12 pins per side, coloured by what the net is for. The thin strip between the chip and each pin is its <b>port</b> (PA to PF). The firmware writes a whole port at a time, so what matters is how many ports hold one kind of net and nothing else. Red outlines show what each option changes.</p>
+
+  <div class="tabs" id="tabs" role="group" aria-label="Pin assignment option"></div>
+
+  <div class="grid">
+    <div class="card">
+      <div class="tog">
+        <span>View:</span>
+        <button id="vBoard" aria-pressed="true">On the board (U1 rotated 180&deg;)</button>
+        <button id="vData" aria-pressed="false">Datasheet orientation</button>
+      </div>
+      <svg id="chip" viewBox="0 0 940 940" role="img" aria-label="Pin map of U1"></svg>
+      <div class="legend" id="legend"></div>
+    </div>
+
+    <div>
+      <div class="card" id="info"></div>
+      <div class="card" style="margin-top:16px">
+        <h2>Ports in this option</h2>
+        <table id="ports"></table>
+        <p class="small">"Clean" = every used pin on the port is columns, or every one is rows. "Shares with buzzer or I2C" is harmless for the matrix, because the firmware sets and clears only its own bits. A gap in the bit list means the pattern cannot be written as one plain byte.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ---- pin data (from the netlist of 'LED Watch - Single Color.kicad_sch') ----------------------------------------------
+const PORT = {};            // pin -> {port, bit} for GPIO pins
+const FIXED = {14:["VDDIO2","pwr"],15:["GND","pwr"],28:["AVDD","pwr"],29:["AGND","pwr"],42:["VDD","pwr"],43:["GND","pwr"],41:["UPDI","sys"]};
+const NAMES = {}; // pin -> "PA5"
+(function(){
+  const t = {1:"PA5",2:"PA6",3:"PA7",4:"PB0",5:"PB1",6:"PB2",7:"PB3",8:"PB4",9:"PB5",10:"PC0",11:"PC1",12:"PC2",13:"PC3",
+    16:"PC4",17:"PC5",18:"PC6",19:"PC7",20:"PD0",21:"PD1",22:"PD2",23:"PD3",24:"PD4",25:"PD5",26:"PD6",27:"PD7",
+    30:"PE0",31:"PE1",32:"PE2",33:"PE3",34:"PF0",35:"PF1",36:"PF2",37:"PF3",38:"PF4",39:"PF5",40:"PF6",
+    44:"PA0",45:"PA1",46:"PA2",47:"PA3",48:"PA4"};
+  for (const p in t){ NAMES[p]=t[p]; PORT[p]={port:t[p][1],bit:+t[p][2]}; }
+  for (const p in FIXED) NAMES[p]=FIXED[p][0];
+})();
+
+// today's assignment: pin -> label. Group is derived from the label.
+const TODAY = {1:"COL3",2:"COL4",3:"COL5",4:"COL6",5:"COL7",6:"COL8",7:"COL9",8:"BUZ_A",9:"BUZ_B",10:"COL10",11:"COL11",
+  12:"ROW0",13:"ROW1",16:"ROW2",17:"ROW3",18:"ROW4",19:"ROW5",20:"ROW6",21:"ROW7",22:"ROW8",23:"ROW9",24:"ROW10",25:"ROW11",
+  26:"",27:"",30:"IMU_INT",31:"BTN1",32:"BTN2",33:"BAT_OK",34:"XTAL1",35:"XTAL2",36:"",37:"",38:"",39:"",40:"RESET",
+  44:"COL0",45:"COL1",46:"SDA",47:"SCL",48:"COL2"};
+
+function groupOf(l){
+  if (!l) return "free";
+  if (/^COL/.test(l)) return "col"; if (/^ROW/.test(l)) return "row"; if (/^BUZ/.test(l)) return "buz";
+  if (l==="SDA"||l==="SCL") return "i2c"; if (/^XTAL/.test(l)) return "xtal"; if (l==="RESET") return "sys";
+  return "inp";
+}
+const GROUPS = [["col","LED columns (anodes)"],["row","LED rows (cathodes)"],["buz","Buzzer"],["i2c","I2C to the accelerometer"],
+  ["inp","Inputs: IMU_INT, buttons, BAT_OK"],["xtal","32 kHz crystal"],["sys","Reset / UPDI"],["pwr","Power and ground"],["free","Free"]];
+
+function build(over){ const m = Object.assign({}, TODAY); for (const k in over) m[k]=over[k]; return m; }
+
+const OPTIONS = [
+ {id:"today", name:"Today", map:build({}),
+  verdict:["Where we are","bad"],
+  text:"Columns and rows are in blocks, but the blocks do not line up with ports: port C mixes COL10/11 with six row pins, port B mixes four columns with the buzzer, and the I2C pins sit in the middle of port A's column bits (so the column run has a two-pin hole at pins 46/47).",
+  moves:[], fw:"nothing", board:"nothing"},
+ {id:"swap", name:"His swap: COL10/11 ↔ buzzer", map:build({8:"COL10",9:"COL11",10:"BUZ_A",11:"BUZ_B"}),
+  verdict:["Cheap, but fixes only port B","bad"],
+  text:"The literal swap he suggested. Port B becomes all columns, but the buzzer lands on PC0/PC1, so port C is still rows plus something else, and port A still has I2C in it.",
+  moves:["COL10 pin 10 → 8","COL11 pin 11 → 9","BUZ_A pin 8 → 10","BUZ_B pin 9 → 11"],
+  fw:"Pin map and the buzzer pins only. Timers unchanged (TCA1 can reach PC0/PC1).", board:"4 nets on four adjacent pins."},
+ {id:"small", name:"Small fix: buzzer to port F", map:build({8:"COL10",9:"COL11",10:"",11:"",38:"BUZ_A",39:"BUZ_B"}),
+  verdict:["My first recommendation, now superseded","bad"],
+  text:"Columns 10 and 11 move into port B, the buzzer goes to PF4/PF5. Ports B, C and D become clean, but it only patches the existing layout: port A keeps I2C and the column run keeps its holes. Chosen earlier only because it moved the fewest nets; that stops mattering if re-routing is cheap.",
+  moves:["COL10 pin 10 → 8","COL11 pin 11 → 9","BUZ_A pin 8 → 38","BUZ_B pin 9 → 39"],
+  fw:"Pin map plus a timer swap (buzzer TCA1 → TCA0 on PORTF, matrix timer TCA0 → TCA1): about 34 renamed references.", board:"4 nets."},
+ {id:"whole", name:"Whole ports, contiguous runs", rec:true,
+  map:build({44:"COL0",45:"COL1",46:"COL2",47:"COL3",48:"COL4",1:"COL5",2:"COL6",3:"COL7",4:"COL8",5:"COL9",6:"COL10",7:"COL11",
+    10:"ROW0",11:"ROW1",12:"ROW2",13:"ROW3",16:"ROW4",17:"ROW5",18:"ROW6",19:"ROW7",20:"ROW8",21:"ROW9",22:"ROW10",23:"ROW11",24:"",25:"",
+    36:"SDA",37:"SCL"}),
+  verdict:["Recommended: bit n of the column pattern = pin n of the port","good"],
+  text:"COL0-7 are all of port A (PA0-7), COL8-11 are PB0-3, ROW0-7 are all of port C, ROW8-11 are PD0-3. Pin order around the chip equals net order, so the 12 columns sit on 12 adjacent pins (44-48, 1-7) and the 12 rows on 10-13 and 16-23: no holes, no crossings, and everything slides only 2 pins from where it is today (COL10/11 four). The buzzer stays on PB4/PB5 where TCA1 already drives it. I2C goes to TWI1 on PF2/PF3 (its default pins). Free afterwards: PD4-7 and PF4/PF5.",
+  moves:["COL2 … COL9: 2 pins toward pin 44 (pins 46, 47, 48, 1, 2, 3, 4, 5)","COL10, COL11 → pins 6, 7","ROW0-ROW11: 2 pins toward pin 1 (pins 10-13, 16-23)","SDA, SCL → pins 36, 37"],
+  fw:"No timer change. I2C driver TWI0 → TWI1 (about 18 references, no pin-mux write needed: PF2/PF3 is TWI1's default). Regenerate the pin map. Optional later: the 12-bit column mask splits straight into two port bytes, so the per-column lookup table can go.",
+  board:"22 matrix nets slide by two pins plus 2 I2C nets: every fan-out is rerouted, but locally, in the same order, with no wrap-around."},
+ {id:"three", name:"Your idea: only ports A, C, D",
+  map:build({44:"COL0",45:"COL1",46:"COL2",47:"COL3",48:"COL4",1:"COL5",2:"COL6",3:"COL7",4:"",5:"",6:"",7:"",
+    10:"COL8",11:"COL9",12:"COL10",13:"COL11",16:"ROW0",17:"ROW1",18:"ROW2",19:"ROW3",20:"ROW4",21:"ROW5",22:"ROW6",23:"ROW7",24:"ROW8",25:"ROW9",26:"ROW10",27:"ROW11",
+    36:"SDA",37:"SCL"}),
+  verdict:["Works, with a 6-pin hole in the middle of the column run","bad"],
+  text:"24 matrix lines fit exactly: PA0-7, PC0-7, PD0-7. Because 12 + 12 is not a multiple of 8, one port is split in half (PC: columns 8-11 on the low nibble, rows 0-3 on the high nibble). Port B is left to the buzzer alone. The catch is geography: columns 0-7 sit at pins 44-3, then port B (pins 4-9) is in the way, so columns 8-11 jump to pins 10-13 and the rows move to 16-27, using PD7 (VREFA) too.",
+  moves:["COL2 … COL7 → pins 46, 47, 48, 1, 2, 3","COL8-COL11 → pins 10-13","ROW0-ROW11 → pins 16-27","SDA, SCL → pins 36, 37"],
+  fw:"Same as the recommendation; MATRIX_PORTS can drop from 4 to 3 (a loop pass fewer per interrupt, a handful of cycles).",
+  board:"22 matrix nets move, rows by four pins, and the columns lose their contiguous run (the router has to go around port B's six pins)."}
+];
+
+// ---- drawing -----------------------------------------------------------------------------------------------------------------
+const NS="http://www.w3.org/2000/svg";
+const S = {opt:OPTIONS[3], board:true};
+const PITCH=40, BODY=480, CELL=185, GAP=8, X0=(940-BODY)/2, Y0=(940-BODY)/2;
+
+function geom(pin, board){
+  let i = pin-1; if (board) i = (i+24)%48;
+  const side = Math.floor(i/12), k = i%12;
+  const off = 0;                     // k along the side
+  if (side===0) return {side:"L", x:X0-GAP-CELL, y:Y0+ (BODY-12*PITCH)/2 + k*PITCH, w:CELL, h:PITCH-4, sx:X0-GAP, sy:Y0+(BODY-12*PITCH)/2+k*PITCH, sw:GAP-2, sh:PITCH-4};
+  if (side===2) return {side:"R", x:X0+BODY+GAP, y:Y0+(BODY-12*PITCH)/2+(11-k)*PITCH, w:CELL, h:PITCH-4, sx:X0+BODY+2, sy:Y0+(BODY-12*PITCH)/2+(11-k)*PITCH, sw:GAP-2, sh:PITCH-4};
+  if (side===1) return {side:"B", x:X0+(BODY-12*PITCH)/2+k*PITCH, y:Y0+BODY+GAP, w:PITCH-4, h:CELL, sx:X0+(BODY-12*PITCH)/2+k*PITCH, sy:Y0+BODY+2, sw:PITCH-4, sh:GAP-2};
+  return {side:"T", x:X0+(BODY-12*PITCH)/2+(11-k)*PITCH, y:Y0-GAP-CELL, w:PITCH-4, h:CELL, sx:X0+(BODY-12*PITCH)/2+(11-k)*PITCH, sy:Y0-GAP, sw:PITCH-4, sh:GAP-2};
+}
+function el(n,a,txt){ const e=document.createElementNS(NS,n); for(const k in a) e.setAttribute(k,a[k]); if(txt!=null) e.textContent=txt; return e; }
+
+function draw(){
+  const svg=document.getElementById("chip"); svg.innerHTML="";
+  const m=S.opt.map;
+  svg.appendChild(el("rect",{x:X0,y:Y0,width:BODY,height:BODY,rx:14,class:"chipbody"}));
+  // pin 1 marker
+  const p1 = S.board ? {x:X0+BODY-26,y:Y0+BODY-26} : {x:X0+26,y:Y0+26};
+  svg.appendChild(el("circle",{cx:p1.x,cy:p1.y,r:9,fill:"#fff"}));
+  const ct=(x,y,t,sz,w)=>svg.appendChild(el("text",{x,y,"text-anchor":"middle",class:"chiptext","font-size":sz,"font-weight":w||400},t));
+  ct(470,Y0+190,"AVR128DB48",28,700); ct(470,Y0+222,"U1, VQFN-48, 6 x 6 mm",16);
+  ct(470,Y0+262,"white dot = pin 1",14);
+  if (S.board){
+    ct(470,Y0+310,"↑ toward the board edge (12 o'clock)",15);
+    ct(470,Y0+BODY-70,"↓ toward the board centre and solar cell",15);
+  } else {
+    ct(470,Y0+310,"(datasheet drawing, pin 1 at top left)",15);
+  }
+  for (let pin=1; pin<=48; pin++){
+    const g=geom(pin,S.board), lab=m[pin];
+    const fixed=FIXED[pin];
+    let grp = fixed?fixed[1]:groupOf(lab), shown = fixed?fixed[0]:(lab||"free");
+    const t=TODAY[pin]||"", cur=lab||"";
+    const changed = !fixed && cur!==t;
+    const cls=["cell","g-"+grp];
+    if (changed && cur) cls.push("moved"); else if (changed && !cur) cls.push("freed");
+    if (grp==="free") cls.push("freecell");
+    const grpEl=el("g",{class:cls.join(" ")});
+    grpEl.appendChild(el("rect",{x:g.x,y:g.y,width:g.w,height:g.h,rx:6,class:"f"}));
+    // port strip
+    const pc = PORT[pin]?PORT[pin].port:"N";
+    grpEl.appendChild(el("rect",{x:g.sx,y:g.sy,width:g.sw,height:g.sh,rx:2,style:"fill:var(--p"+pc+")"}));
+    const l1 = shown, l2 = (NAMES[pin]||"")+"  ·  pin "+pin;
+    const l3 = changed ? (cur? (t? "was "+t : "was free") : "now free ("+t+")") : "";
+    if (g.side==="L"||g.side==="R"){
+      const ax = g.x+10;
+      grpEl.appendChild(el("text",{x:ax,y:g.y+17,class:"l1"},l1));
+      grpEl.appendChild(el("text",{x:ax,y:g.y+30,class:"l2"},l2));
+      if (l3) grpEl.appendChild(el("text",{x:g.x+g.w-8,y:g.y+17,class:"l3","text-anchor":"end"},l3));
+    } else {
+      const cx=g.x+g.w/2, y0=g.side==="T"?g.y+g.h-8:g.y+8;     // text reads bottom-to-top on top pins, top-to-bottom on bottom pins
+      const rot = g.side==="T"?-90:90;
+      const mk=(dx,cls2,txt,anchor)=>{ const t_=el("text",{x:0,y:0,class:cls2,"text-anchor":anchor||"start",transform:`translate(${cx+dx},${y0}) rotate(${rot})`},txt); grpEl.appendChild(t_); };
+      mk(-3,"l1",l1); mk(9,"l2",l2);
+      if (l3){ const e=el("text",{x:0,y:0,class:"l3","text-anchor":"end",transform:`translate(${cx-3},${g.side==="T"?g.y+8:g.y+g.h-8}) rotate(${rot})`},l3); grpEl.appendChild(e); }
+    }
+    svg.appendChild(grpEl);
+  }
+}
+
+function runs(bits){
+  bits=[...bits].sort((a,b)=>a-b); const out=[]; let s=bits[0],p=bits[0];
+  for (let i=1;i<=bits.length;i++){ if (bits[i]===p+1){p=bits[i];continue;} out.push(s===p?""+s:s+"-"+p); s=bits[i]; p=bits[i]; }
+  return out.join(", ");
+}
+function portTable(){
+  const m=S.opt.map, tb=document.getElementById("ports"); tb.innerHTML="<tr><th>Port</th><th>Holds</th><th>Bits</th><th></th></tr>";
+  const colors={A:"#7c3aed",B:"#0ea5e9",C:"#f97316",D:"#16a34a",E:"#db2777",F:"#64748b"};
+  for (const P of "ABCDEF"){
+    const gr={}; let free=[];
+    for (const pin in PORT){ if (PORT[pin].port!==P) continue; const lab=m[pin]; if(!lab){free.push(PORT[pin].bit);continue;} const g=groupOf(lab); (gr[g]=gr[g]||[]).push(PORT[pin].bit); }
+    const kinds=Object.keys(gr), names={col:"columns",row:"rows",buz:"buzzer",i2c:"I2C",inp:"inputs",xtal:"crystal",sys:"reset"};
+    const holds=kinds.map(k=>names[k]).join(" + ")||"nothing";
+    const all=[].concat(...Object.values(gr));
+    let verdict="", cls="";
+    const mx=kinds.filter(k=>k==="col"||k==="row"), other=kinds.filter(k=>k!=="col"&&k!=="row");
+    if (P==="E"||P==="F"){ verdict="system port"; }
+    else if (mx.length===2){ verdict="rows + columns"; cls="bad"; }
+    else if (mx.length===1 && other.length===0){ verdict="clean"; cls="ok"; }
+    else if (mx.length===1){ verdict="shares with "+other.map(k=>names[k]).join(", "); cls="warn"; }
+    else if (kinds.length){ verdict="no matrix"; }
+    else { verdict="free"; }
+    const bits = kinds.map(k=> (kinds.length>1? names[k]+" ":"")+runs(gr[k])).join("; ");
+    tb.insertAdjacentHTML("beforeend",`<tr><td><span class="pb" style="background:${colors[P]}">${P}</span></td><td>${holds}</td><td>${bits||"-"}</td><td class="${cls}">${verdict}</td></tr>`);
+  }
+}
+function info(){
+  const o=S.opt, v=o.verdict;
+  const moves=o.moves.length? "<ul>"+o.moves.map(x=>"<li>"+x+"</li>").join("")+"</ul>" : "<p class='small'>No changes.</p>";
+  document.getElementById("info").innerHTML=
+    `<div class="verdict ${v[1]}">${v[0]}</div><p style="margin:0 0 8px">${o.text}</p>
+     <h2>Pins that move</h2>${moves}
+     <h2>Firmware</h2><p style="margin:0 0 8px">${o.fw}</p>
+     <h2>Board</h2><p style="margin:0">${o.board}</p>`;
+}
+function legend(){
+  const l=document.getElementById("legend");
+  l.innerHTML=GROUPS.map(([k,t])=>`<span><i style="background:var(--${k})"></i>${t}</span>`).join("")
+   +`<span><i class="mv"></i>pin that changes</span><span><i class="fr"></i>pin that becomes free</span>`;
+}
+function tabs(){
+  const t=document.getElementById("tabs"); t.innerHTML="";
+  OPTIONS.forEach(o=>{ const b=document.createElement("button"); b.textContent=o.name; if(o.rec) b.className="rec";
+    b.setAttribute("aria-pressed", o===S.opt); b.onclick=()=>{S.opt=o;render();}; t.appendChild(b); });
+}
+function render(){ tabs(); draw(); info(); portTable(); }
+document.getElementById("vBoard").onclick=()=>{S.board=true;document.getElementById("vBoard").setAttribute("aria-pressed","true");document.getElementById("vData").setAttribute("aria-pressed","false");draw();};
+document.getElementById("vData").onclick=()=>{S.board=false;document.getElementById("vData").setAttribute("aria-pressed","true");document.getElementById("vBoard").setAttribute("aria-pressed","false");draw();};
+legend(); render();
+</script>
+</body>
+</html>

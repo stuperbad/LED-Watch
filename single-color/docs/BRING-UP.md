@@ -1,5 +1,7 @@
 # Bring-up sheet: first power-up of revision A
 
+> **Revision C (2026-11-02):** the pogo pad row is gone. Where this sheet says pogo pad 2 (`VBAT` rail) probe **C10 pad 1** (front, beside U1) or **C52 pad 1** (back); programming goes through the **USB-C receptacle J2** (SBU pins), see the Programming section; the board can also charge from USB-C (BQ21040, 54 mA), see `BRING-UP-TESTS.md` step 1b. Nothing in revision C has been tried on a real board either.
+
 What to do, in order, when the boards arrive. Everything below follows from the schematic, the BQ25570 datasheet and the firmware; **none of it has been tried on a real board yet**, so treat the expected values as "what the design says", and write down what you actually measure. Firmware-side details (self-test LEDs, buzzer scope check) are in `../firmware/c/BRINGUP.md`.
 
 ## How the power works (one paragraph)
@@ -16,9 +18,9 @@ There is no power switch. The battery plugs into J1 and/or J1B (both go to the s
 | Sleep current target of the whole watch | a few uA | `power-budget.md` (estimate) |
 
 ## Before anything is connected (no battery, no programmer)
-Use the meter in resistance mode. Probe points: battery plug J1 (pin 1 = GND, pin 2 = battery +; the connectors are right-angle JST SH on the back), pogo pad row J2 (pad 1 RESET, 2 `VBAT` rail, 3 GND, 4 UPDI), and either pad of C54 for `+3V3`.
+Use the meter in resistance mode. Probe points: battery plug J1 (pin 1 = GND, pin 2 = battery +; the connectors are right-angle JST SH on the back), the `VBAT` rail at C10 pad 1 (revision A / B: pogo pad 2), the USB-C receptacle J2 (revision C: VBUS, GND, SBU), and either pad of C54 for `+3V3`.
 1. `BATT` (J1 pin 2) to GND: should not be a short (expect open or the charge of a cap, rising).
-2. `VBAT` rail (pogo pad 2) to GND: not a short.
+2. `VBAT` rail (C10 pad 1) to GND: not a short.
 3. `+3V3` (C54) to GND: not a short.
 4. Optional: look at the BQ25570 (U4) and the accelerometer (U2) under a microscope for bridged pins (JLCPCB places them; the BQ25570 has a thermal pad underneath).
 
@@ -32,13 +34,13 @@ Use the meter in resistance mode. Probe points: battery plug J1 (pin 1 = GND, pi
 1. Put a meter in series with the battery (current range), or use a current-limited supply set to 3.7 V and about 50 mA through the JST pigtail instead of a cell.
 2. Plug the **one** battery into J1. A blank processor does nothing visible, but it is not asleep: an unprogrammed AVR runs through its empty flash at the default clock, so expect a few milliamps (an estimate, not measured) until it is programmed; the microamp sleep level only comes with the firmware.
 3. Measure with the cell still connected:
-   - pogo pad 2 (`VBAT` rail) = the battery voltage (the switch is closed);
+   - C10 pad 1 (`VBAT` rail) = the battery voltage (the switch is closed);
    - C54 pad (`+3V3`) = about 3.3 V (with a battery above about 3.4 V; a buck cannot output more than its input, so expect it to sag as the battery drops below that);
    - the `VBAT_OV`, `VRDIV` nodes etc. are high-impedance (megohm ladders): do not probe them with a low-impedance meter or scope probe, it changes the thresholds.
 4. If the rail does not follow the battery: check that the battery is above 2 V and polarity again.
 
 ## Programming (UPDI)
-- Tool: Adafruit UPDI Friend (product 5893, 3 V setting) or any serial-UPDI adapter, with a home-made jig of 1.27 mm pogo pins on **UPDI, VDD, GND** (RESET not needed). The two guide holes next to the pads are for alignment pins.
+- Tool (revision C): Adafruit UPDI Friend (product 5893, 3 V setting) or any serial-UPDI adapter, connected to the USB-C receptacle J2 through a **USB-C cable that carries the SBU wires** (many charge-only cables do not) and a USB-C splitter / breakout: **UPDI -> SBU1 and SBU2** (A8 / B8, tied on the board, 1 k in series, BAT54WS clamp to +3V3), **GND -> GND**. Check the cable's SBU and GND continuity with the meter first. Whether the adapter also feeds VBUS (then the BQ21040 charges a plugged battery at 54 mA and powers the rail) or only GND + UPDI (the battery or a bench supply powers the board) is to be decided on the first board. (Revision A / B had a home-made jig of 1.27 mm pogo pins on UPDI, VDD, GND.)
 - First programming: set the fuses for a single supply (the MVIO fuse, VDDIO2 tied to VDD: checklist item B7), select the 32 kHz crystal as the RTC source (done in firmware), then flash `firmware/c/hw/watch_fw.hex` with avrdude 7 (SerialUPDI). If the programmer powers the board, do it **without** the battery in, or set the programmer's voltage to match and check that nothing fights over the rail (checklist: power question open).
 - Serial UPDI on the AVR128DB48 has not been tried with this adapter; try a low baud rate first.
 

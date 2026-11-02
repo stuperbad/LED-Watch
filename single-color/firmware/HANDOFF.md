@@ -17,7 +17,7 @@ Steps 1 and 4 (toolchain, mode state machine) are done in a different way than f
 - Supply is VBAT 3.0 to 4.2 V (battery), no regulator on the MCU. Brightness must therefore follow VDD (LED current changes 1.6 to 4.8 mA over that range): measure VDD (ADC on the internal reference) and scale PWM duty.
 - 32.768 kHz crystal on PF0/PF1 (XTAL32K) drives the RTC; use PIT/RTC for the 1 s tick and sleep in standby between ticks.
 - Buttons BTN1 (PE1), BTN2 (PE2): active low, internal pull-ups, wake from sleep on pin change.
-- LIS2DW12 on I2C (SDA PA2, SCL PA3, address 0x18 or 0x19, check SA0 in the schematic), interrupt on PE0 (IMU_INT): wrist-raise / tap wakes the display.
+- LIS2DW12 on I2C (SDA PF2, SCL PF3 = TWI1, address 0x18 or 0x19, check SA0 in the schematic), interrupt on PE0 (IMU_INT): wrist-raise / tap wakes the display.
 - BAT_OK (PE3) from the BQ25570: low = battery low, show BAT indicator and dim or stop the display.
 - Programming: UPDI pin 41 through the Tag-Connect TC2030 (needs a UPDI programmer, e.g. Microchip SNAP or a serial-UPDI adapter). No dev board is required; develop against the simulator first.
 - No C compiler is installed on this PC yet. Options: Microchip AVR-GCC toolchain (avr-gcc 7.3 + DFP for AVR-Dx) or the `avr-gcc` from the Arduino/DxCore package; pick one and document the exact install in `firmware/README.md`.
@@ -34,7 +34,7 @@ Steps 1 and 4 (toolchain, mode state machine) are done in a different way than f
 - **Buzzer:** Murata PKMCS0909E4000-R1 piezo on **PB4 = BUZ_A** and **PB5 = BUZ_B** (see `mcu-pinmaps.md`). Both pins are TCA1 outputs on the default PORTB route (TCA1 exists on the 48-pin part): TCA1 in **split mode**, high-byte timer, HCMP1 -> WO4 (PB4), HCMP2 -> WO5 (PB5), enable HCMP1EN/HCMP2EN only (PB0-PB3 are LED columns, leave their compare outputs off); equal compare values, and `PORTB.PIN5CTRL |= PORT_INVEN_bm` so the two pins swing in opposite phase (about 6.6 V across the piezo). Split mode is 8-bit single-slope down-count: pick the prescaler per note (about 1.5-10 kHz is usable; Murata's curve is loudest near 8 kHz, about 72 dB at 4 kHz with a 3 V pk-pk drive).
 - **Seven mode LEDs:** SET TMR **ALM** BAT FUN CFG LCK (new IND7 = ROW11 / COL6, silkscreen order left to right as listed).
 - **Weekday display:** the mode LEDs double as weekday lights (S M T W T F S, Sunday first): SET-S TMR-M ALM-T BAT-W FUN-T CFG-F LCK-S are printed on the board. The day is shown by lighting that one LED (replaces the old 1-7 LED bar on the outer ring).
-- **Programming:** pogo pads RESET, VDD(VBAT), GND, UPDI (1.27 mm), RESET on PF6 for high-voltage recovery only.
+- **Programming (revision C):** UPDI through the USB-C receptacle's SBU1 / SBU2 pins (tied, R72 1 k in series, BAT54WS clamp to +3V3) with a USB-C cable that carries the SBU wires (not every charge-only cable does) and a UPDI adapter; GND from the cable. RESET (PF6) is no longer wired to a connector (the pogo row of revisions A / B is gone), so there is no high-voltage recovery path. The schematic marks the pin no-connect and the firmware turns on its internal pull-up (`unused_pins_off()` in `hw/main.c`).
 
 ## Update 2026-10-14: ALM mode, weekday lights, buzzer (firmware session)
 Done in BOTH cores (`c/watch.c` and `sim/watch_core.js`, 20 scenarios match frame-for-frame including the buzzer frequency; 71 unit checks, 197 hardware-layer checks; AVR build 31.7 KB flash / 2.2 KB RAM):
