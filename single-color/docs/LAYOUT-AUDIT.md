@@ -44,4 +44,4 @@ All pads are left from the **outer end of the pad, along its axis, from its cent
 3. **Merge micro pieces** (0.01-0.15 mm) outside the ring hooks (`tools/merge_collinear.py`, `tools/usbc_mockup/refit.py` exist).
 4. ~~Shorten the worst detours~~ **tried and rejected 2026-11-02**: the router's shorter BAT_OK, COL0_MCU and BTN1 crossed the crystal area / traces the owner does not want crossed; they stay as hand-routed. Only dead copper was removed (BUZ_B 76 -> 65 mm, 2 vias, 99 buried pieces). Any further detour work would be by hand, owner's call, with a picture first.
 5. Re-measure the off-centre pad ends with the true pad shape and fix the real ones (the pad-centre rule).
-6. Schematic tidy (see ERC: lone RESET label, annotation warning): to be listed together with what the reviewer flagged.
+6. ~~Schematic tidy~~ done 2026-11-02: ERC 0 violations (RESET no-connect, project symbol library repaired, IMU address pin typed as input); the remaining "annotation errors" note of the CLI netlist export comes from the references J1B, SC1+, SC1- and is accepted (DECISION-LOG).

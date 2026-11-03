@@ -2,7 +2,7 @@
 <export version="E">
   <design>
     <source>C:\Users\evanf\Desktop\LED Watch\single-color\hardware\LED Watch - Single Color.kicad_sch</source>
-    <date>2026-11-02T06:56:15</date>
+    <date>2026-11-02T23:44:54</date>
     <tool>Eeschema 10.0.6</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
@@ -443,6 +443,38 @@
       <property name="ki_fp_filters" value="TO-???* *_Diode_* *SingleDiode* D_*"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamps>1a9d7728-7143-4c9a-a904-3b569f4e5261</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="D51">
+      <value>UDD32C05L01</value>
+      <footprint>Diode_SMD:D_SOD-323</footprint>
+      <datasheet>~</datasheet>
+      <description>ESD / surge clamp on VBUS: UMW UDD32C05L01, bidirectional TVS, 5 V working, 6 V minimum breakdown, 9.8 V clamp at 1 A, 18.3 V at 5 A, 17 A / 350 W (8/20 us), ESD 8 kV contact / 15 kV air. Keeps a static spark or a hot-plug spike from the cable off the charger input (BQ21040 absolute maximum 30 V)</description>
+      <fields>
+        <field name="MPN">UDD32C05L01</field>
+        <field name="LCSC">C19185929</field>
+        <field name="Manufacturer">UMW</field>
+        <field name="Footprint">Diode_SMD:D_SOD-323</field>
+        <field name="Datasheet">~</field>
+        <field name="Description">ESD / surge clamp on VBUS: UMW UDD32C05L01, bidirectional TVS, 5 V working, 6 V minimum breakdown, 9.8 V clamp at 1 A, 18.3 V at 5 A, 17 A / 350 W (8/20 us), ESD 8 kV contact / 15 kV air. Keeps a static spark or a hot-plug spike from the cable off the charger input (BQ21040 absolute maximum 30 V)</field>
+      </fields>
+      <libsource lib="Device" part="D_TVS" description="Bidirectional transient-voltage-suppression diode"/>
+      <property name="MPN" value="UDD32C05L01"/>
+      <property name="LCSC" value="C19185929"/>
+      <property name="Manufacturer" value="UMW"/>
+      <property name="Sheetname" value="LED Watch - Single Color"/>
+      <property name="Sheetfile" value="LED Watch - Single Color.kicad_sch"/>
+      <property name="ki_keywords" value="diode TVS thyrector"/>
+      <property name="ki_fp_filters" value="TO-???* *_Diode_* *SingleDiode* D_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>7d845323-b977-4b60-9955-49737215650c</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -5757,6 +5789,26 @@
         <pin num="2" name="A" type="passive"/>
       </pins>
     </libpart>
+    <libpart lib="Device" part="D_TVS">
+      <description>Bidirectional transient-voltage-suppression diode</description>
+      <footprints>
+        <fp>TO-???*</fp>
+        <fp>*_Diode_*</fp>
+        <fp>*SingleDiode*</fp>
+        <fp>D_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">D</field>
+        <field name="Value">D_TVS</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">Bidirectional transient-voltage-suppression diode</field>
+      </fields>
+      <pins>
+        <pin num="1" name="A1" type="passive"/>
+        <pin num="2" name="A2" type="passive"/>
+      </pins>
+    </libpart>
     <libpart lib="Device" part="L">
       <description>Inductor</description>
       <footprints>
@@ -5830,7 +5882,7 @@
       <pins>
         <pin num="1" name="SCL/SPC" type="input"/>
         <pin num="2" name="~{CS}" type="input"/>
-        <pin num="3" name="SDO/SA0" type="bidirectional"/>
+        <pin num="3" name="SDO/SA0" type="input"/>
         <pin num="4" name="SDA/SDI/SDO" type="bidirectional"/>
         <pin num="5" name="NC" type="passive"/>
         <pin num="6" name="GND" type="power_in"/>
@@ -6494,6 +6546,7 @@
       <node ref="C54" pin="2" pintype="passive"/>
       <node ref="C55" pin="2" pintype="passive"/>
       <node ref="C56" pin="2" pintype="passive"/>
+      <node ref="D51" pin="2" pinfunction="A2_2" pintype="passive"/>
       <node ref="J1" pin="1" pinfunction="Pin_1_1" pintype="passive"/>
       <node ref="J1B" pin="1" pinfunction="Pin_1_1" pintype="passive"/>
       <node ref="J2" pin="A1" pinfunction="GND_A1" pintype="passive"/>
@@ -6515,7 +6568,7 @@
       <node ref="U1" pin="29" pinfunction="AGND_29" pintype="power_in"/>
       <node ref="U1" pin="43" pinfunction="GND_43" pintype="passive"/>
       <node ref="U1" pin="49" pinfunction="GND_49" pintype="passive"/>
-      <node ref="U2" pin="3" pinfunction="SDO/SA0_3" pintype="bidirectional"/>
+      <node ref="U2" pin="3" pinfunction="SDO/SA0_3" pintype="input"/>
       <node ref="U2" pin="5" pinfunction="NC_5" pintype="passive"/>
       <node ref="U2" pin="6" pinfunction="GND_6" pintype="power_in"/>
       <node ref="U2" pin="7" pinfunction="RES_7" pintype="passive"/>
@@ -6544,6 +6597,7 @@
     </net>
     <net code="66" name="VBUS" class="Default">
       <node ref="C55" pin="1" pintype="passive"/>
+      <node ref="D51" pin="1" pinfunction="A1_1" pintype="passive"/>
       <node ref="J2" pin="A4" pinfunction="VBUS_A4" pintype="passive"/>
       <node ref="J2" pin="A9" pinfunction="VBUS_A9" pintype="passive"/>
       <node ref="J2" pin="B4" pinfunction="VBUS_B4" pintype="passive"/>
