@@ -28,6 +28,7 @@ typedef struct {
     uint8_t  solar_mw;          /* solar input, whole milliwatts (only used by the battery screen) */
     uint8_t  charging;
     uint8_t  ambient;           /* ambient light 0..100 (auto brightness) */
+    uint16_t act_mg;            /* activity meter: average wrist motion since the previous step, milli-g beyond gravity (|a| - 1 g); the hardware layer measures it, 0 = none */
 } watch_io_t;
 
 /* What the matrix driver should do. Each slot sinks ONE row and sources up to m columns at the same time (the row pin
@@ -71,6 +72,7 @@ typedef struct {
     uint8_t  alm_on, alm_h, alm_m, alm_field, alm_ring, alm_armed; int32_t alm_t;   /* alarm: on/off, time, field being edited, ringing, ready to fire */
     uint8_t  snd_pat, snd_i; uint16_t snd_hz; int32_t snd_t;                         /* buzzer: pattern playing, note index, current frequency (0 = silent) */
     uint8_t  fun_g, fun_playing;
+    uint8_t  act_en, act_goal, act_item; uint16_t act_pts; uint32_t act_rem;   /* activity meter: on/off, goal step, CFG item; today's points (g.s of motion beyond gravity), remainder in mg.ms */
     uint8_t  cfg_page, ring_sel, ring_lvl[4];   /* CFG page 2: which ring is selected, brightness level 0..7 of hour / minute / second ring and the indicator LEDs */
     uint8_t  set[12];                   /* CFG values, index = CFG number - 1 (CFG 11 = key beeps, CFG 12 = game sounds) */
     uint8_t  pref_sand_mode, pref_orb_pat, pref_rng_mode, pref_pc_kind, pref_pg_mode;
@@ -90,6 +92,7 @@ const watch_t    *watch_state(void);
 void              watch_set_time(uint8_t h, uint8_t m, uint8_t s);
 void              watch_set_date(uint16_t y, uint8_t mo, uint8_t d);
 void              watch_set_cfg(uint8_t idx, uint8_t v);     /* idx 0..11 = CFG 1..12; used by tests and to load saved settings */
+void              watch_set_act(uint8_t on, uint8_t goal_idx); /* activity meter on / off and daily goal step 0..4 (tests and saved settings) */
 void              watch_set_ring(uint8_t ring, uint8_t lvl);  /* ring 0..3 = hour / minute / second ring, indicator LEDs; lvl 0..7 = 100, 70, 50, 35, 25, 18, 12, 8 % */
 void              watch_set_alarm(uint8_t h, uint8_t m, uint8_t on);
 uint16_t          watch_tone_hz(void);       /* frequency the piezo should play now (0 = silent), valid after watch_step() */

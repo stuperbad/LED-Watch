@@ -24,4 +24,5 @@ void     imu_map_axes(const int16_t sensor_mg[3], int16_t *x, int16_t *y, int16_
 /* ---- wrist-raise classifier: watch a short window of samples after the sensor reported motion ---- */
 typedef struct { uint8_t n, armed; int16_t x0, y0, z0; int32_t max_d; } raise_t;
 void     raise_arm(raise_t *r);                             /* start collecting at the next sample */
+uint16_t motion_mg(int16_t x, int16_t y, int16_t z);   /* wrist motion beyond gravity of one sample: | |a| - 1 g | in milli-g (the activity meter's input) */
 int16_t  raise_feed(raise_t *r, int16_t x, int16_t y, int16_t z);   /* -1 while collecting; when the window ends: strength 0..100 (0 = not a raise) */

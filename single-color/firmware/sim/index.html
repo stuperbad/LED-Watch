@@ -288,7 +288,7 @@ function frame(now) {
   if (ffT > 0) { ffT -= dt; fx = fy = fz = 0.02; }
   acc = { x: fx, y: fy, z: fz };
   const solar = +$('sol').value, soc = socV, charging = solar > 0.8 && soc < 0.995;
-  const io = { btn: btn.slice(), accel: acc, wakeStrength, tap, ff: ffEv, vdd: vddOf(soc), soc, batOk: soc > 0.12, solarMw: solar, charging, ambient: +$('amb').value };
+  const io = { btn: btn.slice(), accel: acc, wakeStrength, tap, ff: ffEv, vdd: vddOf(soc), soc, batOk: soc > 0.12, solarMw: solar, charging, ambient: +$('amb').value, actMg: Math.round(Math.abs(Math.hypot(acc.x, acc.y, acc.z) * 1000 - 1000)) };
   tap = false; ffEv = false;
   const out = W.step(dt, dt * simSpeed, io);
   for (const e of out.events) addLog(e);

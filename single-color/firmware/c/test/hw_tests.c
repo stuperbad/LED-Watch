@@ -124,6 +124,29 @@ static void test_ring_levels(void) {
     CHECK(watch_state()->ring_lvl[3] == 2, "the indicator LEDs start at 50 %");
 }
 
+/* Activity meter: points = g.s of wrist motion beyond gravity, only while the meter is on, capped, reset at midnight. */
+static void test_activity(void) {
+    CHECK(motion_mg(0, 0, 1000) == 0 && motion_mg(0, 0, -1000) == 0, "at rest (1 g, any direction) there is no motion");
+    CHECK(motion_mg(0, 0, 1500) == 500 && motion_mg(600, 800, 0) == 0, "motion is | |a| - 1 g |");
+    CHECK(motion_mg(0, 0, 0) == 1000, "free fall counts as 1 g of motion");
+    watch_init(6);
+    watch_io_t io; memset(&io, 0, sizeof io); io.az = 1000; io.vdd_mv = 3700; io.soc_pm = 700; io.bat_ok = 1; io.ambient = 50;
+    io.act_mg = 1000; watch_step(10, 10000, &io);
+    CHECK(watch_state()->act_pts == 0, "the meter is off by default: no points");
+    watch_set_act(1, 0);
+    for (int i = 0; i < 5; i++) watch_step(10, 10000, &io);
+    CHECK(watch_state()->act_pts == 50, "1 g for 50 s = 50 points");
+    io.act_mg = 200; for (int i = 0; i < 10; i++) watch_step(10, 500, &io);                  /* 0.2 g for 5 s = 1 point, from fragments of 0.5 s */
+    CHECK(watch_state()->act_pts == 51, "fragments add up through the remainder");
+    io.act_mg = 60000; for (int i = 0; i < 3; i++) watch_step(10, 10000, &io);                /* a wild reading is clamped to 4 g */
+    CHECK(watch_state()->act_pts == 51 + 120, "a reading above 4 g counts as 4 g");
+    watch_set_act(1, 4); io.act_mg = 0;
+    watch_set_time(23, 59, 50); io.act_mg = 500; watch_step(10, 20000, &io);
+    CHECK(watch_state()->act_pts == 10, "the points start again after midnight (a step across midnight counts for the new day)");
+    watch_set_act(1, 9);
+    CHECK(watch_state()->act_goal == 4, "an out-of-range goal step is ignored");
+}
+
 static void test_inputs_and_math(void) {
     debounce_t d = { 0, 0 };
     CHECK(debounce_step(&d, 1) == 0, "a single sample is not accepted yet");
@@ -213,7 +236,7 @@ static void test_buzzer_plan(void) {
 }
 
 int main(void) {
-    test_pin_map(); test_slot_timing(); test_buzzer_plan(); test_frame_brightness(); test_ring_levels(); test_inputs_and_math(); test_raise(); test_imu_driver();
+    test_pin_map(); test_slot_timing(); test_buzzer_plan(); test_frame_brightness(); test_ring_levels(); test_activity(); test_inputs_and_math(); test_raise(); test_imu_driver();
     printf("%d checks, %d failed\n", checks, fails);
     return fails ? 1 : 0;
 }

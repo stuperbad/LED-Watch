@@ -279,6 +279,23 @@ def build():
     s.idle(12000); s.event(wake=60); s.idle(1500)
     out.append(s)
 
+    s = Sc("22_activity_meter")                                                                        # activity meter: settings page 3, accumulation, Time peek, BAT view, midnight reset
+    s.press(1); s.goto(6); s.idle(400); s.long(1); s.idle(300); s.long(1); s.idle(400)                 # CFG page 3
+    s.press(1); s.idle(200); s.press(0); s.idle(200)                                                   # meter ON, next item (goal)
+    for i in range(6):
+        s.press(1); s.idle(200)                                                                        # every goal step, once round
+    s.long(1); s.idle(300); s.long(0); s.idle(300); s.long(0); s.idle(300)                             # page 1 again, out to Time
+    s.cmd("MOTION 300"); s.idle(60000); s.cmd("MOTION 0"); s.idle(500)                                 # a minute of moderate wrist motion = 18 points
+    s.event(wake=60); s.idle(300); s.long(1); s.idle(2500)                                             # Time peek: battery on the hour ring, activity on the minute ring
+    s.cmd("ACT 1 0"); s.cmd("MOTION 1500"); s.idle(60000); s.cmd("MOTION 0"); s.idle(500)              # smallest goal: a hard minute fills a good part of it
+    s.press(1); s.goto(4); s.idle(300)                                                                 # BAT mode: charge view
+    for i in range(5):
+        s.press(1); s.idle(400)                                                                        # charge, solar, charging, activity, back to charge
+    s.cmd("ACT 0 0"); s.idle(300); s.press(0); s.idle(300)                                             # meter off while in BAT: only 3 views
+    s.cmd("ACT 1 0"); s.cmd("TIME 23 59 40"); s.cmd("MOTION 500"); s.idle(30000); s.cmd("MOTION 0")    # across midnight: the points start again
+    s.idle(500)
+    out.append(s)
+
     for sc in out:
         sc.save()
     return [o.name for o in out]

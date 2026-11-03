@@ -262,6 +262,16 @@ The picture is a BAR drawn on the selected ring, at that ring's real brightness:
 Every start begins at hour 50 %, minute 35 %, second 25 %, indicators 50 % (hours brightest, seconds dimmest; the values are not saved).
 The level also applies to everything else shown on that ring (date, battery, menus, games).
 
+CFG PAGE 3: ACTIVITY METER
+--------------------------
+Hold RIGHT once more in CFG (page 3; once more = back to page 1). The CFG indicator blinks.
+   hour LED 1   meter on / off (default OFF)           hour LED 2   daily goal: 250, 500, 1000, 2000, 4000 points (default 1000)
+   LEFT = next item, RIGHT = change; the minute-ring bar shows the value.
+Points = how much your wrist moved beyond gravity, summed over the day (g.s), reset at midnight. It does not count steps.
+Where it shows: in TIME, hold RIGHT (the battery peek): battery on the hour ring AND today's progress on the minute ring.
+In BAT mode a fourth view, "activity", appears while the meter is on (hour ring: 12 steps, minute ring: 60 steps of the goal).
+The simulator measures it from the accelerometer sliders; the watch measures it from the samples it reads while awake or just after a motion wake-up.
+
 POWER NOTES
 -----------
 Only about 3 LEDs are lit at a time in normal use. Games and bars light more, and because each row

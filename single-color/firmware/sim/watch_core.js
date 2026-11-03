@@ -85,6 +85,10 @@
     const RING_DEF_LVL = [2, 3, 4, 2];                  // hour 50 %, minute 35 %, second 25 %, indicators 50 %
     const RING_LEN = [12, 60, 60, 7];
     const RING_NAME = ['hour ring', 'minute ring', 'second ring', 'indicator LEDs'];
+    // Activity meter (off by default): the hardware layer reports the average wrist motion beyond gravity (milli-g) since the previous step; every second of it adds up as
+    // "points" = g.s of motion, reset at midnight. The goal steps are a first guess (an hour of walking is a few hundred points): to be calibrated on a real wrist.
+    const ACT_GOAL = [250, 500, 1000, 2000, 4000];
+    const actPct = () => Math.min(100, Math.floor(S.actPts * 100 / ACT_GOAL[S.actGoal]));
     const ringOfRow = (row) => row === 0 ? 0 : row <= 5 ? 1 : row <= 10 ? 2 : 3;
     function ringGain(row, lvl) {
       const g = Math.floor((lvl * LEVEL_PCT[S.ringLvl[ringOfRow(row)]] + 50) / 100);
@@ -144,6 +148,7 @@
       snd: { pat: 0, i: 0, t: 0, hz: 0 },                                         // buzzer pattern playing
       bat: { view: 0 },
       cfgSel: 0, cfgPage: 0, ringSel: 0, ringLvl: RING_DEF_LVL.slice(),
+      actEn: 0, actGoal: 2, actItem: 0, actPts: 0, actRem: 0,   // activity meter: on/off, goal step, CFG item, today's points (g.s of wrist motion beyond gravity), remainder in mg.ms
       fun: { g: 0, playing: false },
       dead: false
     };
@@ -212,7 +217,7 @@
           else if (!S.tmr.run && S.tmr.el > 0) { S.tmr.el = 0; log('stopwatch reset'); }
           break;
         case MODE.ALM: if (b === 0) { S.alm.field = (S.alm.field + 1) % 3; log('alarm field: ' + ['hour', 'minute', 'on/off'][S.alm.field]); } else almAdd(); break;
-        case MODE.BAT: S.bat.view = (S.bat.view + (b === 1 ? 1 : 2)) % 3; break;
+        case MODE.BAT: { const n = 3 + S.actEn; S.bat.view = (S.bat.view + (b === 1 ? 1 : n - 1)) % n; break; }   // views: charge, solar, charging, (activity)
         case MODE.FUN:
           if (!S.fun.playing) {
             if (b === 0) { S.fun.g = (S.fun.g + 1) % GAMES.length; log('game: ' + GAMES[S.fun.g]); }
@@ -220,7 +225,12 @@
           } else gameButton(S.fun.g, b, false);
           break;
         case MODE.CFG:
-          if (S.cfgPage) {
+          if (S.cfgPage === 2) {                              // page 3: activity meter, item 0 = on / off, item 1 = daily goal
+            if (b === 0) S.actItem ^= 1;
+            else if (S.actItem === 0) { S.actEn ^= 1; if (!S.actEn && S.bat.view > 2) S.bat.view = 0; log('activity meter ' + (S.actEn ? 'ON' : 'off')); }
+            else { S.actGoal = (S.actGoal + 1) % 5; log('activity goal = ' + ACT_GOAL[S.actGoal] + ' points'); }
+          }
+          else if (S.cfgPage) {
             if (b === 0) { S.ringSel = (S.ringSel + 1) % 4; log('ring: ' + RING_NAME[S.ringSel] + ' = ' + LEVEL_PCT[S.ringLvl[S.ringSel]] + '%'); }
             else { S.ringLvl[S.ringSel] = (S.ringLvl[S.ringSel] + 1) % 8; log(RING_NAME[S.ringSel] + ' = ' + LEVEL_PCT[S.ringLvl[S.ringSel]] + '%'); }
           }
@@ -245,7 +255,7 @@
           if (S.fun.playing && S.fun.g === 0) { if (G.sand.mode === 4) G.bead.w = 0; else sandRemove(4); }
           else if (S.fun.playing && S.fun.g === 6) { G.pc.kind = 1 - G.pc.kind; G.pc.t = 0; G.pc.show = 2500; log(G.pc.kind ? 'breath pacer' : 'metronome'); }
           break;   // Particles: Right hold removes particles (repeats); bead mode: stops the bead
-        case MODE.CFG: S.cfgPage ^= 1; log(S.cfgPage ? 'CFG page 2: ring levels' : 'CFG page 1: settings'); break;   // Right long switches the settings page and the ring-levels page
+        case MODE.CFG: S.cfgPage = (S.cfgPage + 1) % 3; log(['CFG page 1: settings', 'CFG page 2: ring levels', 'CFG page 3: activity meter'][S.cfgPage]); break;   // Right long switches the page   // Right long switches the settings page and the ring-levels page
       }
     }
     function longMs(i) { return i === 1 && (S.mode === MODE.SET || (S.mode === MODE.ALM && S.alm.field < 2)) ? HOLD_MS : LONG_MS; }   // Right in SET: hold = auto-repeat after 0.4 s
@@ -717,7 +727,7 @@
       if (S.dead) { if (blink4) ind(I.BAT, 255); return; }
       switch (S.mode) {
         case MODE.TIME:
-          if (S.peek > 0) { bar(0, io.soc, 255); ind(I.BAT, 255); S.peek -= dt; }
+          if (S.peek > 0) { bar(0, io.soc, 255); if (S.actEn) bar(1, Math.floor((actPct() * 60 + 50) / 100) / 60, 255); ind(I.BAT, 255); S.peek -= dt; }   // battery on the hour ring, today's activity on the minute ring
           else if (S.datePeek > 0) { renderDate(-1, true); S.datePeek -= dt; }
           else { renderTime(); if (S.alm.on) ind(I.ALM, 60); }                   // a dim ALM LED shows that an alarm is set
           break;
@@ -739,6 +749,7 @@
         case MODE.BAT:
           if (S.bat.view === 0) { bar(0, io.soc, 255); }
           else if (S.bat.view === 1) { bar(1, Math.min(1, Math.log10(1 + io.solarMw) / Math.log10(31)), 200); }
+          else if (S.bat.view === 3) { bar(0, Math.floor((actPct() * 12 + 50) / 100) / 12, 255); bar(1, Math.floor((actPct() * 60 + 50) / 100) / 60, 255); }   // activity: today's progress to the goal
           else { if (io.charging) { const k = Math.floor(S.tms / 90) % 12; put(hourLed[k === 0 ? 12 : k], 255); put(hourLed[(k + 11) % 12 || 12], 90); } else put(hourLed[12], 120); }
           ind(I.BAT, io.charging && S.bat.view === 2 ? Math.round(120 + 135 * (0.5 + 0.5 * Math.sin(S.tms / 250))) : 255);
           break;
@@ -746,6 +757,13 @@
           if (!S.fun.playing) put(hourLed[S.fun.g + 1], blink2 ? 255 : 120);   // game picker: hour LED n = game n
           break;
         case MODE.CFG: {
+          if (S.cfgPage === 2) {                              // page 3: activity meter: hour LED 1 = on / off, 2 = daily goal; minute-ring bar = value
+            const v = S.actItem === 0 ? S.actEn : S.actGoal, cnt = S.actItem === 0 ? 2 : 5;
+            put(hourLed[S.actItem + 1], 255);
+            bar(1, Math.floor((2 * (v + 1) * 60 + cnt) / (2 * cnt)) / 60, 255);
+            if (blink2) ind(I.CFG, 255);
+            break;
+          }
           if (S.cfgPage) {                                    // page 2: a bar on the selected ring, drawn through its own level (longer bar = brighter step)
             const r = S.ringSel, n = Math.floor((RING_LEN[r] * (8 - S.ringLvl[r]) + 7) / 8);
             if (r === 3) { for (let i = 0; i < n; i++) ind(i, 255); } else bar(r, n / RING_LEN[r], 255);
@@ -793,7 +811,11 @@
     function step(dtReal, dtSim, ioIn) {
       io = ioIn; evq.length = 0; S.shaken = false;
       S.rtcMs += dtSim;
-      while (S.rtcMs >= 86400000) { S.rtcMs -= 86400000; nextDay(); }
+      while (S.rtcMs >= 86400000) { S.rtcMs -= 86400000; nextDay(); S.actPts = 0; S.actRem = 0; }
+      if (S.actEn && io.actMg) {                                   // mg.ms; 1,000,000 of them = one point (g.s)
+        S.actRem += Math.min(io.actMg, 4000) * Math.min(dtSim, 1000000);
+        if (S.actRem >= 1000000) { S.actPts = Math.min(65535, S.actPts + Math.floor(S.actRem / 1000000)); S.actRem %= 1000000; }
+      }
       S.dead = io.soc < 0.03;
       // accelerometer events (the LIS2DW12 would raise INT on PE0 and wake the MCU). Each motion has its own CFG switch;
       // a locked watch can be told (CFG lock display) to stay dark, ignoring all motion.
@@ -832,7 +854,7 @@
       if (S.locked && S.set.lockd === 2) duty *= 0.25;                 // always-on lock display: low brightness
       const scan = S.awake ? scanPlan(io.vdd, duty) : { slots: [], N: 0, I: ledMa(io.vdd), m: 0, needed: 0, achievable: 0, limited: false, avgMa: 0, relBright: 1 };
       return { fb, scan, duty, tone: S.snd.hz, state: S, mode: S.mode, modeName: MODE_NAME[S.mode], awake: S.awake, locked: S.locked, events: evq.slice(), time: hms(), date: Object.assign({ wd: weekdayIso(S.date.y, S.date.m, S.date.d) }, S.date), menu: S.menu.on,
-               sub: S.menu.on ? 'MODE SELECTION: ' + MODE_NAME[S.menu.sel] : S.mode === MODE.FUN ? (S.fun.playing ? GAMES[S.fun.g] : 'pick a game: ' + GAMES[S.fun.g]) : S.mode === MODE.SET ? 'editing ' + SET_FIELDS[S.setField] : S.mode === MODE.ALM ? 'alarm ' + (S.alm.on ? 'ON' : 'off') + ' ' + String(S.alm.h).padStart(2, '0') + ':' + String(S.alm.m).padStart(2, '0') + ', editing ' + ['hour', 'minute', 'on/off'][S.alm.field] : S.mode === MODE.CFG ? (S.cfgPage ? RING_NAME[S.ringSel] + ' = ' + LEVEL_PCT[S.ringLvl[S.ringSel]] + '%' : CFG_NAMES[S.cfgSel] + ' = ' + cfgValueText(S.cfgSel)) : S.mode === MODE.BAT ? ['charge', 'solar', 'state'][S.bat.view] : '' };
+               sub: S.menu.on ? 'MODE SELECTION: ' + MODE_NAME[S.menu.sel] : S.mode === MODE.FUN ? (S.fun.playing ? GAMES[S.fun.g] : 'pick a game: ' + GAMES[S.fun.g]) : S.mode === MODE.SET ? 'editing ' + SET_FIELDS[S.setField] : S.mode === MODE.ALM ? 'alarm ' + (S.alm.on ? 'ON' : 'off') + ' ' + String(S.alm.h).padStart(2, '0') + ':' + String(S.alm.m).padStart(2, '0') + ', editing ' + ['hour', 'minute', 'on/off'][S.alm.field] : S.mode === MODE.CFG ? (S.cfgPage === 2 ? (S.actItem === 0 ? 'activity meter ' + (S.actEn ? 'ON' : 'off') : 'activity goal ' + ACT_GOAL[S.actGoal] + ' points') : S.cfgPage ? RING_NAME[S.ringSel] + ' = ' + LEVEL_PCT[S.ringLvl[S.ringSel]] + '%' : CFG_NAMES[S.cfgSel] + ' = ' + cfgValueText(S.cfgSel)) : S.mode === MODE.BAT ? ['charge', 'solar', 'state', 'activity ' + actPct() + '% of the goal'][S.bat.view] : '' };
     }
 
     /* what each button does RIGHT NOW (shown in the simulator, mirrored in MANUAL.md) */
@@ -854,7 +876,7 @@
           c.note = 'Seconds LED = elapsed s, minute LED = elapsed min, hour ring = tenths (1-5, 7-11). Display stays on 90 s, then sleeps still in this mode.'; break;
         case MODE.ALM: c.ls = 'next field (' + ['minute', 'on/off', 'hour'][S.alm.field] + ')'; c.rs = S.alm.field === 2 ? 'alarm ' + (S.alm.on ? 'OFF' : 'ON') : '+1 ' + ['hour', 'minute'][S.alm.field]; c.rl = S.alm.field < 2 ? 'HOLD: auto-repeat +1' : '-';
           c.note = 'Alarm ' + (S.alm.on ? 'ON' : 'off') + ' at ' + String(S.alm.h).padStart(2, '0') + ':' + String(S.alm.m).padStart(2, '0') + '. Hour LED + minute LED show the time (an LED at 6 on the outer ring = PM; three LEDs at 12 on the outer ring = alarm on). The field being edited blinks. When it rings (up to 1 min) any button stops it.'; break;
-        case MODE.BAT: c.ls = 'previous view'; c.rs = 'next view (charge / solar / charging)'; c.rl = '-'; c.note = 'Charge: hour-ring bar. Solar: minute-ring bar. Charging: spinner.'; break;
+        case MODE.BAT: c.ls = 'previous view'; c.rs = 'next view (charge / solar / charging' + (S.actEn ? ' / activity' : '') + ')'; c.rl = '-'; c.note = 'Charge: hour-ring bar. Solar: minute-ring bar. Charging: spinner.' + (S.actEn ? ' Activity: progress today to the goal (hour ring 12 steps, minute ring 60 steps).' : ''); break;
         case MODE.FUN:
           if (!S.fun.playing) { c.ls = 'next game (' + GAMES[(S.fun.g + 1) % GAMES.length] + ')'; c.rs = 'START ' + GAMES[S.fun.g]; c.rl = '-'; c.note = 'Game picker: hour LED n = game n (' + GAMES.map((g, i) => (i + 1) + ' ' + g).join(', ') + '). Left long = mode selection.'; }
           else {
@@ -870,7 +892,7 @@
             c.note = GAMES[g] + (g === 0 ? ' (mode ' + (sm + 1) + ': ' + PARTICLE_MODES[sm].name + (sm < 4 ? ', ' + G.sand.p.length + ' particles' : '') + '). Tilt to move things.' : g === 4 ? ' (' + ORBIT_PATTERNS[G.orb.pat] + ').' : g === 5 ? ' (' + RNG_MODES[rg] + ').' : g === 6 ? ' (' + (pc.kind ? 'breath pacer' : 'metronome') + ').' : '.') + ' Left long = mode selection (FUN is highlighted: wait to come back to the game picker).';
           }
           break;
-        case MODE.CFG: if (S.cfgPage) { c.ls = 'next ring (' + RING_NAME[(S.ringSel + 1) % 4] + ')'; c.rs = 'next brightness step'; c.rl = 'back to the settings page'; c.note = 'Ring levels: the bar is drawn on the selected ring (' + RING_NAME[S.ringSel] + ', ' + LEVEL_PCT[S.ringLvl[S.ringSel]] + '%), longer bar = brighter step; the CFG LED blinks.'; } else { c.ls = 'next setting (' + CFG_NAMES[(S.cfgSel + 1) % CFG_COUNT.length] + ')'; c.rs = 'change value'; c.rl = 'ring levels page'; c.note = 'Hour LED ' + (S.cfgSel + 1) + ' = ' + CFG_NAMES[S.cfgSel] + '; minute-ring bar = value (' + cfgValueText(S.cfgSel) + ').'; } break;
+        case MODE.CFG: if (S.cfgPage === 2) { c.ls = 'next item (on/off, daily goal)'; c.rs = 'change'; c.rl = 'back to the settings page'; c.note = 'Activity meter (' + (S.actEn ? 'ON' : 'off') + ', goal ' + ACT_GOAL[S.actGoal] + ' points): hour LED 1 = on/off, 2 = goal; minute-ring bar = value.'; } else if (S.cfgPage) { c.ls = 'next ring (' + RING_NAME[(S.ringSel + 1) % 4] + ')'; c.rs = 'next brightness step'; c.rl = 'next page (activity meter)'; c.note = 'Ring levels: the bar is drawn on the selected ring (' + RING_NAME[S.ringSel] + ', ' + LEVEL_PCT[S.ringLvl[S.ringSel]] + '%), longer bar = brighter step; the CFG LED blinks.'; } else { c.ls = 'next setting (' + CFG_NAMES[(S.cfgSel + 1) % CFG_COUNT.length] + ')'; c.rs = 'change value'; c.rl = 'next page (ring levels)'; c.note = 'Hour LED ' + (S.cfgSel + 1) + ' = ' + CFG_NAMES[S.cfgSel] + '; minute-ring bar = value (' + cfgValueText(S.cfgSel) + ').'; } break;
       }
       return c;
     }

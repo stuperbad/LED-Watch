@@ -122,6 +122,11 @@ static uint8_t in_half(uint8_t r, uint8_t k, uint8_t side) {           /* side 0
  * (CFG, Right long). The defaults are STARTING VALUES (the study in docs/LED-SELECTION.md gives hours 100 / minutes 70 / seconds 45 %, all scaled to start at half): to be calibrated
  * on the real board, the reel-to-reel LED scatter can be 2-3 x. Settings live in RAM, so every boot starts from the defaults. */
 #define RING_N 4
+/* Activity meter (off by default): the hardware layer reports the average wrist motion beyond gravity (milli-g) since the previous step; every second of it adds up as
+ * "points" = g.s of motion, reset at midnight. The goal steps are a first guess (an hour of walking is a few hundred points): to be calibrated on a real wrist. */
+static const uint16_t ACT_GOAL[5] = { 250, 500, 1000, 2000, 4000 };
+#define ACT_GOAL_DEF 2
+static uint8_t act_pct(void) { uint32_t p = (uint32_t)W.act_pts * 100UL / ACT_GOAL[W.act_goal]; return (uint8_t)(p > 100 ? 100 : p); }
 static const uint8_t LEVEL_PCT[8]    = { 100, 70, 50, 35, 25, 18, 12, 8 };
 static const uint8_t RING_DEF_LVL[RING_N] = { 2, 3, 4, 2 };                 /* hour 50 %, minute 35 %, second 25 %, indicators 50 % */
 static const uint8_t RING_LEN[RING_N] = { 12, 60, 60, 7 };
@@ -186,6 +191,7 @@ static void hms(uint8_t *h, uint8_t *m, uint8_t *s) { uint32_t t = (W.rtc_ms / 1
 void watch_set_time(uint8_t h, uint8_t m, uint8_t s) { W.rtc_ms = ((uint32_t)(h % 24) * 3600UL + (uint32_t)(m % 60) * 60UL + (s % 60)) * 1000UL; }
 void watch_set_cfg(uint8_t idx, uint8_t v) { if (idx < C_COUNT && v < CFG_COUNT[idx]) W.set[idx] = v; }
 void watch_set_ring(uint8_t ring, uint8_t lvl) { if (ring < RING_N && lvl < 8) W.ring_lvl[ring] = lvl; }
+void watch_set_act(uint8_t on, uint8_t goal_idx) { W.act_en = on ? 1 : 0; if (goal_idx < 5) W.act_goal = goal_idx; if (!W.act_en && W.bat_view > 2) W.bat_view = 0; }
 void watch_set_alarm(uint8_t h, uint8_t m, uint8_t on) { W.alm_h = (uint8_t)(h % 24); W.alm_m = (uint8_t)(m % 60); W.alm_on = on ? 1 : 0; W.alm_armed = 0; }
 void watch_set_date(uint16_t y, uint8_t mo, uint8_t d) { W.year = y; W.month = mo; W.day = d > days_in(y, mo) ? days_in(y, mo) : d; }
 static void next_day(void) { W.day++; if (W.day > days_in(W.year, W.month)) { W.day = 1; W.month++; if (W.month > 12) { W.month = 1; W.year++; } } }
@@ -243,14 +249,19 @@ static void on_short(uint8_t b) {
         else if (!W.tmr_run && W.tmr_el > 0) W.tmr_el = 0;
         break;
     case M_ALM: if (b == 0) W.alm_field = (uint8_t)((W.alm_field + 1) % 3); else alm_add(); break;
-    case M_BAT: W.bat_view = (uint8_t)((W.bat_view + (b == 1 ? 1 : 2)) % 3); break;
+    case M_BAT: { uint8_t n = (uint8_t)(3 + W.act_en); W.bat_view = (uint8_t)((W.bat_view + (b == 1 ? 1 : n - 1)) % n); break; }     /* views: charge, solar, charging, (activity) */
     case M_FUN:
         if (!W.fun_playing) {
             if (b == 0) W.fun_g = (uint8_t)((W.fun_g + 1) % G_COUNT); else { W.fun_playing = 1; game_start(W.fun_g); }
         } else game_button(W.fun_g, b);
         break;
     default:
-        if (W.cfg_page) { if (b == 0) W.ring_sel = (uint8_t)((W.ring_sel + 1) % RING_N); else W.ring_lvl[W.ring_sel] = (uint8_t)((W.ring_lvl[W.ring_sel] + 1) % 8); }
+        if (W.cfg_page == 2) {                                       /* page 3: activity meter, item 0 = on / off, item 1 = daily goal */
+            if (b == 0) W.act_item ^= 1;
+            else if (W.act_item == 0) { W.act_en ^= 1; if (!W.act_en && W.bat_view > 2) W.bat_view = 0; }
+            else W.act_goal = (uint8_t)((W.act_goal + 1) % 5);
+        }
+        else if (W.cfg_page) { if (b == 0) W.ring_sel = (uint8_t)((W.ring_sel + 1) % RING_N); else W.ring_lvl[W.ring_sel] = (uint8_t)((W.ring_lvl[W.ring_sel] + 1) % 8); }
         else if (b == 0) W.cfg_sel = (uint8_t)((W.cfg_sel + 1) % C_COUNT); else cfg_change();
         break;
     }
@@ -268,7 +279,7 @@ static void on_long(uint8_t b) {
         if (W.fun_playing && W.fun_g == G_PART) { if (W.pref_sand_mode == 4) W.g.part.bead_w = 0; else part_remove(4); }
         else if (W.fun_playing && W.fun_g == G_PACER) { W.pref_pc_kind ^= 1; W.g.pc.t = 0; W.g.pc.show = 2500; }
         break;
-    default: W.cfg_page ^= 1; break;                                 /* CFG: Right long switches between the settings page and the ring-levels page */
+    default: W.cfg_page = (uint8_t)((W.cfg_page + 1) % 3); break;      /* CFG: Right long switches the page: settings, ring levels, activity meter */
     }
 }
 static uint16_t long_ms(uint8_t i) { return (i == 1 && (W.mode == M_SET || (W.mode == M_ALM && W.alm_field < 2))) ? HOLD_MS : LONG_MS; }
@@ -782,7 +793,7 @@ static void render(uint16_t dt) {
     if (W.dead) { if (blink4) ind(I_BAT, 255); return; }
     switch (W.mode) {
     case M_TIME:
-        if (W.peek > 0) { bar_n(0, (uint8_t)(((uint32_t)io->soc_pm * 12 + 500) / 1000), 255); ind(I_BAT, 255); W.peek = (int16_t)(W.peek - dt); }
+        if (W.peek > 0) { bar_n(0, (uint8_t)(((uint32_t)io->soc_pm * 12 + 500) / 1000), 255); if (W.act_en) bar_n(1, (uint8_t)((act_pct() * 60 + 50) / 100), 255); ind(I_BAT, 255); W.peek = (int16_t)(W.peek - dt); }   /* battery on the hour ring, today's activity on the minute ring */
         else if (W.date_peek > 0) { render_date(-1, 1); W.date_peek = (int16_t)(W.date_peek - dt); }
         else { render_time(); if (W.alm_on) ind(I_ALM, 60); }                    /* a dim ALM LED shows that an alarm is set */
         break;
@@ -799,6 +810,7 @@ static void render(uint16_t dt) {
     case M_BAT:
         if (W.bat_view == 0) bar_n(0, (uint8_t)(((uint32_t)io->soc_pm * 12 + 500) / 1000), 255);
         else if (W.bat_view == 1) bar_n(1, SOLAR_BAR[io->solar_mw > 30 ? 30 : io->solar_mw], 200);
+        else if (W.bat_view == 3) { bar_n(0, (uint8_t)((act_pct() * 12 + 50) / 100), 255); bar_n(1, (uint8_t)((act_pct() * 60 + 50) / 100), 255); }   /* activity: today's progress to the goal, 12 steps on the hour ring, 60 on the minute ring */
         else if (io->charging) { uint8_t k = (uint8_t)((W.tms / 90) % 12); put(hour_led(k == 0 ? 12 : k), 255); put(hour_led((uint8_t)(((k + 11) % 12) ? (k + 11) % 12 : 12)), 90); }
         else put(hour_led(12), 120);
         { uint8_t lvl = 255; if (io->charging && W.bat_view == 2) { int16_t sv = sin16((uint16_t)((W.tms % 1571UL) * 65536UL / 1571UL)); lvl = (uint8_t)(188 + ((67L * sv + 16384) >> 15)); } ind(I_BAT, lvl); }
@@ -807,6 +819,13 @@ static void render(uint16_t dt) {
         if (!W.fun_playing) put(hour_led((uint8_t)(W.fun_g + 1)), blink2 ? 255 : 120);          /* game picker: hour LED n = game n */
         break;
     default: {
+        if (W.cfg_page == 2) {                                      /* page 3: activity meter: hour LED 1 = on / off, 2 = daily goal; minute-ring bar = value */
+            uint8_t v = W.act_item == 0 ? W.act_en : W.act_goal, cnt = W.act_item == 0 ? 2 : 5;
+            put(hour_led((uint8_t)(W.act_item + 1)), 255);
+            bar_n(1, (uint8_t)((2 * (v + 1) * 60 + cnt) / (2 * cnt)), 255);
+            if (blink2) ind(I_CFG, 255);
+            break;
+        }
         if (W.cfg_page) {                                           /* page 2: a bar on the selected ring, drawn through its own level (longer bar = brighter step) */
             uint8_t r = W.ring_sel, n = (uint8_t)((RING_LEN[r] * (8 - W.ring_lvl[r]) + 7) / 8);
             if (r == 3) { for (uint8_t i = 0; i < n; i++) ind(i, 255); } else bar_n(r, n, 255);
@@ -870,13 +889,18 @@ void watch_init(uint32_t seed) {
     W.rtc_ms = (10UL * 3600UL + 8UL * 60UL + 37UL) * 1000UL; W.year = 2026; W.month = 10; W.day = 11;
     W.set[C_BRI] = 2; W.set[C_WAKE] = 1; W.set[C_DUR] = 3;
     for (uint8_t i = 0; i < RING_N; i++) W.ring_lvl[i] = RING_DEF_LVL[i];
+    W.act_goal = ACT_GOAL_DEF;
     W.pref_pc_bpm = 100; W.pref_pc_br = 6;
     W.alm_h = 7; W.alm_armed = 1;
 }
 
 void watch_step(uint16_t dt_real, uint32_t dt_sim, const watch_io_t *in) {
     io = in; W.shaken = 0;
-    W.rtc_ms += dt_sim; while (W.rtc_ms >= 86400000UL) { W.rtc_ms -= 86400000UL; next_day(); }
+    W.rtc_ms += dt_sim; while (W.rtc_ms >= 86400000UL) { W.rtc_ms -= 86400000UL; next_day(); W.act_pts = 0; W.act_rem = 0; }
+    if (W.act_en && io->act_mg) {                                     /* mg.ms; 1,000,000 of them = one point (g.s) */
+        W.act_rem += (uint32_t)(io->act_mg > 4000 ? 4000 : io->act_mg) * (dt_sim > 1000000UL ? 1000000UL : dt_sim);
+        if (W.act_rem >= 1000000UL) { uint32_t p = (uint32_t)W.act_pts + W.act_rem / 1000000UL; W.act_pts = (uint16_t)(p > 65535UL ? 65535UL : p); W.act_rem %= 1000000UL; }
+    }
     W.dead = io->soc_pm < 30;
     /* accelerometer events (the LIS2DW12 raises INT and wakes the MCU). Each motion has its own CFG switch; a locked watch can be told to stay dark. */
     uint8_t lock_dark = W.locked && W.set[C_LOCKD] == 1;

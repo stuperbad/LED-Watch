@@ -36,6 +36,11 @@ void imu_map_axes(const int16_t s[3], int16_t *x, int16_t *y, int16_t *z) {
 
 static uint32_t isqrt(uint32_t v) { uint32_t r = 0, b = 1UL << 30; while (b > v) b >>= 2; while (b) { if (v >= r + b) { v -= r + b; r = (r >> 1) + b; } else r >>= 1; b >>= 2; } return r; }
 
+uint16_t motion_mg(int16_t x, int16_t y, int16_t z) {
+    int32_t n = (int32_t)isqrt((uint32_t)((int32_t)x * x + (int32_t)y * y + (int32_t)z * z)) - 1000;
+    return (uint16_t)(n < 0 ? -n : n);
+}
+
 void raise_arm(raise_t *r) { r->armed = 1; r->n = 0; r->max_d = 0; }
 
 /* A wrist raise is a big change of the gravity vector that ends with the watch face up. Compare every sample of the window with the first one, remember

@@ -129,10 +129,11 @@ int main(void) {
             if (imu_ev & IMU_EV_FF) io.ff = 1;
             if (imu_ev & IMU_EV_WAKEUP) { raise_arm(&raise); motion_ms = MOTION_WINDOW_MS; }
         }
+        io.act_mg = 0;                                                  /* activity meter input: only samples read in this pass count (awake, or inside the motion window after a wake-up event) */
         if (fast && imu_ok) {                                           /* samples are only worth reading while the loop is fast */
             int16_t x, y, z;
             if (imu_read_mg(&x, &y, &z)) {
-                io.ax = x; io.ay = y; io.az = z;
+                io.ax = x; io.ay = y; io.az = z; io.act_mg = motion_mg(x, y, z);
                 int16_t r = raise_feed(&raise, x, y, z);
                 if (r >= 0) io.wake_strength = (uint8_t)r;
             }
