@@ -72,7 +72,7 @@ How each finding was checked: **datasheet** = read in the manufacturer's data sh
 | B2 power loops: short, wide, one layer, inductors close, vias to the bottom for the inductors | L1 5.6 mm from U4.20 (LBOOST copper 11.6 mm, 3 vias, 3 layers), L2 9.7 mm from U4.16 (LBUCK 13.6 mm, 2 vias). The data sheet itself says to use vias and bottom traces to connect the inductors, and to put CSTOR / CIN / CBYP first. Track width is 0.1 mm on every power net. | **deviation**, ask |
 | B3 no acute angles | 39 -> **28** spots after the artefact pass; pieces under 0.05 mm: 25 -> 8, zero-length pieces 5 -> 0. What is left: the polar lanes (COL10 6.3 degrees at (83.68, 91.28) and its T junctions, COL11 T junction at (90.22, 84.29), ROW3 / ROW11 / VBAT T junctions at 45 degrees) and ring-lane joints. | partly done, listed |
 | B4 traces leave pads along the axis | all 26 pads of the 14 two-pad parts in the USB-C corner checked: they leave along the axis (the last two exceptions, R69.2 and R72.2, were fixed by the owner) | done for the corner |
-| B5 inner plane clearance down to JLC's minimum | GND zones use 0.2 mm clearance; JLCPCB's minimum for 4 layers is 0.09 mm | not changed |
+| B5 inner plane clearance down to JLC's minimum | the In2 ground plane now keeps 0.1 mm (was 0.2 mm; JLCPCB's minimum for 4 layers is 0.09 mm); the F.Cu crystal pour keeps 0.2 mm; the 0.2 mm hole-to-copper rule around vias is unchanged | **done 2026-11-04** |
 | B6 crystal pour deleted or stitched | stitched (14 vias) | done |
 | B8 bypass caps | see section 5 | deviation, ask |
 | Test points | none on the board; for bring-up use the big pads: C54 for +3V3 / GND, J1 pads for the battery, C52 / C13 for VSTOR, L1 pad 2 for SOLAR_IN, the J2 pads for VBUS | note added to the bring-up list below |
@@ -110,4 +110,4 @@ All ground returns reach a GND via within 0.5-1.4 mm of copper (the inner plane 
 
 ## 8. Questions for the reviewer
 
-Plain-language version with a "who is who" table: `QUESTIONS-FOR-JAMES.md`. In short: (1) are the solar-charger parts close enough to U4 (CIN 7.7 mm, CBYP 8.4 mm, L1 5.6 mm, L2 9.7 mm, LBOOST 11.6 mm of copper; picture `cbyp-8p4mm.png`); (2) MCU decoupling at 1.4 / 2.2 / 4.8 mm; (3) inner-plane clearance 0.2 mm or lower; (4) the USB-C corner, including the SBU clamp going to VBAT instead of +3V3. Decided by the owner, not asked: no TVS on SBU or the buttons, no In2 cut-out.
+Plain-language version with a "who is who" table: `QUESTIONS-FOR-JAMES.md`. In short: (1) are the solar-charger parts close enough to U4 (CIN 7.7 mm, CBYP 8.4 mm, L1 5.6 mm, L2 9.7 mm, LBOOST 11.6 mm of copper; picture `cbyp-8p4mm.png`); (2) MCU decoupling at 1.4 / 2.2 / 4.8 mm; (3) the USB-C corner, including the SBU clamp going to VBAT instead of +3V3. Decided by the owner, not asked: no TVS on SBU or the buttons, no In2 cut-out, In2 clearance 0.1 mm. Where each question sits on the board: `review-areas-top-and-bottom.png`.

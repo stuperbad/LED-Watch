@@ -543,3 +543,8 @@ Files changed: schematic/gen_schematic.py (+ regenerated watch_solar.kicad_sch, 
 - **CBYP (C53) stays at 8.4 mm** (11.2 mm of copper); picture `docs/cbyp-8p4mm.png`. C52 (CSTOR, 4.7 uF) is 1.3 mm from pin 19.
 - **In2 ground plane under R50-R56 / C51:** earlier flagged from data sheet 10.1; on reflection no cut-out is recommended (reasons in review item 13, picture `docs/in2-under-dividers.png`). My first flag was more alarmed than the facts support.
 
+### 2026-11-04 (morning) - In2 ground-plane clearance 0.2 -> 0.1 mm; pictures of the review areas
+
+- **Owner's decision** (following the reviewer's B5 point): the In2 ground plane keeps 0.1 mm to other copper instead of 0.2 mm (JLCPCB's stated minimum for 4 layers is 0.09 mm). Zone clearance of the In2 GND zone set to 0.1 mm and refilled (filled area 1,366 -> 1,409 mm2). Not changed: the F.Cu crystal pour (0.2 mm, owner's keep-out design) and the 0.2 mm hole-to-copper rule (JLCPCB's drill rule), so around vias the plane gap is still set by the hole rule; the change matters near pads and tracks. DRC unchanged (4 J2 hole clearances, library, text height; 0 unconnected), keep-out 0, 65 of 65 nets still one piece. Only the In2 Gerber changed. A first refill inside the edit script gave 1,341 mm2; a fresh refill (what was installed, checked stable on a second refill) gives 1,409 mm2. Save point: `rev C board (before the In2 clearance 0.2 to 0.1).kicad_pcb`.
+- **Pictures:** `docs/review-areas-top-and-bottom.png` (orange = solar charger parts, green = MCU power capacitors C10 / C11 / C13 on the front, purple = USB-C corner) and `docs/review-areas-back-zoom.png`.
+

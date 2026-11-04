@@ -19,7 +19,9 @@ Plain-language version of section 8 of `DESIGN-REVIEW-REV-C.md` (that file has t
 | J2 | the USB-C connector (charging and programming) |
 | D51 | static-protection diode on the USB 5 V pin; D50 clamp diode on the programming wire; R72 1 kohm in the programming wire; R68 / R69 5.1 kohm resistors that tell a charger "I am a device" |
 
-## The four questions
+## The three questions
+
+Picture of where each one is on the board: `review-areas-top-and-bottom.png` (orange 1, green 2, purple 3 here = the USB-C corner), close-up of the back: `review-areas-back-zoom.png`.
 
 **1. Are the solar-charger parts close enough to U4?**
 TI's data sheet says "as close as possible" and gives no numbers. Ours: storage capacitor C52 1.3 mm (good), solar input capacitor C50 7.7 mm, bypass capacitor C53 8.4 mm, coil L1 5.6 mm, coil L2 9.7 mm. The back of the board is only a 4.8 mm strip between the two batteries and it is full; we tried moving things and each option broke something else (details in the design review, picture `cbyp-8p4mm.png`).
@@ -30,17 +32,14 @@ TI's data sheet says "as close as possible" and gives no numbers. Ours: storage 
 His rule was about 1 mm with no via in between. The chip is boxed in by the crystal keep-out and the LED fan-out; at 4 MHz this is common practice.
 *Ask:* acceptable, or does he want one moved?
 
-**3. Ground-layer gap: 0.2 mm or the fab minimum (0.09 mm)?**
-The inner ground layer keeps a gap around every via and trace. We use 0.2 mm; JLCPCB can do 0.09 mm. He suggested going to the minimum earlier.
-*Ask:* does he still want it? (We have no reason to change it; 0.2 mm is the safer one to manufacture.)
-
-**4. The USB-C corner: anything he would change?**
+**3. The USB-C corner: anything he would change?**
 It holds the static diode on 5 V (D51), the two 5.1 kohm resistors, the 1 kohm in the programming wire with its clamp diode (D50), and the grounded shell. One small point to raise: the clamp diode D50 goes to the 3.3 V supply; the safer connection is the battery supply (a damaged cable putting 5 V on the programming wire could push current into the 3.3 V supply).
 *Ask:* happy with the corner? Move the clamp to the battery supply?
 
 ## Already decided (no need to ask)
 
 - No extra static protection on the programming wires or the buttons for the prototype (owner's call, 2026-11-04). Revisit before boards go to other people.
+- Inner ground-layer gap: set to 0.1 mm (JLCPCB can do 0.09 mm), as he suggested; no need to ask.
 - No cut-out in the inner ground layer under the divider resistors (it would hurt other signals' return path; the data sheet's warning is about surface leakage).
 - The crystal block sits 1.2 mm further from the chip than before; he can look at it.
 
