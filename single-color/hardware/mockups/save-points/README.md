@@ -45,3 +45,4 @@ Frozen copies of the USB-C mock-up board, kept so any step can be returned to. N
 | `rev C board (owner's save 01-45, before the via and small-error pass).kicad_pcb` | revision C main board as saved at 01:45 (owner's ring / indicator clean-up), before the small-error fixes and the via search. |
 | `rev C board (owner's save 02-10, before the tick-off pass).kicad_pcb` | revision C main board as saved at 02:10 (owner's third clean-up cycle), before nested duplicates, the COL3 T and two slivers were fixed. |
 | `rev C board (owner's save 02-19, before the pad-exit and overlap fixes).kicad_pcb` | revision C main board as saved at 02:19, before four ring-LED pad exits, R5.1 and three overlaps were fixed. |
+| `rev C board (owner's save 02-28, before the ring-LED exit lengthening).kicad_pcb` | revision C main board after the 02:19 pad-exit / overlap fixes (commit b589f3c), before the four ring-LED exits were lengthened to 1+ trace widths outside the pad. |
