@@ -556,3 +556,9 @@ Files changed: schematic/gen_schematic.py (+ regenerated watch_solar.kicad_sch, 
 - **Ground gap check:** In2 zone clearance is 0.10 mm in the owner's save (filled area 1,412 mm2 against 1,366 mm2 at 0.2 mm); picture `docs/in2-gap-before-after.png`.
 - **Pad exits** (`tools/check_pad_exit.py`): 20 pads still more than 25 degrees off the part axis (was 23): ring LEDs H11 / H7 / M18 / M49 / M59, IND1.2, resistors C10.1 R9 R10 R20 R53 R55, L2, C30, Y1 (both pads). Owner will redraw the Y1 pads (leave along the crystal axis, then fork to the capacitor and the chip pin) and take the ring LEDs to the reviewer.
 
+### 2026-11-04 (02:10 save) - tick-off pass
+
+- **Audit of the owner's 02:10 save:** pad exits 20 -> 8 (Y1, L2, ring LEDs, resistors fixed by hand); vias 342; every net one piece except COL3 (a T 0.026 mm off its line); DRC one new item (0.0001 mm sliver on COL5).
+- **Fixed (no or tiny copper change):** four nested duplicate pieces (VBAT, GND at C20, COL5, SOLAR_IN at C50) cut / removed with `tidy_neutral.py`; the COL3 T given a node (largest displacement 0.0226 mm, `fix_joints.py --snap 0.03`); the COL5 sliver and a zero-length VBAT piece removed; 2 collinear merges. DRC back to the 12 known items, 0 unconnected, keep-out 0, 65 of 65 nets one piece. Save point `rev C board (owner's save 02-10, before the tick-off pass).kicad_pcb`.
+- **Left (list for the owner):** 8 pad exits off the part axis (C30.1, H11.1, H11.2, H5.2, H7.2, IND1.2, R20.1, R9.2); 2 pad landings under 0.05 mm deep (IND1.1 0.007, R5.1 0.038); 28 spots under 60 degrees (mostly 45-degree forks and T joints, two 15-degree T joints on COL4 at (113.761, 106.374) and (114.198, 108.028), a few 0-degree overlaps at +3V3 (103.095, 98.75), ROW11 (88.75, 104.807) and GND (91.42, 93.21)); 180 pieces under 0.15 mm (39 under 0.05).
+

@@ -1,12 +1,12 @@
 %TF.GenerationSoftware,KiCad,Pcbnew,10.0.6*%
-%TF.CreationDate,2026-11-04T01:55:02-08:00*%
+%TF.CreationDate,2026-11-04T02:14:41-08:00*%
 %TF.ProjectId,LED Watch - Single Color,4c454420-5761-4746-9368-202d2053696e,C*%
 %TF.SameCoordinates,Original*%
 %TF.FileFunction,Soldermask,Top*%
 %TF.FilePolarity,Negative*%
 %FSLAX46Y46*%
 G04 Gerber Fmt 4.6, Leading zero omitted, Abs format (unit mm)*
-G04 Created by KiCad (PCBNEW 10.0.6) date 2026-11-04 01:55:02*
+G04 Created by KiCad (PCBNEW 10.0.6) date 2026-11-04 02:14:41*
 %MOMM*%
 %LPD*%
 G01*
@@ -225,8 +225,8 @@ X118916513Y-93853651D03*
 %TD*%
 D17*
 %TO.C,C20*%
-X91300000Y-91595000D03*
-X91300000Y-92555000D03*
+X91290000Y-91720000D03*
+X91290000Y-92680000D03*
 %TD*%
 D15*
 %TO.C,SW2*%
@@ -381,8 +381,8 @@ X85218849Y-86690991D03*
 %TD*%
 D30*
 %TO.C,C21*%
-X91300000Y-94805000D03*
-X91300000Y-93845000D03*
+X91300000Y-94700000D03*
+X91300000Y-93740000D03*
 %TD*%
 D46*
 %TO.C,M3*%

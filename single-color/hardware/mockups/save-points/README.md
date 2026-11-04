@@ -43,3 +43,4 @@ Frozen copies of the USB-C mock-up board, kept so any step can be returned to. N
 | `rev C board (before the VOUT_SET overlap tidy).kicad_pcb` | revision C main board after the collinear merge (23:42), before the doubled VOUT_SET piece was removed. |
 | `rev C board (before the In2 clearance 0.2 to 0.1).kicad_pcb` | revision C main board at 00:10 (after the tidy-ups), before the In2 ground plane clearance was set to 0.1 mm. |
 | `rev C board (owner's save 01-45, before the via and small-error pass).kicad_pcb` | revision C main board as saved at 01:45 (owner's ring / indicator clean-up), before the small-error fixes and the via search. |
+| `rev C board (owner's save 02-10, before the tick-off pass).kicad_pcb` | revision C main board as saved at 02:10 (owner's third clean-up cycle), before nested duplicates, the COL3 T and two slivers were fixed. |
