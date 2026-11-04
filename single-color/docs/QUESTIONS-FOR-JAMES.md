@@ -19,7 +19,7 @@ Plain-language version of section 8 of `DESIGN-REVIEW-REV-C.md` (that file has t
 | J2 | the USB-C connector (charging and programming) |
 | D51 | static-protection diode on the USB 5 V pin; D50 clamp diode on the programming wire; R72 1 kohm in the programming wire; R68 / R69 5.1 kohm resistors that tell a charger "I am a device" |
 
-## The three questions
+## The four questions
 
 Picture of where each one is on the board: `review-areas-top-and-bottom.png` (orange 1, green 2, purple 3 here = the USB-C corner), close-up of the back: `review-areas-back-zoom.png`.
 
@@ -36,11 +36,17 @@ His rule was about 1 mm with no via in between. The chip is boxed in by the crys
 It holds the static diode on 5 V (D51), the two 5.1 kohm resistors, the 1 kohm in the programming wire with its clamp diode (D50), and the grounded shell. One small point to raise: the clamp diode D50 goes to the 3.3 V supply; the safer connection is the battery supply (a damaged cable putting 5 V on the programming wire could push current into the 3.3 V supply).
 *Ask:* happy with the corner? Move the clamp to the battery supply?
 
+**4. LED-ring pad exits that are not perfect.**
+On the LED ring some parts sit at odd angles, so the first small trace piece cannot leave exactly along the part's axis and still end on a 45-degree line. About 20 pads are more than 25 degrees off the axis (mostly the ring LEDs, a few resistors, the coil L2 and the crystal). The owner has already redrawn the indicator row and the crystal capacitors.
+*Ask:* close enough for a prototype, or does he want the first piece forced along the axis?
+
 ## Already decided (no need to ask)
 
 - No extra static protection on the programming wires or the buttons for the prototype (owner's call, 2026-11-04). Revisit before boards go to other people.
-- Inner ground-layer gap: set to 0.1 mm (JLCPCB can do 0.09 mm), as he suggested; no need to ask.
+- Inner ground-layer gap: set to 0.1 mm (JLCPCB can do 0.09 mm), as he suggested; checked in the file and in a picture (`in2-gap-before-after.png`): the clear ring around each via is visibly smaller.
+- Vias: searched every non-ground, non-LED-ring net for vias that only hop over their own wire; the owner's hand clean-up had already removed the easy ones, 1 more hop and 1 leftover via were removed (345 -> 342); the other 119 vias are needed to cross other traces.
 - No cut-out in the inner ground layer under the divider resistors (it would hurt other signals' return path; the data sheet's warning is about surface leakage).
+- The crystal's two traces leave each pad sideways (both its capacitor and the chip pin are on the same pad side); the owner will redraw them to leave along the crystal's axis and fork afterwards.
 - The crystal block sits 1.2 mm further from the chip than before; he can look at it.
 
 ## Not questions: things to do at the bench before power-up (BRING-UP-TESTS.md)
