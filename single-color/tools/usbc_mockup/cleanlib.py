@@ -52,7 +52,7 @@ def margins(b, polyline, width, net, layer, skip_ids):
                 c = xy(p.GetPosition()); worst = min(worst, _dseg(c, q0, q1) - width / 2 - tomm(p.GetDrillSizeX()) / 2 - HOLE)
     return worst
 
-def clean_chains(b, owner_keys, box, skip=(), skip_ends=()):
+def clean_chains(b, owner_keys, box, skip=(), skip_ends=(), ends_too=True):
     pads = [p for f in b.GetFootprints() for p in f.Pads()]
     vias = [t for t in b.GetTracks() if t.GetClass() == "PCB_VIA"]
     def anchor(pt, net, layer):
@@ -98,7 +98,7 @@ def clean_chains(b, owner_keys, box, skip=(), skip_ends=()):
         off0 = a0 and a0[0] > 0.004; off1 = a1 and a1[0] > 0.004
         micro_owner = any(lens[i] < MICRO and key(b, chain[i]) in owner_keys for i in range(len(chain)))
         end_owner = (off0 and key(b, chain[0]) in owner_keys) or (off1 and key(b, chain[-1]) in owner_keys)
-        if not (micro_owner or end_owner): continue
+        if not (micro_owner or (end_owner and ends_too)): continue
         if not any(inbox(p) for p in pts): continue
         lines = []
         for i in range(len(pts) - 1):
