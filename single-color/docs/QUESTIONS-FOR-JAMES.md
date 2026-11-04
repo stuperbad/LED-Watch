@@ -1,0 +1,49 @@
+# Questions for James (reviewer) - revision C, solar single-colour LED watch
+
+Plain-language version of section 8 of `DESIGN-REVIEW-REV-C.md` (that file has the numbers and pictures). Written 2026-11-04.
+
+## Who is who (the part labels on the board)
+
+| Label | What it is |
+|---|---|
+| U1 | the microcontroller (AVR128DB48), the brain |
+| U2 | the motion sensor (LIS2DW12) |
+| U4 | the solar charger chip (BQ25570): takes the solar cell's tiny power, charges the battery, and also makes the 3.3 V supply |
+| U5 | the USB charger chip (BQ21040) |
+| L1, L2 | the two coils (inductors) next to U4: L1 for the solar side, L2 for the 3.3 V supply |
+| C52 | the 4.7 uF "storage" capacitor right next to U4's battery pin |
+| C53 | a small 10 nF "bypass" capacitor that should sit beside C52 (it does not, see question 1) |
+| C50 | the 4.7 uF capacitor on U4's solar input |
+| C54 | the 22 uF capacitor on the 3.3 V output |
+| C10, C11, C13 | the capacitors at the microcontroller's three power pins |
+| J2 | the USB-C connector (charging and programming) |
+| D51 | static-protection diode on the USB 5 V pin; D50 clamp diode on the programming wire; R72 1 kohm in the programming wire; R68 / R69 5.1 kohm resistors that tell a charger "I am a device" |
+
+## The four questions
+
+**1. Are the solar-charger parts close enough to U4?**
+TI's data sheet says "as close as possible" and gives no numbers. Ours: storage capacitor C52 1.3 mm (good), solar input capacitor C50 7.7 mm, bypass capacitor C53 8.4 mm, coil L1 5.6 mm, coil L2 9.7 mm. The back of the board is only a 4.8 mm strip between the two batteries and it is full; we tried moving things and each option broke something else (details in the design review, picture `cbyp-8p4mm.png`).
+*Ask:* acceptable for a first board? If he would move one thing, which?
+*Our answer if asked:* acceptable; measure the 3.3 V output and charging current on the bench.
+
+**2. The microcontroller's three power capacitors are 1.4, 2.2 and 4.8 mm from their pins.**
+His rule was about 1 mm with no via in between. The chip is boxed in by the crystal keep-out and the LED fan-out; at 4 MHz this is common practice.
+*Ask:* acceptable, or does he want one moved?
+
+**3. Ground-layer gap: 0.2 mm or the fab minimum (0.09 mm)?**
+The inner ground layer keeps a gap around every via and trace. We use 0.2 mm; JLCPCB can do 0.09 mm. He suggested going to the minimum earlier.
+*Ask:* does he still want it? (We have no reason to change it; 0.2 mm is the safer one to manufacture.)
+
+**4. The USB-C corner: anything he would change?**
+It holds the static diode on 5 V (D51), the two 5.1 kohm resistors, the 1 kohm in the programming wire with its clamp diode (D50), and the grounded shell. One small point to raise: the clamp diode D50 goes to the 3.3 V supply; the safer connection is the battery supply (a damaged cable putting 5 V on the programming wire could push current into the 3.3 V supply).
+*Ask:* happy with the corner? Move the clamp to the battery supply?
+
+## Already decided (no need to ask)
+
+- No extra static protection on the programming wires or the buttons for the prototype (owner's call, 2026-11-04). Revisit before boards go to other people.
+- No cut-out in the inner ground layer under the divider resistors (it would hurt other signals' return path; the data sheet's warning is about surface leakage).
+- The crystal block sits 1.2 mm further from the chip than before; he can look at it.
+
+## Not questions: things to do at the bench before power-up (BRING-UP-TESTS.md)
+
+Meter the battery wires first (polarity is unknown until measured; no reverse protection). Plug the second battery in only at the same voltage as the first. Use a USB-C cable that carries the sideband wires (many charge-only cables do not) so the programming works.

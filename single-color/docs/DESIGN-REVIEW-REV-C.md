@@ -20,7 +20,7 @@ How each finding was checked: **datasheet** = read in the manufacturer's data sh
 | 10 | Acute bends / micro pieces | low | 39 -> 28 spots; the rest listed |
 | 11 | Charging cold: no battery thermistor, BQ21040 charges at any temperature | low | documented limitation |
 | 13 | Data sheet 10.1: 'no ground planes near the voltage-setting resistors and the VREF_SAMP capacitor' (our In2 plane runs under R50-R56 and C51) | low | **recommendation: no cut-out.** The warning is about surface leakage from flux residue; an inner plane under about 0.2 mm of laminate is not exposed to it, the stray capacitance of those nodes is about 0.3 pF (3 Mohm x 0.3 pF = 1 us), and a cut-out would take the return plane away from about 40 mm of F.Cu / In1 copper (SCL, IMU_INT, BTN2, COL1, SDA, VBAT, VRDIV, VREF_SAMP, OK_HYST, VOUT_SET) that crosses that area. Picture `in2-under-dividers.png`; confirm with the reviewer |
-| 12 | JLCPCB: new gerbers, BOM and CPL ready; stock check of C19185929 and a new quote still to do | - | open (checklist H9) |
+| 12 | JLCPCB: new gerbers, BOM and CPL ready; stock check of C19185929 and a new quote still to do | - | stock of the new part confirmed 2026-11-04; assembled quote open (checklist H9) |
 
 ## 2. Power
 
@@ -106,13 +106,8 @@ All ground returns reach a GND via within 0.5-1.4 mm of copper (the inner plane 
 ## 7. JLCPCB
 
 - DFM: 229 pairs of traces at exactly 0.100 mm (JLCPCB's stated minimum for 4 layers is 0.09 mm), 0.10 mm tracks and 0.15 mm via rings by design; these were the red items of the earlier JLCDFM run.
-- Files ready in `hardware/production/`: Gerber zip (14 files), `assembly/BOM.csv` (33 lines, 205 parts, every line with an LCSC number), `assembly/CPL.csv`. Stock of D51's part C19185929 (LCSC showed 5,100 on 2026-11-02) and a new quote are still open.
+- Files ready in `hardware/production/`: Gerber zip (14 files), `assembly/BOM.csv` (33 lines, 205 parts, every line with an LCSC number), `assembly/CPL.csv`. D51's part C19185929 (UMW UDD32C05L01, extended, SOD-323, MSL 3): **in stock 5,109 on the JLCPCB parts page, 2026-11-04**, $0.0322 each at 1 piece, matches the data used. An assembled quote with the new BOM / CPL is still open (needs the owner signed in).
 
-## 8. Questions for the reviewer, in order
+## 8. Questions for the reviewer
 
-1. SBU: the owner has decided against a TVS for the prototype (needs R72 / R70 / C53 / R69 moved); should the clamp go to VBAT?
-2. Buttons: no TVS (owner's decision).
-3. Inductor distances (L1 5.6 mm, L2 9.7 mm), the 11.6 mm LBOOST and CBYP (C53) at 8.4 mm / 11.2 mm of copper (picture `cbyp-8p4mm.png`; the slot beside C52 is R54's and R54 cannot be moved, see the decision log 2026-11-03 night): acceptable for a first board, or move closer?
-4. Bypass caps at 1.4 / 2.2 / 4.8 mm: acceptable?
-5. Inner-plane clearance 0.2 mm: reduce to 0.1 mm?
-6. Anything in the USB-C block (CC, VBUS, shell, SBU) he would change?
+Plain-language version with a "who is who" table: `QUESTIONS-FOR-JAMES.md`. In short: (1) are the solar-charger parts close enough to U4 (CIN 7.7 mm, CBYP 8.4 mm, L1 5.6 mm, L2 9.7 mm, LBOOST 11.6 mm of copper; picture `cbyp-8p4mm.png`); (2) MCU decoupling at 1.4 / 2.2 / 4.8 mm; (3) inner-plane clearance 0.2 mm or lower; (4) the USB-C corner, including the SBU clamp going to VBAT instead of +3V3. Decided by the owner, not asked: no TVS on SBU or the buttons, no In2 cut-out.
