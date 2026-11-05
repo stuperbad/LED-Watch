@@ -46,3 +46,7 @@ Frozen copies of the USB-C mock-up board, kept so any step can be returned to. N
 | `rev C board (owner's save 02-10, before the tick-off pass).kicad_pcb` | revision C main board as saved at 02:10 (owner's third clean-up cycle), before nested duplicates, the COL3 T and two slivers were fixed. |
 | `rev C board (owner's save 02-19, before the pad-exit and overlap fixes).kicad_pcb` | revision C main board as saved at 02:19, before four ring-LED pad exits, R5.1 and three overlaps were fixed. |
 | `rev C board (owner's save 02-28, before the ring-LED exit lengthening).kicad_pcb` | revision C main board after the 02:19 pad-exit / overlap fixes (commit b589f3c), before the four ring-LED exits were lengthened to 1+ trace widths outside the pad. |
+| `rev C board (before the D50-D51 and R53-R54 swaps).kicad_pcb` | revision C main board after the 02:30 ring-LED exit fix, before D50 / D51 and R53 / R54 were swapped. |
+| `rev C board (owner's save 16-40, LBUCK and L2 done by hand).kicad_pcb` | the owner's 16:40 save: L2 turned and LBUCK routed by hand, a net-less duplicate D50 on top of the real one (removed later). |
+| `rev C board (owner's save before the three swaps).kicad_pcb` | the same file, taken just before D50 / D51, C53 / R72 and R53 / R54 were swapped. |
+| `rev C board (owner's save 19-29, LBUCK on In1, before the DRC clean-up).kicad_pcb` | the owner's 19:29 save (LBUCK on In1), before the dangling via, J2 pad, weekday-letter and piezo-footprint fixes. |

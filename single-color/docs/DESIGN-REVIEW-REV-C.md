@@ -15,9 +15,9 @@ How each finding was checked: **datasheet** = read in the manufacturer's data sh
 | 5 | Buttons: low risk (plastic actuators); two TVS would fit on the front | low | **owner decision 2026-11-04: no button TVS for the prototype** |
 | 6 | Battery plugs: no reverse-polarity protection, wire polarity of the cells unknown until measured | high if ignored | needs hardware (first step of the bring-up) |
 | 7 | Two chargers on one battery (BQ25570 solar, BQ21040 USB) | none found | explained (section 2) |
-| 8 | BQ25570: the input cap CIN (C50) is 7.7 mm from VIN_DC (14 mm of copper; was 11.2 / 19 until the lane move of 2026-11-03 night), CBYP (C53) 8.4 mm from VSTOR, the inductors 5.6 mm (L1) and 9.7 mm (L2) from the IC, the boost switching node 11.6 mm of copper over 3 layers with 3 vias (section 6b) | medium | known deviation from the data sheet's layout advice; ask the reviewer; measure efficiency at bring-up |
+| 8 | BQ25570: the input cap CIN (C50) is 7.8 mm from VIN_DC (11.9 mm of copper; was 11.2 / 19 until the lane move of 2026-11-03 night), CBYP (C53) 8.1 mm from VSTOR (**20.5 mm of copper since the owner's clean-up of 2026-11-04: the VBAT link loops round the south of U4; a direct link past C54 was tried and does not fit**), the inductors 5.7 mm (L1) and 9.4 mm (L2) from the IC, the boost switching node 10.7 mm of copper over 3 layers, the buck switching node 12.6 mm (section 6b) | medium | known deviation from the data sheet's layout advice; ask the reviewer; measure efficiency at bring-up |
 | 9 | MCU supply pins have their bypass caps at 1.4 / 2.2 / 4.8 mm (reviewer's rule: about 1 mm) | low-medium | known deviation, reasons in section 5 |
-| 10 | Acute bends / micro pieces | low | 39 -> 28 spots; the rest listed |
+| 10 | Acute bends / micro pieces | low | 40 spots under 60 degrees (mostly 45-degree forks; two real ones on COL4: 15 degrees at (114.198, 108.028) and 30 degrees at (113.459, 106.200)), 189 pieces under 0.15 mm; cosmetic, left |
 | 11 | Charging cold: no battery thermistor, BQ21040 charges at any temperature | low | documented limitation |
 | 13 | Data sheet 10.1: 'no ground planes near the voltage-setting resistors and the VREF_SAMP capacitor' (our In2 plane runs under R50-R56 and C51) | low | **recommendation: no cut-out.** The warning is about surface leakage from flux residue; an inner plane under about 0.2 mm of laminate is not exposed to it, the stray capacitance of those nodes is about 0.3 pF (3 Mohm x 0.3 pF = 1 us), and a cut-out would take the return plane away from about 40 mm of F.Cu / In1 copper (SCL, IMU_INT, BTN2, COL1, SDA, VBAT, VRDIV, VREF_SAMP, OK_HYST, VOUT_SET) that crosses that area. Picture `in2-under-dividers.png`; confirm with the reviewer |
 | 12 | JLCPCB: new gerbers, BOM and CPL ready; stock check of C19185929 and a new quote still to do | - | stock of the new part confirmed 2026-11-04; assembled quote open (checklist H9) |
@@ -69,9 +69,9 @@ How each finding was checked: **datasheet** = read in the manufacturer's data sh
 
 | Point | Today | Status |
 |---|---|---|
-| B2 power loops: short, wide, one layer, inductors close, vias to the bottom for the inductors | L1 5.6 mm from U4.20 (LBOOST copper 11.6 mm, 3 vias, 3 layers), L2 9.7 mm from U4.16 (LBUCK 13.6 mm, 2 vias). The data sheet itself says to use vias and bottom traces to connect the inductors, and to put CSTOR / CIN / CBYP first. Track width is 0.1 mm on every power net. | **deviation**, ask |
+| B2 power loops: short, wide, one layer, inductors close, vias to the bottom for the inductors | L1 5.7 mm from U4.20 (LBOOST copper 10.7 mm, 3 vias, 3 layers), L2 9.4 mm from U4.16 (LBUCK 12.6 mm, 2 vias; **since 2026-11-04 evening it runs on In1 along the north edge of U4 instead of on the back beside the VOUT_SET divider tap, and no longer crosses under U4**; the data sheet does not give a spacing rule, it asks for short divider traces: page 34). The data sheet itself says to use vias and bottom traces to connect the inductors, and to put CSTOR / CIN / CBYP first. Track width is 0.1 mm on every power net. | **deviation**, ask |
 | B3 no acute angles | 39 -> **28** spots after the artefact pass; pieces under 0.05 mm: 25 -> 8, zero-length pieces 5 -> 0. What is left: the polar lanes (COL10 6.3 degrees at (83.68, 91.28) and its T junctions, COL11 T junction at (90.22, 84.29), ROW3 / ROW11 / VBAT T junctions at 45 degrees) and ring-lane joints. | partly done, listed |
-| B4 traces leave pads along the axis | all 26 pads of the 14 two-pad parts in the USB-C corner checked: they leave along the axis (the last two exceptions, R69.2 and R72.2, were fixed by the owner) | done for the corner |
+| B4 traces leave pads along the axis | all pads of the two-pad parts in the USB-C corner leave along the axis (checked again after the D50 / D51, C53 / R72 and R53 / R54 swaps and the owner's clean-up, 2026-11-04 evening); the only exits more than 25 degrees off the axis on the whole board are three ring resistors (R10.2 45 degrees, R11.2 and R3.2 30 degrees) | done |
 | B5 inner plane clearance down to JLC's minimum | the In2 ground plane now keeps 0.1 mm (was 0.2 mm; JLCPCB's minimum for 4 layers is 0.09 mm); the F.Cu crystal pour keeps 0.2 mm; the 0.2 mm hole-to-copper rule around vias is unchanged | **done 2026-11-04** |
 | B6 crystal pour deleted or stitched | stitched (14 vias) | done |
 | B8 bypass caps | see section 5 | deviation, ask |
@@ -85,15 +85,15 @@ Straight pad-to-pad distance from each part to the pin it serves, and the length
 | Part (role) | Straight | Copper | Verdict (my thresholds: good <= 3 mm, acceptable 3-6, far > 6) |
 |---|---|---|---|
 | C52 4.7 uF (CSTOR) | 1.3 | 1.9 | good |
-| C53 10 nF (CBYP) | 8.4 | 11.2 | far: the data sheet puts this first |
-| **C50 4.7 uF (CIN, VIN_DC)** | **7.7** (was 11.2) | **14.1** (was 19.4) | **far-ish; moved by the owner's choice into the lane above L1 (106.15, 96.45), straight onto the SOLAR_IN node; pin 1 / pin 2 are on the south edge, which the battery keeps clear, so closer is not possible** |
-| C54 22 uF (COUT) | 4.3 | 6.2 | acceptable |
-| L1 (LBOOST end / VIN_DC end) | 5.7 / 7.5 | 11.8 / 16.2 | far-ish |
-| L2 (LBUCK end / VOUT end) | 9.7 / 8.2 | 13.6 / not measured | far |
+| C53 10 nF (CBYP) | 8.1 | **20.5** (was 11.2) | far: the data sheet puts this first; the copper loops round the south of U4 (owner's clean-up), the direct way past C54 does not fit |
+| **C50 4.7 uF (CIN, VIN_DC)** | **7.8** (was 11.2) | **11.9** (was 19.4) | **far-ish; moved by the owner's choice into the lane above L1 (106.15, 96.45), straight onto the SOLAR_IN node; pin 1 / pin 2 are on the south edge, which the battery keeps clear, so closer is not possible** |
+| C54 22 uF (COUT) | 4.3 | 6.6 | acceptable |
+| L1 (LBOOST end / VIN_DC end) | 5.7 / 7.5 | 10.7 / 13.2 | far-ish |
+| L2 (LBUCK end / VOUT end) | 9.4 / 8.7 | 12.6 / not measured | far |
 | C51 10 nF (CREF) | 4.8 | 8.1 | acceptable (high-impedance node, short stub matters more) |
 | VBAT_OV divider (R50 / R51) | 2.4 | 3.2 | good |
-| OK_HYST / OK_PROG dividers | 5.7 / 4.0 | 16.7 / 10.1 | acceptable straight, long copper |
-| VOUT_SET divider | 3.6 | 5.3 | acceptable |
+| OK_HYST / OK_PROG dividers (R53 / R54) | 4.6 / 6.1 (was 5.7 / 4.0 before the R53 <-> R54 swap) | 16.0 / 9.1 (was 16.7 / 10.1) | acceptable straight, long copper |
+| VOUT_SET divider | 3.6 | 5.0 | acceptable |
 | BQ21040: C55 (IN) / C56 (OUT) | 3.5 / 1.6 | 7.3 / - | acceptable / good |
 | BQ21040: R70 (ISET) / R71 (TS) | 3.7 / 3.5 | 6.7 / 6.9 | acceptable (DC nodes) |
 | MCU: C10 / C11 / C13 to the VDD pins | 1.4 / 2.2 / 4.8 | 2.4 / 3.8 / 8.2 | good / good / acceptable-far |
@@ -111,3 +111,14 @@ All ground returns reach a GND via within 0.5-1.4 mm of copper (the inner plane 
 ## 8. Questions for the reviewer
 
 Plain-language version with a "who is who" table: `QUESTIONS-FOR-JAMES.md`. In short: (1) are the solar-charger parts close enough to U4 (CIN 7.7 mm, CBYP 8.4 mm, L1 5.6 mm, L2 9.7 mm, LBOOST 11.6 mm of copper; picture `cbyp-8p4mm.png`); (2) MCU decoupling at 1.4 / 2.2 / 4.8 mm; (3) the USB-C corner, (4) pad exits on the LED ring (about 20 pads more than 25 degrees off the part axis), including the SBU clamp going to VBAT instead of +3V3. Decided by the owner, not asked: no TVS on SBU or the buttons, no In2 cut-out, In2 clearance 0.1 mm. Where each question sits on the board: `review-areas-top-and-bottom.png`.
+
+## 7. Late changes and open points (2026-11-04 evening)
+
+- **Swaps done:** D50 <-> D51 (D51 turned, VBUS pad entered from its outer end), C53 <-> R72 (both turned), R53 <-> R54 (both turned); the owner then re-routed R72 / R70 / R56 and lifted the buck switching node LBUCK to In1 (pictures `swaps-usb-corner-composite.png`, `swaps-r53-r54-composite.png`, `lbuck-in1-composite.png`: front red, inner green, back blue in one picture).
+- **DRC in the project folder: 0 violations, 0 unconnected.** Fixed on 2026-11-04 evening: a dangling +3V3 via, the four J2 shell pads 0.02 mm shorter (hole-to-copper to the guide holes 0.1944 -> 0.2044 mm), the weekday letters 0.6 -> 0.8 mm high, the piezo footprint in the project library brought in line with the board (back silkscreen removed). The schematic-parity listing (412 items: library nicknames of the generated footprints, 'unconnected-(...)' net names of deliberately unconnected pads) is unchanged since the last push and cosmetic.
+- **For the reviewer (none blocks the order):**
+  1. LBUCK versus VOUT_SET: data sheet pages 16 and 34 ask for short divider traces to avoid noise pickup on the high-impedance nodes; LBUCK used to run 0.1 mm beside VOUT_SET for 2.2 mm on the back, now it is on In1 with the ground plane in between (closest remaining approach 0.4 mm on the next layer for about 1.2 mm near pin 12). Bench check: the 3.3 V output at light load; if it wanders, 10-47 pF across R56 is the usual cure (to confirm).
+  2. Vias in the exposed pads: U1 has 5 (corners and centre), U4 has 1 (centre), all GND, 0.3 / 0.15 mm. Ask JLCPCB whether open vias in the pad need filling (solder wicking) and what it costs.
+  3. Parts overlapping the battery outline (nominal + half tolerance): U5, R71, C55, C56, C50, C53, D50, D51, R68 (all under 1.1 mm high); U5, R71, C56, C50 and D50 also inside the nominal battery. To settle with a real battery (checklist A2); the cell is a soft pouch.
+  4. UPDI runs over the connector's SBU pins; charge-only USB-C cables often leave SBU out. There are no separate programming pads; for the first boards a thin wire to the UPDI via at (102.325, 96.935) or to R72 / D50 is the fallback.
+  5. CBYP (C53) copper path 20.5 mm, see finding 8.

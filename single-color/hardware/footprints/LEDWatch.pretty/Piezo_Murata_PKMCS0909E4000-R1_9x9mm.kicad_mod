@@ -48,26 +48,6 @@
 	)
 	(attr smd)
 	(duplicate_pad_numbers_are_jumpers no)
-	(fp_line
-		(start -3.5 -4.75)
-		(end 3.5 -4.75)
-		(stroke
-			(width 0.12)
-			(type default)
-		)
-		(layer "F.SilkS")
-		(uuid "44527d3b-2b2c-49e3-95b1-4a4756ec39f8")
-	)
-	(fp_line
-		(start -3.5 4.75)
-		(end 3.5 4.75)
-		(stroke
-			(width 0.12)
-			(type default)
-		)
-		(layer "F.SilkS")
-		(uuid "7dcdab4f-b3d5-4a01-af58-a9c22a5be778")
-	)
 	(fp_rect
 		(start -5.2 -4.7)
 		(end 5.2 4.7)
