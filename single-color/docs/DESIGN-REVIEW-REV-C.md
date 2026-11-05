@@ -110,7 +110,7 @@ All ground returns reach a GND via within 0.5-1.4 mm of copper (the inner plane 
 
 ## 8. Questions for the reviewer
 
-Plain-language version with a "who is who" table: `QUESTIONS-FOR-JAMES.md`. In short: (1) are the solar-charger parts close enough to U4 (CIN 7.8 mm, CBYP 2.6 mm, L1 6.9 mm, L2 9.4 mm, LBOOST 11.7 mm of copper; picture `power-block-final-composite.png`); (2) MCU decoupling at 1.4 / 2.2 / 4.8 mm; (3) the USB-C corner, (4) pad exits on the LED ring (about 20 pads more than 25 degrees off the part axis), including the SBU clamp going to VBAT instead of +3V3. Decided by the owner, not asked: no TVS on SBU or the buttons, no In2 cut-out, In2 clearance 0.1 mm. Where each question sits on the board: `review-areas-top-and-bottom.png`.
+The questions for the reviewer, in short: (1) are the solar-charger parts close enough to U4 (CIN 7.8 mm, CBYP 2.6 mm, L1 6.9 mm, L2 9.4 mm, LBOOST 11.7 mm of copper; picture `power-block-final-composite.png`); (2) MCU decoupling at 1.4 / 2.2 / 4.8 mm; (3) the USB-C corner, (4) pad exits on the LED ring (about 20 pads more than 25 degrees off the part axis), including the SBU clamp going to VBAT instead of +3V3. Decided by the owner, not asked: no TVS on SBU or the buttons, no In2 cut-out, In2 clearance 0.1 mm. Where each question sits on the board: `review-areas-top-and-bottom.png`.
 
 ## 7. Late changes and open points (2026-11-04 evening)
 

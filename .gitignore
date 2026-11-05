@@ -2,3 +2,6 @@
 _old-desktop-copies/
 *.lck
 *.stackdump
+
+# private notes for the owner: kept local, never published
+single-color/docs/QUESTIONS-FOR-JAMES.md
