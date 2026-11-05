@@ -24,7 +24,7 @@ Plain-language version of section 8 of `DESIGN-REVIEW-REV-C.md` (that file has t
 Picture of where each one is on the board: `review-areas-top-and-bottom.png` (orange 1, green 2, purple 3 here = the USB-C corner), close-up of the back: `review-areas-back-zoom.png`.
 
 **1. Are the solar-charger parts close enough to U4?**
-TI's data sheet says "as close as possible" and gives no numbers. Ours: storage capacitor C52 1.3 mm (good), solar input capacitor C50 7.8 mm, bypass capacitor C53 8.1 mm (its copper is 20 mm, it loops round the chip), coil L1 5.7 mm, coil L2 9.4 mm. The back of the board is only a 4.8 mm strip between the two batteries and it is full; we tried moving things and each option broke something else (details in the design review, picture `cbyp-8p4mm.png`).
+TI's data sheet says "as close as possible" and gives no numbers. Ours: storage capacitor C52 1.3 mm (good), solar input capacitor C50 7.8 mm, bypass capacitor C53 2.6 mm (good, beside C52), coil L1 6.9 mm, coil L2 9.4 mm. The back of the board is only a 4.8 mm strip between the two batteries and it is full; we tried moving things and each option broke something else (details in the design review, picture `power-block-final-composite.png`).
 *Ask:* acceptable for a first board? If he would move one thing, which?
 *Our answer if asked:* acceptable; measure the 3.3 V output and charging current on the bench.
 
