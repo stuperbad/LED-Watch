@@ -1,0 +1,144 @@
+(footprint "KXOB25_cell_2pad_23x8mm"
+	(version 20260206)
+	(generator "pcbnew")
+	(generator_version "10.0")
+	(layer "F.Cu")
+	(descr "One Anysolar KXOB25-05X3TF SolarBIT (23 x 8 x 1.2 mm, 3 cells in series) as ONE part: two hand-soldered pads 2.5 x 7.4 mm (contact 2.0 x 7.4 mm per data sheet p. 3, the outer 0.5 mm is the soldering fillet / iron access). Pad 1 = + (right, seen from the front), pad 2 = - (left). Copper and mask only, no paste (Sn42/Bi58 by hand).")
+	(tags "solar cell pad hand solder")
+	(property "Reference" "SC1"
+		(at 0 -6.2 0)
+		(layer "F.SilkS")
+		(hide yes)
+		(uuid "4fee7ec1-6e38-47e2-813f-d5b228801d94")
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+	)
+	(property "Value" "KXOB25-05X3TF cell"
+		(at 0 6.2 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "616b8423-f449-4e29-8090-db767c58c227")
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "0a99c858-fade-4e23-ad22-cbe813743fff")
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "94e04ec2-8219-4082-b15c-6a727644a444")
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+	)
+	(attr smd exclude_from_pos_files exclude_from_bom)
+	(duplicate_pad_numbers_are_jumpers no)
+	(fp_line
+		(start -9.3 -4)
+		(end 9.3 -4)
+		(stroke
+			(width 0.12)
+			(type default)
+		)
+		(layer "F.SilkS")
+		(uuid "a6275768-ee49-4e48-bb35-f18f36e1d585")
+	)
+	(fp_line
+		(start -9.3 4)
+		(end 9.3 4)
+		(stroke
+			(width 0.12)
+			(type default)
+		)
+		(layer "F.SilkS")
+		(uuid "a610a844-932f-4500-a268-7a4c7b3fbb52")
+	)
+	(fp_rect
+		(start -12 -4)
+		(end 12 4)
+		(stroke
+			(width 0.05)
+			(type default)
+		)
+		(fill no)
+		(layer "F.CrtYd")
+		(uuid "7c6d0668-390b-4e90-bac0-125f6aa6fac9")
+	)
+	(fp_rect
+		(start -11.5 -4)
+		(end 11.5 4)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(fill no)
+		(layer "F.Fab")
+		(uuid "6e279a0f-f7af-40d4-b5fa-c572116e76a2")
+	)
+	(fp_text user "-"
+		(at -10.75 -4.8 0)
+		(layer "F.SilkS")
+		(uuid "4401235c-391c-4399-94cd-84b7f267fee4")
+		(effects
+			(font
+				(size 1.2 1.2)
+				(thickness 0.2)
+			)
+		)
+	)
+	(fp_text user "+"
+		(at 10.75 -4.8 0)
+		(layer "F.SilkS")
+		(uuid "a82a508b-3348-4209-9003-17c0d6f02d40")
+		(effects
+			(font
+				(size 1.2 1.2)
+				(thickness 0.2)
+			)
+		)
+	)
+	(pad "1" smd rect
+		(at 10.75 0)
+		(size 2.5 7.4)
+		(layers "F.Cu" "F.Mask")
+		(thermal_bridge_angle 45)
+		(uuid "16204a30-e080-4f62-92c0-1286d76db7f3")
+	)
+	(pad "2" smd rect
+		(at -10.75 0)
+		(size 2.5 7.4)
+		(layers "F.Cu" "F.Mask")
+		(thermal_bridge_angle 45)
+		(uuid "f8ca3589-dfa3-4a57-b2a6-5320de432b78")
+	)
+	(embedded_fonts no)
+	(model "${KIPRJMOD}/3dmodels/cell_kxob25.step"
+		(offset
+			(xyz 0 0 0)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz 0 0 0)
+		)
+	)
+)

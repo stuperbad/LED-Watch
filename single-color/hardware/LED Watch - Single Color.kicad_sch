@@ -10463,7 +10463,7 @@
 	)
 	(wire
 		(pts
-			(xy 530.86 160.02) (xy 530.86 170.18)
+			(xy 530.86 165.1) (xy 530.86 170.18)
 		)
 		(stroke
 			(width 0)
@@ -11070,16 +11070,6 @@
 			(type default)
 		)
 		(uuid "c435d6f6-ce88-4c70-8511-af9dda4011c9")
-	)
-	(wire
-		(pts
-			(xy 508 160.02) (xy 508 165.1)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "c46eb074-770f-44c7-9267-98479cfce45e")
 	)
 	(wire
 		(pts
@@ -18491,81 +18481,6 @@
 		)
 	)
 	(symbol
-		(lib_id "power:GND")
-		(at 508 165.1 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom no)
-		(on_board no)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "34853ae9-166a-42f6-b183-8ace6538d8d7")
-		(property "Reference" "#PWR034"
-			(at 508 165.1 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "GND"
-			(at 508 168.91 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 71.12 -266.7 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 508 165.1 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 508 165.1 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "77e30aff-2e1a-43ea-919e-6ce698f1e1b2")
-		)
-		(instances
-			(project "LED Watch - Single Color"
-				(path "/3f3398f1-104f-4f2f-beed-32bb3294140b"
-					(reference "#PWR034")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:LED")
 		(at 233.68 185.42 180)
 		(unit 1)
@@ -22363,84 +22278,6 @@
 			(project "LED Watch - Single Color"
 				(path "/3f3398f1-104f-4f2f-beed-32bb3294140b"
 					(reference "S53")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Connector:TestPoint")
-		(at 508 160.02 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "732f6798-934b-4645-ad8d-c77e2e08690b")
-		(property "Reference" "SC1-"
-			(at 511 157.52 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "cell pad"
-			(at 511 160.02 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "LEDWatch:KXOB25_cell_pad_2.5x7.4mm"
-			(at 508 160.02 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" "https://github.com/stuperbad/LED-Watch/blob/main/single-color/docs/datasheets/KXOB25-05X3TF-DATASHEET.pdf"
-			(at 508 160.02 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "KXOB25-05X3TF - end pad (GND). Not a part: just the board pad under the cell"
-			(at 508 160.02 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "b0a3d6d0-3d86-4e09-801a-21628eb8b6a0")
-		)
-		(instances
-			(project "LED Watch - Single Color"
-				(path "/3f3398f1-104f-4f2f-beed-32bb3294140b"
-					(reference "SC1-")
 					(unit 1)
 				)
 			)
@@ -34509,84 +34346,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Connector:TestPoint")
-		(at 530.86 160.02 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "ec171523-0c1c-40bd-b50a-168eac4178a6")
-		(property "Reference" "SC1+"
-			(at 533.86 157.52 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "cell pad"
-			(at 533.86 160.02 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "LEDWatch:KXOB25_cell_pad_2.5x7.4mm"
-			(at 530.86 160.02 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" "https://github.com/stuperbad/LED-Watch/blob/main/single-color/docs/datasheets/KXOB25-05X3TF-DATASHEET.pdf"
-			(at 530.86 160.02 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "KXOB25-05X3TF + end pad (SOLAR_IN). Not a part: just the 2.5 x 7.4 mm board pad under the cell. VERIFY polarity of the physical cell (Voc) before soldering"
-			(at 530.86 160.02 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "6ba5e7b7-f64a-4368-9d22-5e82ab4743cc")
-		)
-		(instances
-			(project "LED Watch - Single Color"
-				(path "/3f3398f1-104f-4f2f-beed-32bb3294140b"
-					(reference "SC1+")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:PWR_FLAG")
 		(at 626.11 193.04 0)
 		(unit 1)
@@ -37237,6 +36996,202 @@
 			(justify left bottom)
 		)
 		(uuid "95625749-76f6-4a3d-9072-9a45ae0cf91d")
+	)
+	(symbol
+		(lib_id "Connector_Generic:Conn_01x02")
+		(at 520.7 152.4 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "6cad2dbc-d30e-4930-aaf0-b018e6b0210f")
+		(property "Reference" "SC1"
+			(at 518.7 144.9 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "KXOB25-05X3TF cell"
+			(at 518.7 147.4 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "LEDWatch:KXOB25_cell_2pad_23x8mm"
+			(at 520.7 152.4 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "https://github.com/stuperbad/LED-Watch/blob/main/single-color/docs/datasheets/KXOB25-05X3TF-DATASHEET.pdf"
+			(at 520.7 152.4 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 520.7 152.4 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "fbe8946f-7d7b-4e12-8d6e-1743a4aee817")
+		)
+		(pin "2"
+			(uuid "540ffe6f-1d5a-4e5d-b290-8f7c97c38fa1")
+		)
+		(instances
+			(project "LED Watch - Single Color"
+				(path "/3f3398f1-104f-4f2f-beed-32bb3294140b"
+					(reference "SC1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 510.54 157.48 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "d2349a09-529c-415a-b82f-3876ff7f0e63")
+		(property "Reference" "#PWR066"
+			(at 510.54 157.48 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 510.54 161.29 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 71.12 -266.7 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 510.54 157.48 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 510.54 157.48 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "ccb3929e-459e-4496-969c-e1a58e960cbe")
+		)
+		(instances
+			(project "LED Watch - Single Color"
+				(path "/3f3398f1-104f-4f2f-beed-32bb3294140b"
+					(reference "#PWR066")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 515.62 152.4) (xy 510.54 152.4)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "beb7ded3-726d-4e69-b89f-fb9243fb9c59")
+	)
+	(wire
+		(pts
+			(xy 515.62 154.94) (xy 510.54 154.94)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "03995961-a999-4fd2-bd08-cff21c1fa6ea")
+	)
+	(wire
+		(pts
+			(xy 510.54 154.94) (xy 510.54 157.48)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b631ee10-92f3-4a05-894f-ff96c7152748")
+	)
+	(label "SOLAR_IN"
+		(at 510.54 152.4 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "e230e27e-f226-4b3d-a2e5-6f6be9fceb7d")
 	)
 	(sheet_instances
 		(path "/"

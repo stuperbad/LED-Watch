@@ -3,7 +3,7 @@
   U1  MCU          ${KIPRJMOD}/3dmodels/qfn48_6x6_ep4p2.step    (same reason)
   U4  BQ25570      stock Texas VQFN-RGR-20 3.5 x 3.5 mm model
   BZ1 piezo        ${KIPRJMOD}/3dmodels/piezo_pkmcs0909.step
-  MECH1 solar cell 23 x 8 x 1.2 mm on the front between the cell pads; MECH2 / MECH3 the two LiPo pouches 15 x 15 x 5 mm on the back, bottom 1.1 mm above the board
+  (the solar cell is now the footprint SC1 with its own 3D block, see make_cell_footprint.py) MECH2 / MECH3 the two LiPo pouches 15 x 15 x 5 mm on the back, bottom 1.1 mm above the board
   (the parts under the batteries are up to 1.1 mm high).   MECH parts are board-only footprints (no symbol, not in BOM or position files).
 Models are made by make_models.py.   With --lib the library footprints get the same model entries."""
 import sys, os, pcbnew
@@ -27,7 +27,6 @@ def add_mech(ref, value, fpname, path, x, y, back, z=0.0):
     b.Add(f); f.SetPosition(pcbnew.VECTOR2I(FM(x), FM(y)))
     if back: f.Flip(f.GetPosition(), pcbnew.FLIP_DIRECTION_LEFT_RIGHT)
     mech.append(f); print("added", ref, value, "(%.2f, %.2f)" % (x, y), "back" if back else "front")
-add_mech("MECH1", "Solar cell KXOB25-05X3TF 23x8x1.2 mm", "MECH_SolarCell_KXOB25_23x8x1.2mm", PRJ + "cell_kxob25.step", 100.0, 100.0, False)
 add_mech("MECH2", "LiPo 501515 15x15x5 mm (upper)", "MECH_LiPo_501515_15x15x5mm", PRJ + "lipo_501515.step", 100.0, 88.5, True, 1.1)
 add_mech("MECH3", "LiPo 501515 15x15x5 mm (lower)", "MECH_LiPo_501515_15x15x5mm", PRJ + "lipo_501515.step", 100.0, 111.5, True, 1.1)
 pcbnew.SaveBoard(dst, b)

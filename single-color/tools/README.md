@@ -41,3 +41,4 @@ The story of the order the stages were run in, with the reasons, is in `../docs/
 | Keep-close picture (2026-11-05) | `priority_map.py BOARD PREFIX` (family colours + data-sheet priority badges + distance verdicts; overview, back power block, front MCU; system python) with `priority_dump.py` (geometry, KiCad python) |
 | 3D models (2026-11-05) | `make_models.py OUT_DIR` (STEP models from data-sheet dimensions: USB-C GCT USB4110, VQFN-48 MCU, piezo, solar cell, LiPo; needs build123d) and `apply_models.py IN OUT [--lib ...pretty]` (puts them on J2 / U1 / BZ1 / U4 and adds the board-only MECH1-3 cell and battery blocks; KiCad python) |
 | USB-C / UPDI picture (2026-11-05) | `usbc_updi_diagram.py OUT.png` (pinout of the 16-pin receptacle, our UPDI path over SBU, the SBU-to-VBUS fault case) |
+| Solar cell footprint (2026-11-05) | `make_cell_footprint.py LIB.pretty [IN OUT SYMBOL_UUID]` (the one-piece cell footprint SC1 and its placement on the board; KiCad python) |
