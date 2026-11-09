@@ -1,5 +1,5 @@
 """apply_models.py IN.kicad_pcb OUT.kicad_pcb [--lib hardware/footprints/LEDWatch.pretty] : 3D models for the parts that had none or a missing file (KiCad python, idempotent).
-  J2  USB-C        ${KIPRJMOD}/3dmodels/usbc_gct_usb4110.step   (the stock KiCad file is not shipped with KiCad 10)
+  J2  USB-C        ${KIPRJMOD}/3dmodels/usbc_gct_usb4110_aligned.step   (GCT's own model, aligned by align_gct_step.py; usbc_gct_usb4110.step is the fallback built from the drawing)
   U1  MCU          ${KIPRJMOD}/3dmodels/qfn48_6x6_ep4p2.step    (same reason)
   U4  BQ25570      stock Texas VQFN-RGR-20 3.5 x 3.5 mm model
   BZ1 piezo        ${KIPRJMOD}/3dmodels/piezo_pkmcs0909.step
@@ -14,7 +14,7 @@ def model(path, z=0.0):
     m = pcbnew.FP_3DMODEL(); m.m_Filename = path; m.m_Offset = pcbnew.VECTOR3D(0, 0, z); m.m_Scale = pcbnew.VECTOR3D(1, 1, 1); m.m_Rotation = pcbnew.VECTOR3D(0, 0, 0); m.m_Show = True; m.m_Opacity = 1.0; return m
 def setmodel(fp, path, z=0.0):
     fp.Models().clear(); fp.Models().push_back(model(path, z))
-for ref, path in (("J2", PRJ + "usbc_gct_usb4110.step"), ("U1", PRJ + "qfn48_6x6_ep4p2.step"), ("BZ1", PRJ + "piezo_pkmcs0909.step"),
+for ref, path in (("J2", PRJ + "usbc_gct_usb4110_aligned.step"), ("U1", PRJ + "qfn48_6x6_ep4p2.step"), ("BZ1", PRJ + "piezo_pkmcs0909.step"),
                   ("U4", STOCK + "Package_DFN_QFN.3dshapes/Texas_VQFN-RGR-20-1EP_3.5x3.5mm_Pitch0.5mm.step")):
     setmodel(b.FindFootprintByReference(ref), path); print("model set on", ref)
 for f in list(b.GetFootprints()):

@@ -5,3 +5,7 @@ _old-desktop-copies/
 
 # private notes for the owner: kept local, never published
 single-color/docs/QUESTIONS-FOR-REVIEWER.md
+
+# GCT's own CAD model (manufacturer download, not redistributed here): download USB4110-GF-A STEP, run tools/align_gct_step.py
+single-color/hardware/3dmodels/usbc_gct_usb4110_gct.step
+single-color/hardware/3dmodels/usbc_gct_usb4110_aligned.step

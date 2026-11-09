@@ -29323,7 +29323,7 @@
 			(uuid "134c5980-8301-432e-aa96-c53a97ef6906")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/3dmodels/usbc_gct_usb4110.step"
+		(model "${KIPRJMOD}/3dmodels/usbc_gct_usb4110_aligned.step"
 			(offset
 				(xyz 0 0 0)
 			)
