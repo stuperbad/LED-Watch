@@ -147,14 +147,25 @@ def panel(side, box, ppm, fs):
             if r in STAR: d.text((bx + 2, ay - 2), "*", fill=(220, 0, 0, 255), font=FB(fs * 3), anchor="lm")
     return img.convert("RGB")
 def legend(w, title):
-    f = FB(15); h = 250; im = Image.new("RGB", (w, h), (255, 255, 255)); d = ImageDraw.Draw(im)
+    f = FB(15); h = 352; im = Image.new("RGB", (w, h), (255, 255, 255)); d = ImageDraw.Draw(im)
+    d.text((8, 4), "COLOUR FILL = which family the part belongs to", font=FB(14), fill=(90, 90, 90))
     for i, (fam, (col, txt)) in enumerate(FAM.items()):
-        cx, cy = (8, 6 + 20 * i) if i < 6 else (640, 6 + 20 * (i - 6)); d.rectangle([cx, cy + 2, cx + 18, cy + 16], fill=col, outline=(0, 0, 0)); d.text((cx + 26, cy), txt, fill=(0, 0, 0), font=f)
-    for i, ln in enumerate(("Badge = data-sheet priority inside its chip (1 = keep closest; BQ25570: CBYP / CSTOR 1, CIN 2, L1 3, COUT 4, L2 5).  H = high-impedance node (short trace, away from switching copper).",
-                            "Outline and line = straight pad-to-pin distance against the group's limit: green within (3 mm solar / 1.5 mm MCU and IMU / 2 mm crystal / 3 mm USB), amber up to twice the limit, red beyond.",
-                            "Label = straight distance in mm, then (copper path in mm, found by walking the net through vias).   Red star = suggested for tightening (C50, C54).   Parts without a distance only carry their name.")):
-        d.text((8, 140 + 20 * i), ln, fill=(0, 0, 0), font=FB(13))
-    d.text((8, 210), title, fill=(0, 0, 0), font=FB(20)); return im
+        cx, cy = (8, 24 + 19 * i) if i < 6 else (600, 24 + 19 * (i - 6)); d.rectangle([cx, cy + 2, cx + 18, cy + 16], fill=col, outline=(0, 0, 0)); d.text((cx + 26, cy), txt, font=FB(14), fill=(0, 0, 0))
+    # key panel: three things drawn on every part that serves a chip pin
+    kx, ky = 8, 150
+    d.text((kx, ky - 4), "KEY to the marks on the parts that must stay close to a chip pin", font=FB(14), fill=(90, 90, 90))
+    # example: badge
+    d.rectangle([kx + 10, ky + 30, kx + 70, ky + 62], fill=(255, 150, 0), outline=(40, 170, 60), width=5); d.ellipse([kx - 2, ky + 18, kx + 22, ky + 42], fill=(30, 30, 40), outline=(40, 170, 60), width=3); d.text((kx + 10, ky + 30), "2", font=FB(15), fill=(255, 255, 255), anchor="mm")
+    d.text((kx + 85, ky + 24), "1) The small DARK CIRCLE on the corner holds a NUMBER or the letter H:", font=FB(14), fill=(0, 0, 0))
+    d.text((kx + 85, ky + 43), "number = the data-sheet priority for sitting close to its chip pin (1 = closest first; BQ25570: CBYP and CSTOR 1, CIN 2, L1 3, COUT 4, L2 5; MCU, IMU, crystal caps 1)", font=FB(13), fill=(0, 0, 0))
+    d.text((kx + 85, ky + 60), "H = high-impedance node (divider): short trace, keep away from switching copper", font=FB(13), fill=(0, 0, 0))
+    ox = kx + 10
+    d.text((kx, ky + 86), "2) The OUTLINE colour of the part box (and its line to the pin) = how far it is now:", font=FB(14), fill=(0, 0, 0))
+    for j, (col, t) in enumerate((((40, 170, 60), "green: within the limit"), ((235, 160, 0), "amber: up to twice the limit"), ((215, 30, 30), "red: farther than that"))):
+        x = kx + 680 + j * 250; d.rectangle([x, ky + 84, x + 36, ky + 104], fill=(255, 150, 0), outline=col, width=5); d.text((x + 46, ky + 86), t, font=FB(14), fill=(0, 0, 0))
+    d.text((kx, ky + 110), "   Limits (straight pad-to-pin): 3 mm solar and USB parts, 1.5 mm MCU and IMU caps, 2 mm crystal.   The label gives the straight distance in mm, then (the copper path in mm).", font=FB(13), fill=(0, 0, 0))
+    d.text((kx, ky + 130), "3) RED STAR next to a part = suggested for tightening (C50, C54).   Parts with no badge only carry their name; the dark box around a chip (U1, U2, U4, U5, J2) marks the chip the parts serve.", font=FB(14), fill=(0, 0, 0))
+    d.text((8, h - 40), title, font=FB(22), fill=(0, 0, 0)); return im
 def sheet(panels, title):
     w = max(1260, sum(p.width for p in panels) + 10 * (len(panels) - 1)); hh = max(p.height for p in panels); L = legend(w, title)
     out = Image.new("RGB", (w, L.height + hh), (255, 255, 255)); out.paste(L, (0, 0)); x = 0
