@@ -12351,26 +12351,6 @@
 		)
 		(uuid "0689b6a9-f298-4d4f-91b9-ab8ee27bb32c")
 	)
-	(label "COL3"
-		(at 109.22 238.76 270)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "06eda494-b805-4c47-a1d9-3bff32fa46d1")
-	)
-	(label "COL6"
-		(at 177.8 238.76 270)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "09bbf867-9466-4714-b08d-1d817262e754")
-	)
 	(label "SOLAR_IN"
 		(at 551.18 170.18 0)
 		(effects
@@ -12400,16 +12380,6 @@
 			(justify left bottom)
 		)
 		(uuid "0e72d7ec-cf6a-4339-9c28-aedd80097f26")
-	)
-	(label "COL11"
-		(at 292.1 255.27 90)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "14fd29a4-fd54-4c0f-9427-fc146b377147")
 	)
 	(label "XTAL2"
 		(at 373.38 205.74 90)
@@ -12491,16 +12461,6 @@
 		)
 		(uuid "28721a8e-6176-4f9c-9bcc-eea12c4fc139")
 	)
-	(label "COL7"
-		(at 200.66 238.76 270)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "29e4259b-3a37-4c23-a8bf-78410c055414")
-	)
 	(label "BUZ_B"
 		(at 370.84 337.82 180)
 		(effects
@@ -12541,16 +12501,6 @@
 		)
 		(uuid "301a2dd8-1703-43b9-9fbb-c09aa9030930")
 	)
-	(label "COL0"
-		(at 40.64 255.27 90)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "34978102-dd92-43cf-8704-b9894a0bf6dc")
-	)
 	(label "COL6_MCU"
 		(at 410.21 71.12 0)
 		(effects
@@ -12561,16 +12511,6 @@
 		)
 		(uuid "360e03f5-c612-4f8d-806f-0532c1ff12f4")
 	)
-	(label "COL7"
-		(at 200.66 255.27 90)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "364bf677-2c03-45f9-97f3-806338c0067e")
-	)
 	(label "XTAL1"
 		(at 373.38 220.98 270)
 		(effects
@@ -12580,16 +12520,6 @@
 			(justify right bottom)
 		)
 		(uuid "3e95b120-11f2-425b-ac8a-19e121ed9409")
-	)
-	(label "COL1"
-		(at 63.5 238.76 270)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "4130e57e-f858-4c94-88bc-537f89e6df7d")
 	)
 	(label "ROW4"
 		(at 410.21 106.68 0)
@@ -12691,16 +12621,6 @@
 		)
 		(uuid "511ebd5a-fb07-4b66-8b16-e5d2e5937b92")
 	)
-	(label "COL9"
-		(at 246.38 238.76 270)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "58b0390a-982c-4370-9a2d-deac3da3511b")
-	)
 	(label "UPDI"
 		(at 547.37 491.49 270)
 		(effects
@@ -12710,16 +12630,6 @@
 			(justify right bottom)
 		)
 		(uuid "5bb995b0-5d5e-455f-83b8-9847c6183b0d")
-	)
-	(label "COL8"
-		(at 223.52 255.27 90)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "60091e3d-a05a-41a6-812d-c2796f551301")
 	)
 	(label "COL0_MCU"
 		(at 40.64 267.97 270)
@@ -12741,36 +12651,6 @@
 		)
 		(uuid "670ca1bd-02ef-4d0a-840c-8e8b97b225d4")
 	)
-	(label "COL3"
-		(at 109.22 255.27 90)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "67546132-6f57-45ae-8caf-47bc1322a50b")
-	)
-	(label "COL4"
-		(at 132.08 238.76 270)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "67d36b1e-2fc2-418e-879a-67f7c6a4311c")
-	)
-	(label "COL10"
-		(at 269.24 255.27 90)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "6a64245d-1ea4-48aa-aff4-6e3cf8328703")
-	)
 	(label "COL0_MCU"
 		(at 410.21 55.88 0)
 		(effects
@@ -12780,16 +12660,6 @@
 			(justify left bottom)
 		)
 		(uuid "6c5e58d3-ad7b-4d70-b0c1-863a8436086f")
-	)
-	(label "COL2"
-		(at 86.36 255.27 90)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "6d51ecb0-76d5-4d93-bf90-68a7f243225d")
 	)
 	(label "COL8_MCU"
 		(at 410.21 78.74 0)
@@ -12830,16 +12700,6 @@
 			(justify left bottom)
 		)
 		(uuid "7511e599-794b-45ac-85d3-b03e1cc39eba")
-	)
-	(label "COL5"
-		(at 154.94 255.27 90)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "75c06895-5897-4962-808a-e0cb62dcbf85")
 	)
 	(label "CC2"
 		(at 401.32 410.21 0)
@@ -13001,16 +12861,6 @@
 		)
 		(uuid "954d8dfe-4315-4d13-b165-a5e6239feed8")
 	)
-	(label "COL2"
-		(at 86.36 238.76 270)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "95b1b271-4ec7-4b8c-972c-eed05b56b44d")
-	)
 	(label "VOUT_SET"
 		(at 655.32 247.65 0)
 		(effects
@@ -13121,16 +12971,6 @@
 		)
 		(uuid "ac7f6636-6720-4f1a-951f-0f6275300f5e")
 	)
-	(label "COL0"
-		(at 40.64 238.76 270)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "b24f34fd-a041-46a4-9a32-262868979f18")
-	)
 	(label "COL9_MCU"
 		(at 410.21 81.28 0)
 		(effects
@@ -13180,16 +13020,6 @@
 			(justify right bottom)
 		)
 		(uuid "ba2cdd8e-a255-45bf-8e99-0d82e75fbcaa")
-	)
-	(label "COL10"
-		(at 269.24 238.76 270)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "bb8d5a53-c9ae-4b3c-8de8-3bb3f734c8d2")
 	)
 	(label "SDA"
 		(at 539.75 78.74 180)
@@ -13341,16 +13171,6 @@
 		)
 		(uuid "db3624a5-396c-4491-8da6-536bcbafdc1b")
 	)
-	(label "COL1"
-		(at 63.5 255.27 90)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "dc5b8d2d-a50c-4da9-9d5b-771f0a32a09e")
-	)
 	(label "ROW3"
 		(at 410.21 104.14 0)
 		(effects
@@ -13361,16 +13181,6 @@
 		)
 		(uuid "dc8532dc-0ad9-4b3b-b3b9-dc0dbcf4c51f")
 	)
-	(label "COL4"
-		(at 132.08 255.27 90)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "de7b688c-da9f-44fa-8571-a35d7f2b6fc3")
-	)
 	(label "SCL"
 		(at 364.49 68.58 180)
 		(effects
@@ -13380,16 +13190,6 @@
 			(justify right bottom)
 		)
 		(uuid "dea00d19-bf7a-43b1-b1f8-1dd0d93d9822")
-	)
-	(label "COL11"
-		(at 292.1 238.76 270)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "df2a04a6-5709-44f7-9b66-ab567619d353")
 	)
 	(label "XTAL2"
 		(at 364.49 63.5 180)
@@ -13471,16 +13271,6 @@
 		)
 		(uuid "f4c288a9-8e13-4ced-a86e-2a46438d3290")
 	)
-	(label "COL8"
-		(at 223.52 238.76 270)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "f70fc93e-582a-4a53-9cbe-01acf20cd625")
-	)
 	(label "ROW10"
 		(at 312.42 210.82 0)
 		(effects
@@ -13490,16 +13280,6 @@
 			(justify left bottom)
 		)
 		(uuid "f84570c6-a772-4275-b884-621d22617407")
-	)
-	(label "COL6"
-		(at 177.8 255.27 90)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "fa401579-a0ba-469c-8df6-a5e04e5b1495")
 	)
 	(label "COL5_MCU"
 		(at 410.21 68.58 0)
@@ -13530,26 +13310,6 @@
 			(justify left bottom)
 		)
 		(uuid "fce2ca19-3cc6-43af-8118-fb5e27040075")
-	)
-	(label "COL9"
-		(at 246.38 255.27 90)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "fd058f78-4cc6-4aeb-aa59-a04e2206d8b7")
-	)
-	(label "COL5"
-		(at 154.94 238.76 270)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "fdb42135-2431-4e5c-9169-02657f111025")
 	)
 	(label "BATT"
 		(at 402.59 476.25 90)
@@ -13605,7 +13365,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C25744.html"
 			(at 525.78 83.82 0)
 			(hide yes)
 			(show_name no)
@@ -13686,7 +13446,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C172111.html"
 			(at 632.46 256.54 0)
 			(hide yes)
 			(show_name no)
@@ -13769,7 +13529,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C20613596.html"
 			(at 187.96 231.14 0)
 			(hide yes)
 			(show_name no)
@@ -13863,7 +13623,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C20613596.html"
 			(at 96.52 78.74 0)
 			(hide yes)
 			(show_name no)
@@ -14030,7 +13790,7 @@
 				)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://gct.co/files/drawings/usb4110.pdf"
 			(at 381 417.83 0)
 			(hide yes)
 			(show_name no)
@@ -14169,7 +13929,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C965789.html"
 			(at 119.38 200.66 0)
 			(hide yes)
 			(show_name no)
@@ -14488,7 +14248,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C965789.html"
 			(at 119.38 170.18 0)
 			(hide yes)
 			(show_name no)
@@ -14657,7 +14417,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C20613596.html"
 			(at 256.54 78.74 0)
 			(hide yes)
 			(show_name no)
@@ -14751,7 +14511,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C20613596.html"
 			(at 73.66 93.98 0)
 			(hide yes)
 			(show_name no)
@@ -14843,7 +14603,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C1525.html"
 			(at 599.44 83.82 0)
 			(hide yes)
 			(show_name no)
@@ -14926,7 +14686,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C965789.html"
 			(at 302.26 200.66 0)
 			(hide yes)
 			(show_name no)
@@ -15020,7 +14780,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C965789.html"
 			(at 73.66 170.18 0)
 			(hide yes)
 			(show_name no)
@@ -15189,7 +14949,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C965789.html"
 			(at 187.96 200.66 0)
 			(hide yes)
 			(show_name no)
@@ -15283,7 +15043,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C20613596.html"
 			(at 210.82 78.74 0)
 			(hide yes)
 			(show_name no)
@@ -15375,7 +15135,7 @@
 				)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C52923.html"
 			(at 382.27 482.6 0)
 			(hide yes)
 			(show_name no)
@@ -15467,7 +15227,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C25091.html"
 			(at 154.94 261.62 0)
 			(hide yes)
 			(show_name no)
@@ -15550,7 +15310,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C965789.html"
 			(at 279.4 170.18 0)
 			(hide yes)
 			(show_name no)
@@ -15719,7 +15479,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C965789.html"
 			(at 256.54 215.9 0)
 			(hide yes)
 			(show_name no)
@@ -15813,7 +15573,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C20613596.html"
 			(at 233.68 109.22 0)
 			(hide yes)
 			(show_name no)
@@ -15905,7 +15665,7 @@
 				)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C304155.html"
 			(at 547.37 482.6 0)
 			(hide yes)
 			(show_name no)
@@ -16307,7 +16067,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C965789.html"
 			(at 96.52 200.66 0)
 			(hide yes)
 			(show_name no)
@@ -16401,7 +16161,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C20613596.html"
 			(at 302.26 109.22 0)
 			(hide yes)
 			(show_name no)
@@ -16646,7 +16406,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C20613596.html"
 			(at 73.66 124.46 0)
 			(hide yes)
 			(show_name no)
@@ -16740,7 +16500,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C965789.html"
 			(at 96.52 215.9 0)
 			(hide yes)
 			(show_name no)
@@ -16834,7 +16594,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C20613596.html"
 			(at 302.26 139.7 0)
 			(hide yes)
 			(show_name no)
@@ -16928,7 +16688,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C20613596.html"
 			(at 96.52 93.98 0)
 			(hide yes)
 			(show_name no)
@@ -17020,7 +16780,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C106202.html"
 			(at 393.7 220.98 0)
 			(hide yes)
 			(show_name no)
@@ -17101,7 +16861,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C90320.html"
 			(at 541.02 190.5 0)
 			(hide yes)
 			(show_name no)
@@ -17259,7 +17019,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C965789.html"
 			(at 302.26 185.42 0)
 			(hide yes)
 			(show_name no)
@@ -17353,7 +17113,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C965789.html"
 			(at 187.96 185.42 0)
 			(hide yes)
 			(show_name no)
@@ -17522,7 +17282,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C965789.html"
 			(at 50.8 185.42 0)
 			(hide yes)
 			(show_name no)
@@ -17614,7 +17374,7 @@
 				)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C25905.html"
 			(at 425.45 482.6 0)
 			(hide yes)
 			(show_name no)
@@ -17706,7 +17466,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C25744.html"
 			(at 101.6 320.04 0)
 			(hide yes)
 			(show_name no)
@@ -17789,7 +17549,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C20613596.html"
 			(at 73.66 78.74 0)
 			(hide yes)
 			(show_name no)
@@ -17883,7 +17643,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C20613596.html"
 			(at 73.66 139.7 0)
 			(hide yes)
 			(show_name no)
@@ -17975,7 +17735,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C160402.html"
 			(at 598.17 339.09 0)
 			(hide yes)
 			(show_name no)
@@ -18058,7 +17818,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C2290.html"
 			(at 119.38 63.5 0)
 			(hide yes)
 			(show_name no)
@@ -18152,7 +17912,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C965789.html"
 			(at 73.66 200.66 0)
 			(hide yes)
 			(show_name no)
@@ -18246,7 +18006,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C965789.html"
 			(at 187.96 215.9 0)
 			(hide yes)
 			(show_name no)
@@ -18340,7 +18100,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C965789.html"
 			(at 165.1 170.18 0)
 			(hide yes)
 			(show_name no)
@@ -18434,7 +18194,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C20613596.html"
 			(at 73.66 231.14 0)
 			(hide yes)
 			(show_name no)
@@ -18524,7 +18284,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C72443.html"
 			(at 431.8 248.92 0)
 			(hide yes)
 			(show_name no)
@@ -18563,7 +18323,7 @@
 	)
 	(symbol
 		(lib_id "power:+3V3")
-		(at 549.91 76.2 90)
+		(at 549.91 76.2 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -18584,7 +18344,7 @@
 			)
 		)
 		(property "Value" "+3V3"
-			(at 544.87 76.2 90)
+			(at 549.91 72.39 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -18682,7 +18442,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C2290.html"
 			(at 50.8 63.5 0)
 			(hide yes)
 			(show_name no)
@@ -18851,7 +18611,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C965789.html"
 			(at 233.68 185.42 0)
 			(hide yes)
 			(show_name no)
@@ -18945,7 +18705,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C20613596.html"
 			(at 96.52 124.46 0)
 			(hide yes)
 			(show_name no)
@@ -19189,7 +18949,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C965789.html"
 			(at 210.82 185.42 0)
 			(hide yes)
 			(show_name no)
@@ -19283,7 +19043,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C20613596.html"
 			(at 233.68 124.46 0)
 			(hide yes)
 			(show_name no)
@@ -19377,7 +19137,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C965789.html"
 			(at 210.82 200.66 0)
 			(hide yes)
 			(show_name no)
@@ -19469,7 +19229,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C1525.html"
 			(at 378.46 156.21 0)
 			(hide yes)
 			(show_name no)
@@ -19552,7 +19312,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C965789.html"
 			(at 233.68 200.66 0)
 			(hide yes)
 			(show_name no)
@@ -19644,7 +19404,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C25091.html"
 			(at 223.52 261.62 0)
 			(hide yes)
 			(show_name no)
@@ -19727,7 +19487,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C965789.html"
 			(at 50.8 215.9 0)
 			(hide yes)
 			(show_name no)
@@ -19896,7 +19656,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C965789.html"
 			(at 256.54 200.66 0)
 			(hide yes)
 			(show_name no)
@@ -19990,7 +19750,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C20613596.html"
 			(at 256.54 124.46 0)
 			(hide yes)
 			(show_name no)
@@ -20084,7 +19844,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C20613596.html"
 			(at 233.68 93.98 0)
 			(hide yes)
 			(show_name no)
@@ -20178,7 +19938,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C20613596.html"
 			(at 302.26 93.98 0)
 			(hide yes)
 			(show_name no)
@@ -20347,7 +20107,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C965789.html"
 			(at 187.96 154.94 0)
 			(hide yes)
 			(show_name no)
@@ -20441,7 +20201,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C20613596.html"
 			(at 187.96 109.22 0)
 			(hide yes)
 			(show_name no)
@@ -20535,7 +20295,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C965789.html"
 			(at 73.66 154.94 0)
 			(hide yes)
 			(show_name no)
@@ -20629,7 +20389,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C965789.html"
 			(at 279.4 185.42 0)
 			(hide yes)
 			(show_name no)
@@ -20721,7 +20481,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C1525.html"
 			(at 363.22 156.21 0)
 			(hide yes)
 			(show_name no)
@@ -20802,7 +20562,7 @@
 				)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/bq21040.pdf"
 			(at 459.74 417.83 0)
 			(hide yes)
 			(show_name no)
@@ -20919,7 +20679,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C20613596.html"
 			(at 165.1 78.74 0)
 			(hide yes)
 			(show_name no)
@@ -21013,7 +20773,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C20613596.html"
 			(at 210.82 139.7 0)
 			(hide yes)
 			(show_name no)
@@ -21105,7 +20865,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C25744.html"
 			(at 40.64 320.04 0)
 			(hide yes)
 			(show_name no)
@@ -21188,7 +20948,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C965789.html"
 			(at 165.1 154.94 0)
 			(hide yes)
 			(show_name no)
@@ -21280,7 +21040,7 @@
 				)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C25905.html"
 			(at 448.31 482.6 0)
 			(hide yes)
 			(show_name no)
@@ -21447,7 +21207,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C172111.html"
 			(at 612.14 238.76 0)
 			(hide yes)
 			(show_name no)
@@ -21530,7 +21290,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C20613596.html"
 			(at 279.4 139.7 0)
 			(hide yes)
 			(show_name no)
@@ -21624,7 +21384,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C20613596.html"
 			(at 50.8 109.22 0)
 			(hide yes)
 			(show_name no)
@@ -21791,7 +21551,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C25091.html"
 			(at 132.08 261.62 0)
 			(hide yes)
 			(show_name no)
@@ -21874,7 +21634,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C965789.html"
 			(at 233.68 170.18 0)
 			(hide yes)
 			(show_name no)
@@ -21968,7 +21728,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C2290.html"
 			(at 96.52 63.5 0)
 			(hide yes)
 			(show_name no)
@@ -22184,7 +21944,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C20613596.html"
 			(at 73.66 109.22 0)
 			(hide yes)
 			(show_name no)
@@ -22278,7 +22038,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C2290.html"
 			(at 233.68 63.5 0)
 			(hide yes)
 			(show_name no)
@@ -22372,7 +22132,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C20613596.html"
 			(at 187.96 93.98 0)
 			(hide yes)
 			(show_name no)
@@ -22466,7 +22226,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C965789.html"
 			(at 302.26 154.94 0)
 			(hide yes)
 			(show_name no)
@@ -22560,7 +22320,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C965789.html"
 			(at 279.4 200.66 0)
 			(hide yes)
 			(show_name no)
@@ -22652,7 +22412,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://github.com/stuperbad/LED-Watch/blob/main/single-color/docs/datasheets/KXOB25-05X3TF-DATASHEET.pdf"
 			(at 508 160.02 0)
 			(hide yes)
 			(show_name no)
@@ -22881,7 +22641,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C25091.html"
 			(at 63.5 261.62 0)
 			(hide yes)
 			(show_name no)
@@ -22964,7 +22724,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C2290.html"
 			(at 256.54 63.5 0)
 			(hide yes)
 			(show_name no)
@@ -23131,7 +22891,7 @@
 				)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C52923.html"
 			(at 402.59 482.6 0)
 			(hide yes)
 			(show_name no)
@@ -23223,7 +22983,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C25091.html"
 			(at 109.22 261.62 0)
 			(hide yes)
 			(show_name no)
@@ -23306,7 +23066,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C20613596.html"
 			(at 256.54 93.98 0)
 			(hide yes)
 			(show_name no)
@@ -23400,7 +23160,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C20613596.html"
 			(at 279.4 109.22 0)
 			(hide yes)
 			(show_name no)
@@ -23494,7 +23254,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C2290.html"
 			(at 165.1 63.5 0)
 			(hide yes)
 			(show_name no)
@@ -23586,7 +23346,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C15525.html"
 			(at 408.94 156.21 0)
 			(hide yes)
 			(show_name no)
@@ -23669,7 +23429,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C965789.html"
 			(at 233.68 215.9 0)
 			(hide yes)
 			(show_name no)
@@ -23763,7 +23523,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C20613596.html"
 			(at 50.8 139.7 0)
 			(hide yes)
 			(show_name no)
@@ -23932,7 +23692,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C965789.html"
 			(at 119.38 154.94 0)
 			(hide yes)
 			(show_name no)
@@ -24024,7 +23784,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C25091.html"
 			(at 40.64 261.62 0)
 			(hide yes)
 			(show_name no)
@@ -24182,7 +23942,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C20613596.html"
 			(at 50.8 124.46 0)
 			(hide yes)
 			(show_name no)
@@ -24276,7 +24036,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C965789.html"
 			(at 142.24 170.18 0)
 			(hide yes)
 			(show_name no)
@@ -24370,7 +24130,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C965789.html"
 			(at 50.8 170.18 0)
 			(hide yes)
 			(show_name no)
@@ -24462,7 +24222,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C1525.html"
 			(at 393.7 156.21 0)
 			(hide yes)
 			(show_name no)
@@ -24545,7 +24305,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C20613596.html"
 			(at 279.4 124.46 0)
 			(hide yes)
 			(show_name no)
@@ -24712,7 +24472,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C74563.html"
 			(at 612.14 190.5 0)
 			(hide yes)
 			(show_name no)
@@ -24795,7 +24555,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C20613596.html"
 			(at 142.24 93.98 0)
 			(hide yes)
 			(show_name no)
@@ -24887,7 +24647,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C423137.html"
 			(at 652.78 238.76 0)
 			(hide yes)
 			(show_name no)
@@ -24970,7 +24730,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C20613596.html"
 			(at 279.4 78.74 0)
 			(hide yes)
 			(show_name no)
@@ -25062,7 +24822,7 @@
 				)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C25744.html"
 			(at 491.49 482.6 0)
 			(hide yes)
 			(show_name no)
@@ -25156,7 +24916,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C965789.html"
 			(at 73.66 215.9 0)
 			(hide yes)
 			(show_name no)
@@ -25248,7 +25008,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C477705.html"
 			(at 632.46 274.32 0)
 			(hide yes)
 			(show_name no)
@@ -25331,7 +25091,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C20613596.html"
 			(at 256.54 139.7 0)
 			(hide yes)
 			(show_name no)
@@ -25425,7 +25185,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C20613596.html"
 			(at 165.1 124.46 0)
 			(hide yes)
 			(show_name no)
@@ -25517,7 +25277,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C25744.html"
 			(at 71.12 340.36 0)
 			(hide yes)
 			(show_name no)
@@ -25556,7 +25316,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 400.05 205.74 90)
+		(at 400.05 205.74 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -25577,7 +25337,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 403.86 205.74 0)
+			(at 400.05 209.55 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -25675,7 +25435,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C965789.html"
 			(at 210.82 154.94 0)
 			(hide yes)
 			(show_name no)
@@ -25919,7 +25679,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C965789.html"
 			(at 73.66 185.42 0)
 			(hide yes)
 			(show_name no)
@@ -26013,7 +25773,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C20613596.html"
 			(at 142.24 78.74 0)
 			(hide yes)
 			(show_name no)
@@ -26105,7 +25865,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C25091.html"
 			(at 269.24 261.62 0)
 			(hide yes)
 			(show_name no)
@@ -26188,7 +25948,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C965789.html"
 			(at 96.52 185.42 0)
 			(hide yes)
 			(show_name no)
@@ -26280,7 +26040,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C477211.html"
 			(at 632.46 238.76 0)
 			(hide yes)
 			(show_name no)
@@ -26513,7 +26273,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C20613596.html"
 			(at 96.52 231.14 0)
 			(hide yes)
 			(show_name no)
@@ -26607,7 +26367,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C20613596.html"
 			(at 279.4 93.98 0)
 			(hide yes)
 			(show_name no)
@@ -26699,7 +26459,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C25744.html"
 			(at 101.6 340.36 0)
 			(hide yes)
 			(show_name no)
@@ -26888,7 +26648,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 400.05 220.98 90)
+		(at 400.05 220.98 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -26909,7 +26669,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 403.86 220.98 0)
+			(at 400.05 224.79 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -27007,7 +26767,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C965789.html"
 			(at 187.96 170.18 0)
 			(hide yes)
 			(show_name no)
@@ -27101,7 +26861,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C20613596.html"
 			(at 142.24 124.46 0)
 			(hide yes)
 			(show_name no)
@@ -27193,7 +26953,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C25091.html"
 			(at 246.38 261.62 0)
 			(hide yes)
 			(show_name no)
@@ -27276,7 +27036,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C965789.html"
 			(at 302.26 215.9 0)
 			(hide yes)
 			(show_name no)
@@ -27370,7 +27130,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C20613596.html"
 			(at 302.26 78.74 0)
 			(hide yes)
 			(show_name no)
@@ -27464,7 +27224,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C965789.html"
 			(at 165.1 215.9 0)
 			(hide yes)
 			(show_name no)
@@ -27558,7 +27318,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C20613596.html"
 			(at 50.8 93.98 0)
 			(hide yes)
 			(show_name no)
@@ -27652,7 +27412,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C20613596.html"
 			(at 210.82 109.22 0)
 			(hide yes)
 			(show_name no)
@@ -27819,7 +27579,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C25091.html"
 			(at 86.36 261.62 0)
 			(hide yes)
 			(show_name no)
@@ -27900,7 +27660,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C106202.html"
 			(at 393.7 205.74 0)
 			(hide yes)
 			(show_name no)
@@ -27983,7 +27743,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C965789.html"
 			(at 142.24 200.66 0)
 			(hide yes)
 			(show_name no)
@@ -28073,7 +27833,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C72443.html"
 			(at 391.16 248.92 0)
 			(hide yes)
 			(show_name no)
@@ -28304,7 +28064,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C25744.html"
 			(at 86.36 320.04 0)
 			(hide yes)
 			(show_name no)
@@ -28343,7 +28103,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 582.93 88.9 90)
+		(at 582.93 88.9 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -28364,7 +28124,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 587.51 88.9 90)
+			(at 582.93 92.71 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -28612,7 +28372,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C20613596.html"
 			(at 50.8 231.14 0)
 			(hide yes)
 			(show_name no)
@@ -28781,7 +28541,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C20613596.html"
 			(at 165.1 93.98 0)
 			(hide yes)
 			(show_name no)
@@ -28875,7 +28635,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C965789.html"
 			(at 210.82 215.9 0)
 			(hide yes)
 			(show_name no)
@@ -28969,7 +28729,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C20613596.html"
 			(at 302.26 124.46 0)
 			(hide yes)
 			(show_name no)
@@ -29213,7 +28973,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C2290.html"
 			(at 302.26 63.5 0)
 			(hide yes)
 			(show_name no)
@@ -29307,7 +29067,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C965789.html"
 			(at 119.38 185.42 0)
 			(hide yes)
 			(show_name no)
@@ -29476,7 +29236,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C965789.html"
 			(at 210.82 170.18 0)
 			(hide yes)
 			(show_name no)
@@ -29570,7 +29330,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C965789.html"
 			(at 165.1 185.42 0)
 			(hide yes)
 			(show_name no)
@@ -29664,7 +29424,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C965789.html"
 			(at 256.54 154.94 0)
 			(hide yes)
 			(show_name no)
@@ -29758,7 +29518,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C20613596.html"
 			(at 119.38 231.14 0)
 			(hide yes)
 			(show_name no)
@@ -29927,7 +29687,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C965789.html"
 			(at 96.52 154.94 0)
 			(hide yes)
 			(show_name no)
@@ -30021,7 +29781,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C965789.html"
 			(at 142.24 215.9 0)
 			(hide yes)
 			(show_name no)
@@ -30265,7 +30025,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C20613596.html"
 			(at 119.38 109.22 0)
 			(hide yes)
 			(show_name no)
@@ -30359,7 +30119,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C965789.html"
 			(at 233.68 154.94 0)
 			(hide yes)
 			(show_name no)
@@ -30451,7 +30211,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C423173.html"
 			(at 652.78 256.54 0)
 			(hide yes)
 			(show_name no)
@@ -30534,7 +30294,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C20613596.html"
 			(at 187.96 124.46 0)
 			(hide yes)
 			(show_name no)
@@ -30704,7 +30464,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C20613596.html"
 			(at 142.24 231.14 0)
 			(hide yes)
 			(show_name no)
@@ -30873,7 +30633,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C965789.html"
 			(at 302.26 170.18 0)
 			(hide yes)
 			(show_name no)
@@ -30967,7 +30727,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C20613596.html"
 			(at 119.38 124.46 0)
 			(hide yes)
 			(show_name no)
@@ -31061,7 +30821,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C20613596.html"
 			(at 119.38 93.98 0)
 			(hide yes)
 			(show_name no)
@@ -31155,7 +30915,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C965789.html"
 			(at 50.8 154.94 0)
 			(hide yes)
 			(show_name no)
@@ -31249,7 +31009,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C2290.html"
 			(at 187.96 63.5 0)
 			(hide yes)
 			(show_name no)
@@ -31341,7 +31101,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C23733.html"
 			(at 523.24 205.74 0)
 			(hide yes)
 			(show_name no)
@@ -31424,7 +31184,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C20613596.html"
 			(at 210.82 124.46 0)
 			(hide yes)
 			(show_name no)
@@ -31593,7 +31353,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C20613596.html"
 			(at 142.24 109.22 0)
 			(hide yes)
 			(show_name no)
@@ -31685,7 +31445,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C166448.html"
 			(at 612.14 256.54 0)
 			(hide yes)
 			(show_name no)
@@ -31916,7 +31676,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C109314.html"
 			(at 622.3 205.74 0)
 			(hide yes)
 			(show_name no)
@@ -32149,7 +31909,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C965789.html"
 			(at 119.38 215.9 0)
 			(hide yes)
 			(show_name no)
@@ -32243,7 +32003,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C2290.html"
 			(at 142.24 63.5 0)
 			(hide yes)
 			(show_name no)
@@ -32337,7 +32097,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C965789.html"
 			(at 142.24 154.94 0)
 			(hide yes)
 			(show_name no)
@@ -32431,7 +32191,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C965789.html"
 			(at 279.4 215.9 0)
 			(hide yes)
 			(show_name no)
@@ -32525,7 +32285,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C20613596.html"
 			(at 142.24 139.7 0)
 			(hide yes)
 			(show_name no)
@@ -32619,7 +32379,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C20613596.html"
 			(at 96.52 109.22 0)
 			(hide yes)
 			(show_name no)
@@ -32713,7 +32473,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C20613596.html"
 			(at 165.1 231.14 0)
 			(hide yes)
 			(show_name no)
@@ -32807,7 +32567,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C20613596.html"
 			(at 50.8 78.74 0)
 			(hide yes)
 			(show_name no)
@@ -32901,7 +32661,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C2290.html"
 			(at 279.4 63.5 0)
 			(hide yes)
 			(show_name no)
@@ -32995,7 +32755,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C20613596.html"
 			(at 210.82 93.98 0)
 			(hide yes)
 			(show_name no)
@@ -33089,7 +32849,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C20613596.html"
 			(at 165.1 139.7 0)
 			(hide yes)
 			(show_name no)
@@ -33319,7 +33079,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C25744.html"
 			(at 86.36 340.36 0)
 			(hide yes)
 			(show_name no)
@@ -33402,7 +33162,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C965789.html"
 			(at 256.54 185.42 0)
 			(hide yes)
 			(show_name no)
@@ -33494,7 +33254,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C1525.html"
 			(at 614.68 83.82 0)
 			(hide yes)
 			(show_name no)
@@ -33577,7 +33337,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C965789.html"
 			(at 142.24 185.42 0)
 			(hide yes)
 			(show_name no)
@@ -33669,7 +33429,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C25091.html"
 			(at 177.8 261.62 0)
 			(hide yes)
 			(show_name no)
@@ -33752,7 +33512,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C20613596.html"
 			(at 119.38 139.7 0)
 			(hide yes)
 			(show_name no)
@@ -33844,7 +33604,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C25091.html"
 			(at 292.1 261.62 0)
 			(hide yes)
 			(show_name no)
@@ -34075,7 +33835,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C25744.html"
 			(at 40.64 340.36 0)
 			(hide yes)
 			(show_name no)
@@ -34158,7 +33918,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C965789.html"
 			(at 279.4 154.94 0)
 			(hide yes)
 			(show_name no)
@@ -34250,7 +34010,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C15195.html"
 			(at 584.2 254 0)
 			(hide yes)
 			(show_name no)
@@ -34331,7 +34091,7 @@
 				)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C11702.html"
 			(at 514.35 482.6 0)
 			(hide yes)
 			(show_name no)
@@ -34425,7 +34185,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C965789.html"
 			(at 50.8 200.66 0)
 			(hide yes)
 			(show_name no)
@@ -34517,7 +34277,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C15195.html"
 			(at 546.1 228.6 0)
 			(hide yes)
 			(show_name no)
@@ -34598,7 +34358,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C25744.html"
 			(at 55.88 340.36 0)
 			(hide yes)
 			(show_name no)
@@ -34681,7 +34441,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C20613596.html"
 			(at 233.68 139.7 0)
 			(hide yes)
 			(show_name no)
@@ -34775,7 +34535,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C20613596.html"
 			(at 233.68 78.74 0)
 			(hide yes)
 			(show_name no)
@@ -34867,7 +34627,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://github.com/stuperbad/LED-Watch/blob/main/single-color/docs/datasheets/KXOB25-05X3TF-DATASHEET.pdf"
 			(at 530.86 160.02 0)
 			(hide yes)
 			(show_name no)
@@ -35023,7 +34783,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C20613596.html"
 			(at 187.96 139.7 0)
 			(hide yes)
 			(show_name no)
@@ -35117,7 +34877,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C2290.html"
 			(at 210.82 63.5 0)
 			(hide yes)
 			(show_name no)
@@ -35209,7 +34969,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C25091.html"
 			(at 200.66 261.62 0)
 			(hide yes)
 			(show_name no)
@@ -35290,7 +35050,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C25744.html"
 			(at 510.54 83.82 0)
 			(hide yes)
 			(show_name no)
@@ -35373,7 +35133,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C965789.html"
 			(at 96.52 170.18 0)
 			(hide yes)
 			(show_name no)
@@ -35467,7 +35227,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C20613596.html"
 			(at 119.38 78.74 0)
 			(hide yes)
 			(show_name no)
@@ -35559,7 +35319,7 @@
 				)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C25744.html"
 			(at 468.63 482.6 0)
 			(hide yes)
 			(show_name no)
@@ -35651,7 +35411,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C23733.html"
 			(at 566.42 254 0)
 			(hide yes)
 			(show_name no)
@@ -35734,7 +35494,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C20613596.html"
 			(at 96.52 139.7 0)
 			(hide yes)
 			(show_name no)
@@ -35828,7 +35588,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C965789.html"
 			(at 256.54 170.18 0)
 			(hide yes)
 			(show_name no)
@@ -36072,7 +35832,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C20613596.html"
 			(at 187.96 78.74 0)
 			(hide yes)
 			(show_name no)
@@ -36166,7 +35926,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C965789.html"
 			(at 165.1 200.66 0)
 			(hide yes)
 			(show_name no)
@@ -36260,7 +36020,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C20613596.html"
 			(at 165.1 109.22 0)
 			(hide yes)
 			(show_name no)
@@ -36352,7 +36112,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C25744.html"
 			(at 71.12 320.04 0)
 			(hide yes)
 			(show_name no)
@@ -36435,7 +36195,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C2290.html"
 			(at 73.66 63.5 0)
 			(hide yes)
 			(show_name no)
@@ -36604,7 +36364,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C20613596.html"
 			(at 256.54 109.22 0)
 			(hide yes)
 			(show_name no)
@@ -36872,7 +36632,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C97606.html"
 			(at 373.38 213.36 0)
 			(hide yes)
 			(show_name no)
@@ -36964,7 +36724,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C160402.html"
 			(at 537.21 339.09 0)
 			(hide yes)
 			(show_name no)
@@ -37045,7 +36805,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C25744.html"
 			(at 55.88 320.04 0)
 			(hide yes)
 			(show_name no)
@@ -37118,7 +36878,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C19185929.html"
 			(at 360.68 482.6 0)
 			(effects
 				(font
@@ -37302,6 +37062,246 @@
 			(justify left top)
 		)
 		(uuid "e52223ce-6d62-4a1b-8892-3fbcac5b29ce")
+	)
+	(wire
+		(pts
+			(xy 40.64 238.76) (xy 40.64 255.27)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "db895c3e-fd3a-4833-8b94-18d0ab8124ba")
+	)
+	(label "COL0"
+		(at 40.64 252.73 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "2faf71d6-8d46-42fe-bcb2-fa65b9c6765f")
+	)
+	(wire
+		(pts
+			(xy 63.5 238.76) (xy 63.5 255.27)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "49d508dd-c601-4e17-891e-71747619affe")
+	)
+	(label "COL1"
+		(at 63.5 252.73 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "b916d8ad-4055-4a10-b908-88d0cc91ab46")
+	)
+	(wire
+		(pts
+			(xy 86.36 238.76) (xy 86.36 255.27)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6545b427-7b9a-4f9f-82cd-cca8420e7678")
+	)
+	(label "COL2"
+		(at 86.36 252.73 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "2a906c4d-38b4-4187-ab2e-23be1d776cda")
+	)
+	(wire
+		(pts
+			(xy 109.22 238.76) (xy 109.22 255.27)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bbee27b3-ddf6-4a29-af0c-08d3669b4664")
+	)
+	(label "COL3"
+		(at 109.22 252.73 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "663b21f9-2a88-435d-aa03-97be95e382e6")
+	)
+	(wire
+		(pts
+			(xy 132.08 238.76) (xy 132.08 255.27)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fc10f9f8-1805-48e9-bab4-8f8626e8a6a9")
+	)
+	(label "COL4"
+		(at 132.08 252.73 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "e849228c-ba78-44a2-8c84-281d61be0c92")
+	)
+	(wire
+		(pts
+			(xy 154.94 238.76) (xy 154.94 255.27)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4c4de2ad-2ce3-4ac6-a737-1525cec2febe")
+	)
+	(label "COL5"
+		(at 154.94 252.73 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "698d9c6d-bcef-4eeb-bc50-7aff4dc06e14")
+	)
+	(wire
+		(pts
+			(xy 177.8 238.76) (xy 177.8 255.27)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "352ac37c-b281-4b22-bc72-7ba1ca35e3f8")
+	)
+	(label "COL6"
+		(at 177.8 252.73 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "fa21a543-6b1e-4dc2-82f9-323b6e751d7f")
+	)
+	(wire
+		(pts
+			(xy 200.66 238.76) (xy 200.66 255.27)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8a61f192-f32c-4c33-97f7-a776c037ad8a")
+	)
+	(label "COL7"
+		(at 200.66 252.73 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "b6168eaf-5725-4ed0-97b6-051e9b5daab3")
+	)
+	(wire
+		(pts
+			(xy 223.52 238.76) (xy 223.52 255.27)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "13c2317c-079b-4a73-899c-1273633c7b02")
+	)
+	(label "COL8"
+		(at 223.52 252.73 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "d8efeb86-29e0-43f9-abf8-4254d136db4b")
+	)
+	(wire
+		(pts
+			(xy 246.38 238.76) (xy 246.38 255.27)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f5624930-56fd-448e-b98c-aecf3ff2aeb4")
+	)
+	(label "COL9"
+		(at 246.38 252.73 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "14ed0c51-8933-4e59-a0f9-46682728f944")
+	)
+	(wire
+		(pts
+			(xy 269.24 238.76) (xy 269.24 255.27)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7768fa5a-a942-459e-bbb6-bb49e3f8bf01")
+	)
+	(label "COL10"
+		(at 269.24 252.73 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "d2659c6b-5ebe-4d53-944a-7218b31333b8")
+	)
+	(wire
+		(pts
+			(xy 292.1 238.76) (xy 292.1 255.27)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "be58bd30-24d1-4aad-9487-fad757cff75c")
+	)
+	(label "COL11"
+		(at 292.1 252.73 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "204f5056-a4b6-4839-9b3a-113021c6b76d")
 	)
 	(sheet_instances
 		(path "/"
