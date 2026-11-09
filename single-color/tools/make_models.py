@@ -46,5 +46,6 @@ save("qfn48_6x6_ep4p2", parts)
 
 # ---- blocks
 save("piezo_pkmcs0909", [box(-4.5, -4.5, 0.0, 4.5, 4.5, 1.9, (0.18, 0.18, 0.20), "piezo")])
-save("cell_kxob25", [box(-11.5, -4.0, 0.05, 11.5, 4.0, 1.25, (0.10, 0.16, 0.38), "solar cell")])
+# solar cell: body 23 x 8 x 1.2 mm with the two back contacts (2.0 x 7.4 mm at each end, data sheet p. 3: the + contact is the LEFT one seen from the back, so the RIGHT one seen from the front)
+save("cell_kxob25", [box(-11.5, -4.0, 0.04, 11.5, 4.0, 1.24, (0.10, 0.16, 0.38), "solar cell"), box(-11.5, -3.7, 0.0, -9.5, 3.7, 0.05, (0.85, 0.68, 0.25), "contact -"), box(9.5, -3.7, 0.0, 11.5, 3.7, 0.05, (0.85, 0.68, 0.25), "contact +")])
 save("lipo_501515", [box(-7.5, -7.5, 0.0, 7.5, 7.5, 5.0, (0.82, 0.83, 0.86), "LiPo pouch")])
