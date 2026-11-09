@@ -15843,7 +15843,7 @@
 				)
 			)
 		)
-		(property "Datasheet" "https://ww1.microchip.com/downloads/en/DeviceDoc/AVR128DB64-48-32-DataSheet-DS40002247.pdf"
+		(property "Datasheet" "https://ww1.microchip.com/downloads/aemDocuments/documents/MCU08/ProductDocuments/DataSheets/AVR128DB28-32-48-64-DataSheet-DS40002247.pdf"
 			(at 387.35 86.36 0)
 			(hide yes)
 			(show_name no)
