@@ -5409,7 +5409,7 @@
 		)
 		(uuid "06300981-675f-499c-ad59-a0be57dfc4ee")
 	)
-	(text "UPDI path: SBU (both pins) - R72 1 k - UPDI (the MCU's UPDI pin). D50 clamps UPDI to +3V3."
+	(text "UPDI path: SBU (both pins) - R72 1 k - UPDI (the MCU's UPDI pin). D50 clamps UPDI to the battery node (BATT): a fault current then just charges the cell and cannot push the 3.3 V rail up."
 		(exclude_from_sim no)
 		(at 365.252 459.486 0)
 		(effects
@@ -29567,81 +29567,6 @@
 		)
 	)
 	(symbol
-		(lib_id "power:+3V3")
-		(at 547.37 473.71 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom no)
-		(on_board no)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "bf78469d-c032-4bf6-a930-850ce1ed2e0c")
-		(property "Reference" "#PWR063"
-			(at 547.37 473.71 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "+3V3"
-			(at 547.37 469.9 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 1.27 -27.94 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 547.37 473.71 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 547.37 473.71 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "4d28d6ed-ffe7-46af-805c-bc30f3322ad5")
-		)
-		(instances
-			(project "LED Watch - Single Color"
-				(path "/3f3398f1-104f-4f2f-beed-32bb3294140b"
-					(reference "#PWR063")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:LED")
 		(at 96.52 154.94 180)
 		(unit 1)
@@ -37302,6 +37227,16 @@
 			(justify left bottom)
 		)
 		(uuid "204f5056-a4b6-4839-9b3a-113021c6b76d")
+	)
+	(label "BATT"
+		(at 547.37 473.71 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "95625749-76f6-4a3d-9072-9a45ae0cf91d")
 	)
 	(sheet_instances
 		(path "/"

@@ -4,7 +4,7 @@ from PIL import Image, ImageDraw, ImageFont, ImageChops
 from kirender import render
 board, out = sys.argv[1], sys.argv[2]; box = tuple(map(float, sys.argv[3:7])); ppm = float(sys.argv[7]); hi = sys.argv[8].split(",") if len(sys.argv) > 8 else []
 K = "C:/Program Files/KiCad/10.0/bin/"
-layers = {"F.Cu": (235, 70, 70), "In1.Cu": (60, 190, 90), "B.Cu": (70, 110, 235)}
+layers = {"F.Cu": (235, 70, 70), "In2.Cu": (60, 190, 90), "B.Cu": (70, 110, 235)}   # since 2026-11-05 In2 is the signal layer (In1 is the ground plane)
 base = None
 for L, col in layers.items():
     svg = out + "." + L[:2] + ".svg"

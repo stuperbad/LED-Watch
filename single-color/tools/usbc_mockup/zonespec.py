@@ -4,14 +4,15 @@ no In1 / B.Cu copper within 0.18 mm of a U1 pad; no foreign signal under the U4 
 2026-11-02 review (owner: zones should be thought through, not forced): (a) the crystal zone is the OCTAGON of the F.Cu GND guard pour (chamfer 0.5 mm), not its bounding rectangle (hits() tests the octagon;
 the rectangle stays in the list because the router's --exclude takes rectangles, which is the safe side); (b) the U1-pad rule (pad + 0.18 mm) was a router corridor rule for In1 vias / lanes beside the QFN pads: it now covers In1 only,
 B.Cu lies behind the In2 ground plane and DRC already checks the real clearances; (c) the IMU zone is the pad box of U2 (99.05-100.95 x 107.4-109.3), the footprint's bounding box (0.33-0.57 mm larger on every side) included its silkscreen.
-ZONES = [(name, (x0,y0,x1,y1), layers, allowed_nets)]  -- layers: tuple of F.Cu / In1.Cu / B.Cu"""
+ZONES = [(name, (x0,y0,x1,y1), layers, allowed_nets)]  -- layers: tuple of F.Cu / In2.Cu / B.Cu.
+2026-11-05: the inner layers were swapped (ground plane on In1 = layer 2, signals on In2 = layer 3); the crystal zone is now the front layer only (the plane sits directly under it, owner + reviewer), the other rules follow the signal layer to In2."""
 import pcbnew
 tomm = pcbnew.ToMM
 
 
 def build(b):
-    Z = [("crystal", (90.49, 90.815, 94.75, 95.585), ("F.Cu", "In1.Cu", "B.Cu"), {"/XTAL1", "/XTAL2", "GND"}),
-         ("mcu-core", (97.5, 89.37, 102.5, 94.37), ("F.Cu", "In1.Cu", "B.Cu"), {"GND", "VBAT"})]
+    Z = [("crystal", (90.49, 90.815, 94.75, 95.585), ("F.Cu",), {"/XTAL1", "/XTAL2", "GND"}),
+         ("mcu-core", (97.5, 89.37, 102.5, 94.37), ("F.Cu", "In2.Cu", "B.Cu"), {"GND", "VBAT"})]
     f = b.FindFootprintByReference("U1")
     for p in f.Pads():
         if p.GetNetname() in ("GND", ""):
@@ -21,8 +22,8 @@ def build(b):
         o = round(p.GetOrientationDegrees()) % 180
         if o == 90:
             hx, hy = hy, hx
-        Z.append(("u1-pad %s" % p.GetNumber(), (tomm(c.x) - hx - 0.18, tomm(c.y) - hy - 0.18, tomm(c.x) + hx + 0.18, tomm(c.y) + hy + 0.18), ("In1.Cu",), {p.GetNetname(), "GND"}))
-    for ref, lay, nm in (("U4", ("F.Cu", "In1.Cu"), "u4-core"), ("U2", ("F.Cu", "In1.Cu", "B.Cu"), "imu")):
+        Z.append(("u1-pad %s" % p.GetNumber(), (tomm(c.x) - hx - 0.18, tomm(c.y) - hy - 0.18, tomm(c.x) + hx + 0.18, tomm(c.y) + hy + 0.18), ("In2.Cu",), {p.GetNetname(), "GND"}))
+    for ref, lay, nm in (("U4", ("F.Cu", "In2.Cu"), "u4-core"), ("U2", ("F.Cu", "In2.Cu", "B.Cu"), "imu")):
         f = b.FindFootprintByReference(ref)
         bb = f.GetBoundingBox(False)              # all pads and the body outline, no courtyard
         if ref == "U2":                           # the pads of the LGA are the package footprint: the bounding box above also holds the silkscreen
