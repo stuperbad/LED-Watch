@@ -9,7 +9,8 @@ P = json.load(open(sys.argv[1])); out = sys.argv[2]
 HEIGHT = {"R": 0.35, "C": 0.5, "C54": 1.25, "L": 2.5, "D": 1.11, "U5": 1.55, "U4": 0.78, "J": 2.96}
 def height(r): return HEIGHT.get(r) or HEIGHT.get(r[0], 0.5)
 FIXED = {"BZ1": (80.4, 95.5, 90.1, 105.1, "piezo 1.9 mm"), "J1": (83.5, 89.17, 90.11, 95.03, "LiPo clip 3.0 mm"), "J1B": (83.5, 106.08, 90.11, 111.92, "LiPo clip 3.0 mm"), "J2": (111.27, 93.28, 120.25, 106.72, "USB-C 3.3 mm")}
-BAT = [(90.67, 79.42, 109.33, 97.58), (90.67, 102.42, 109.33, 120.58)]
+BAT = [(90.67, 79.42, 109.33, 97.58), (90.67, 102.42, 109.33, 120.58)]          # outer outline (nominal + half tolerance): nothing taller than 1.1 mm may enter
+NOM = [(91.67, 80.42, 108.33, 96.58), (91.67, 103.42, 108.33, 119.58)]          # nominal body: nothing may enter (small parts may sit in the ring between the two)
 FAM = {"solar": (255, 150, 0), "usb": (150, 60, 220)}
 SOLAR = {"U4", "L1", "L2", "C50", "C51", "C52", "C53", "C54", "R50", "R51", "R52", "R53", "R54", "R55", "R56"}
 # (priority badge, U4 pin(s) served: list of (pad number of the part, U4 pin))
@@ -37,9 +38,8 @@ def evaluate(V):
             if A[0] < fx1 + 0.1 and fx0 < A[2] + 0.1 and A[1] < fy1 + 0.1 and fy0 < A[3] + 0.1: issues.append("%s on fixed %s" % (a, f))
         A = boxes[a]
         if any(math.hypot(cx - 100, cy - 100) > 20.55 for cx in (A[0], A[2]) for cy in (A[1], A[3])): issues.append("%s too close to the board edge" % a)
-        if height(a) > 1.1:
-            for bt in BAT:
-                if A[0] < bt[2] and bt[0] < A[2] and A[1] < bt[3] and bt[1] < A[3]: issues.append("%s (%.2f mm) under a battery" % (a, height(a)))
+        for bt in (BAT if height(a) > 1.1 else NOM):
+            if A[0] < bt[2] and bt[0] < A[2] and A[1] < bt[3] and bt[1] < A[3]: issues.append("%s (%.2f mm) %s" % (a, height(a), "in the battery outline" if height(a) > 1.1 else "in the nominal battery body"))
     dist = {}
     u4 = G["U4"][1]
     for r, (bdg, serves) in SERVE.items():
@@ -117,9 +117,11 @@ def cost(V, rules):
         for f, (fx0, fy0, fx1, fy1, _) in FIXED.items():
             if A[0] < fx1 + 0.1 and fx0 < A[2] + 0.1 and A[1] < fy1 + 0.1 and fy0 < A[3] + 0.1: c += 50
         if any(math.hypot(cx - 100, cy - 100) > 20.55 for cx in (A[0], A[2]) for cy in (A[1], A[3])): c += 50
-        if height(a) > 1.1:
-            for bt in BAT:
-                if A[0] < bt[2] and bt[0] < A[2] and A[1] < bt[3] and bt[1] < A[3]: c += 50
+        for bt in (BAT if height(a) > 1.1 else NOM):
+            if A[0] < bt[2] and bt[0] < A[2] and A[1] < bt[3] and bt[1] < A[3]: c += 50
+        for fb in rules.get('forbid', {}).get(a, []) + rules.get('forbid', {}).get('*', []):
+            if A[0] < fb[2] and fb[0] < A[2] and A[1] < fb[3] and fb[1] < A[3]: c += 50
+        if a in rules.get('rot0', []) and V[a][2] % 180 != 0: c += 50
         reg = rules.get("region", {}).get(a)
         if reg and not any(A[0] >= q[0] and A[2] <= q[2] and A[1] >= q[1] and A[3] <= q[3] for q in reg): c += 50
     u4 = G["U4"][1]
@@ -128,16 +130,18 @@ def cost(V, rules):
             for pn, pin in serves:
                 p = G[r][1][pn]; q = u4[str(pin)]; c += WEIGHT[r] * math.hypot(p[0] - q[0], p[1] - q[1])
     c += pull_cost(G)
+    for a, b in rules.get('mirrorx', []):
+        xc = rules['xc']; c += 4.0 * (abs((G[a][0][0] + G[a][0][2]) / 2 + (G[b][0][0] + G[b][0][2]) / 2 - 2 * xc) + abs(V[a][1] - V[b][1]) * 2)
     for a, b in rules.get("mirror", []):
         c += 1.2 * (abs(G[a][0][0] - G[b][0][0]) + abs((G[a][0][1] + G[b][0][3]) - 200) * 0.5 + abs(V[a][2] - V[b][2]) % 180 * 0.02)
     return c
 def optimise(V0, rules, seed=1, iters=60000):
-    rnd = random.Random(seed); V = dict(V0); best = cost(V, rules); free = [r for r in V if r not in rules.get("pinned", [])]; T = 4.0
+    rnd = random.Random(seed); V = dict(V0); V.update(rules.get('init', {})); best = cost(V, rules); free = [r for r in V if r not in rules.get('pinned', []) or r in rules.get('rotfree', [])]; T = 4.0
     for it in range(iters):
         r = rnd.choice(free); x, y, rot = V[r]; sig = 0.15 + 2.5 * (1 - it / iters) ** 2
         nx, ny, nr = x + rnd.gauss(0, sig), y + rnd.gauss(0, sig), rot
-        if rnd.random() < 0.04: nr = rnd.choice([0, 90, 180, 270]) if r != "U4" or rules.get("u4rot") else rot
-        if r == "U4": ny = 100.0
+        if r in rules.get('pinned', []): nx, ny = x, y
+        if rnd.random() < (0.25 if r in rules.get('rotfree', []) else 0.04): nr = rnd.choice([0, 180] if r in rules.get('rot0', []) else [0, 90, 180, 270]) if r != 'U4' or rules.get('u4rot') else rot
         reg = rules.get('region', {}).get(r)
         if reg and rnd.random() < 0.05:
             q = rnd.choice(reg); nx, ny = rnd.uniform(q[0] + 1.5, q[2] - 1.5), rnd.uniform(q[1] + 1.5, q[3] - 1.5)
@@ -150,11 +154,29 @@ V0 = {r: (P[r]["x"], P[r]["y"], P[r]["rot"] % 360) for r in P if r not in FIXED}
 for r in V0: V0[r] = (V0[r][0], V0[r][1], {0: 0, 90: 90, 180: 180, 270: 270}.get(round(V0[r][2]) % 360, round(V0[r][2]) % 360))
 BAND = [(91.0, 97.58, 111.0, 102.42)]
 NE = [(109.5, 80.5, 119.5, 92.9)]; SE = [(109.5, 107.1, 119.5, 119.5)]
+def make(xu, y0=99.2, u5="east", mirror=True):
+    """one row of small parts under U4 (rot 0 / 180 only), U4 / L1 / L2 pushed up to y0, nothing else above or below U4, tall parts out of the battery outline"""
+    ROW = ["C50", "C51", "R50", "R51", "R52", "R53"]
+    SOLAR_REST = [r for r in V0 if r in SOLAR and r not in ROW and r not in ("U4", "L1", "L2")]
+    north = (89.0, 80.0, 112.0, y0 - 2.05); south = (89.0, y0 + 2.05, 112.0, 120.0)
+    forbid = {"*": []}
+    for r in SOLAR_REST + ["L1", "L2"]: forbid[r] = [north, south]
+    for r in ROW: forbid[r] = [north]
+    region = {r: [(xu - 9.5, 100.9, xu + 9.5, 102.5)] for r in ROW}
+    for r in ("L1", "L2"): region[r] = [(90.5, y0 - 1.6, 111.0, y0 + 1.6)]
+    rules = {"init": {"U4": (xu, y0, 90), "L1": (xu + 6.3, y0, 0), "L2": (xu - 6.3, y0, 0)}, "pinned": ["U4"], "rotfree": ["U4"], "u4rot": True, "xc": xu, "forbid": forbid, "region": region, "rot0": ROW + ["L1", "L2"]}
+    if mirror: rules["mirrorx"] = [("L1", "L2")]
+    corner = [(109.4, 80.0, 119.8, 93.0), (109.4, 107.0, 119.8, 119.8)]
+    for r in ("C54",): forbid[r] = forbid.get(r, []) + corner
+    if u5 == "se": region["U5"] = [(109.6, 107.3, 119.0, 118.0)]; forbid["U5"] = []
+    elif u5 == "ne": region["U5"] = [(109.6, 82.0, 119.0, 92.7)]; forbid["U5"] = []
+    else: region["U5"] = [(90.6, 97.6, 111.0, 102.4)]
+    return rules
 CONCEPTS = {
     "A now": (None, None),
-    "B tidy": ({"region": {"L1": BAND, "L2": BAND}, "u4rot": True}, 1),
-    "C corner inductors": ({"region": {"L2": NE, "L1": SE}, "mirror": [("L1", "L2")], "u4rot": True}, 2),
-    "D L2 in the corner": ({"region": {"L1": BAND, "L2": NE}, "u4rot": True}, 3),
+    "E U5 southeast": (make(101.5, u5="se"), 5),
+    "F U5 northeast": (make(100.5, u5="ne"), 6),
+    "G U5 in the band": (make(100.5, u5="band"), 7),
 }
 only = sys.argv[3].split(",") if len(sys.argv) > 3 else list(CONCEPTS)
 iters = int(sys.argv[4]) if len(sys.argv) > 4 else 40000
@@ -162,6 +184,7 @@ summary = {}
 for name in only:
     rules, seed = CONCEPTS[name]
     if rules is None: V = V0; c = cost(V0, {})
+    elif False: pass
     else:
         V, c = None, 1e18
         for sd in range(seed * 10, seed * 10 + 4):
