@@ -1,6 +1,6 @@
 """make_cell_footprint.py LIB.pretty [IN.kicad_pcb OUT.kicad_pcb SYMBOL_UUID] (KiCad python):
 1. writes the library footprint KXOB25_cell_2pad_23x8mm: ONE footprint for the whole solar cell (Anysolar KXOB25-05X3TF, 23 x 8 x 1.2 mm), the two hand-soldered pads 2.5 x 7.4 mm at +-10.75 mm
-   (pad 1 = + = SOLAR_IN on the right as seen from the front, pad 2 = - = GND on the left), "+" / "-" marks and the cell's top / bottom edges on the front silkscreen, the cell outline on F.Fab,
+   (pad 1 = + = SOLAR_IN on the right as seen from the front, pad 2 = - = GND on the left), "+" / "-" install marks on the front silkscreen inside the cell area (covered by the cell once soldered; no edge lines), the cell outline on F.Fab,
    courtyard, and the 3D block with the back contacts.  Not in the BOM or position files (hand soldered).
 2. with IN / OUT: replaces SC1+ / SC1- / MECH1 and the loose silk marks on the board by one footprint SC1 at the cell centre (100, 100), same pad positions, so the tracks stay connected.
 Written 2026-11-05 after the owner could drag the two pads independently."""
@@ -22,8 +22,8 @@ def seg(x1, y1, x2, y2, layer, w):
     s = pcbnew.PCB_SHAPE(fp); s.SetShape(pcbnew.SHAPE_T_SEGMENT); s.SetStart(P(x1, y1)); s.SetEnd(P(x2, y2)); s.SetLayer(layer); s.SetWidth(FM(w)); fp.Add(s)
 def rect(x0, y0, x1, y1, layer, w):
     s = pcbnew.PCB_SHAPE(fp); s.SetShape(pcbnew.SHAPE_T_RECT); s.SetStart(P(x0, y0)); s.SetEnd(P(x1, y1)); s.SetLayer(layer); s.SetWidth(FM(w)); s.SetFilled(False); fp.Add(s)
-text("+", 10.75, -4.8, pcbnew.F_SilkS); text("-", -10.75, -4.8, pcbnew.F_SilkS)
-seg(-9.3, -4.0, 9.3, -4.0, pcbnew.F_SilkS, 0.12); seg(-9.3, 4.0, 9.3, 4.0, pcbnew.F_SilkS, 0.12)
+# 2026-11-11: marks sit INSIDE the cell footprint, just inside each pad, so the cell covers them once soldered; no edge lines on the silkscreen
+text("+", 8.4, 0, pcbnew.F_SilkS); text("-", -8.4, 0, pcbnew.F_SilkS)
 rect(-11.5, -4.0, 11.5, 4.0, pcbnew.F_Fab, 0.1); rect(-12.0, -4.0, 12.0, 4.0, pcbnew.F_CrtYd, 0.05)
 fp.Reference().SetVisible(False); fp.Value().SetVisible(False); fp.Reference().SetPosition(P(0, -6.2)); fp.Value().SetPosition(P(0, 6.2)); fp.Value().SetLayer(pcbnew.F_Fab)
 m = pcbnew.FP_3DMODEL(); m.m_Filename = "${KIPRJMOD}/3dmodels/cell_kxob25.step"; m.m_Offset = pcbnew.VECTOR3D(0, 0, 0); m.m_Scale = pcbnew.VECTOR3D(1, 1, 1); m.m_Rotation = pcbnew.VECTOR3D(0, 0, 0); m.m_Show = True; m.m_Opacity = 1.0

@@ -19,6 +19,10 @@ LCSC = {
 # JLCPCB rotation corrections per footprint (their part model vs KiCad footprint zero), checked in the
 # JLCPCB PCBA placement preview 2026-10-14: pin-1 dot of the model must land on the silkscreen pin-1 mark.
 ROT_FIX = {"LGA-12_2x2mm_P0.5mm": -90, "BQ25570RGR_VQFN-20_3.5x3.5mm_P0.5mm_EP2.05mm": -90}
+# JLCPCB position corrections per designator in mm (board frame, KiCad X / Y, before the CPL sign flip of Y): the origin of their part model differs from our footprint's.
+# J2 (USB4110-GF-A, C5143397), measured in JLCPCB's placement viewer 2026-11-11: with the raw position the model's contact pins and mounting tabs sit about 1.1 mm
+# towards the rim of the board, off the pads (JLCDFM "pin without pad": 8). J2 is on the back at the +X rim, so 1.1 mm inwards is -X.
+POS_FIX = {"J2": (-1.10, 0.0)}
 IND = {"SET", "TMR", "ALM", "BAT", "FUN", "CFG", "LCK"}
 rows = list(csv.DictReader(open(pos, encoding="utf8")))
 bom = collections.OrderedDict()
@@ -34,7 +38,8 @@ for r in rows:
         continue
     bom.setdefault(key, []).append(ref)
     rot = (float(r["Rot"]) + ROT_FIX.get(pkg, 0)) % 360
-    cpl.append((ref, r["PosX"], r["PosY"], "Top" if r["Side"] == "top" else "Bottom", "%.6f" % rot))
+    dx, dy = POS_FIX.get(ref, (0.0, 0.0))
+    cpl.append((ref, "%.6f" % (float(r["PosX"]) + dx), "%.6f" % (float(r["PosY"]) - dy), "Top" if r["Side"] == "top" else "Bottom", "%.6f" % rot))
 with open(out + "/BOM.csv", "w", newline="", encoding="utf8") as f:
     w = csv.writer(f); w.writerow(["Comment", "Designator", "Footprint", "LCSC Part #"])
     for (val, pkg), refs in bom.items():

@@ -12,3 +12,11 @@ Thumbs.db
 
 # Big local-only leftovers (ignored intermediates of the layout work and old layout experiments, ~250 MB): kept on the author's disk, not in git
 archive/local-only/
+
+# dated local copies from the re-placement work (about 170 MB), kept on this computer only
+hardware/rework-history/
+
+# data sheet PDFs and their text extracts are the manufacturers' files: kept on the author's disk only, download links are listed in docs/datasheets/README.md
+# (a few older ones are already tracked and stay so; this only stops new ones from being added)
+docs/datasheets/*.pdf
+docs/datasheets/*.txt
