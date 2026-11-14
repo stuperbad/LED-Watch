@@ -660,3 +660,8 @@ Files changed: schematic/gen_schematic.py (+ regenerated watch_solar.kicad_sch, 
 - Gerbers, zip, BOM / CPL (J2 correction kept, X 115.65) and the two 3D pictures regenerated from a refilled copy of the 5:14 save (DRC 0 violations / 0 unconnected, 65 of 65 nets walk, only the two known library-table warnings on the scratch copy).
 - Data sheet PDFs and text extracts are no longer added to git (public repo, about 56 MB); `docs/datasheets/README.md` keeps the table and a "Where to download them" list. Files already tracked stay as they are.
 - JLC stays a test process until after the review; nothing to be re-uploaded or ordered yet.
+
+### 2026-11-13: void corner and the divider ground via
+- The GND via that ties the divider ground pads R54.2 / R56.2 to the plane sat on a corner of the In1 void and touched the plane copper by only about 0.02 mm (connected in DRC, but below the fab's minimum feature). Owner moved it (now (103.16, 99.38), centre inside the plane copper) and simplified the void edge there. Picture: `via-corner-void-2026-11-13.png` (shows the state before the move).
+- The two signal vias on the void boundary (BAT_OK, UPDI) have 0.125 mm between their land and the plane copper; left as they are.
+- DRC on a refilled copy of the 19:24 save: 0 violations / 0 unconnected (two library-table warnings on scratch copies only). Production files and renders regenerated from it; J2 placement correction kept.
