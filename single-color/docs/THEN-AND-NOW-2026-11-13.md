@@ -1,7 +1,7 @@
 # Then and now: what changed on the board (for a reviewer)
 
 **Then** = the board as last committed before the charger-core rework, git commit `350f9ec`, 2026-11-08.
-**Now** = the working board `hardware/LED Watch - Single Color.kicad_pcb`, save of 2026-11-11 05:14 (DRC 0 violations / 0 unconnected, all 65 nets one piece).
+**Now** = the working board `hardware/LED Watch - Single Color.kicad_pcb`, save of 2026-11-14 03:35 (DRC 0 violations / 0 unconnected, all 65 nets one piece).
 Both are drawn from the board files themselves by the same script, on a dark background: blue = back copper, pink = front copper, orange / gold = pads, grey rings = vias, yellow outline = parts that changed, olive = ground plane on In1.
 
 ## 1. Charger block on the back (the big change)
@@ -49,12 +49,13 @@ New since "then": the In1 ground plane is cut away under the voltage-setting res
 ## Numbers
 | | Then | Now |
 |---|---|---|
-| Footprints | 208 | 207 (MECH2, the upper LiPo placeholder, is gone: not recorded in the decision log, to confirm) |
+| Footprints | 208 | 208 (MECH2, the upper LiPo placeholder, was lost in the 2026-11-09 cleanup and restored on 2026-11-13) |
 | Track pieces | 2607 | 1926 (merged into longer pieces; total copper length 3181 mm -> 3527 mm) |
 | Vias | 342 | 317 |
 | In1 ground void | none | rule areas under the divider and sample capacitor (hand-edited by the owner) |
 
 ## Other changes that do not show in a picture
+- L2 (buck inductor) was rotated 180 degrees on the reviewer's suggestion (2026-11-14); no other part moved after the pictures were drawn.
 - C56 reaches the charger by 4.4 mm of copper (was 14.5) after CC2 was routed round the south of it; the BQ21040 data sheet (11.1) wants IN and OUT capacitors close.
 - Exposed pads of U1 and U4: one centre via each; crystal guard vias kept.
 - Production files (gerbers, BOM, placement) regenerated; the J2 placement has a 1.10 mm correction because JLCPCB's connector model has a different origin (`JLCPCB-ORDER-NOTES.md`).

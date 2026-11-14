@@ -669,3 +669,9 @@ Files changed: schematic/gen_schematic.py (+ regenerated watch_solar.kicad_sch, 
 ### 2026-11-13: upper LiPo placeholder (MECH2) restored
 - MECH2 (LiPo 501515 15 x 15 x 5 mm, the J1 side, B.Cu at (100, 88.5), 180 degrees) was missing from the working board since the cleanup stretch of 2026-11-09 (present at 23:29, gone at 23:46; none of the tools touches footprints like that, so most likely an accidental delete in KiCad). The design runs on one or two cells (J1 / J1B in parallel), so both outlines belong on the board.
 - Restored exactly as on the 2026-11-08 board (copy of the footprint block) into the 2026-11-13 19:24 save. It has no pads and no copper. DRC in place on the real file: 0 violations / 0 unconnected, parity 435 items (baseline), 65 of 65 nets one piece. Backup of the file before the change: `hardware/rework-history/MAIN before restoring MECH2 (2026-11-13).kicad_pcb`. Production files and renders regenerated.
+
+### 2026-11-14: L2 rotated, production refreshed from the 03:35 save
+- After a short talk with the reviewer: L2 (buck inductor) rotated 180 degrees (now 0 degrees, same position), plus a few small trace clean-ups by the owner (1676 -> 1674 track pieces, 249 arcs, 317 vias, 208 footprints). R54 moved 0.02 mm in Y.
+- DRC in place on the real file: 0 violations / 0 unconnected, parity 435 items (baseline); refilled scratch copy: only the three library-table warnings; 65 of 65 nets walk as one piece.
+- Gerbers, zip, BOM / CPL (J2 correction kept, X 115.65; CPL differs from the previous only in L2 rotation and R54 Y) and the two 3D pictures regenerated from a refilled copy of that save.
+- JLC still untouched: re-upload of the final files, Photo Confirmation price, deleting the two old unpaid cart drafts and a fresh JLCDFM assembly check are the remaining steps before an order.

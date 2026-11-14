@@ -1,6 +1,6 @@
 # JLCPCB order notes (revision C, quote of 2026-11-11, nothing ordered)
 
-**Files:** `hardware/production/` (gerbers zip, `assembly/BOM.csv`, `assembly/CPL.csv`), all from the 04:06 save of `hardware/LED Watch - Single Color.kicad_pcb`.
+**Files:** `hardware/production/` (gerbers zip, `assembly/BOM.csv`, `assembly/CPL.csv`), all from the 2026-11-14 03:35 save of `hardware/LED Watch - Single Color.kicad_pcb`.
 
 **Quote, 5 boards:** PCB $87.82 + assembly $237.71 = **$325.53** before shipping and duties (2-3 day assembly +$49.63). Specification: 4 layers, 1.6 mm, black, white silk, ENIG 1 U", 1 oz / 0.5 oz, plugged vias, 0.15 mm / (0.25 / 0.3) vias, flying probe, Standard PCBA both sides, edge rails by JLCPCB, confirm parts placement **Yes with "do not confirm automatically" ticked**, parts by customer. In the BOM step three lines have to be ticked by hand (0402 LED, JST plugs, USB4110).
 
