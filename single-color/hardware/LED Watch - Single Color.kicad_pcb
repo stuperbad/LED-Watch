@@ -56940,4 +56940,71 @@
 		)
 	)
 	(embedded_fonts no)
+	(footprint "LEDWatch:MECH_LiPo_501515_15x15x5mm"
+		(layer "B.Cu")
+		(uuid "469b0e82-2df0-4716-8f4a-70bad93e2a67")
+		(at 100 88.5 180)
+		(property "Reference" "MECH2"
+			(at 0 0 0)
+			(layer "B.SilkS")
+			(hide yes)
+			(uuid "e3928125-2c6c-4f55-b58e-8ca96ba44d87")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
+		(property "Value" "LiPo 501515 15x15x5 mm (upper)"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "ebbfa584-10e8-45ef-8a4a-85b0aadaf565")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "1859df30-970c-4ed2-9bb3-911b55f148cb")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "12fe089a-4a25-4af3-8b5a-1595f736e907")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify mirror)
+			)
+		)
+		(attr board_only exclude_from_pos_files exclude_from_bom)
+		(duplicate_pad_numbers_are_jumpers no)
+		(embedded_fonts no)
+		(model "${KIPRJMOD}/3dmodels/lipo_501515.step"
+			(offset
+				(xyz 0 0 1.1)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
+	)
 )
