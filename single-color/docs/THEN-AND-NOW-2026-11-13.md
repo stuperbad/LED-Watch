@@ -1,7 +1,7 @@
 # Then and now: what changed on the board (for a reviewer)
 
 **Then** = the board as last committed before the charger-core rework, git commit `350f9ec`, 2026-11-08.
-**Now** = the working board `hardware/LED Watch - Single Color.kicad_pcb`, save of 2026-11-14 03:35 (DRC 0 violations / 0 unconnected, all 65 nets one piece).
+**Now** = the working board `hardware/LED Watch - Single Color.kicad_pcb`, save of 2026-11-14 03:35 (the board was saved again on 2026-11-17 with small trace changes; DRC 0 violations / 0 unconnected, all 65 nets one piece).
 Both are drawn from the board files themselves by the same script, on a dark background: blue = back copper, pink = front copper, orange / gold = pads, grey rings = vias, yellow outline = parts that changed, olive = ground plane on In1.
 
 ## 1. Charger block on the back (the big change)
