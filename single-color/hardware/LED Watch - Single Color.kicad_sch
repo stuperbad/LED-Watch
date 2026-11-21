@@ -2597,6 +2597,172 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "Device:D_TVS"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 1.016)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "D"
+				(at 0 2.54 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "D_TVS"
+				(at 0 -2.54 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Bidirectional transient-voltage-suppression diode"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "diode TVS thyrector"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "TO-???* *_Diode_* *SingleDiode* D_*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "D_TVS_0_1"
+				(polyline
+					(pts
+						(xy -2.54 1.27) (xy -2.54 -1.27) (xy 2.54 1.27) (xy 2.54 -1.27) (xy -2.54 1.27)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0.508 1.27) (xy 0 1.27) (xy 0 -1.27) (xy -0.508 -1.27)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 0) (xy -1.27 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "D_TVS_1_1"
+				(pin passive line
+					(at -3.81 0 0)
+					(length 2.54)
+					(name "A1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 3.81 0 180)
+					(length 2.54)
+					(name "A2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "Device:L"
 			(pin_numbers
 				(hide yes)
@@ -5231,172 +5397,6 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Device:D_TVS"
-				(pin_numbers
-					(hide yes)
-				)
-				(pin_names
-					(offset 1.016)
-					(hide yes)
-				)
-				(exclude_from_sim no)
-				(in_bom yes)
-				(on_board yes)
-				(in_pos_files yes)
-				(duplicate_pin_numbers_are_jumpers no)
-				(property "Reference" "D"
-					(at 0 2.54 0)
-					(show_name no)
-					(do_not_autoplace no)
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(property "Value" "D_TVS"
-					(at 0 -2.54 0)
-					(show_name no)
-					(do_not_autoplace no)
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(property "Footprint" ""
-					(at 0 0 0)
-					(show_name no)
-					(do_not_autoplace no)
-					(hide yes)
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(property "Datasheet" ""
-					(at 0 0 0)
-					(show_name no)
-					(do_not_autoplace no)
-					(hide yes)
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(property "Description" "Bidirectional transient-voltage-suppression diode"
-					(at 0 0 0)
-					(show_name no)
-					(do_not_autoplace no)
-					(hide yes)
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(property "ki_keywords" "diode TVS thyrector"
-					(at 0 0 0)
-					(show_name no)
-					(do_not_autoplace no)
-					(hide yes)
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(property "ki_fp_filters" "TO-???* *_Diode_* *SingleDiode* D_*"
-					(at 0 0 0)
-					(show_name no)
-					(do_not_autoplace no)
-					(hide yes)
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(symbol "D_TVS_0_1"
-					(polyline
-						(pts
-							(xy -2.54 1.27) (xy -2.54 -1.27) (xy 2.54 1.27) (xy 2.54 -1.27) (xy -2.54 1.27)
-						)
-						(stroke
-							(width 0.254)
-							(type default)
-						)
-						(fill
-							(type none)
-						)
-					)
-					(polyline
-						(pts
-							(xy 0.508 1.27) (xy 0 1.27) (xy 0 -1.27) (xy -0.508 -1.27)
-						)
-						(stroke
-							(width 0.254)
-							(type default)
-						)
-						(fill
-							(type none)
-						)
-					)
-					(polyline
-						(pts
-							(xy 1.27 0) (xy -1.27 0)
-						)
-						(stroke
-							(width 0)
-							(type default)
-						)
-						(fill
-							(type none)
-						)
-					)
-				)
-				(symbol "D_TVS_1_1"
-					(pin passive line
-						(at -3.81 0 0)
-						(length 2.54)
-						(name "A1"
-							(effects
-								(font
-									(size 1.27 1.27)
-								)
-							)
-						)
-						(number "1"
-							(effects
-								(font
-									(size 1.27 1.27)
-								)
-							)
-						)
-					)
-					(pin passive line
-						(at 3.81 0 180)
-						(length 2.54)
-						(name "A2"
-							(effects
-								(font
-									(size 1.27 1.27)
-								)
-							)
-						)
-						(number "2"
-							(effects
-								(font
-									(size 1.27 1.27)
-								)
-							)
-						)
-					)
-				)
-				(embedded_fonts no)
-			)
 	)
 	(text "LiPo (protected cell). Pin 1 = -\n(GND), pin 2 = + (BATT):\nTinyCircuits' own wiring (their\ndatasheet fig. 4); meter the leads\nbefore plugging in (BRING-UP-TESTS 2)."
 		(exclude_from_sim no)
@@ -5551,6 +5551,17 @@
 			(justify left bottom)
 		)
 		(uuid "d98d2e1a-93d7-4292-bc49-dc98ce62a39a")
+	)
+	(text "D51: static-discharge (ESD) clamp on VBUS,\nplaced next to the receptacle on the board."
+		(exclude_from_sim no)
+		(at 348.68 496.6 0)
+		(effects
+			(font
+				(size 2 2)
+			)
+			(justify left top)
+		)
+		(uuid "e52223ce-6d62-4a1b-8892-3fbcac5b29ce")
 	)
 	(text "32.768 kHz crystal on PF0/PF1 (XTAL32K1/2). Seiko SC-32S wants CL = 12.5 pF:\n(18 pF + 5 pF pin capacitance)/2 + ~1 pF stray = 12.5 pF (AVR128DB\ndatasheet Table 39-10). Use C0G caps."
 		(exclude_from_sim no)
@@ -5892,12 +5903,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "3d231668-852a-442c-90fe-272cf0e90d72")
-	)
-	(junction
-		(at 530.86 165.1)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "3d398a37-26eb-492a-8216-ea48991b2746")
 	)
 	(junction
 		(at 132.08 231.14)
@@ -7333,16 +7338,6 @@
 	)
 	(wire
 		(pts
-			(xy 109.22 63.5) (xy 109.22 238.76)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "00618ead-88bd-4d4f-ba91-83d26518b908")
-	)
-	(wire
-		(pts
 			(xy 469.9 415.29) (xy 474.98 415.29)
 		)
 		(stroke
@@ -7393,7 +7388,7 @@
 	)
 	(wire
 		(pts
-			(xy 40.64 63.5) (xy 40.64 238.76)
+			(xy 40.64 63.5) (xy 40.64 257.81)
 		)
 		(stroke
 			(width 0)
@@ -7430,6 +7425,16 @@
 			(type default)
 		)
 		(uuid "0390b931-6159-408a-be14-8ef682b53f98")
+	)
+	(wire
+		(pts
+			(xy 515.62 154.94) (xy 510.54 154.94)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "03995961-a999-4fd2-bd08-cff21c1fa6ea")
 	)
 	(wire
 		(pts
@@ -7573,7 +7578,7 @@
 	)
 	(wire
 		(pts
-			(xy 63.5 257.81) (xy 63.5 255.27)
+			(xy 63.5 63.5) (xy 63.5 257.81)
 		)
 		(stroke
 			(width 0)
@@ -7843,16 +7848,6 @@
 	)
 	(wire
 		(pts
-			(xy 200.66 63.5) (xy 200.66 238.76)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "12b25ea1-d1d6-4a40-8f21-fd3915f561b9")
-	)
-	(wire
-		(pts
 			(xy 586.74 195.58) (xy 635 195.58)
 		)
 		(stroke
@@ -8113,7 +8108,7 @@
 	)
 	(wire
 		(pts
-			(xy 269.24 63.5) (xy 269.24 238.76)
+			(xy 269.24 63.5) (xy 269.24 257.81)
 		)
 		(stroke
 			(width 0)
@@ -8283,7 +8278,7 @@
 	)
 	(wire
 		(pts
-			(xy 292.1 63.5) (xy 292.1 238.76)
+			(xy 292.1 63.5) (xy 292.1 257.81)
 		)
 		(stroke
 			(width 0)
@@ -8460,16 +8455,6 @@
 			(type default)
 		)
 		(uuid "38b2d0f3-9eb4-4e93-a736-2ab3e351b243")
-	)
-	(wire
-		(pts
-			(xy 86.36 257.81) (xy 86.36 255.27)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "38ff3da5-ce74-4a2e-a3fe-d65fe9211f95")
 	)
 	(wire
 		(pts
@@ -9143,7 +9128,7 @@
 	)
 	(wire
 		(pts
-			(xy 132.08 257.81) (xy 132.08 255.27)
+			(xy 132.08 63.5) (xy 132.08 257.81)
 		)
 		(stroke
 			(width 0)
@@ -9190,16 +9175,6 @@
 			(type default)
 		)
 		(uuid "61b18b9b-6c12-49a5-9f11-b77e126bc092")
-	)
-	(wire
-		(pts
-			(xy 154.94 63.5) (xy 154.94 238.76)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "61ba67f9-772e-4932-b78c-0c049cd038b4")
 	)
 	(wire
 		(pts
@@ -9333,17 +9308,7 @@
 	)
 	(wire
 		(pts
-			(xy 132.08 63.5) (xy 132.08 238.76)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "66ab89de-43f9-4779-ae89-395bc418d5f9")
-	)
-	(wire
-		(pts
-			(xy 223.52 63.5) (xy 223.52 238.76)
+			(xy 223.52 63.5) (xy 223.52 257.81)
 		)
 		(stroke
 			(width 0)
@@ -9433,7 +9398,7 @@
 	)
 	(wire
 		(pts
-			(xy 246.38 257.81) (xy 246.38 255.27)
+			(xy 246.38 63.5) (xy 246.38 257.81)
 		)
 		(stroke
 			(width 0)
@@ -9583,6 +9548,16 @@
 	)
 	(wire
 		(pts
+			(xy 360.68 486.41) (xy 360.68 488.95)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "721e8ef3-c790-4e54-a7dc-b8b700de0201")
+	)
+	(wire
+		(pts
 			(xy 115.57 231.14) (xy 109.22 231.14)
 		)
 		(stroke
@@ -9643,7 +9618,7 @@
 	)
 	(wire
 		(pts
-			(xy 109.22 257.81) (xy 109.22 255.27)
+			(xy 109.22 63.5) (xy 109.22 257.81)
 		)
 		(stroke
 			(width 0)
@@ -9660,16 +9635,6 @@
 			(type default)
 		)
 		(uuid "75925515-4725-488f-8d7e-2d68750676cf")
-	)
-	(wire
-		(pts
-			(xy 40.64 257.81) (xy 40.64 255.27)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "75b3f054-1493-420b-8012-1ad7500044ec")
 	)
 	(wire
 		(pts
@@ -10063,17 +10028,7 @@
 	)
 	(wire
 		(pts
-			(xy 292.1 257.81) (xy 292.1 255.27)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "8dabdcf1-f641-4a7d-a4fd-6da6a480864d")
-	)
-	(wire
-		(pts
-			(xy 177.8 257.81) (xy 177.8 255.27)
+			(xy 177.8 63.5) (xy 177.8 257.81)
 		)
 		(stroke
 			(width 0)
@@ -10260,6 +10215,16 @@
 			(type default)
 		)
 		(uuid "96cdbd60-5e33-4b69-b0d2-96445572a366")
+	)
+	(wire
+		(pts
+			(xy 360.68 478.79) (xy 360.68 476.25)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "96ec1a7a-0519-4b4f-8f8e-8fdc5bd471e0")
 	)
 	(wire
 		(pts
@@ -10793,6 +10758,16 @@
 	)
 	(wire
 		(pts
+			(xy 510.54 154.94) (xy 510.54 157.48)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b631ee10-92f3-4a05-894f-ff96c7152748")
+	)
+	(wire
+		(pts
 			(xy 529.59 339.09) (xy 529.59 336.55)
 		)
 		(stroke
@@ -10873,7 +10848,7 @@
 	)
 	(wire
 		(pts
-			(xy 200.66 257.81) (xy 200.66 255.27)
+			(xy 200.66 63.5) (xy 200.66 257.81)
 		)
 		(stroke
 			(width 0)
@@ -10973,6 +10948,16 @@
 	)
 	(wire
 		(pts
+			(xy 515.62 152.4) (xy 510.54 152.4)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "beb7ded3-726d-4e69-b89f-fb9243fb9c59")
+	)
+	(wire
+		(pts
 			(xy 100.33 93.98) (xy 100.33 88.9)
 		)
 		(stroke
@@ -11000,16 +10985,6 @@
 			(type default)
 		)
 		(uuid "bfc4ba2f-9ba6-421a-8bd4-abb8af1c36a1")
-	)
-	(wire
-		(pts
-			(xy 223.52 257.81) (xy 223.52 255.27)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "c069898e-e7f1-4006-8291-326f9dc7b4a5")
 	)
 	(wire
 		(pts
@@ -11323,16 +11298,6 @@
 	)
 	(wire
 		(pts
-			(xy 63.5 63.5) (xy 63.5 238.76)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "d00c1c81-fec2-4183-8612-4f5693b6c05c")
-	)
-	(wire
-		(pts
 			(xy 168.91 185.42) (xy 168.91 180.34)
 		)
 		(stroke
@@ -11473,7 +11438,7 @@
 	)
 	(wire
 		(pts
-			(xy 154.94 257.81) (xy 154.94 255.27)
+			(xy 154.94 63.5) (xy 154.94 257.81)
 		)
 		(stroke
 			(width 0)
@@ -11540,16 +11505,6 @@
 			(type default)
 		)
 		(uuid "dd3a57a4-e5d6-477d-be43-7bf759737807")
-	)
-	(wire
-		(pts
-			(xy 177.8 63.5) (xy 177.8 238.76)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "dd7674cc-dca3-494d-8c5c-7d865446997f")
 	)
 	(wire
 		(pts
@@ -12023,7 +11978,7 @@
 	)
 	(wire
 		(pts
-			(xy 86.36 63.5) (xy 86.36 238.76)
+			(xy 86.36 63.5) (xy 86.36 257.81)
 		)
 		(stroke
 			(width 0)
@@ -12163,16 +12118,6 @@
 	)
 	(wire
 		(pts
-			(xy 246.38 63.5) (xy 246.38 238.76)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f8f02733-7304-4744-a27c-72afcad7f3cc")
-	)
-	(wire
-		(pts
 			(xy 237.49 139.7) (xy 237.49 134.62)
 		)
 		(stroke
@@ -12273,16 +12218,6 @@
 	)
 	(wire
 		(pts
-			(xy 269.24 257.81) (xy 269.24 255.27)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "fed9b35a-252f-4f46-a33b-e73d91b106e4")
-	)
-	(wire
-		(pts
 			(xy 373.38 440.69) (xy 373.38 444.5)
 		)
 		(stroke
@@ -12371,6 +12306,16 @@
 		)
 		(uuid "0e72d7ec-cf6a-4339-9c28-aedd80097f26")
 	)
+	(label "COL9"
+		(at 246.38 252.73 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "14ed0c51-8933-4e59-a0f9-46682728f944")
+	)
 	(label "XTAL2"
 		(at 373.38 205.74 90)
 		(effects
@@ -12410,6 +12355,16 @@
 			(justify left bottom)
 		)
 		(uuid "1cb2aa90-de7a-4231-a310-1ed664141dce")
+	)
+	(label "COL11"
+		(at 292.1 252.73 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "204f5056-a4b6-4839-9b3a-113021c6b76d")
 	)
 	(label "UPDI"
 		(at 514.35 491.49 270)
@@ -12451,6 +12406,16 @@
 		)
 		(uuid "28721a8e-6176-4f9c-9bcc-eea12c4fc139")
 	)
+	(label "COL2"
+		(at 86.36 252.73 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "2a906c4d-38b4-4187-ab2e-23be1d776cda")
+	)
 	(label "BUZ_B"
 		(at 370.84 337.82 180)
 		(effects
@@ -12480,6 +12445,16 @@
 			(justify left bottom)
 		)
 		(uuid "2f9e4c67-9079-4f9b-aa37-34b39c0a4fa8")
+	)
+	(label "COL0"
+		(at 40.64 252.73 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "2faf71d6-8d46-42fe-bcb2-fa65b9c6765f")
 	)
 	(label "ISET"
 		(at 444.5 420.37 180)
@@ -12631,6 +12606,16 @@
 		)
 		(uuid "63034c17-b8a2-4388-97de-de79f358fa36")
 	)
+	(label "COL3"
+		(at 109.22 252.73 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "663b21f9-2a88-435d-aa03-97be95e382e6")
+	)
 	(label "ROW0"
 		(at 410.21 96.52 0)
 		(effects
@@ -12640,6 +12625,16 @@
 			(justify left bottom)
 		)
 		(uuid "670ca1bd-02ef-4d0a-840c-8e8b97b225d4")
+	)
+	(label "COL5"
+		(at 154.94 252.73 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "698d9c6d-bcef-4eeb-bc50-7aff4dc06e14")
 	)
 	(label "COL0_MCU"
 		(at 410.21 55.88 0)
@@ -12851,6 +12846,16 @@
 		)
 		(uuid "954d8dfe-4315-4d13-b165-a5e6239feed8")
 	)
+	(label "BATT"
+		(at 547.37 473.71 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "95625749-76f6-4a3d-9072-9a45ae0cf91d")
+	)
 	(label "VOUT_SET"
 		(at 655.32 247.65 0)
 		(effects
@@ -12991,6 +12996,16 @@
 		)
 		(uuid "b5c21169-ddbe-41b7-9636-ae645e05b8ad")
 	)
+	(label "COL7"
+		(at 200.66 252.73 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "b6168eaf-5725-4ed0-97b6-051e9b5daab3")
+	)
 	(label "BTN1"
 		(at 364.49 83.82 180)
 		(effects
@@ -13000,6 +13015,16 @@
 			(justify right bottom)
 		)
 		(uuid "b68226ca-7f82-47c3-8554-5cd4d2c321fd")
+	)
+	(label "COL1"
+		(at 63.5 252.73 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "b916d8ad-4055-4a10-b908-88d0cc91ab46")
 	)
 	(label "UPDI"
 		(at 364.49 55.88 180)
@@ -13141,6 +13166,16 @@
 		)
 		(uuid "d1fb570e-ace4-4171-9b63-4c10941f0853")
 	)
+	(label "COL10"
+		(at 269.24 252.73 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "d2659c6b-5ebe-4d53-944a-7218b31333b8")
+	)
 	(label "IMU_INT"
 		(at 364.49 81.28 180)
 		(effects
@@ -13150,6 +13185,16 @@
 			(justify right bottom)
 		)
 		(uuid "d8440430-c240-4e8c-ad17-2bb87b8d39ab")
+	)
+	(label "COL8"
+		(at 223.52 252.73 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "d8efeb86-29e0-43f9-abf8-4254d136db4b")
 	)
 	(label "COL1_MCU"
 		(at 63.5 267.97 270)
@@ -13211,6 +13256,16 @@
 		)
 		(uuid "e22a8b79-415a-4f0e-8741-c4c9117c99a6")
 	)
+	(label "SOLAR_IN"
+		(at 510.54 152.4 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "e230e27e-f226-4b3d-a2e5-6f6be9fceb7d")
+	)
 	(label "ROW3"
 		(at 312.42 104.14 0)
 		(effects
@@ -13220,6 +13275,16 @@
 			(justify left bottom)
 		)
 		(uuid "e4141a5b-06f6-4225-aca2-8ecacb57bd28")
+	)
+	(label "COL4"
+		(at 132.08 252.73 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "e849228c-ba78-44a2-8c84-281d61be0c92")
 	)
 	(label "ROW5"
 		(at 410.21 109.22 0)
@@ -13270,6 +13335,16 @@
 			(justify left bottom)
 		)
 		(uuid "f84570c6-a772-4275-b884-621d22617407")
+	)
+	(label "COL6"
+		(at 177.8 252.73 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "fa21a543-6b1e-4dc2-82f9-323b6e751d7f")
 	)
 	(label "COL5_MCU"
 		(at 410.21 68.58 0)
@@ -13747,7 +13822,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "058420ea-1dc0-48df-a396-12c55cd1bc86")
-		(property "Reference" "J2"
+		(property "Reference" "USB1"
 			(at 365 388.83 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -13813,6 +13888,39 @@
 				)
 			)
 		)
+		(property "Supplier" ""
+			(at 381 417.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Supplier Part Number" ""
+			(at 381 417.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Manufacturer Part Number" ""
+			(at 381 417.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "A1"
 			(uuid "f9d33859-b64c-43a0-b120-edd4cf48b025")
 		)
@@ -13867,7 +13975,7 @@
 		(instances
 			(project "LED Watch - Single Color"
 				(path "/3f3398f1-104f-4f2f-beed-32bb3294140b"
-					(reference "J2")
+					(reference "USB1")
 					(unit 1)
 				)
 			)
@@ -14064,7 +14172,7 @@
 				)
 			)
 		)
-		(property "Value" "VBAT"
+		(property "Value" "+3V3"
 			(at 408.94 146.05 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -14139,7 +14247,7 @@
 				)
 			)
 		)
-		(property "Value" "VBAT"
+		(property "Value" "+3V3"
 			(at 363.22 146.05 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -17692,7 +17800,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "2b08f902-b506-4634-8985-bafa882a52b1")
-		(property "Reference" "J1B"
+		(property "Reference" "J2"
 			(at 596.17 331.59 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -17747,6 +17855,39 @@
 				)
 			)
 		)
+		(property "Supplier" ""
+			(at 598.17 339.09 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Supplier Part Number" ""
+			(at 598.17 339.09 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Manufacturer Part Number" ""
+			(at 598.17 339.09 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "09125464-ea8c-4542-b604-734ec706f00b")
 		)
@@ -17756,7 +17897,7 @@
 		(instances
 			(project "LED Watch - Single Color"
 				(path "/3f3398f1-104f-4f2f-beed-32bb3294140b"
-					(reference "J1B")
+					(reference "J2")
 					(unit 1)
 				)
 			)
@@ -20521,6 +20662,39 @@
 				)
 			)
 		)
+		(property "Supplier" ""
+			(at 459.74 417.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Supplier Part Number" ""
+			(at 459.74 417.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Manufacturer Part Number" ""
+			(at 459.74 417.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "547478c1-2416-40ff-a5c8-fe8fe875b6c7")
 		)
@@ -21025,7 +21199,7 @@
 				)
 			)
 		)
-		(property "Value" "VBAT"
+		(property "Value" "+3V3"
 			(at 387.35 39.37 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -21592,6 +21766,87 @@
 			(project "LED Watch - Single Color"
 				(path "/3f3398f1-104f-4f2f-beed-32bb3294140b"
 					(reference "S41")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector_Generic:Conn_01x02")
+		(at 520.7 152.4 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "6cad2dbc-d30e-4930-aaf0-b018e6b0210f")
+		(property "Reference" "SC1"
+			(at 518.7 144.9 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "KXOB25-05X3TF cell"
+			(at 518.7 147.4 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "LEDWatch:KXOB25_cell_2pad_23x8mm"
+			(at 520.7 152.4 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "https://github.com/stuperbad/LED-Watch/blob/main/single-color/docs/datasheets/KXOB25-05X3TF-DATASHEET.pdf"
+			(at 520.7 152.4 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 520.7 152.4 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "fbe8946f-7d7b-4e12-8d6e-1743a4aee817")
+		)
+		(pin "2"
+			(uuid "540ffe6f-1d5a-4e5d-b290-8f7c97c38fa1")
+		)
+		(instances
+			(project "LED Watch - Single Color"
+				(path "/3f3398f1-104f-4f2f-beed-32bb3294140b"
+					(reference "SC1")
 					(unit 1)
 				)
 			)
@@ -23484,6 +23739,120 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:D_TVS")
+		(at 360.68 482.6 270)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "7d845323-b977-4b60-9955-49737215650c")
+		(property "Reference" "D51"
+			(at 363.68 481.2 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "UDD32C05L01"
+			(at 363.68 484 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Diode_SMD:D_SOD-323"
+			(at 360.68 482.6 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C19185929.html"
+			(at 360.68 482.6 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "ESD / surge clamp on VBUS: UMW UDD32C05L01, bidirectional TVS, 5 V working, 6 V minimum breakdown, 9.8 V clamp at 1 A, 18.3 V at 5 A, 17 A / 350 W (8/20 us), ESD 8 kV contact / 15 kV air. Keeps a static spark or a hot-plug spike from the cable off the charger input (BQ21040 absolute maximum 30 V)"
+			(at 360.68 482.6 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "UDD32C05L01"
+			(at 360.68 482.6 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC" "C19185929"
+			(at 360.68 482.6 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Manufacturer" "UMW"
+			(at 360.68 482.6 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "6f606d89-38da-4322-b108-4660bf208541")
+		)
+		(pin "2"
+			(uuid "ca25b071-0035-4964-b0d3-67735c91ae98")
+		)
+		(instances
+			(project "LED Watch - Single Color"
+				(path "/3f3398f1-104f-4f2f-beed-32bb3294140b"
+					(reference "D51")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:LED")
 		(at 119.38 154.94 180)
 		(unit 1)
@@ -23653,6 +24022,81 @@
 			(project "LED Watch - Single Color"
 				(path "/3f3398f1-104f-4f2f-beed-32bb3294140b"
 					(reference "R1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:VBUS")
+		(at 360.68 476.25 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "7ffbfcdf-9dc0-47d4-bb5f-d09f1b3ba573")
+		(property "Reference" "#PWR064"
+			(at 360.68 476.25 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "VBUS"
+			(at 360.68 472.44 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 360.68 476.25 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 360.68 476.25 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "37af6e6c-a854-492b-ae01-208fa5edbcae")
+		)
+		(instances
+			(project "LED Watch - Single Color"
+				(path "/3f3398f1-104f-4f2f-beed-32bb3294140b"
+					(reference "#PWR064")
 					(unit 1)
 				)
 			)
@@ -25417,7 +25861,7 @@
 				)
 			)
 		)
-		(property "Value" "VBAT"
+		(property "Value" "VSTOR"
 			(at 571.5 176.53 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -26011,7 +26455,7 @@
 				)
 			)
 		)
-		(property "Value" "VBAT"
+		(property "Value" "VSTOR"
 			(at 584.2 243.84 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -28035,7 +28479,7 @@
 				)
 			)
 		)
-		(property "Value" "VBAT"
+		(property "Value" "VSTOR"
 			(at 546.14 208.28 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -28279,7 +28723,7 @@
 				)
 			)
 		)
-		(property "Value" "VBAT"
+		(property "Value" "+3V3"
 			(at 378.46 146.05 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -28974,7 +29418,7 @@
 				)
 			)
 		)
-		(property "Value" "VBAT"
+		(property "Value" "+3V3"
 			(at 393.7 146.05 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -29736,6 +30180,81 @@
 			(project "LED Watch - Single Color"
 				(path "/3f3398f1-104f-4f2f-beed-32bb3294140b"
 					(reference "#PWR022")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 360.68 488.95 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "c1b05e72-d554-4b11-8f96-1c82ba46d73b")
+		(property "Reference" "#PWR065"
+			(at 360.68 488.95 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 360.68 492.76 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 360.68 488.95 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 360.68 488.95 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "88e7d9bd-af18-4659-9ca8-e4bf69f291ac")
+		)
+		(instances
+			(project "LED Watch - Single Color"
+				(path "/3f3398f1-104f-4f2f-beed-32bb3294140b"
+					(reference "#PWR065")
 					(unit 1)
 				)
 			)
@@ -31389,6 +31908,81 @@
 			(project "LED Watch - Single Color"
 				(path "/3f3398f1-104f-4f2f-beed-32bb3294140b"
 					(reference "#PWR004")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 510.54 157.48 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "d2349a09-529c-415a-b82f-3876ff7f0e63")
+		(property "Reference" "#PWR066"
+			(at 510.54 157.48 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 510.54 161.29 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 71.12 -266.7 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 510.54 157.48 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 510.54 157.48 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "ccb3929e-459e-4496-969c-e1a58e960cbe")
+		)
+		(instances
+			(project "LED Watch - Single Color"
+				(path "/3f3398f1-104f-4f2f-beed-32bb3294140b"
+					(reference "#PWR066")
 					(unit 1)
 				)
 			)
@@ -33500,7 +34094,7 @@
 				)
 			)
 		)
-		(property "Value" "VBAT"
+		(property "Value" "VSTOR"
 			(at 546.14 200.66 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -35342,7 +35936,7 @@
 				)
 			)
 		)
-		(property "Value" "VBAT"
+		(property "Value" "VSTOR"
 			(at 566.42 243.84 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -36525,673 +37119,6 @@
 				)
 			)
 		)
-	)
-	(symbol
-		(lib_id "Device:D_TVS")
-		(at 360.68 482.6 270)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "7d845323-b977-4b60-9955-49737215650c")
-		(property "Reference" "D51"
-			(at 363.68 481.2 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "UDD32C05L01"
-			(at 363.68 484 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Diode_SMD:D_SOD-323"
-			(at 360.68 482.6 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://www.lcsc.com/product-detail/C19185929.html"
-			(at 360.68 482.6 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "ESD / surge clamp on VBUS: UMW UDD32C05L01, bidirectional TVS, 5 V working, 6 V minimum breakdown, 9.8 V clamp at 1 A, 18.3 V at 5 A, 17 A / 350 W (8/20 us), ESD 8 kV contact / 15 kV air. Keeps a static spark or a hot-plug spike from the cable off the charger input (BQ21040 absolute maximum 30 V)"
-			(at 360.68 482.6 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "MPN" "UDD32C05L01"
-			(at 360.68 482.6 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "LCSC" "C19185929"
-			(at 360.68 482.6 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Manufacturer" "UMW"
-			(at 360.68 482.6 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "6f606d89-38da-4322-b108-4660bf208541")
-		)
-		(pin "2"
-			(uuid "ca25b071-0035-4964-b0d3-67735c91ae98")
-		)
-		(instances
-			(project "LED Watch - Single Color"
-				(path "/3f3398f1-104f-4f2f-beed-32bb3294140b"
-					(reference "D51")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(wire
-		(pts
-			(xy 360.68 478.79) (xy 360.68 476.25)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "96ec1a7a-0519-4b4f-8f8e-8fdc5bd471e0")
-	)
-	(symbol
-		(lib_id "power:VBUS")
-		(at 360.68 476.25 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom no)
-		(on_board no)
-		(dnp no)
-		(uuid "7ffbfcdf-9dc0-47d4-bb5f-d09f1b3ba573")
-		(property "Reference" "#PWR064"
-			(at 360.68 476.25 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "VBUS"
-			(at 360.68 472.44 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "37af6e6c-a854-492b-ae01-208fa5edbcae")
-		)
-		(instances
-			(project "LED Watch - Single Color"
-				(path "/3f3398f1-104f-4f2f-beed-32bb3294140b"
-					(reference "#PWR064")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(wire
-		(pts
-			(xy 360.68 486.41) (xy 360.68 488.95)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "721e8ef3-c790-4e54-a7dc-b8b700de0201")
-	)
-	(symbol
-		(lib_id "power:GND")
-		(at 360.68 488.95 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom no)
-		(on_board no)
-		(dnp no)
-		(uuid "c1b05e72-d554-4b11-8f96-1c82ba46d73b")
-		(property "Reference" "#PWR065"
-			(at 360.68 488.95 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 360.68 492.76 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "88e7d9bd-af18-4659-9ca8-e4bf69f291ac")
-		)
-		(instances
-			(project "LED Watch - Single Color"
-				(path "/3f3398f1-104f-4f2f-beed-32bb3294140b"
-					(reference "#PWR065")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(text "D51: static-discharge (ESD) clamp on VBUS,\nplaced next to the receptacle on the board."
-		(exclude_from_sim no)
-		(at 348.68 496.6 0)
-		(effects
-			(font
-				(size 2 2)
-			)
-			(justify left top)
-		)
-		(uuid "e52223ce-6d62-4a1b-8892-3fbcac5b29ce")
-	)
-	(wire
-		(pts
-			(xy 40.64 238.76) (xy 40.64 255.27)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "db895c3e-fd3a-4833-8b94-18d0ab8124ba")
-	)
-	(label "COL0"
-		(at 40.64 252.73 90)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "2faf71d6-8d46-42fe-bcb2-fa65b9c6765f")
-	)
-	(wire
-		(pts
-			(xy 63.5 238.76) (xy 63.5 255.27)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "49d508dd-c601-4e17-891e-71747619affe")
-	)
-	(label "COL1"
-		(at 63.5 252.73 90)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "b916d8ad-4055-4a10-b908-88d0cc91ab46")
-	)
-	(wire
-		(pts
-			(xy 86.36 238.76) (xy 86.36 255.27)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "6545b427-7b9a-4f9f-82cd-cca8420e7678")
-	)
-	(label "COL2"
-		(at 86.36 252.73 90)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "2a906c4d-38b4-4187-ab2e-23be1d776cda")
-	)
-	(wire
-		(pts
-			(xy 109.22 238.76) (xy 109.22 255.27)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "bbee27b3-ddf6-4a29-af0c-08d3669b4664")
-	)
-	(label "COL3"
-		(at 109.22 252.73 90)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "663b21f9-2a88-435d-aa03-97be95e382e6")
-	)
-	(wire
-		(pts
-			(xy 132.08 238.76) (xy 132.08 255.27)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "fc10f9f8-1805-48e9-bab4-8f8626e8a6a9")
-	)
-	(label "COL4"
-		(at 132.08 252.73 90)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "e849228c-ba78-44a2-8c84-281d61be0c92")
-	)
-	(wire
-		(pts
-			(xy 154.94 238.76) (xy 154.94 255.27)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "4c4de2ad-2ce3-4ac6-a737-1525cec2febe")
-	)
-	(label "COL5"
-		(at 154.94 252.73 90)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "698d9c6d-bcef-4eeb-bc50-7aff4dc06e14")
-	)
-	(wire
-		(pts
-			(xy 177.8 238.76) (xy 177.8 255.27)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "352ac37c-b281-4b22-bc72-7ba1ca35e3f8")
-	)
-	(label "COL6"
-		(at 177.8 252.73 90)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "fa21a543-6b1e-4dc2-82f9-323b6e751d7f")
-	)
-	(wire
-		(pts
-			(xy 200.66 238.76) (xy 200.66 255.27)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "8a61f192-f32c-4c33-97f7-a776c037ad8a")
-	)
-	(label "COL7"
-		(at 200.66 252.73 90)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "b6168eaf-5725-4ed0-97b6-051e9b5daab3")
-	)
-	(wire
-		(pts
-			(xy 223.52 238.76) (xy 223.52 255.27)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "13c2317c-079b-4a73-899c-1273633c7b02")
-	)
-	(label "COL8"
-		(at 223.52 252.73 90)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "d8efeb86-29e0-43f9-abf8-4254d136db4b")
-	)
-	(wire
-		(pts
-			(xy 246.38 238.76) (xy 246.38 255.27)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f5624930-56fd-448e-b98c-aecf3ff2aeb4")
-	)
-	(label "COL9"
-		(at 246.38 252.73 90)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "14ed0c51-8933-4e59-a0f9-46682728f944")
-	)
-	(wire
-		(pts
-			(xy 269.24 238.76) (xy 269.24 255.27)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "7768fa5a-a942-459e-bbb6-bb49e3f8bf01")
-	)
-	(label "COL10"
-		(at 269.24 252.73 90)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "d2659c6b-5ebe-4d53-944a-7218b31333b8")
-	)
-	(wire
-		(pts
-			(xy 292.1 238.76) (xy 292.1 255.27)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "be58bd30-24d1-4aad-9487-fad757cff75c")
-	)
-	(label "COL11"
-		(at 292.1 252.73 90)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "204f5056-a4b6-4839-9b3a-113021c6b76d")
-	)
-	(label "BATT"
-		(at 547.37 473.71 90)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "95625749-76f6-4a3d-9072-9a45ae0cf91d")
-	)
-	(symbol
-		(lib_id "Connector_Generic:Conn_01x02")
-		(at 520.7 152.4 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom no)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "6cad2dbc-d30e-4930-aaf0-b018e6b0210f")
-		(property "Reference" "SC1"
-			(at 518.7 144.9 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "KXOB25-05X3TF cell"
-			(at 518.7 147.4 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "LEDWatch:KXOB25_cell_2pad_23x8mm"
-			(at 520.7 152.4 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" "https://github.com/stuperbad/LED-Watch/blob/main/single-color/docs/datasheets/KXOB25-05X3TF-DATASHEET.pdf"
-			(at 520.7 152.4 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 520.7 152.4 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "fbe8946f-7d7b-4e12-8d6e-1743a4aee817")
-		)
-		(pin "2"
-			(uuid "540ffe6f-1d5a-4e5d-b290-8f7c97c38fa1")
-		)
-		(instances
-			(project "LED Watch - Single Color"
-				(path "/3f3398f1-104f-4f2f-beed-32bb3294140b"
-					(reference "SC1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
-		(at 510.54 157.48 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom no)
-		(on_board no)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "d2349a09-529c-415a-b82f-3876ff7f0e63")
-		(property "Reference" "#PWR066"
-			(at 510.54 157.48 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "GND"
-			(at 510.54 161.29 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 71.12 -266.7 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 510.54 157.48 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 510.54 157.48 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "ccb3929e-459e-4496-969c-e1a58e960cbe")
-		)
-		(instances
-			(project "LED Watch - Single Color"
-				(path "/3f3398f1-104f-4f2f-beed-32bb3294140b"
-					(reference "#PWR066")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(wire
-		(pts
-			(xy 515.62 152.4) (xy 510.54 152.4)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "beb7ded3-726d-4e69-b89f-fb9243fb9c59")
-	)
-	(wire
-		(pts
-			(xy 515.62 154.94) (xy 510.54 154.94)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "03995961-a999-4fd2-bd08-cff21c1fa6ea")
-	)
-	(wire
-		(pts
-			(xy 510.54 154.94) (xy 510.54 157.48)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b631ee10-92f3-4a05-894f-ff96c7152748")
-	)
-	(label "SOLAR_IN"
-		(at 510.54 152.4 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "e230e27e-f226-4b3d-a2e5-6f6be9fceb7d")
 	)
 	(sheet_instances
 		(path "/"
